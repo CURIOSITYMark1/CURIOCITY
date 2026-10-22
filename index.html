@@ -113,7 +113,7 @@ nav button{position:relative}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 /* === CONFIGURACIÓN: pega aquí los datos de Supabase. Vacío = modo demostración (solo en tu navegador) === */
-const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "sb_publishable_ODTlK8Q5KOR8kDW_NblPYQ_UCgDgvNw" };
+const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1YnF3aWZzcnJrZm5jb2ttYmppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MzQ1OTgsImV4cCI6MjEwODIxMDU5OH0.zQISgPu4SWRQxSF7Q-Qr2g6uxEfTXK1qj1z3JSckCi8" };
 
 const COLORS = [["Rojo","#DC2626"],["Naranja","#EA580C"],["Amarillo","#EAB308"],["Verde","#16A34A"],["Azul","#2563EB"],["Morado","#7C3AED"],["Rosa","#DB2777"],["Negro","#1E293B"]];
 const AVS = ["a1","a2","a3","a4","a5","a6"];
@@ -142,6 +142,7 @@ const IC = {
   music: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
   mic: '<rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
   sticker: '<path d="M20 12V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6l8-8z"/><path d="M20 12h-6a2 2 0 0 0-2 2v6"/>',
+  bird: '<path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 0 3.84-10.61"/>',
   x: '<path d="M6 6l12 12M18 6L6 18"/>'
 };
 const ic = (n, s = 22, f) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${f ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
@@ -176,7 +177,7 @@ function mkDemo() {
       users: [{ id: "u1", username: "ana_dev", pass: "x", color: "#16A34A", avatar: "a4", status: "active" }, { id: "u2", username: "admin", pass: "admin123", color: "#7C3AED", avatar: "a2", status: "active", is_admin: true }],
       moments: [{ id: 1, user_id: "u1", text: "Se nos cayó el proyector en plena exposición y nadie dijo nada", created_at: n - 864e5 }, { id: 2, user_id: "u2", text: "Hoy alguien contestó “presente” en el chat equivocado", created_at: n - 36e5 }] };
   }
-  s.friends = s.friends || []; s.stickers = s.stickers || [];
+  s.friends = s.friends || []; s.stickers = s.stickers || []; s.pigeons = s.pigeons || [];
   const save = () => { try { localStorage.setItem(K, JSON.stringify(s)); } catch (e) { throw new Error("El modo demo se quedó sin espacio"); } };
   const find = n => s.users.find(u => u.username.toLowerCase() === n.toLowerCase());
   const meU = () => s.users.find(u => u.id === s.me);
@@ -187,7 +188,7 @@ function mkDemo() {
     async signUp(n, p) { if (find(n)) throw new Error("Ese nombre ya existe"); const u = { id: "u" + (++s.n), username: n, pass: p, color: COLORS[4][1], avatar: "a1", status: "active" }; s.users.push(u); s.me = u.id; save(); },
     async signIn(n, p) { const u = find(n); if (!u || u.pass !== p) throw new Error("Usuario o contraseña incorrectos"); s.me = u.id; save(); },
     async signOut() { s.me = null; save(); },
-    async load() { return { profiles: Object.fromEntries(s.users.map(u => [u.id, u])), moments: s.moments, likes: s.likes, comments: s.comments, friends: s.friends, stickers: s.stickers }; },
+    async load() { return { profiles: Object.fromEntries(s.users.map(u => [u.id, u])), moments: s.moments, likes: s.likes, comments: s.comments, friends: s.friends, stickers: s.stickers, pg: { inbox: s.pigeons.filter(g => g.recipient === s.me && g.arrives_at <= Date.now() && g.fate !== "lost").sort((a, b) => b.arrives_at - a.arrives_at).map(g => ({ id: g.id, sender: g.sender, text: g.text, arrives_at: g.arrives_at, seen: g.seen })), last: Math.max(0, ...s.pigeons.filter(g => g.sender === s.me).map(g => g.sent_at)) } }; },
     async upload(b) { return toData(b); },
     async post(t, img, ex) { if (["restricted", "blocked"].includes(meU().status)) deny(); s.moments.push({ id: ++s.n, user_id: s.me, text: t, image_url: img || null, ...(ex || {}), created_at: Date.now() }); save(); },
     async like(id, on) { if (meU().status === "blocked") deny(); s.likes = s.likes.filter(l => !(l.moment_id === id && l.user_id === s.me)); if (on) s.likes.push({ moment_id: id, user_id: s.me, kind: on }); save(); },
@@ -198,6 +199,25 @@ function mkDemo() {
     async addSticker(url) { s.stickers.unshift({ id: ++s.n, user_id: s.me, image_url: url }); save(); },
     async friendReq(to) { if (meU().status === "blocked") deny(); s.friends.push({ id: ++s.n, requester: s.me, addressee: to, status: "pending" }); save(); },
     async friendAccept(id) { s.friends.find(f => f.id === id).status = "accepted"; save(); },
+    async pigeonSend(to, body) {
+      if (["muted", "blocked"].includes(meU().status)) deny();
+      if (!s.friends.some(f => f.status === "accepted" && ((f.requester === s.me && f.addressee === to) || (f.requester === to && f.addressee === s.me)))) throw new Error("Solo puedes enviar palomas a tus amigos");
+      if (s.pigeons.some(g => g.sender === s.me && g.sent_at > Date.now() - 864e5)) throw new Error("Tu paloma está descansando. Podrás enviar otra pasado un día.");
+      const r = Math.random(); let fate = "ok", text = body;
+      if (r < 0.0025) { fate = "lost"; text = null; }
+      else if (r < 0.0525) {
+        const w = body.split(/\s+/);
+        if (w.length >= 2) {
+          const o = [...w]; let d = false;
+          w.forEach((x, i) => { if (Math.random() < 0.35) { w[i] = "…"; d = true; } });
+          if (!d) w[Math.floor(Math.random() * w.length)] = "…";
+          if (w.every(x => x === "…")) { const i = Math.floor(Math.random() * w.length); w[i] = o[i]; }
+          text = w.join(" "); fate = "garbled";
+        }
+      }
+      s.pigeons.push({ id: ++s.n, sender: s.me, recipient: to, fate, text, sent_at: Date.now(), arrives_at: Date.now() + 6e4, seen: false }); save();
+    },
+    async pigeonSeen(id) { const g = s.pigeons.find(x => x.id === id); if (g) g.seen = true; save(); },
     async friendDel(id) { s.friends = s.friends.filter(f => f.id !== id); save(); },
     async pin(id, h) { s.moments.find(m => m.id === id).pinned_until = h ? Date.now() + h * 36e5 : 0; save(); },
     async delComment(id) { s.comments = s.comments.filter(c => c.id !== id); save(); },
@@ -218,8 +238,8 @@ function mkSup() {
     async signIn(n, p) { fail((await sb.auth.signInWithPassword({ email: mail(n), password: p })).error); },
     async signOut() { await sb.auth.signOut(); },
     async load() {
-      const [a, b, c, d, e, f] = await Promise.all([sb.from("profiles").select("*"), sb.from("moments").select("*").order("created_at", { ascending: false }).limit(300), sb.from("likes").select("*"), sb.from("comments").select("*").order("created_at"), sb.from("friendships").select("*"), sb.from("stickers").select("*").order("created_at", { ascending: false }).limit(60)]);
-      return { profiles: Object.fromEntries(ok(a).map(u => [u.id, { ...u, intro_until: u.intro_until ? Date.parse(u.intro_until) : 0 }])), moments: ok(b).map(t), likes: ok(c), comments: ok(d).map(t), friends: ok(e), stickers: ok(f) };
+      const [a, b, c, d, e, f, g, h] = await Promise.all([sb.from("profiles").select("*"), sb.from("moments").select("*").order("created_at", { ascending: false }).limit(300), sb.from("likes").select("*"), sb.from("comments").select("*").order("created_at"), sb.from("friendships").select("*"), sb.from("stickers").select("*").order("created_at", { ascending: false }).limit(60), Promise.resolve(sb.rpc("pigeon_inbox")).then(r => r.error ? { data: [] } : r), Promise.resolve(sb.rpc("pigeon_last")).then(r => r.error ? { data: null } : r)]);
+      return { profiles: Object.fromEntries(ok(a).map(u => [u.id, { ...u, intro_until: u.intro_until ? Date.parse(u.intro_until) : 0 }])), moments: ok(b).map(t), likes: ok(c), comments: ok(d).map(t), friends: ok(e), stickers: ok(f), pg: { inbox: (ok(g) || []).map(x => ({ id: x.id, sender: x.sender, text: x.delivered_text, arrives_at: Date.parse(x.arrives_at), seen: x.seen })), last: ok(h) ? Date.parse(ok(h)) : 0 } };
     },
     async upload(b, ext = "jpg", type = "image/jpeg") { const me = await this.session(), path = me.id + "/" + Date.now() + "." + ext; fail((await sb.storage.from("media").upload(path, b, { contentType: type })).error); return sb.storage.from("media").getPublicUrl(path).data.publicUrl; },
     async post(x, img, ex) { fail((await sb.from("moments").insert({ text: x, image_url: img || null, ...(ex || {}) })).error); },
@@ -231,6 +251,8 @@ function mkSup() {
     async addSticker(url) { fail((await sb.from("stickers").insert({ image_url: url })).error); },
     async friendReq(to) { fail((await sb.from("friendships").insert({ addressee: to })).error); },
     async friendAccept(id) { fail((await sb.from("friendships").update({ status: "accepted" }).eq("id", id)).error); },
+    async pigeonSend(to, body) { fail((await sb.rpc("send_pigeon", { to_user: to, msg: body })).error); },
+    async pigeonSeen(id) { await sb.rpc("pigeon_seen", { pid: id }); },
     async friendDel(id) { fail((await sb.from("friendships").delete().eq("id", id)).error); },
     async pin(id, h) { fail((await sb.from("moments").update({ pinned_until: h ? new Date(Date.now() + h * 36e5).toISOString() : null }).eq("id", id)).error); },
     async delComment(id) { fail((await sb.from("comments").delete().eq("id", id)).error); },
@@ -239,7 +261,7 @@ function mkSup() {
 }
 
 const API = (CFG.url && CFG.key && window.supabase) ? mkSup() : mkDemo();
-let S = { fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [] }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
+let S = { pgo: {}, pgto: null, fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [], pg: { inbox: [], last: 0 } }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
 
 function toast(m) { const t = $("#toast"); t.textContent = m; t.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = "none", 2800); }
 function ago(t) { const m = Math.max(0, (Date.now() - t) / 6e4); if (m < 1) return "ahora"; if (m < 60) return "hace " + Math.floor(m) + " min"; if (m < 1440) return "hace " + Math.floor(m / 60) + " h"; return "hace " + Math.floor(m / 1440) + " d"; }
@@ -289,6 +311,14 @@ async function sticker(file) {
   return new Promise(ok => c.toBlob(ok, "image/png"));
 }
 
+function pigeons() {
+  const inbox = S.data.pg.inbox; if (!inbox.length) return "";
+  return `<h2>Palomas</h2>` + inbox.map(g => { const u = pOf(g.sender); return `<div class="card" style="margin:8px 0"><div class="who">${avatar(u)}<div><b style="color:${cl(u.color)}">${esc(u.username)}</b> te mandó un mensaje<small>${ago(g.arrives_at)}</small></div>${g.seen ? "" : '<span class="chip" style="margin-left:auto">Nueva</span>'}</div>${S.pgo[g.id] ? `<p>${esc(g.text)}</p>` : `<button class="btn ghost" data-a="pread" data-id="${g.id}" style="margin-top:8px">Leer mensaje</button>`}</div>`; }).join("");
+}
+function pigeonSheet() {
+  const u = pOf(S.pgto), next = S.data.pg.last + 864e5, rest = next > Date.now();
+  return `<div class="sheet" data-a="pgx"><div data-stop="1"><h2 style="margin:0">Paloma para ${esc(u.username)}</h2><small style="color:var(--mut)">Tu paloma tarda 1 día en llegar y solo puedes enviar una al día. A veces se pierde por el camino o llega con palabras de menos.${API.demo ? " (Modo demo: llega en 1 minuto.)" : ""}</small>${rest ? `<div class="note">Tu paloma está descansando. Podrás enviar otra el ${new Date(next).toLocaleString("es", { weekday: "short", hour: "2-digit", minute: "2-digit" })}.</div>` : `<textarea data-k="pgt" maxlength="200" placeholder="Escribe tu mensaje (máx. 200)">${esc(S.dr.pgt || "")}</textarea>`}${S.err ? `<div class="err">${esc(S.err)}</div>` : ""}${rest ? "" : `<button class="btn" data-a="pgsend2">${ic("bird", 18)}Enviar paloma</button>`}</div></div>`;
+}
 function urow(u, acts) { return `<div class="item">${avatar(u, "sm")}<div><b style="color:${cl(u.color)}">${esc(u.username)}</b>${REL[u.relationship] ? `<small style="display:block;color:var(--mut)">${REL[u.relationship]}</small>` : ""}</div>${acts}</div>`; }
 function fres() {
   const F = S.data.friends, me = S.me.id, rel = new Set(F.map(f => f.requester === me ? f.addressee : f.requester)), q = (S.dr.fq || "").trim().toLowerCase();
@@ -299,8 +329,8 @@ function friends() {
   if (!S.me) return `<div class="empty"><p>Entra para hacer amigos.</p><button class="btn" data-a="auth" data-m="in">Entrar</button></div>`;
   const F = S.data.friends, me = S.me.id, P = f => pOf(f.requester === me ? f.addressee : f.requester);
   const inc = F.filter(f => f.status === "pending" && f.addressee === me), acc = F.filter(f => f.status === "accepted"), out = F.filter(f => f.status === "pending" && f.requester === me);
-  return (inc.length ? `<h2>Solicitudes</h2>` + inc.map(f => urow(pOf(f.requester), `<button class="btn" data-a="facc" data-id="${f.id}">Aceptar</button><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Rechazar">${ic("x", 20)}</button>`)).join("") : "")
-    + `<h2>Mis amigos (${acc.length})</h2>` + (acc.map(f => urow(P(f), `<button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Quitar amigo">${ic("trash", 20)}</button>`)).join("") || '<div class="empty">Todavía no tienes amigos. Agrega a alguien abajo.</div>')
+  return pigeons() + (inc.length ? `<h2>Solicitudes</h2>` + inc.map(f => urow(pOf(f.requester), `<button class="btn" data-a="facc" data-id="${f.id}">Aceptar</button><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Rechazar">${ic("x", 20)}</button>`)).join("") : "")
+    + `<h2>Mis amigos (${acc.length})</h2>` + (acc.map(f => urow(P(f), `<button class="btn ghost" data-a="pgsend" data-id="${P(f).id}">${ic("bird", 18)}Paloma</button><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Quitar amigo">${ic("trash", 20)}</button>`)).join("") || '<div class="empty">Todavía no tienes amigos. Agrega a alguien abajo.</div>')
     + (out.length ? `<h2>Enviadas</h2>` + out.map(f => urow(P(f), `<span class="chip">Pendiente</span><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Cancelar">${ic("x", 20)}</button>`)).join("") : "")
     + `<h2>Buscar personas</h2><input data-k="fq" placeholder="Buscar por apodo" value="${esc(S.dr.fq || "")}"><div id="fres">${fres()}</div>`;
 }
@@ -316,7 +346,8 @@ function card(m, hero, ico) {
 }
 
 function home() {
-  const st = meP().status || "active";
+  const st = meP().status || "active", un = S.me ? S.data.pg.inbox.filter(g => !g.seen).length : 0;
+  const pb = un ? `<button class="note" data-a="tab" data-t="friends" style="width:100%;border:0;text-align:left">${ic("bird", 18)} Tienes ${un} paloma${un > 1 ? "s" : ""} nueva${un > 1 ? "s" : ""}</button>` : "";
   const comp = !S.me
     ? `<div class="card" style="text-align:center"><p style="margin:0 0 12px">Crea tu cuenta para publicar, dar likes y comentar.</p><button class="btn" data-a="auth" data-m="up">Crear cuenta</button></div>`
     : (st === "restricted" || st === "blocked")
@@ -324,7 +355,7 @@ function home() {
       : `<div class="card"><textarea data-k="post" maxlength="280" placeholder="Cuenta un momento divertido…">${esc(S.dr.post || "")}</textarea>${S.img ? `<div class="prev"><img src="${esc(S.img.prev)}" alt="Vista previa"><button data-a="noimg" aria-label="Quitar foto">${ic("x", 16)}</button></div>` : ""}${S.aud ? `<div style="margin-top:8px">${S.aud.kind === "music" ? `<input data-k="mt" maxlength="60" placeholder="Título de la canción" value="${esc(S.dr.mt || "")}" style="margin-bottom:8px">` : ""}<audio controls src="${S.aud.prev}" style="width:100%"></audio><button class="btn ghost" data-a="noaud" style="margin-top:6px">Quitar audio</button></div>` : ""}${S.rec === "post" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 1:00</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : ""}<div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="f" role="button">${ic("img", 18)}Foto</label><label class="btn ghost" for="fm" role="button">${ic("music", 18)}Música</label><button class="btn ghost" data-a="rec" data-t="post">${ic("mic", 18)}Voz</button><button class="btn" data-a="post" style="margin-left:auto">Publicar</button></div>${st === "muted" ? `<div class="note" style="margin-top:10px">${NOTE.muted}</div>` : ""}</div>`;
   const pn = m => m.pinned_until > Date.now() ? 1 : 0;
   const ms = S.data.moments.filter(m => visible(m.user_id)).sort((a, b) => pn(b) - pn(a) || b.created_at - a.created_at);
-  return comp + (ms.map(m => card(m, pn(m) ? "Fijado" : null, "pin")).join("") || '<div class="empty">Aún no hay momentos. Publica el primero.</div>');
+  return pb + comp + (ms.map(m => card(m, pn(m) ? "Fijado" : null, "pin")).join("") || '<div class="empty">Aún no hay momentos. Publica el primero.</div>');
 }
 
 function rank(title, span) {
@@ -379,11 +410,11 @@ function render() {
   $("#bar").innerHTML = (API.demo ? '<span class="chip">Modo demo</span> ' : "") + (S.me ? `<span style="font-weight:600;display:inline-flex;gap:8px;align-items:center">${avatar(p, "sm")}${esc(S.me.username)}</span>` : '<button class="btn" data-a="auth" data-m="in">Entrar</button>');
   const T = [["home", "home", "Inicio"], ["top", "trophy", "Destacado"], ["friends", "users", "Amistad"], ["me", "user", "Perfil"]];
   if (isAdmin()) T.push(["admin", "shield", "Admin"]);
-  const nreq = S.me ? S.data.friends.filter(f => f.status === "pending" && f.addressee === S.me.id).length : 0;
+  const nreq = S.me ? S.data.friends.filter(f => f.status === "pending" && f.addressee === S.me.id).length + S.data.pg.inbox.filter(g => !g.seen).length : 0;
   $("#nav").innerHTML = T.map(t => `<button data-a="tab" data-t="${t[0]}" class="${S.tab === t[0] ? "on" : ""}">${ic(t[1], 22)}${t[2]}${t[0] === "friends" && nreq ? `<i class="dot">${nreq}</i>` : ""}</button>`).join("");
   $("#main").className = S.fresh ? "go" : ""; S.fresh = false;
   $("#main").innerHTML = S.tab === "home" ? home() : S.tab === "top" ? rank("Momento destacado", 0) : S.tab === "friends" ? friends() : S.tab === "admin" ? admin() : prof();
-  $("#auth").innerHTML = S.auth ? authSheet() : S.lb ? `<div class="sheet" data-a="lbx" style="align-items:center"><img src="${S.lb}" alt="Foto ampliada" style="max-width:96%;max-height:90vh;border-radius:12px"></div>` : "";
+  $("#auth").innerHTML = S.auth ? authSheet() : S.pgto ? pigeonSheet() : S.lb ? `<div class="sheet" data-a="lbx" style="align-items:center"><img src="${S.lb}" alt="Foto ampliada" style="max-width:96%;max-height:90vh;border-radius:12px"></div>` : "";
 }
 
 async function refresh() { try { S.data = await API.load(); } catch (e) { toast(e.message); } render(); }
@@ -410,7 +441,7 @@ document.addEventListener("change", async e => {
 
 document.addEventListener("click", async e => {
   const b = e.target.closest("[data-a]"); if (!b) return;
-  if (b.dataset.a === "close" && e.target.closest("[data-stop]")) return;
+  if ((b.dataset.a === "close" || b.dataset.a === "pgx") && e.target.closest("[data-stop]")) return;
   const a = b.dataset.a, id = +b.dataset.id;
   try {
     if (a === "tab") { S.tab = b.dataset.t; S.pf = null; S.arm = null; S.fresh = true; S.rx = null; render(); scrollTo(0, 0); }
@@ -437,6 +468,14 @@ document.addEventListener("click", async e => {
       if (S.aud) ex = { kind: S.aud.kind, audio_title: S.aud.kind === "music" ? (S.dr.mt || "Mi canción").slice(0, 60) : null, audio_url: await API.upload(S.aud.blob, "wav", "audio/wav") };
       await API.post(t, url, ex); S.dr.post = ""; S.dr.mt = ""; S.img = null; S.aud = null; await refresh(); toast("Momento publicado");
     }
+    else if (a === "pgsend") { S.pgto = b.dataset.id; S.err = null; render(); }
+    else if (a === "pgx") { S.pgto = null; S.err = null; render(); }
+    else if (a === "pgsend2") {
+      const t = (S.dr.pgt || "").trim(); if (!t) { S.err = "Escribe un mensaje"; return render(); }
+      try { await API.pigeonSend(S.pgto, t); } catch (e) { S.err = e.message; return render(); }
+      S.pgto = null; S.dr.pgt = ""; S.err = null; await refresh(); toast(API.demo ? "La paloma salió volando. Llegará en 1 minuto (demo)." : "La paloma salió volando. Llegará en 1 día.");
+    }
+    else if (a === "pread") { S.pgo[id] = true; await API.pigeonSeen(id); await refresh(); }
     else if (a === "noaud") { S.aud = null; render(); }
     else if (a === "rec") { if (needLogin()) return; await startRec(b.dataset.t === "intro" ? 30 : 60, b.dataset.t); }
     else if (a === "recstop") { if (REC && REC.mr.state === "recording") REC.mr.stop(); }
