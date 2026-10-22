@@ -35,8 +35,8 @@ textarea{resize:none;min-height:80px}
 .av.big{width:104px;height:104px;margin:0 auto}
 .av.sm{width:32px;height:32px}
 .pic{width:100%;max-height:520px;object-fit:cover;border-radius:12px;display:block;margin-top:10px;cursor:zoom-in;background:var(--soft)}
-.acts{display:flex;gap:8px}
-.acts button{background:var(--soft);border:0;border-radius:10px;padding:8px 14px;font-weight:600;display:inline-flex;gap:6px;align-items:center}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.acts button{background:var(--soft);border:0;border-radius:10px;padding:7px 11px;font-weight:600;display:inline-flex;gap:6px;align-items:center}
 .acts button.on{background:var(--pri);color:var(--onpri)}
 .cms{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
 .cm{margin:6px 0;overflow-wrap:anywhere}
@@ -62,8 +62,39 @@ nav button.on{color:var(--prid);background:var(--soft)}
 .item select{width:auto}
 .thumb{width:44px;height:44px;border-radius:8px;object-fit:cover}
 .ic{background:none;border:0;color:var(--bad);padding:8px;border-radius:8px;font-weight:600}
-.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}label.btn{cursor:pointer}
+.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}label.btn{cursor:pointer}.btn.ghost.on{background:var(--pri);color:var(--onpri);border-color:var(--pri)}.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--soft);border-radius:12px;padding:4px}.seg button{border:0;background:none;border-radius:9px;padding:10px;font-weight:600;color:var(--mut)}.seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.2)}.err{color:var(--bad);font-weight:600;font-size:14px}.pw{position:relative}.pw input{padding-right:84px}.pw button{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--prid);font-weight:600;padding:8px}
 #toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;z-index:30;display:none;max-width:90%;text-align:center}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.95)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes slide{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes tin{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+.go .card,.go .item,.go .empty{animation:up .4s ease-out both}
+.go .card:nth-child(2){animation-delay:.06s}.go .card:nth-child(3){animation-delay:.12s}.go .card:nth-child(4){animation-delay:.18s}.go .card:nth-child(n+5){animation-delay:.24s}
+.sheet{animation:fade .2s}.sheet>div{animation:slide .28s cubic-bezier(.2,.9,.3,1)}
+#toast{animation:tin .22s ease-out}
+button,label.btn{transition:transform .12s,background .2s,color .2s,box-shadow .2s}
+button:active:not(:disabled),label.btn:active{transform:scale(.95)}
+.pw button:active:not(:disabled){transform:translateY(-50%)}
+.tray{display:flex;gap:4px;overflow-x:auto;margin-top:8px;padding:6px;background:var(--soft);border-radius:14px;animation:pop .2s ease-out;scrollbar-width:none}
+.tray::-webkit-scrollbar{display:none}
+.tray button{flex:none;min-width:48px;background:none;border:0;border-radius:10px;padding:4px 6px;display:flex;flex-direction:column;align-items:center}
+.tray button span{font-size:26px;line-height:1.2;transition:transform .15s}
+.tray button:hover span{transform:scale(1.25)}
+.tray button small{font-size:11px;color:var(--mut);min-height:14px}
+.tray button.on{background:var(--card);box-shadow:inset 0 0 0 2px var(--pri)}
+.acts button.bump{animation:bump .35s}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+nav button{position:relative}
+.dot{position:absolute;top:2px;right:calc(50% - 22px);background:var(--bad);color:#fff;font-size:11px;font-style:normal;border-radius:999px;min-width:16px;padding:0 4px;line-height:16px}
+.note-card{display:flex;gap:12px;align-items:center;border-radius:14px;padding:14px;margin-top:10px;color:#fff}
+.note-card small{display:block;opacity:.85}.note-card audio{width:100%;margin-top:8px}.note-card>div{flex:1;min-width:0}
+.nt{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;flex:none}
+.voice audio{width:100%;margin-top:10px}
+.stk{width:96px;height:96px;object-fit:cover;border-radius:16px;display:block;margin-top:4px}
+.tray img{width:64px;height:64px;border-radius:12px;object-fit:cover;display:block}
+.mini{background:var(--soft);color:var(--prid);border:0;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;display:inline-flex;gap:5px;align-items:center;margin-left:auto}
 .prev{position:relative;margin-top:8px}.prev img{width:100%;max-height:240px;object-fit:cover;border-radius:12px}
 .prev button{position:absolute;top:8px;right:8px;background:rgba(15,23,42,.75);color:#fff;border:0;border-radius:50%;width:32px;height:32px}
 </style>
@@ -76,16 +107,22 @@ nav button.on{color:var(--prid);background:var(--soft)}
 <div id="toast"></div>
 <input type="file" id="f" accept="image/*" class="vh">
 <input type="file" id="fa" accept="image/*" class="vh">
+<input type="file" id="fm" accept="audio/*" class="vh">
+<input type="file" id="fi" accept="audio/*" class="vh">
+<input type="file" id="fs" accept="image/*" class="vh">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 /* === CONFIGURACIÓN: pega aquí los datos de Supabase. Vacío = modo demostración (solo en tu navegador) === */
-const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "sb_publishable_ODTlK8Q5KOR8kDW_NblPYQ_UCgDgvNw" };
+const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "PEGA_TU_CLAVE_AQUI" };
 
 const COLORS = [["Rojo","#DC2626"],["Naranja","#EA580C"],["Amarillo","#EAB308"],["Verde","#16A34A"],["Azul","#2563EB"],["Morado","#7C3AED"],["Rosa","#DB2777"],["Negro","#1E293B"]];
 const AVS = ["a1","a2","a3","a4","a5","a6"];
+const REACT = [["heart","❤️"],["laugh","😂"],["wow","😮"],["sad","😢"],["fire","🔥"],["clap","👏"],["love","😍"],["mind","🤯"],["party","🥳"],["cool","😎"],["up","👍"],["pray","🙏"]];
+const REL = { single: "Soltero/a", taken: "En una relación" };
 const STAT = { active: "Activo", muted: "Silenciado", restricted: "Restringido", blocked: "Bloqueado" };
 const NOTE = { muted: "Tu cuenta está silenciada: no puedes comentar.", restricted: "Tu cuenta está restringida: no puedes publicar momentos.", blocked: "Tu cuenta está bloqueada: no puedes publicar, comentar ni dar likes." };
 const $ = s => document.querySelector(s);
+let AUD = null, REC = null;
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const cl = c => /^#[0-9a-f]{6}$/i.test(c || "") ? c : COLORS[4][1];
 const safe = u => /^(https:\/\/|data:image\/)/.test(u || "") ? esc(u) : "";
@@ -100,19 +137,24 @@ const IC = {
   shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',
   img: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/>',
   trash: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+  pin: '<path d="M12 17v5M9 3h6l-1 6 3 3v2H7v-2l3-3z"/>',
+  users: '<circle cx="9" cy="8" r="3.5"/><path d="M2 21a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M22 21a7 7 0 0 0-4-6.3"/>',
+  music: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+  mic: '<rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+  sticker: '<path d="M20 12V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6l8-8z"/><path d="M20 12h-6a2 2 0 0 0-2 2v6"/>',
   x: '<path d="M6 6l12 12M18 6L6 18"/>'
 };
 const ic = (n, s = 22, f) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${f ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
 
-const AX = {
-  a1: "",
-  a2: '<g fill="none" stroke="@" stroke-width="1.6"><circle cx="20.5" cy="20" r="3"/><circle cx="27.5" cy="20" r="3"/><path d="M23.5 20h1"/></g>',
-  a3: '<path d="M15 18a9 9 0 0 1 18 0z" fill="@"/><path d="M30 18h8" stroke="@" stroke-width="2.4" stroke-linecap="round"/>',
-  a4: '<path d="M15 21c-1-9 4-13 9-13s10 4 9 13c-1-5-4-7-9-7s-8 2-9 7z" fill="@"/>',
-  a5: '<path d="M14 21a10 10 0 0 1 20 0" fill="none" stroke="@" stroke-width="2.4"/><rect x="12" y="19" width="4" height="7" rx="2" fill="@"/><rect x="32" y="19" width="4" height="7" rx="2" fill="@"/>',
-  a6: '<path d="M15 19a9 9 0 0 1 18 0z" fill="@"/><circle cx="24" cy="9.5" r="2.4" fill="@"/>'
+const ROBOT = {
+  a1: '<circle cx="19" cy="23" r="3" fill="@"/><circle cx="29" cy="23" r="3" fill="@"/><path d="M19 30q5 4 10 0" fill="none" stroke="@" stroke-width="2" stroke-linecap="round"/>',
+  a2: '<rect x="15" y="20" width="18" height="7" rx="3.5" fill="@"/><path d="M19 31h10" stroke="@" stroke-width="2" stroke-linecap="round"/>',
+  a3: '<rect x="16" y="20" width="6" height="6" rx="1" fill="@"/><rect x="26" y="20" width="6" height="6" rx="1" fill="@"/><path d="M18 31h12M21 29v4M24 29v4M27 29v4" stroke="@" stroke-width="1.6"/>',
+  a4: '<circle cx="24" cy="23" r="5" fill="@"/><circle cx="24" cy="23" r="1.8" fill="#fff"/><path d="M19 32h10" stroke="@" stroke-width="2" stroke-linecap="round"/>',
+  a5: '<path d="M16 24q3-4 6 0M26 24q3-4 6 0" fill="none" stroke="@" stroke-width="2.2" stroke-linecap="round"/><rect x="20" y="29" width="8" height="4" rx="2" fill="@"/>',
+  a6: '<path d="M16 23h6M26 23h6" stroke="@" stroke-width="2.6" stroke-linecap="round"/><path d="M20 31q4-3 8 0" fill="none" stroke="@" stroke-width="2" stroke-linecap="round"/>'
 };
-const avSvg = (id, c) => `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="${c}"/><path d="M8 44c2-9 9-12 16-12s14 3 16 12z" fill="#fff" opacity=".92"/><circle cx="24" cy="20" r="8" fill="#fff"/>${(AX[id] || "").replaceAll("@", c)}</svg>`;
+const avSvg = (id, c) => `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="${c}"/><path d="M24 14v-5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="8" r="2.6" fill="#fff"/><rect x="7" y="21" width="4" height="8" rx="2" fill="#fff"/><rect x="37" y="21" width="4" height="8" rx="2" fill="#fff"/><rect x="11" y="14" width="26" height="22" rx="6" fill="#fff"/><rect x="16" y="39" width="16" height="5" rx="2.5" fill="#fff" opacity=".9"/>${(ROBOT[id] || ROBOT.a1).replaceAll("@", c)}</svg>`;
 const avatar = (p, cls = "") => safe(p.avatar_url) ? `<img class="av ${cls}" src="${safe(p.avatar_url)}" alt="">` : `<span class="av ${cls}">${avSvg(p.avatar || "a1", cl(p.color))}</span>`;
 
 async function shrink(file, max, q) {
@@ -134,6 +176,7 @@ function mkDemo() {
       users: [{ id: "u1", username: "ana_dev", pass: "x", color: "#16A34A", avatar: "a4", status: "active" }, { id: "u2", username: "admin", pass: "admin123", color: "#7C3AED", avatar: "a2", status: "active", is_admin: true }],
       moments: [{ id: 1, user_id: "u1", text: "Se nos cayó el proyector en plena exposición y nadie dijo nada", created_at: n - 864e5 }, { id: 2, user_id: "u2", text: "Hoy alguien contestó “presente” en el chat equivocado", created_at: n - 36e5 }] };
   }
+  s.friends = s.friends || []; s.stickers = s.stickers || [];
   const save = () => { try { localStorage.setItem(K, JSON.stringify(s)); } catch (e) { throw new Error("El modo demo se quedó sin espacio"); } };
   const find = n => s.users.find(u => u.username.toLowerCase() === n.toLowerCase());
   const meU = () => s.users.find(u => u.id === s.me);
@@ -144,13 +187,19 @@ function mkDemo() {
     async signUp(n, p) { if (find(n)) throw new Error("Ese nombre ya existe"); const u = { id: "u" + (++s.n), username: n, pass: p, color: COLORS[4][1], avatar: "a1", status: "active" }; s.users.push(u); s.me = u.id; save(); },
     async signIn(n, p) { const u = find(n); if (!u || u.pass !== p) throw new Error("Usuario o contraseña incorrectos"); s.me = u.id; save(); },
     async signOut() { s.me = null; save(); },
-    async load() { return { profiles: Object.fromEntries(s.users.map(u => [u.id, u])), moments: s.moments, likes: s.likes, comments: s.comments }; },
+    async load() { return { profiles: Object.fromEntries(s.users.map(u => [u.id, u])), moments: s.moments, likes: s.likes, comments: s.comments, friends: s.friends, stickers: s.stickers }; },
     async upload(b) { return toData(b); },
-    async post(t, img) { if (["restricted", "blocked"].includes(meU().status)) deny(); s.moments.push({ id: ++s.n, user_id: s.me, text: t, image_url: img || null, created_at: Date.now() }); save(); },
-    async like(id, on) { if (meU().status === "blocked") deny(); s.likes = s.likes.filter(l => !(l.moment_id === id && l.user_id === s.me)); if (on) s.likes.push({ moment_id: id, user_id: s.me }); save(); },
-    async comment(id, t) { if (["muted", "blocked"].includes(meU().status)) deny(); s.comments.push({ id: ++s.n, moment_id: id, user_id: s.me, text: t, created_at: Date.now() }); save(); },
-    async profile(color, av, url) { const u = meU(); u.color = color; u.avatar = av; u.avatar_url = url || null; save(); },
+    async post(t, img, ex) { if (["restricted", "blocked"].includes(meU().status)) deny(); s.moments.push({ id: ++s.n, user_id: s.me, text: t, image_url: img || null, ...(ex || {}), created_at: Date.now() }); save(); },
+    async like(id, on) { if (meU().status === "blocked") deny(); s.likes = s.likes.filter(l => !(l.moment_id === id && l.user_id === s.me)); if (on) s.likes.push({ moment_id: id, user_id: s.me, kind: on }); save(); },
+    async comment(id, t, st) { if (["muted", "blocked"].includes(meU().status)) deny(); s.comments.push({ id: ++s.n, moment_id: id, user_id: s.me, text: t, sticker_url: st || null, created_at: Date.now() }); save(); },
+    async profile(color, av, url, rel) { const u = meU(); u.color = color; u.avatar = av; u.avatar_url = url || null; u.relationship = rel; save(); },
     async setStatus(id, st) { s.users.find(u => u.id === id).status = st; save(); },
+    async setIntro(url, h) { const u = meU(); u.intro_url = url; u.intro_until = url ? Date.now() + h * 36e5 : 0; save(); },
+    async addSticker(url) { s.stickers.unshift({ id: ++s.n, user_id: s.me, image_url: url }); save(); },
+    async friendReq(to) { if (meU().status === "blocked") deny(); s.friends.push({ id: ++s.n, requester: s.me, addressee: to, status: "pending" }); save(); },
+    async friendAccept(id) { s.friends.find(f => f.id === id).status = "accepted"; save(); },
+    async friendDel(id) { s.friends = s.friends.filter(f => f.id !== id); save(); },
+    async pin(id, h) { s.moments.find(m => m.id === id).pinned_until = h ? Date.now() + h * 36e5 : 0; save(); },
     async delComment(id) { s.comments = s.comments.filter(c => c.id !== id); save(); },
     async delMoment(id) { s.moments = s.moments.filter(m => m.id !== id); s.likes = s.likes.filter(l => l.moment_id !== id); s.comments = s.comments.filter(c => c.moment_id !== id); save(); }
   };
@@ -161,7 +210,7 @@ function mkSup() {
   const mail = n => n.toLowerCase() + "@momentos.app";
   const fail = e => { if (e) { const m = e.message || ""; throw new Error(/already/i.test(m) ? "Ese nombre ya existe" : /invalid login/i.test(m) ? "Usuario o contraseña incorrectos" : /at least/i.test(m) ? "La contraseña necesita mínimo 6 caracteres" : /row-level security|permission/i.test(m) ? "Tu cuenta no tiene permiso para esto" : m); } };
   const ok = r => { fail(r.error); return r.data; };
-  const t = r => ({ ...r, created_at: Date.parse(r.created_at) });
+  const t = r => ({ ...r, created_at: Date.parse(r.created_at), pinned_until: r.pinned_until ? Date.parse(r.pinned_until) : 0 });
   return {
     demo: false,
     async session() { const { data } = await sb.auth.getSession(); const u = data.session && data.session.user; return u ? { id: u.id, username: u.user_metadata.username } : null; },
@@ -169,22 +218,28 @@ function mkSup() {
     async signIn(n, p) { fail((await sb.auth.signInWithPassword({ email: mail(n), password: p })).error); },
     async signOut() { await sb.auth.signOut(); },
     async load() {
-      const [a, b, c, d] = await Promise.all([sb.from("profiles").select("*"), sb.from("moments").select("*").order("created_at", { ascending: false }).limit(300), sb.from("likes").select("*"), sb.from("comments").select("*").order("created_at")]);
-      return { profiles: Object.fromEntries(ok(a).map(u => [u.id, u])), moments: ok(b).map(t), likes: ok(c), comments: ok(d).map(t) };
+      const [a, b, c, d, e, f] = await Promise.all([sb.from("profiles").select("*"), sb.from("moments").select("*").order("created_at", { ascending: false }).limit(300), sb.from("likes").select("*"), sb.from("comments").select("*").order("created_at"), sb.from("friendships").select("*"), sb.from("stickers").select("*").order("created_at", { ascending: false }).limit(60)]);
+      return { profiles: Object.fromEntries(ok(a).map(u => [u.id, { ...u, intro_until: u.intro_until ? Date.parse(u.intro_until) : 0 }])), moments: ok(b).map(t), likes: ok(c), comments: ok(d).map(t), friends: ok(e), stickers: ok(f) };
     },
-    async upload(b) { const me = await this.session(), path = me.id + "/" + Date.now() + ".jpg"; fail((await sb.storage.from("media").upload(path, b, { contentType: "image/jpeg" })).error); return sb.storage.from("media").getPublicUrl(path).data.publicUrl; },
-    async post(x, img) { fail((await sb.from("moments").insert({ text: x, image_url: img || null })).error); },
-    async like(id, on) { fail((on ? await sb.from("likes").insert({ moment_id: id }) : await sb.from("likes").delete().eq("moment_id", id)).error); },
-    async comment(id, x) { fail((await sb.from("comments").insert({ moment_id: id, text: x })).error); },
-    async profile(color, av, url) { const me = await this.session(); fail((await sb.from("profiles").update({ color, avatar: av, avatar_url: url || null }).eq("id", me.id)).error); },
+    async upload(b, ext = "jpg", type = "image/jpeg") { const me = await this.session(), path = me.id + "/" + Date.now() + "." + ext; fail((await sb.storage.from("media").upload(path, b, { contentType: type })).error); return sb.storage.from("media").getPublicUrl(path).data.publicUrl; },
+    async post(x, img, ex) { fail((await sb.from("moments").insert({ text: x, image_url: img || null, ...(ex || {}) })).error); },
+    async like(id, kind) { const me = await this.session(); await sb.from("likes").delete().eq("moment_id", id).eq("user_id", me.id); if (kind) fail((await sb.from("likes").insert({ moment_id: id, kind })).error); },
+    async comment(id, x, st) { fail((await sb.from("comments").insert({ moment_id: id, text: x, sticker_url: st || null })).error); },
+    async profile(color, av, url, rel) { const me = await this.session(); fail((await sb.from("profiles").update({ color, avatar: av, avatar_url: url || null, relationship: rel }).eq("id", me.id)).error); },
     async setStatus(id, st) { fail((await sb.rpc("admin_set_status", { target: id, new_status: st })).error); },
+    async setIntro(url, h) { const me = await this.session(); fail((await sb.from("profiles").update({ intro_url: url, intro_until: url ? new Date(Date.now() + h * 36e5).toISOString() : null }).eq("id", me.id)).error); },
+    async addSticker(url) { fail((await sb.from("stickers").insert({ image_url: url })).error); },
+    async friendReq(to) { fail((await sb.from("friendships").insert({ addressee: to })).error); },
+    async friendAccept(id) { fail((await sb.from("friendships").update({ status: "accepted" }).eq("id", id)).error); },
+    async friendDel(id) { fail((await sb.from("friendships").delete().eq("id", id)).error); },
+    async pin(id, h) { fail((await sb.from("moments").update({ pinned_until: h ? new Date(Date.now() + h * 36e5).toISOString() : null }).eq("id", id)).error); },
     async delComment(id) { fail((await sb.from("comments").delete().eq("id", id)).error); },
     async delMoment(id) { fail((await sb.from("moments").delete().eq("id", id)).error); }
   };
 }
 
 const API = (CFG.url && CFG.key && window.supabase) ? mkSup() : mkDemo();
-let S = { tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [] }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
+let S = { fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [] }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
 
 function toast(m) { const t = $("#toast"); t.textContent = m; t.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = "none", 2800); }
 function ago(t) { const m = Math.max(0, (Date.now() - t) / 6e4); if (m < 1) return "ahora"; if (m < 60) return "hace " + Math.floor(m) + " min"; if (m < 1440) return "hace " + Math.floor(m / 60) + " h"; return "hace " + Math.floor(m / 1440) + " d"; }
@@ -194,11 +249,70 @@ const isAdmin = () => !!meP().is_admin;
 const pOf = id => S.data.profiles[id] || { username: "anónimo", color: COLORS[4][1], avatar: "a1" };
 const visible = uid => isAdmin() || pOf(uid).status !== "blocked";
 
-function card(m, hero) {
-  const p = pOf(m.user_id), L = likesOf(m.id), liked = S.me && L.some(l => l.user_id === S.me.id);
+const introOn = p => p.intro_url && p.intro_until > Date.now();
+const fmt = n => Math.floor(n / 60) + ":" + String(n % 60).padStart(2, "0");
+const stray = id => `<div class="tray"><label class="btn ghost" for="fs" role="button" style="flex:none">+ Crear</label>${S.data.stickers.map(k => `<button data-a="ss" data-id="${id}" data-u="${safe(k.image_url)}" aria-label="Enviar sticker"><img alt="" src="${safe(k.image_url)}"></button>`).join("") || '<small style="color:var(--mut);align-self:center">Aún no hay stickers. Crea el primero.</small>'}</div>`;
+
+async function wavTrim(blob, max) {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  let buf; try { buf = await ctx.decodeAudioData(await blob.arrayBuffer()); } catch (e) { throw new Error("No se pudo leer ese audio"); } finally { ctx.close(); }
+  const rate = 16000, secs = Math.min(buf.duration, max), n = Math.floor(secs * rate);
+  const off = new OfflineAudioContext(1, n, rate), src = off.createBufferSource();
+  src.buffer = buf; src.connect(off.destination); src.start(0);
+  const out = (await off.startRendering()).getChannelData(0);
+  const v = new DataView(new ArrayBuffer(44 + n * 2)), w = (o, t) => [...t].forEach((c, i) => v.setUint8(o + i, c.charCodeAt(0)));
+  w(0, "RIFF"); v.setUint32(4, 36 + n * 2, true); w(8, "WAVEfmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+  v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true); w(36, "data"); v.setUint32(40, n * 2, true);
+  for (let i = 0; i < n; i++) v.setInt16(44 + i * 2, Math.max(-1, Math.min(1, out[i])) * 32767, true);
+  return { blob: new Blob([v], { type: "audio/wav" }), trimmed: buf.duration > max + .5 };
+}
+async function setAudio(blob, max, target, kind, title) {
+  const r = await wavTrim(blob, max), o = { blob: r.blob, prev: await toData(r.blob), kind, title: title || "" };
+  if (target === "intro") S.ia = o; else { S.aud = o; S.img = null; }
+  if (r.trimmed) toast("Se recortó a " + max + " segundos");
+}
+async function startRec(max, target) {
+  if (!navigator.mediaDevices || !window.MediaRecorder) throw new Error("Tu navegador no permite grabar audio");
+  let st; try { st = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch (e) { throw new Error("No se pudo usar el micrófono. Revisa el permiso del navegador."); }
+  const mr = new MediaRecorder(st), ch = [], t0 = Date.now();
+  mr.ondataavailable = e => ch.push(e.data);
+  mr.onstop = async () => { clearInterval(REC.iv); st.getTracks().forEach(x => x.stop()); REC = null; S.rec = null; try { await setAudio(new Blob(ch), max, target, "audio"); } catch (e) { toast(e.message); } render(); };
+  REC = { mr, iv: setInterval(() => { const n = Math.floor((Date.now() - t0) / 1e3), el = $("#rt"); if (el) el.textContent = fmt(n) + " / " + fmt(max); if (n >= max && mr.state === "recording") mr.stop(); }, 250) };
+  mr.start(); S.rec = target; render();
+}
+async function sticker(file) {
+  const url = URL.createObjectURL(file);
+  const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("No se pudo leer esa imagen")); i.src = url; });
+  const c = document.createElement("canvas"); c.width = c.height = 256;
+  const k = Math.max(256 / img.width, 256 / img.height), w = img.width * k, h = img.height * k;
+  c.getContext("2d").drawImage(img, (256 - w) / 2, (256 - h) / 2, w, h); URL.revokeObjectURL(url);
+  return new Promise(ok => c.toBlob(ok, "image/png"));
+}
+
+function urow(u, acts) { return `<div class="item">${avatar(u, "sm")}<div><b style="color:${cl(u.color)}">${esc(u.username)}</b>${REL[u.relationship] ? `<small style="display:block;color:var(--mut)">${REL[u.relationship]}</small>` : ""}</div>${acts}</div>`; }
+function fres() {
+  const F = S.data.friends, me = S.me.id, rel = new Set(F.map(f => f.requester === me ? f.addressee : f.requester)), q = (S.dr.fq || "").trim().toLowerCase();
+  const us = Object.values(S.data.profiles).filter(u => u.id !== me && !rel.has(u.id) && (isAdmin() || u.status !== "blocked") && u.username.toLowerCase().includes(q));
+  return us.slice(0, 30).map(u => urow(u, `<button class="btn" data-a="fadd" data-id="${u.id}">Agregar</button>`)).join("") || '<div class="empty">No hay más personas para agregar.</div>';
+}
+function friends() {
+  if (!S.me) return `<div class="empty"><p>Entra para hacer amigos.</p><button class="btn" data-a="auth" data-m="in">Entrar</button></div>`;
+  const F = S.data.friends, me = S.me.id, P = f => pOf(f.requester === me ? f.addressee : f.requester);
+  const inc = F.filter(f => f.status === "pending" && f.addressee === me), acc = F.filter(f => f.status === "accepted"), out = F.filter(f => f.status === "pending" && f.requester === me);
+  return (inc.length ? `<h2>Solicitudes</h2>` + inc.map(f => urow(pOf(f.requester), `<button class="btn" data-a="facc" data-id="${f.id}">Aceptar</button><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Rechazar">${ic("x", 20)}</button>`)).join("") : "")
+    + `<h2>Mis amigos (${acc.length})</h2>` + (acc.map(f => urow(P(f), `<button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Quitar amigo">${ic("trash", 20)}</button>`)).join("") || '<div class="empty">Todavía no tienes amigos. Agrega a alguien abajo.</div>')
+    + (out.length ? `<h2>Enviadas</h2>` + out.map(f => urow(P(f), `<span class="chip">Pendiente</span><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Cancelar">${ic("x", 20)}</button>`)).join("") : "")
+    + `<h2>Buscar personas</h2><input data-k="fq" placeholder="Buscar por apodo" value="${esc(S.dr.fq || "")}"><div id="fres">${fres()}</div>`;
+}
+
+function card(m, hero, ico) {
+  const p = pOf(m.user_id), L = likesOf(m.id), mf = S.me && L.find(l => l.user_id === S.me.id), mine = mf && (mf.kind || "heart");
   const C = S.data.comments.filter(c => c.moment_id === m.id && visible(c.user_id)), o = S.open[m.id];
-  const cms = o ? `<div class="cms">${C.map(c => { const q = pOf(c.user_id); return `<div class="cm"><b style="color:${cl(q.color)}">${esc(q.username)}</b> ${esc(c.text)}</div>`; }).join("") || '<div class="cm" style="color:var(--mut)">Sin comentarios todavía</div>'}<div class="row"><input data-k="c${m.id}" value="${esc(S.dr["c" + m.id] || "")}" placeholder="Escribe un comentario" maxlength="200"><button class="btn" data-a="send" data-id="${m.id}">Enviar</button></div></div>` : "";
-  return `<article class="card ${hero ? "hero" : ""}">${hero ? `<span class="tag">${ic("trophy", 16)}${hero}</span>` : ""}<div class="who" ${hero ? 'style="margin-top:10px"' : ""}>${avatar(p)}<div><b style="color:${cl(p.color)}">${esc(p.username)}</b><small>${ago(m.created_at)}</small></div></div>${safe(m.image_url) ? `<img class="pic" loading="lazy" alt="Foto del momento" src="${safe(m.image_url)}" data-a="lb" data-u="${safe(m.image_url)}">` : ""}${m.text ? `<p>${esc(m.text)}</p>` : '<div style="height:10px"></div>'}<div class="acts"><button class="${liked ? "on" : ""}" data-a="like" data-id="${m.id}">${ic("heart", 18, liked)}${L.length}</button><button data-a="cm" data-id="${m.id}">${ic("chat", 18)}${C.length}</button></div>${cms}</article>`;
+  const cms = o ? `<div class="cms">${C.map(c => { const q = pOf(c.user_id); return `<div class="cm"><b style="color:${cl(q.color)}">${esc(q.username)}</b> ${safe(c.sticker_url) ? `<img class="stk" alt="Sticker" src="${safe(c.sticker_url)}">` : esc(c.text)}</div>`; }).join("") || '<div class="cm" style="color:var(--mut)">Sin comentarios todavía</div>'}<div class="row"><input data-k="c${m.id}" value="${esc(S.dr["c" + m.id] || "")}" placeholder="Escribe un comentario" maxlength="200"><button class="btn ghost" data-a="stk" data-id="${m.id}" aria-label="Stickers">${ic("sticker", 18)}</button><button class="btn" data-a="send" data-id="${m.id}">Enviar</button></div>${S.st === m.id ? stray(m.id) : ""}</div>` : "";
+  const cnt = k => L.filter(l => (l.kind || "heart") === k).length;
+  const tp = REACT.map(([k, e]) => [e, cnt(k)]).filter(x => x[1]).sort((a, b) => b[1] - a[1]).slice(0, 3).map(x => x[0]).join("");
+  const tray = S.rx === m.id ? `<div class="tray">${REACT.map(([k, e]) => `<button class="${mine === k ? "on" : ""}" data-a="like" data-id="${m.id}" data-k2="${k}" aria-label="Reaccionar ${k}"><span>${e}</span><small>${cnt(k) || ""}</small></button>`).join("")}</div>` : "";
+  return `<article class="card ${hero ? "hero" : ""}">${hero ? `<span class="tag">${ic(ico || "trophy", 16)}${hero}</span>` : ""}<div class="who" ${hero ? 'style="margin-top:10px"' : ""}>${avatar(p)}<div><b style="color:${cl(p.color)}">${esc(p.username)}</b><small>${ago(m.created_at)}${REL[p.relationship] ? " · " + REL[p.relationship] : ""}</small></div>${introOn(p) ? `<button class="mini" data-a="play" data-u="${safe(p.intro_url)}">${ic("music", 14)}Presentación</button>` : ""}</div>${safe(m.image_url) ? `<img class="pic" loading="lazy" alt="Foto del momento" src="${safe(m.image_url)}" data-a="lb" data-u="${safe(m.image_url)}">` : ""}${safe(m.audio_url) ? (m.kind === "music" ? `<div class="note-card" style="background:linear-gradient(135deg,${cl(p.color)} 0%,#1E293B 140%)"><span class="nt">${ic("music", 24)}</span><div><b>${esc(m.audio_title || "Canción")}</b><small>Nota musical</small><audio controls preload="none" src="${safe(m.audio_url)}"></audio></div></div>` : `<div class="voice"><audio controls preload="none" src="${safe(m.audio_url)}"></audio></div>`) : ""}${m.text ? `<p>${esc(m.text)}</p>` : '<div style="height:10px"></div>'}<div class="acts"><button class="${mine ? "on" : ""} ${S.pop === m.id ? "bump" : ""}" data-a="rx" data-id="${m.id}" aria-label="Reaccionar">${tp || ic("heart", 18)}${L.length || ""}</button><button data-a="cm" data-id="${m.id}">${ic("chat", 18)}${C.length}</button></div>${tray}${cms}</article>`;
 }
 
 function home() {
@@ -207,9 +321,10 @@ function home() {
     ? `<div class="card" style="text-align:center"><p style="margin:0 0 12px">Crea tu cuenta para publicar, dar likes y comentar.</p><button class="btn" data-a="auth" data-m="up">Crear cuenta</button></div>`
     : (st === "restricted" || st === "blocked")
       ? `<div class="note">${NOTE[st]}</div>`
-      : `<div class="card"><textarea data-k="post" maxlength="280" placeholder="Cuenta un momento divertido…">${esc(S.dr.post || "")}</textarea>${S.img ? `<div class="prev"><img src="${esc(S.img.prev)}" alt="Vista previa"><button data-a="noimg" aria-label="Quitar foto">${ic("x", 16)}</button></div>` : ""}<div class="row" style="justify-content:space-between"><label class="btn ghost" for="f" role="button">${ic("img", 18)}Foto</label><button class="btn" data-a="post">Publicar</button></div>${st === "muted" ? `<div class="note" style="margin-top:10px">${NOTE.muted}</div>` : ""}</div>`;
-  const ms = S.data.moments.filter(m => visible(m.user_id)).sort((a, b) => b.created_at - a.created_at);
-  return comp + (ms.map(m => card(m)).join("") || '<div class="empty">Aún no hay momentos. Publica el primero.</div>');
+      : `<div class="card"><textarea data-k="post" maxlength="280" placeholder="Cuenta un momento divertido…">${esc(S.dr.post || "")}</textarea>${S.img ? `<div class="prev"><img src="${esc(S.img.prev)}" alt="Vista previa"><button data-a="noimg" aria-label="Quitar foto">${ic("x", 16)}</button></div>` : ""}${S.aud ? `<div style="margin-top:8px">${S.aud.kind === "music" ? `<input data-k="mt" maxlength="60" placeholder="Título de la canción" value="${esc(S.dr.mt || "")}" style="margin-bottom:8px">` : ""}<audio controls src="${S.aud.prev}" style="width:100%"></audio><button class="btn ghost" data-a="noaud" style="margin-top:6px">Quitar audio</button></div>` : ""}${S.rec === "post" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 1:00</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : ""}<div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="f" role="button">${ic("img", 18)}Foto</label><label class="btn ghost" for="fm" role="button">${ic("music", 18)}Música</label><button class="btn ghost" data-a="rec" data-t="post">${ic("mic", 18)}Voz</button><button class="btn" data-a="post" style="margin-left:auto">Publicar</button></div>${st === "muted" ? `<div class="note" style="margin-top:10px">${NOTE.muted}</div>` : ""}</div>`;
+  const pn = m => m.pinned_until > Date.now() ? 1 : 0;
+  const ms = S.data.moments.filter(m => visible(m.user_id)).sort((a, b) => pn(b) - pn(a) || b.created_at - a.created_at);
+  return comp + (ms.map(m => card(m, pn(m) ? "Fijado" : null, "pin")).join("") || '<div class="empty">Aún no hay momentos. Publica el primero.</div>');
 }
 
 function rank(title, span) {
@@ -222,14 +337,20 @@ function rank(title, span) {
 function prof() {
   if (!S.me) return `<div class="empty"><p>Entra para personalizar tu perfil.</p><button class="btn" data-a="auth" data-m="in">Entrar</button></div>`;
   const p = meP();
-  S.pf = S.pf || { color: cl(p.color), avatar: p.avatar || "a1", url: p.avatar_url || null, blob: null };
+  S.pf = S.pf || { color: cl(p.color), avatar: p.avatar || "a1", url: p.avatar_url || null, blob: null, rel: p.relationship || "none" };
   const mine = S.data.moments.filter(m => m.user_id === S.me.id), got = mine.reduce((n, m) => n + likesOf(m.id).length, 0);
   const view = { color: S.pf.color, avatar: S.pf.avatar, avatar_url: S.pf.url };
-  return `<div class="card" style="text-align:center">${avatar(view, "big")}<h2 style="color:${S.pf.color};margin:12px 0 2px">${esc(S.me.username)}</h2><small style="color:var(--mut)">${mine.length} momentos · ${got} likes recibidos</small></div>
+  return `<div class="card" style="text-align:center">${avatar(view, "big")}<h2 style="color:${S.pf.color};margin:12px 0 2px">${esc(S.me.username)}</h2><small style="color:var(--mut)">${mine.length} momentos · ${got} reacciones recibidas</small></div>
   <h2>Foto de perfil</h2><div class="row"><label class="btn" for="fa" role="button">${ic("img", 18)}Subir mi foto</label>${S.pf.url ? `<button class="btn ghost" data-a="noav">Quitar foto</button>` : ""}</div>
-  <h2>Avatar</h2><div class="grid">${AVS.map(a => `<button data-a="pa" data-v="${a}" class="${!S.pf.url && S.pf.avatar === a ? "sel" : ""}">${avatar({ avatar: a, color: S.pf.color })}</button>`).join("")}</div>
+  <h2>Robot</h2><div class="grid">${AVS.map(a => `<button data-a="pa" data-v="${a}" class="${!S.pf.url && S.pf.avatar === a ? "sel" : ""}">${avatar({ avatar: a, color: S.pf.color })}</button>`).join("")}</div>
   <h2>Color</h2><div class="grid">${COLORS.map(c => `<button data-a="pc" data-v="${c[1]}" class="${S.pf.color === c[1] ? "sel" : ""}"><span class="sw" style="background:${c[1]}"></span>${c[0]}</button>`).join("")}</div>
-  <div class="row" style="margin-top:20px"><button class="btn" data-a="psave">Guardar perfil</button><button class="btn ghost" data-a="out">Salir</button></div>`;
+  <h2>Estado</h2><div class="row" style="flex-wrap:wrap">${[["none", "Prefiero no decir"], ["single", "Soltero/a"], ["taken", "En una relación"]].map(([k, v]) => `<button class="btn ghost ${S.pf.rel === k ? "on" : ""}" data-a="prel" data-v="${k}">${v}</button>`).join("")}</div>
+  <div class="row" style="margin-top:20px"><button class="btn" data-a="psave">Guardar perfil</button><button class="btn ghost" data-a="out">Salir</button></div>
+  <h2>Mi presentación</h2><small style="color:var(--mut)">Un audio de hasta 30 segundos que aparece junto a tu nombre.</small>
+  ${introOn(p) ? `<div class="note" style="margin-top:8px">Activa hasta ${new Date(p.intro_until).toLocaleString("es", { weekday: "short", hour: "2-digit", minute: "2-digit" })}</div>` : ""}
+  ${S.ia ? `<audio controls src="${S.ia.prev}" style="width:100%;margin-top:8px"></audio>` : ""}
+  ${S.rec === "intro" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 0:30</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : `<div class="row" style="flex-wrap:wrap"><button class="btn ghost" data-a="rec" data-t="intro">${ic("mic", 18)}Grabar</button><label class="btn ghost" for="fi" role="button">${ic("music", 18)}Subir audio</label>${introOn(p) ? `<button class="btn ghost" data-a="introoff">Quitar</button>` : ""}</div>`}
+  <div class="row"><select id="idur" aria-label="Duración"><option value="0.25" ${S.idur === "0.25" ? "selected" : ""}>Dura 15 minutos</option><option value="1" ${S.idur === "1" ? "selected" : ""}>Dura 1 hora</option><option value="24" ${!S.idur || S.idur === "24" ? "selected" : ""}>Dura 1 día</option></select><button class="btn" data-a="introsave">Publicar</button></div>`;
 }
 
 function del(kind, id) {
@@ -242,39 +363,46 @@ function admin() {
   const us = Object.values(S.data.profiles).filter(u => u.id !== S.me.id);
   const cms = [...S.data.comments].sort((a, b) => b.created_at - a.created_at).slice(0, 30);
   const ms = [...S.data.moments].sort((a, b) => b.created_at - a.created_at).slice(0, 20);
-  return `<h2>Perfiles</h2>` + (us.map(u => `<div class="item">${avatar(u, "sm")}<div><b style="color:${cl(u.color)}">${esc(u.username)}</b> ${u.status !== "active" ? `<span class="chip bad">${STAT[u.status]}</span>` : ""}</div><select data-st="${u.id}" aria-label="Estado de ${esc(u.username)}">${Object.entries(STAT).map(([k, v]) => `<option value="${k}" ${u.status === k ? "selected" : ""}>${v}</option>`).join("")}</select></div>`).join("") || '<div class="empty">Aún no hay otros perfiles.</div>')
+  return `<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span>Usuarios totales</span><b style="font-size:28px">${Object.keys(S.data.profiles).length}</b></div><h2>Perfiles</h2>` + (us.map(u => `<div class="item">${avatar(u, "sm")}<div><b style="color:${cl(u.color)}">${esc(u.username)}</b> ${u.status !== "active" ? `<span class="chip bad">${STAT[u.status]}</span>` : ""}</div><select data-st="${u.id}" aria-label="Estado de ${esc(u.username)}">${Object.entries(STAT).map(([k, v]) => `<option value="${k}" ${u.status === k ? "selected" : ""}>${v}</option>`).join("")}</select></div>`).join("") || '<div class="empty">Aún no hay otros perfiles.</div>')
     + `<h2>Comentarios</h2>` + (cms.map(c => `<div class="item"><div><b>${esc(pOf(c.user_id).username)}</b>: ${esc(c.text)}</div>${del("c", c.id)}</div>`).join("") || '<div class="empty">Sin comentarios.</div>')
-    + `<h2>Momentos</h2>` + (ms.map(m => `<div class="item">${safe(m.image_url) ? `<img class="thumb" alt="" src="${safe(m.image_url)}">` : ""}<div><b>${esc(pOf(m.user_id).username)}</b>: ${esc(m.text || "(solo foto)")}</div>${del("m", m.id)}</div>`).join("") || '<div class="empty">Sin momentos.</div>');
+    + `<h2>Momentos</h2>` + (ms.map(m => `<div class="item">${safe(m.image_url) ? `<img class="thumb" alt="" src="${safe(m.image_url)}">` : ""}<div>${m.pinned_until > Date.now() ? '<span class="chip">Fijado</span> ' : ""}<b>${esc(pOf(m.user_id).username)}</b>: ${esc(m.text || "(solo foto)")}</div><select data-pin="${m.id}" aria-label="Fijar momento"><option value="">Fijar…</option><option value="1">1 hora</option><option value="24">1 día</option><option value="168">7 días</option>${m.pinned_until > Date.now() ? '<option value="0">Quitar</option>' : ""}</select>${del("m", m.id)}</div>`).join("") || '<div class="empty">Sin momentos.</div>');
 }
 
 function authSheet() {
   const up = S.auth === "up";
-  return `<div class="sheet" data-a="close"><div data-stop="1"><h2 style="margin:0">${up ? "Crea tu cuenta" : "Entrar"}</h2><small style="color:var(--mut)">${up ? "Elige un apodo: así te verán los demás. Mejor no uses tu nombre real." : "Usa tu apodo y tu contraseña."}</small><input id="u" placeholder="Apodo (letras, números o _)" autocapitalize="none" autocomplete="username" maxlength="20"><input id="p" type="password" placeholder="Contraseña (mínimo 6)" autocomplete="${up ? "new-password" : "current-password"}"><button class="btn" data-a="go">${up ? "Crear cuenta" : "Entrar"}</button><button class="btn ghost" data-a="auth" data-m="${up ? "in" : "up"}">${up ? "Ya tengo cuenta" : "Crear cuenta nueva"}</button></div></div>`;
+  return `<div class="sheet" data-a="close"><div data-stop="1"><div class="seg"><button data-a="auth" data-m="in" class="${up ? "" : "on"}">Entrar</button><button data-a="auth" data-m="up" class="${up ? "on" : ""}">Crear cuenta</button></div><h2 style="margin:6px 0 0">${up ? "Crea tu cuenta en segundos" : "Qué bueno verte de nuevo"}</h2><small style="color:var(--mut)">${up ? "Solo necesitas un apodo y una contraseña. Los demás verán tu apodo, así que mejor no uses tu nombre real." : "Escribe tu apodo y tu contraseña."}</small><input id="u" data-k="au" placeholder="Tu apodo" autocapitalize="none" autocomplete="username" maxlength="20" value="${esc(S.dr.au || "")}"><div class="pw"><input id="p" data-k="ap" type="${S.spw ? "text" : "password"}" placeholder="Contraseña (mínimo 6)" autocomplete="${up ? "new-password" : "current-password"}" value="${esc(S.dr.ap || "")}"><button data-a="spw">${S.spw ? "Ocultar" : "Mostrar"}</button></div>${S.err ? `<div class="err">${esc(S.err)}</div>` : ""}<button class="btn" data-a="go">${up ? "Crear mi cuenta" : "Entrar"}</button></div></div>`;
 }
 
 function render() {
+  setTimeout(() => { S.pop = null; });
   const p = meP();
   $("#bar").innerHTML = (API.demo ? '<span class="chip">Modo demo</span> ' : "") + (S.me ? `<span style="font-weight:600;display:inline-flex;gap:8px;align-items:center">${avatar(p, "sm")}${esc(S.me.username)}</span>` : '<button class="btn" data-a="auth" data-m="in">Entrar</button>');
-  const T = [["home", "home", "Inicio"], ["top", "trophy", "Destacado"], ["week", "cal", "Semana"], ["me", "user", "Perfil"]];
+  const T = [["home", "home", "Inicio"], ["top", "trophy", "Destacado"], ["friends", "users", "Amistad"], ["me", "user", "Perfil"]];
   if (isAdmin()) T.push(["admin", "shield", "Admin"]);
-  $("#nav").innerHTML = T.map(t => `<button data-a="tab" data-t="${t[0]}" class="${S.tab === t[0] ? "on" : ""}">${ic(t[1], 22)}${t[2]}</button>`).join("");
-  $("#main").innerHTML = S.tab === "home" ? home() : S.tab === "top" ? rank("Momento destacado", 0) : S.tab === "week" ? rank("Momento de la semana", 7 * 864e5) : S.tab === "admin" ? admin() : prof();
+  const nreq = S.me ? S.data.friends.filter(f => f.status === "pending" && f.addressee === S.me.id).length : 0;
+  $("#nav").innerHTML = T.map(t => `<button data-a="tab" data-t="${t[0]}" class="${S.tab === t[0] ? "on" : ""}">${ic(t[1], 22)}${t[2]}${t[0] === "friends" && nreq ? `<i class="dot">${nreq}</i>` : ""}</button>`).join("");
+  $("#main").className = S.fresh ? "go" : ""; S.fresh = false;
+  $("#main").innerHTML = S.tab === "home" ? home() : S.tab === "top" ? rank("Momento destacado", 0) : S.tab === "friends" ? friends() : S.tab === "admin" ? admin() : prof();
   $("#auth").innerHTML = S.auth ? authSheet() : S.lb ? `<div class="sheet" data-a="lbx" style="align-items:center"><img src="${S.lb}" alt="Foto ampliada" style="max-width:96%;max-height:90vh;border-radius:12px"></div>` : "";
 }
 
 async function refresh() { try { S.data = await API.load(); } catch (e) { toast(e.message); } render(); }
 const needLogin = () => { if (!S.me) { S.auth = "in"; render(); return true; } return false; };
 
-document.addEventListener("input", e => { const k = e.target.dataset && e.target.dataset.k; if (k) S.dr[k] = e.target.value; });
+document.addEventListener("input", e => { const k = e.target.dataset && e.target.dataset.k; if (k) S.dr[k] = e.target.value; if (k === "fq" && $("#fres")) $("#fres").innerHTML = fres(); });
 
 document.addEventListener("change", async e => {
   const t = e.target;
   try {
     if (t.dataset.st) { await API.setStatus(t.dataset.st, t.value); await refresh(); toast("Perfil actualizado"); }
+    else if (t.dataset.pin) { if (t.value === "") return; await API.pin(+t.dataset.pin, +t.value); await refresh(); toast(+t.value ? "Momento fijado" : "Fijado quitado"); }
+    else if (t.id === "idur") S.idur = t.value;
+    else if (t.id === "fm" || t.id === "fi") { const f = t.files[0]; t.value = ""; if (!f) return; await setAudio(f, t.id === "fm" ? 60 : 30, t.id === "fm" ? "post" : "intro", t.id === "fm" ? "music" : "audio", f.name.replace(/\.[^.]+$/, "")); render(); }
+    else if (t.id === "fs") { const f = t.files[0]; t.value = ""; if (!f || needLogin()) return; const url = await API.upload(await sticker(f), "png", "image/png"); await API.addSticker(url); await refresh(); toast("Sticker creado"); }
     else if (t.id === "f" || t.id === "fa") {
       const f = t.files[0]; t.value = ""; if (!f) return;
       const b = await shrink(f, t.id === "f" ? 1280 : 320, .8), d = await toData(b);
-      if (t.id === "f") S.img = { blob: b, prev: d }; else { S.pf = S.pf || {}; S.pf.blob = b; S.pf.url = d; }
+      if (t.id === "f") { S.img = { blob: b, prev: d }; S.aud = null; } else { S.pf = S.pf || {}; S.pf.blob = b; S.pf.url = d; }
       render();
     }
   } catch (x) { toast(x.message || "Algo salió mal"); }
@@ -285,40 +413,56 @@ document.addEventListener("click", async e => {
   if (b.dataset.a === "close" && e.target.closest("[data-stop]")) return;
   const a = b.dataset.a, id = +b.dataset.id;
   try {
-    if (a === "tab") { S.tab = b.dataset.t; S.pf = null; S.arm = null; render(); scrollTo(0, 0); }
-    else if (a === "auth") { S.auth = b.dataset.m; render(); }
+    if (a === "tab") { S.tab = b.dataset.t; S.pf = null; S.arm = null; S.fresh = true; S.rx = null; render(); scrollTo(0, 0); }
+    else if (a === "auth") { S.auth = b.dataset.m; S.err = null; render(); }
+    else if (a === "spw") { S.spw = !S.spw; render(); }
     else if (a === "close") { S.auth = null; render(); }
     else if (a === "lb") { S.lb = b.dataset.u; render(); }
     else if (a === "lbx") { S.lb = null; render(); }
     else if (a === "go") {
-      const u = $("#u").value.trim(), p = $("#p").value;
-      if (!/^[A-Za-z0-9_]{3,20}$/.test(u)) return toast("El apodo debe tener 3 a 20 letras, números o _");
-      if (p.length < 6) return toast("La contraseña necesita mínimo 6 caracteres");
-      S.auth === "up" ? await API.signUp(u, p) : await API.signIn(u, p);
-      S.me = await API.session(); S.auth = null; S.pf = null; await refresh(); toast("Bienvenido, " + S.me.username);
+      const u = ($("#u").value || "").trim(), p = $("#p").value || ""; S.dr.au = u; S.dr.ap = p;
+      if (!/^[A-Za-z0-9_]{3,20}$/.test(u)) { S.err = "El apodo debe tener 3 a 20 letras, números o _ (sin espacios)"; return render(); }
+      if (p.length < 6) { S.err = "La contraseña necesita mínimo 6 caracteres"; return render(); }
+      try { S.auth === "up" ? await API.signUp(u, p) : await API.signIn(u, p); } catch (e) { S.err = e.message; return render(); }
+      S.err = null; S.dr.ap = ""; S.me = await API.session(); S.auth = null; S.pf = null; await refresh(); toast("Bienvenido, " + S.me.username);
     }
     else if (a === "out") { await API.signOut(); S.me = null; S.pf = null; S.tab = "home"; render(); }
     else if (a === "pick") $("#f").click();
     else if (a === "pickav") $("#fa").click();
     else if (a === "noimg") { S.img = null; render(); }
     else if (a === "post") {
-      const t = (S.dr.post || "").trim(); if (!t && !S.img) return toast("Escribe algo o agrega una foto");
+      const t = (S.dr.post || "").trim(); if (!t && !S.img && !S.aud) return toast("Escribe algo o agrega una foto o un audio");
       b.disabled = true; const url = S.img ? await API.upload(S.img.blob) : null;
-      await API.post(t, url); S.dr.post = ""; S.img = null; await refresh(); toast("Momento publicado");
+      let ex = null;
+      if (S.aud) ex = { kind: S.aud.kind, audio_title: S.aud.kind === "music" ? (S.dr.mt || "Mi canción").slice(0, 60) : null, audio_url: await API.upload(S.aud.blob, "wav", "audio/wav") };
+      await API.post(t, url, ex); S.dr.post = ""; S.dr.mt = ""; S.img = null; S.aud = null; await refresh(); toast("Momento publicado");
     }
-    else if (a === "like") { if (needLogin()) return; await API.like(id, !likesOf(id).some(l => l.user_id === S.me.id)); await refresh(); }
+    else if (a === "noaud") { S.aud = null; render(); }
+    else if (a === "rec") { if (needLogin()) return; await startRec(b.dataset.t === "intro" ? 30 : 60, b.dataset.t); }
+    else if (a === "recstop") { if (REC && REC.mr.state === "recording") REC.mr.stop(); }
+    else if (a === "play") { if (AUD) AUD.pause(); AUD = new Audio(b.dataset.u); AUD.play().catch(() => toast("No se pudo reproducir")); }
+    else if (a === "stk") { if (needLogin()) return; S.st = S.st === id ? null : id; render(); }
+    else if (a === "ss") { await API.comment(id, "", b.dataset.u); S.st = null; await refresh(); }
+    else if (a === "fadd") { await API.friendReq(b.dataset.id); await refresh(); toast("Solicitud enviada"); }
+    else if (a === "facc") { await API.friendAccept(id); await refresh(); toast("Ahora son amigos"); }
+    else if (a === "fdel") { await API.friendDel(id); await refresh(); }
+    else if (a === "introsave") { if (!S.ia) return toast("Graba o sube un audio primero"); b.disabled = true; const url = await API.upload(S.ia.blob, "wav", "audio/wav"); await API.setIntro(url, +(S.idur || 24)); S.ia = null; await refresh(); toast("Presentación publicada"); }
+    else if (a === "introoff") { await API.setIntro(null, 0); await refresh(); toast("Presentación quitada"); }
+    else if (a === "rx") { if (needLogin()) return; S.rx = S.rx === id ? null : id; render(); }
+    else if (a === "like") { if (needLogin()) return; const k = b.dataset.k2, cur = likesOf(id).find(l => l.user_id === S.me.id), same = cur && (cur.kind || "heart") === k; S.rx = null; S.pop = same ? null : id; await API.like(id, same ? null : k); await refresh(); }
     else if (a === "cm") { S.open[id] = !S.open[id]; render(); }
     else if (a === "send") {
       if (needLogin()) return;
       const t = (S.dr["c" + id] || "").trim(); if (!t) return;
       await API.comment(id, t); S.dr["c" + id] = ""; await refresh();
     }
+    else if (a === "prel") { S.pf.rel = b.dataset.v; render(); }
     else if (a === "pc") { S.pf.color = b.dataset.v; render(); }
     else if (a === "pa") { S.pf.avatar = b.dataset.v; S.pf.url = null; S.pf.blob = null; render(); }
     else if (a === "noav") { S.pf.url = null; S.pf.blob = null; render(); }
     else if (a === "psave") {
       let url = S.pf.url; if (S.pf.blob) url = await API.upload(S.pf.blob);
-      await API.profile(S.pf.color, S.pf.avatar, url); S.pf = null; await refresh(); toast("Perfil guardado");
+      await API.profile(S.pf.color, S.pf.avatar, url, S.pf.rel); S.pf = null; await refresh(); toast("Perfil guardado");
     }
     else if (a === "del") {
       const k = b.dataset.t + id; if (S.arm !== k) { S.arm = k; render(); return; }
@@ -326,6 +470,8 @@ document.addEventListener("click", async e => {
     }
   } catch (err) { toast(err.message || "Algo salió mal"); render(); }
 });
+
+document.addEventListener("keydown", e => { if (e.key === "Enter" && (e.target.id === "u" || e.target.id === "p")) { e.preventDefault(); document.querySelector('[data-a="go"]').click(); } });
 
 (async () => { try { S.me = await API.session(); } catch (e) {} await refresh(); })();
 </script>
