@@ -2,105 +2,142 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <title>Momentos</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
 <style>
-:root{--bg:#F8FAFC;--card:#fff;--ink:#0F172A;--mut:#64748B;--line:#E2E8F0;--soft:#E8EEF9;--pri:#2563EB;--prid:#1D4ED8;--onpri:#fff;--bad:#DC2626;
+:root{--bg:#F4F6FB;--card:#fff;--ink:#0B1220;--mut:#6B7790;--line:#E4E8F1;--soft:#EDF1FB;--pri:#2F5BEA;--prid:#2447C7;--onpri:#fff;--bad:#DC2626;--sh:0 1px 2px rgba(11,18,32,.05),0 12px 32px -14px rgba(11,18,32,.16);
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1220;--card:#111B2E;--ink:#E2E8F0;--mut:#94A3B8;--line:#1E293B;--soft:#1A2640;--pri:#3B82F6;--prid:#93C5FD;--bad:#F87171}}
-:root[data-theme="dark"]{--bg:#0B1220;--card:#111B2E;--ink:#E2E8F0;--mut:#94A3B8;--line:#1E293B;--soft:#1A2640;--pri:#3B82F6;--prid:#93C5FD;--bad:#F87171}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A0F1C;--card:#121A2B;--ink:#E8EDF7;--mut:#92A0BC;--line:#1F2A40;--soft:#18233A;--pri:#4C74F5;--prid:#9DB4FF;--bad:#F87171;--sh:0 1px 2px rgba(0,0,0,.4),0 12px 32px -14px rgba(0,0,0,.7)}}
+:root[data-theme="dark"]{--bg:#0A0F1C;--card:#121A2B;--ink:#E8EDF7;--mut:#92A0BC;--line:#1F2A40;--soft:#18233A;--pri:#4C74F5;--prid:#9DB4FF;--bad:#F87171;--sh:0 1px 2px rgba(0,0,0,.4),0 12px 32px -14px rgba(0,0,0,.7)}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 "Plus Jakarta Sans",system-ui,sans-serif;min-height:100vh}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Plus Jakarta Sans",system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line)}
-h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-.03em}
-h2{margin:20px 0 10px;font-size:19px;font-weight:800;letter-spacing:-.01em}
-main{max-width:640px;margin:0 auto;padding:12px 16px 100px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:21px;font-weight:800;letter-spacing:-.03em;display:flex;align-items:center;gap:10px}
+.logo{width:26px;height:26px;border-radius:9px;background:linear-gradient(135deg,var(--pri),#7C3AED);position:relative;display:block}
+.logo::after{content:"";position:absolute;inset:8px;border-radius:50%;background:#fff}
+h2{margin:24px 0 10px;font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+main{max-width:640px;margin:0 auto;padding:10px 16px 120px}
 button,input,textarea,select{font:inherit;color:inherit}
 button{cursor:pointer}
-.btn{background:var(--pri);color:var(--onpri);border:0;border-radius:12px;padding:10px 18px;font-weight:600;display:inline-flex;align-items:center;gap:8px;justify-content:center}
-.btn.ghost{background:transparent;color:var(--prid);border:1.5px solid var(--line)}
-.btn.bad{background:var(--bad)}
-input,textarea,select{width:100%;font-size:16px;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:11px 12px}
-input:focus,textarea:focus,select:focus,button:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
-textarea{resize:none;min-height:80px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:14px 0}
+.btn{background:linear-gradient(180deg,color-mix(in srgb,var(--pri) 90%,#fff),var(--pri));color:var(--onpri);border:0;border-radius:14px;padding:11px 18px;font-weight:700;display:inline-flex;align-items:center;gap:8px;justify-content:center;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 8px 16px -8px color-mix(in srgb,var(--pri) 75%,transparent)}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.ghost.on{background:var(--pri);color:var(--onpri);border-color:var(--pri)}
+.btn.bad{background:var(--bad);box-shadow:none}
+input,textarea,select{width:100%;font-size:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+input:focus,textarea:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px color-mix(in srgb,var(--pri) 20%,transparent)}
+button:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
+textarea{resize:none;min-height:84px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin:14px 0;box-shadow:var(--sh)}
 .card p{margin:10px 0;font-size:16px;overflow-wrap:anywhere}
 .who{display:flex;gap:10px;align-items:center}
-.who small{display:block;color:var(--mut)}
-.av{width:42px;height:42px;border-radius:50%;flex:none;display:block;object-fit:cover;overflow:hidden}
+.who small{display:block;color:var(--mut);font-size:13px}
+.av{width:42px;height:42px;border-radius:50%;flex:none;display:block;object-fit:cover;overflow:hidden;box-shadow:0 0 0 2px var(--card),0 0 0 3px var(--line)}
 .av svg{display:block;width:100%;height:100%}
 .av.big{width:104px;height:104px;margin:0 auto}
 .av.sm{width:32px;height:32px}
-.pic{width:100%;max-height:520px;object-fit:cover;border-radius:12px;display:block;margin-top:10px;cursor:zoom-in;background:var(--soft)}
-.acts{display:flex;gap:6px;flex-wrap:wrap}
-.acts button{background:var(--soft);border:0;border-radius:10px;padding:7px 11px;font-weight:600;display:inline-flex;gap:6px;align-items:center}
-.acts button.on{background:var(--pri);color:var(--onpri)}
-.cms{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
-.cm{margin:6px 0;overflow-wrap:anywhere}
-.row{display:flex;gap:8px;margin-top:8px;align-items:center}.row input{flex:1}
-.hero{border:2px solid var(--pri)}
-.tag{display:inline-flex;gap:6px;align-items:center;background:var(--pri);color:var(--onpri);border-radius:8px;padding:4px 10px;font-weight:600;font-size:14px}
-.empty{text-align:center;color:var(--mut);padding:32px 8px}
-.note{background:var(--soft);border-radius:12px;padding:12px;font-weight:600;color:var(--prid)}
-nav{position:fixed;left:0;right:0;bottom:0;z-index:9;background:var(--card);border-top:1px solid var(--line);display:flex;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
-nav button{flex:1;background:none;border:0;padding:7px 2px;color:var(--mut);font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:12px}
-nav button.on{color:var(--prid);background:var(--soft)}
-.sheet{position:fixed;inset:0;background:rgba(15,23,42,.6);z-index:20;display:flex;align-items:flex-end;justify-content:center}
-.sheet>div{background:var(--bg);width:100%;max-width:480px;border-radius:22px 22px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px));display:grid;gap:10px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0}
-.grid button{background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--mut)}
-.sw{width:100%;aspect-ratio:1;max-width:68px;border-radius:50%;border:4px solid transparent;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
-.sel .sw,.sel .av{outline:3px solid var(--ink);outline-offset:2px}
+.pic{width:100%;max-height:540px;object-fit:cover;border-radius:16px;display:block;margin-top:12px;cursor:zoom-in;background:var(--soft)}
+.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.acts button{background:var(--soft);border:1px solid transparent;border-radius:12px;padding:7px 11px;font-weight:600;display:inline-flex;gap:6px;align-items:center}
+.acts button.on{background:color-mix(in srgb,var(--pri) 14%,var(--card));border-color:var(--pri);color:var(--prid)}
+.cms{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
+.cm{margin:8px 0;overflow-wrap:anywhere}
+.cpic{display:block;max-width:230px;width:100%;border-radius:14px;margin-top:6px;cursor:zoom-in}
+.row{display:flex;gap:8px;margin-top:10px;align-items:center}.row input{flex:1}
+.row .dd{flex:1}.row .ddb{width:100%;justify-content:space-between}
+.hero{border:1.5px solid var(--pri);box-shadow:0 0 0 4px color-mix(in srgb,var(--pri) 10%,transparent),var(--sh)}
+.tag{display:inline-flex;gap:6px;align-items:center;background:color-mix(in srgb,var(--pri) 14%,var(--card));color:var(--prid);border-radius:10px;padding:5px 11px;font-weight:700;font-size:13px}
+.empty{text-align:center;color:var(--mut);padding:36px 8px}
+.note{background:var(--soft);border-radius:14px;padding:12px 14px;font-weight:600;color:var(--prid)}
+nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:520px;margin:0 auto;z-index:9;background:color-mix(in srgb,var(--card) 84%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:22px;box-shadow:var(--sh);display:flex;padding:6px;gap:2px}
+nav button{flex:1;position:relative;background:none;border:0;padding:8px 2px;color:var(--mut);font-size:11.5px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:16px}
+nav button.on{color:var(--prid);background:color-mix(in srgb,var(--pri) 13%,transparent)}
+.dot{position:absolute;top:3px;right:calc(50% - 22px);background:var(--bad);color:#fff;font-size:11px;font-style:normal;border-radius:999px;min-width:16px;padding:0 4px;line-height:16px;text-align:center}
+.sheet{position:fixed;inset:0;background:rgba(8,12,24,.6);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+.sheet>div{background:var(--card);width:100%;max-width:440px;border-radius:24px;padding:22px 20px;display:grid;gap:12px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5);max-height:calc(100dvh - 32px);overflow-y:auto}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:8px 0}
+.grid button{background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--mut)}
+.sw{width:100%;aspect-ratio:1;max-width:68px;border-radius:50%;border:3px solid var(--card);box-shadow:0 0 0 1px var(--line),0 6px 12px -6px rgba(0,0,0,.35)}
+.sel .sw,.sel .av{outline:3px solid var(--ink);outline-offset:3px}
 .grid .av{width:100%;max-width:68px;height:auto;aspect-ratio:1}
-.chip{font-size:12px;background:var(--soft);color:var(--prid);border-radius:8px;padding:3px 9px;font-weight:600}
+.chip{font-size:12px;background:color-mix(in srgb,var(--pri) 14%,var(--card));color:var(--prid);border-radius:8px;padding:3px 9px;font-weight:700}
 .chip.bad{background:var(--bad);color:#fff}
-.item{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
-.item>div{flex:1;min-width:0;overflow-wrap:anywhere}
-.item select{width:auto}
-.thumb{width:44px;height:44px;border-radius:8px;object-fit:cover}
-.ic{background:none;border:0;color:var(--bad);padding:8px;border-radius:8px;font-weight:600}
-.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}label.btn{cursor:pointer}.btn.ghost.on{background:var(--pri);color:var(--onpri);border-color:var(--pri)}.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--soft);border-radius:12px;padding:4px}.seg button{border:0;background:none;border-radius:9px;padding:10px;font-weight:600;color:var(--mut)}.seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.2)}.err{color:var(--bad);font-weight:600;font-size:14px}.pw{position:relative}.pw input{padding-right:84px}.pw button{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--prid);font-weight:600;padding:8px}
-#toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;z-index:30;display:none;max-width:90%;text-align:center}
+.item{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.item>div:not(.dd){flex:1;min-width:0;overflow-wrap:anywhere}
+.thumb{width:44px;height:44px;border-radius:10px;object-fit:cover}
+.ic{background:none;border:0;color:var(--bad);padding:8px;border-radius:10px;font-weight:600}
+#toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:14px;z-index:30;display:none;max-width:90%;text-align:center;font-weight:600;box-shadow:var(--sh)}
+.prev{position:relative;margin-top:10px}.prev img{width:100%;max-height:240px;object-fit:cover;border-radius:16px}
+.prev button{position:absolute;top:8px;right:8px;background:rgba(11,18,32,.75);color:#fff;border:0;border-radius:50%;width:32px;height:32px}
+.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
+label.btn{cursor:pointer}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--soft);border-radius:14px;padding:4px}
+.seg button{border:0;background:none;border-radius:11px;padding:11px;font-weight:700;color:var(--mut)}
+.seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.err{color:var(--bad);font-weight:600;font-size:14px}
+.pw{position:relative}.pw input{padding-right:84px}
+.pw button{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--prid);font-weight:700;padding:8px}
+.note-card{display:flex;gap:12px;align-items:center;border-radius:18px;padding:14px;margin-top:12px;color:#fff}
+.note-card small{display:block;opacity:.85}.note-card>div{flex:1;min-width:0}
+.nt{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none}
+.stk{width:96px;height:96px;object-fit:cover;border-radius:16px;display:block;margin-top:4px}
+.tray{display:flex;gap:4px;overflow-x:auto;margin-top:8px;padding:6px;background:var(--soft);border-radius:16px;scrollbar-width:none;animation:pop .2s ease-out}
+.tray::-webkit-scrollbar{display:none}
+.tray button{flex:none;min-width:48px;background:none;border:0;border-radius:12px;padding:4px 6px;display:flex;flex-direction:column;align-items:center}
+.tray button span{font-size:26px;line-height:1.2;transition:transform .15s}
+.tray button small{font-size:11px;color:var(--mut);min-height:14px}
+.tray button.on{background:var(--card);box-shadow:inset 0 0 0 2px var(--pri)}
+.mini{background:color-mix(in srgb,var(--pri) 14%,var(--card));color:var(--prid);border:0;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:700;display:inline-flex;gap:5px;align-items:center;margin-left:auto}
+.ap{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:999px;padding:6px 14px 6px 6px;margin-top:8px;max-width:340px}
+.apb{width:36px;height:36px;border-radius:50%;border:0;background:var(--pri);color:#fff;display:grid;place-items:center;flex:none;padding:0}
+.apt{flex:1;height:5px;border-radius:5px;background:color-mix(in srgb,var(--ink) 15%,transparent);overflow:hidden;min-width:60px}
+.apt i{display:block;height:100%;width:0;background:var(--pri);border-radius:5px}
+.apd{font-size:12px;font-weight:700;color:var(--mut);font-variant-numeric:tabular-nums;min-width:30px;text-align:right}
+.ap.w{background:rgba(255,255,255,.2)}.ap.w .apb{background:#fff;color:#1E293B}.ap.w .apt{background:rgba(255,255,255,.3)}.ap.w .apt i{background:#fff}.ap.w .apd{color:#fff}
+.dd{position:relative;flex:none}
+.ddb{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-weight:700;font-size:14px}
+.ddl{position:absolute;right:0;top:calc(100% + 6px);z-index:15;min-width:170px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 40px -12px rgba(0,0,0,.35);padding:6px;display:grid;gap:2px;animation:pop .15s ease-out}
+.ddl.up{top:auto;bottom:calc(100% + 6px)}
+.ddl button{background:none;border:0;text-align:left;padding:11px 12px;border-radius:11px;font-weight:600}
+.ddl button:hover,.ddl button.on{background:color-mix(in srgb,var(--pri) 12%,transparent);color:var(--prid)}
+.cbar{display:flex;align-items:center;gap:2px;background:var(--soft);border-radius:999px;padding:4px;margin-top:12px}
+.cbar input{flex:1;min-width:0;border:0;background:transparent;box-shadow:none;padding:10px 6px}
+.cbar input:focus{box-shadow:none}
+.cb{width:40px;height:40px;border-radius:50%;border:0;background:none;color:var(--mut);display:grid;place-items:center;flex:none;padding:0;cursor:pointer}
+.cb.mic,.cb.send{background:var(--pri);color:#fff}
+.cbar .send{display:none}.cbar.has .send,.cbar.rec .send{display:grid}.cbar.has .mic{display:none}
+.rtime{flex:1;font-weight:700;font-variant-numeric:tabular-nums}
+.dotrec{width:10px;height:10px;border-radius:50%;background:var(--bad);animation:blink 1s infinite;margin:0 8px}
+.pnl{background:var(--soft);border-radius:18px;margin-top:8px;padding:10px;max-height:240px;overflow:auto;animation:pop .2s ease-out}
+.pt{font-size:11.5px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.07em;margin:4px 2px 8px}
+.pg{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:8px}
+.pg.e{grid-template-columns:repeat(8,1fr);gap:2px}
+.em{background:none;border:0;font-size:24px;padding:6px 0;border-radius:10px}.em:active{background:var(--card)}
+.st{aspect-ratio:1;border:0;background:var(--card);border-radius:14px;padding:0;overflow:hidden;display:grid;place-items:center}
+.st img{width:100%;height:100%;object-fit:cover}
+.st.add{color:var(--prid);border:1.5px dashed var(--pri);background:transparent}
 @keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.95)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-@keyframes slide{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes slide{from{transform:translateY(24px) scale(.97);opacity:0}to{transform:none;opacity:1}}
 @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
 @keyframes tin{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes blink{50%{opacity:.25}}
 .go .card,.go .item,.go .empty{animation:up .4s ease-out both}
 .go .card:nth-child(2){animation-delay:.06s}.go .card:nth-child(3){animation-delay:.12s}.go .card:nth-child(4){animation-delay:.18s}.go .card:nth-child(n+5){animation-delay:.24s}
 .sheet{animation:fade .2s}.sheet>div{animation:slide .28s cubic-bezier(.2,.9,.3,1)}
 #toast{animation:tin .22s ease-out}
-button,label.btn{transition:transform .12s,background .2s,color .2s,box-shadow .2s}
-button:active:not(:disabled),label.btn:active{transform:scale(.95)}
+button,label.btn{transition:transform .12s,background .2s,color .2s,box-shadow .2s,border-color .2s}
+button:active:not(:disabled),label.btn:active{transform:scale(.96)}
 .pw button:active:not(:disabled){transform:translateY(-50%)}
-.tray{display:flex;gap:4px;overflow-x:auto;margin-top:8px;padding:6px;background:var(--soft);border-radius:14px;animation:pop .2s ease-out;scrollbar-width:none}
-.tray::-webkit-scrollbar{display:none}
-.tray button{flex:none;min-width:48px;background:none;border:0;border-radius:10px;padding:4px 6px;display:flex;flex-direction:column;align-items:center}
-.tray button span{font-size:26px;line-height:1.2;transition:transform .15s}
-.tray button:hover span{transform:scale(1.25)}
-.tray button small{font-size:11px;color:var(--mut);min-height:14px}
-.tray button.on{background:var(--card);box-shadow:inset 0 0 0 2px var(--pri)}
 .acts button.bump{animation:bump .35s}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-nav button{position:relative}
-.dot{position:absolute;top:2px;right:calc(50% - 22px);background:var(--bad);color:#fff;font-size:11px;font-style:normal;border-radius:999px;min-width:16px;padding:0 4px;line-height:16px}
-.note-card{display:flex;gap:12px;align-items:center;border-radius:14px;padding:14px;margin-top:10px;color:#fff}
-.note-card small{display:block;opacity:.85}.note-card audio{width:100%;margin-top:8px}.note-card>div{flex:1;min-width:0}
-.nt{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;flex:none}
-.voice audio{width:100%;margin-top:10px}
-.stk{width:96px;height:96px;object-fit:cover;border-radius:16px;display:block;margin-top:4px}
-.tray img{width:64px;height:64px;border-radius:12px;object-fit:cover;display:block}
-.mini{background:var(--soft);color:var(--prid);border:0;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;display:inline-flex;gap:5px;align-items:center;margin-left:auto}
-.prev{position:relative;margin-top:8px}.prev img{width:100%;max-height:240px;object-fit:cover;border-radius:12px}
-.prev button{position:absolute;top:8px;right:8px;background:rgba(15,23,42,.75);color:#fff;border:0;border-radius:50%;width:32px;height:32px}
 </style>
 </head>
 <body>
-<header><h1>Momentos</h1><div id="bar"></div></header>
+<header><h1><span class="logo"></span>Momentos</h1><div id="bar"></div></header>
 <main id="main"></main>
 <nav id="nav"></nav>
 <div id="auth"></div>
@@ -110,10 +147,11 @@ nav button{position:relative}
 <input type="file" id="fm" accept="audio/*" class="vh">
 <input type="file" id="fi" accept="audio/*" class="vh">
 <input type="file" id="fs" accept="image/*" class="vh">
+<input type="file" id="fc" accept="image/*" class="vh">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 /* === CONFIGURACIÓN: pega aquí los datos de Supabase. Vacío = modo demostración (solo en tu navegador) === */
-const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "sb_publishable_ODTlK8Q5KOR8kDW_NblPYQ_UCgDgvNw" };
+const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1YnF3aWZzcnJrZm5jb2ttYmppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MzQ1OTgsImV4cCI6MjEwODIxMDU5OH0.zQISgPu4SWRQxSF7Q-Qr2g6uxEfTXK1qj1z3JSckCi8" };
 
 const COLORS = [["Rojo","#DC2626"],["Naranja","#EA580C"],["Amarillo","#EAB308"],["Verde","#16A34A"],["Azul","#2563EB"],["Morado","#7C3AED"],["Rosa","#DB2777"],["Negro","#1E293B"]];
 const AVS = ["a1","a2","a3","a4","a5","a6"];
@@ -142,6 +180,12 @@ const IC = {
   music: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
   mic: '<rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
   sticker: '<path d="M20 12V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6l8-8z"/><path d="M20 12h-6a2 2 0 0 0-2 2v6"/>',
+  play: '<path d="M7 4l13 8-13 8z"/>',
+  pause: '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>',
+  send: '<path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/>',
+  smile: '<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
+  chev: '<path d="M6 9l6 6 6-6"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
   bird: '<path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 0 3.84-10.61"/>',
   x: '<path d="M6 6l12 12M18 6L6 18"/>'
 };
@@ -192,7 +236,7 @@ function mkDemo() {
     async upload(b) { return toData(b); },
     async post(t, img, ex) { if (["restricted", "blocked"].includes(meU().status)) deny(); s.moments.push({ id: ++s.n, user_id: s.me, text: t, image_url: img || null, ...(ex || {}), created_at: Date.now() }); save(); },
     async like(id, on) { if (meU().status === "blocked") deny(); s.likes = s.likes.filter(l => !(l.moment_id === id && l.user_id === s.me)); if (on) s.likes.push({ moment_id: id, user_id: s.me, kind: on }); save(); },
-    async comment(id, t, st) { if (["muted", "blocked"].includes(meU().status)) deny(); s.comments.push({ id: ++s.n, moment_id: id, user_id: s.me, text: t, sticker_url: st || null, created_at: Date.now() }); save(); },
+    async comment(id, t, st, img, aud) { if (["muted", "blocked"].includes(meU().status)) deny(); s.comments.push({ id: ++s.n, moment_id: id, user_id: s.me, text: t, sticker_url: st || null, image_url: img || null, audio_url: aud || null, created_at: Date.now() }); save(); },
     async profile(color, av, url, rel) { const u = meU(); u.color = color; u.avatar = av; u.avatar_url = url || null; u.relationship = rel; save(); },
     async setStatus(id, st) { s.users.find(u => u.id === id).status = st; save(); },
     async setIntro(url, h) { const u = meU(); u.intro_url = url; u.intro_until = url ? Date.now() + h * 36e5 : 0; save(); },
@@ -244,7 +288,7 @@ function mkSup() {
     async upload(b, ext = "jpg", type = "image/jpeg") { const me = await this.session(), path = me.id + "/" + Date.now() + "." + ext; fail((await sb.storage.from("media").upload(path, b, { contentType: type })).error); return sb.storage.from("media").getPublicUrl(path).data.publicUrl; },
     async post(x, img, ex) { fail((await sb.from("moments").insert({ text: x, image_url: img || null, ...(ex || {}) })).error); },
     async like(id, kind) { const me = await this.session(); await sb.from("likes").delete().eq("moment_id", id).eq("user_id", me.id); if (kind) fail((await sb.from("likes").insert({ moment_id: id, kind })).error); },
-    async comment(id, x, st) { fail((await sb.from("comments").insert({ moment_id: id, text: x, sticker_url: st || null })).error); },
+    async comment(id, x, st, img, aud) { fail((await sb.from("comments").insert({ moment_id: id, text: x, sticker_url: st || null, image_url: img || null, audio_url: aud || null })).error); },
     async profile(color, av, url, rel) { const me = await this.session(); fail((await sb.from("profiles").update({ color, avatar: av, avatar_url: url || null, relationship: rel }).eq("id", me.id)).error); },
     async setStatus(id, st) { fail((await sb.rpc("admin_set_status", { target: id, new_status: st })).error); },
     async setIntro(url, h) { const me = await this.session(); fail((await sb.from("profiles").update({ intro_url: url, intro_until: url ? new Date(Date.now() + h * 36e5).toISOString() : null }).eq("id", me.id)).error); },
@@ -261,7 +305,7 @@ function mkSup() {
 }
 
 const API = (CFG.url && CFG.key && window.supabase) ? mkSup() : mkDemo();
-let S = { pgo: {}, pgto: null, fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [], pg: { inbox: [], last: 0 } }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
+let S = { dd: null, cp: null, cfor: null, pgo: {}, pgto: null, fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [], pg: { inbox: [], last: 0 } }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
 
 function toast(m) { const t = $("#toast"); t.textContent = m; t.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = "none", 2800); }
 function ago(t) { const m = Math.max(0, (Date.now() - t) / 6e4); if (m < 1) return "ahora"; if (m < 60) return "hace " + Math.floor(m) + " min"; if (m < 1440) return "hace " + Math.floor(m / 60) + " h"; return "hace " + Math.floor(m / 1440) + " d"; }
@@ -271,9 +315,41 @@ const isAdmin = () => !!meP().is_admin;
 const pOf = id => S.data.profiles[id] || { username: "anónimo", color: COLORS[4][1], avatar: "a1" };
 const visible = uid => isAdmin() || pOf(uid).status !== "blocked";
 
+const safeA = u => /^(https:\/\/|blob:|data:audio\/)/.test(u || "") ? esc(u) : "";
+const ap = (u, t) => `<div class="ap ${t || ""}" data-u="${safeA(u)}"><button class="apb" data-a="aplay" data-u="${safeA(u)}" aria-label="Reproducir">${ic("play", 18, 1)}</button><div class="apt"><i></i></div><span class="apd">0:00</span></div>`;
+function syncAP() {
+  document.querySelectorAll(".ap").forEach(el => {
+    const on = AUD && AUD._u === el.dataset.u, d = on && isFinite(AUD.duration) ? AUD.duration : 0, c = on ? AUD.currentTime : 0;
+    el.querySelector(".apt i").style.width = (d ? c / d * 100 : 0) + "%";
+    el.querySelector(".apd").textContent = fmt(Math.floor(c));
+    el.querySelector(".apb").innerHTML = ic(on && !AUD.paused ? "pause" : "play", 18, 1);
+  });
+}
+function playUrl(u) {
+  if (AUD && AUD._u === u) { AUD.paused ? AUD.play() : AUD.pause(); return syncAP(); }
+  if (AUD) AUD.pause();
+  AUD = new Audio(u); AUD._u = u;
+  AUD.ontimeupdate = AUD.onpause = AUD.onplay = AUD.onloadedmetadata = syncAP;
+  AUD.onended = () => { AUD.currentTime = 0; syncAP(); };
+  AUD.play().catch(() => toast("No se pudo reproducir")); syncAP();
+}
+const dd = (id, label, opts, cur, dir) => `<div class="dd"><button class="ddb" data-a="dd" data-d="${esc(id)}">${esc(label)}${ic("chev", 16)}</button>${S.dd === id ? `<div class="ddl ${dir || ""}">${opts.map(([v, t]) => `<button class="${v === cur ? "on" : ""}" data-a="ddo" data-d="${esc(id)}" data-v="${esc(v)}">${esc(t)}</button>`).join("")}</div>` : ""}</div>`;
+const EMJ = "😀 😃 😄 😁 😆 😅 😂 🤣 😊 😇 🙂 😉 😍 🥰 😘 😋 😛 😜 🤪 😎 🤩 🥳 😏 😒 😞 😔 😕 🙁 😣 😖 😫 😩 🥺 😢 😭 😤 😠 😡 🤯 😳 🥵 🥶 😱 😨 😰 🤗 🤔 🫡 🤭 🤫 😶 😐 😑 😬 🙄 😯 😮 😴 🤤 😷 🤒 🤕 🤢 🥴 😵 🤠 👍 👎 👏 🙌 🙏 💪 👀 ❤️ 🧡 💛 💚 💙 💜 🖤 💔 🔥 ✨ 🎉 🎂 🎁 ⭐ 💯 ✅ ❌".split(" ");
+const epan = id => `<div class="pnl"><div class="pg e">${EMJ.map(e => `<button class="em" data-a="emo" data-id="${id}" data-e="${e}">${e}</button>`).join("")}</div></div>`;
+const cbody = c => [safe(c.sticker_url) ? `<img class="stk" alt="Sticker" src="${safe(c.sticker_url)}">` : "", safe(c.image_url) ? `<img class="cpic" loading="lazy" alt="Imagen" src="${safe(c.image_url)}" data-a="lb" data-u="${safe(c.image_url)}">` : "", safeA(c.audio_url) ? ap(c.audio_url) : "", c.text ? esc(c.text) : ""].join("");
+function chatbar(id) {
+  const k = "c" + id, has = (S.dr[k] || "").trim();
+  if (S.rec === k) return `<div class="cbar rec"><button class="cb" data-a="crc" aria-label="Cancelar">${ic("trash", 20)}</button><span class="dotrec"></span><span class="rtime" id="rt">0:00 / 1:00</span><button class="cb send" data-a="recsend" aria-label="Enviar audio">${ic("send", 20)}</button></div>`;
+  const pan = S.cp && S.cp.id === id ? (S.cp.p === "s" ? stray(id) : epan(id)) : "";
+  return `<div class="cbar ${has ? "has" : ""}"><button class="cb" data-a="pan" data-id="${id}" data-p="e" aria-label="Emojis">${ic("smile", 22)}</button><input data-k="${k}" value="${esc(S.dr[k] || "")}" placeholder="Mensaje" maxlength="200" enterkeyhint="send"><button class="cb" data-a="pan" data-id="${id}" data-p="s" aria-label="Stickers">${ic("sticker", 22)}</button><label class="cb" for="fc" role="button" data-a="cimg" data-id="${id}" aria-label="Enviar imagen">${ic("img", 22)}</label><button class="cb mic" data-a="rec" data-t="${k}" aria-label="Grabar audio">${ic("mic", 22)}</button><button class="cb send" data-a="send" data-id="${id}" aria-label="Enviar">${ic("send", 20)}</button></div>${pan}`;
+}
 const introOn = p => p.intro_url && p.intro_until > Date.now();
 const fmt = n => Math.floor(n / 60) + ":" + String(n % 60).padStart(2, "0");
-const stray = id => `<div class="tray"><label class="btn ghost" for="fs" role="button" style="flex:none">+ Crear</label>${S.data.stickers.map(k => `<button data-a="ss" data-id="${id}" data-u="${safe(k.image_url)}" aria-label="Enviar sticker"><img alt="" src="${safe(k.image_url)}"></button>`).join("") || '<small style="color:var(--mut);align-self:center">Aún no hay stickers. Crea el primero.</small>'}</div>`;
+const stray = id => {
+  const mine = S.data.stickers.filter(k => S.me && k.user_id === S.me.id), rest = S.data.stickers.filter(k => !S.me || k.user_id !== S.me.id);
+  const tile = k => `<button class="st" data-a="ss" data-id="${id}" data-u="${safe(k.image_url)}" aria-label="Enviar sticker"><img alt="" src="${safe(k.image_url)}"></button>`;
+  return `<div class="pnl"><div class="pt">Mis stickers</div><div class="pg"><label class="st add" for="fs" role="button" aria-label="Crear sticker">${ic("plus", 22)}</label>${mine.map(tile).join("")}</div>${rest.length ? `<div class="pt">De otros</div><div class="pg">${rest.map(tile).join("")}</div>` : ""}</div>`;
+};
 
 async function wavTrim(blob, max) {
   const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -289,7 +365,7 @@ async function wavTrim(blob, max) {
   return { blob: new Blob([v], { type: "audio/wav" }), trimmed: buf.duration > max + .5 };
 }
 async function setAudio(blob, max, target, kind, title) {
-  const r = await wavTrim(blob, max), o = { blob: r.blob, prev: await toData(r.blob), kind, title: title || "" };
+  const r = await wavTrim(blob, max), o = { blob: r.blob, prev: URL.createObjectURL(r.blob), kind, title: title || "" };
   if (target === "intro") S.ia = o; else { S.aud = o; S.img = null; }
   if (r.trimmed) toast("Se recortó a " + max + " segundos");
 }
@@ -298,7 +374,16 @@ async function startRec(max, target) {
   let st; try { st = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch (e) { throw new Error("No se pudo usar el micrófono. Revisa el permiso del navegador."); }
   const mr = new MediaRecorder(st), ch = [], t0 = Date.now();
   mr.ondataavailable = e => ch.push(e.data);
-  mr.onstop = async () => { clearInterval(REC.iv); st.getTracks().forEach(x => x.stop()); REC = null; S.rec = null; try { await setAudio(new Blob(ch), max, target, "audio"); } catch (e) { toast(e.message); } render(); };
+  mr.onstop = async () => {
+    const cancel = REC.cancel; clearInterval(REC.iv); st.getTracks().forEach(x => x.stop()); REC = null; S.rec = null;
+    try {
+      if (!cancel) {
+        if (target[0] === "c") { const r = await wavTrim(new Blob(ch), max); toast("Enviando audio…"); const url = await API.upload(r.blob, "wav", "audio/wav"); await API.comment(+target.slice(1), "", null, null, url); await refresh(); return; }
+        await setAudio(new Blob(ch), max, target, "audio");
+      }
+    } catch (e) { toast(e.message); }
+    render();
+  };
   REC = { mr, iv: setInterval(() => { const n = Math.floor((Date.now() - t0) / 1e3), el = $("#rt"); if (el) el.textContent = fmt(n) + " / " + fmt(max); if (n >= max && mr.state === "recording") mr.stop(); }, 250) };
   mr.start(); S.rec = target; render();
 }
@@ -338,11 +423,11 @@ function friends() {
 function card(m, hero, ico) {
   const p = pOf(m.user_id), L = likesOf(m.id), mf = S.me && L.find(l => l.user_id === S.me.id), mine = mf && (mf.kind || "heart");
   const C = S.data.comments.filter(c => c.moment_id === m.id && visible(c.user_id)), o = S.open[m.id];
-  const cms = o ? `<div class="cms">${C.map(c => { const q = pOf(c.user_id); return `<div class="cm"><b style="color:${cl(q.color)}">${esc(q.username)}</b> ${safe(c.sticker_url) ? `<img class="stk" alt="Sticker" src="${safe(c.sticker_url)}">` : esc(c.text)}</div>`; }).join("") || '<div class="cm" style="color:var(--mut)">Sin comentarios todavía</div>'}<div class="row"><input data-k="c${m.id}" value="${esc(S.dr["c" + m.id] || "")}" placeholder="Escribe un comentario" maxlength="200"><button class="btn ghost" data-a="stk" data-id="${m.id}" aria-label="Stickers">${ic("sticker", 18)}</button><button class="btn" data-a="send" data-id="${m.id}">Enviar</button></div>${S.st === m.id ? stray(m.id) : ""}</div>` : "";
+  const cms = o ? `<div class="cms">${C.map(c => { const q = pOf(c.user_id); return `<div class="cm"><b style="color:${cl(q.color)}">${esc(q.username)}</b> ${cbody(c)}</div>`; }).join("") || '<div class="cm" style="color:var(--mut)">Sin comentarios todavía</div>'}${chatbar(m.id)}</div>` : "";
   const cnt = k => L.filter(l => (l.kind || "heart") === k).length;
   const tp = REACT.map(([k, e]) => [e, cnt(k)]).filter(x => x[1]).sort((a, b) => b[1] - a[1]).slice(0, 3).map(x => x[0]).join("");
   const tray = S.rx === m.id ? `<div class="tray">${REACT.map(([k, e]) => `<button class="${mine === k ? "on" : ""}" data-a="like" data-id="${m.id}" data-k2="${k}" aria-label="Reaccionar ${k}"><span>${e}</span><small>${cnt(k) || ""}</small></button>`).join("")}</div>` : "";
-  return `<article class="card ${hero ? "hero" : ""}">${hero ? `<span class="tag">${ic(ico || "trophy", 16)}${hero}</span>` : ""}<div class="who" ${hero ? 'style="margin-top:10px"' : ""}>${avatar(p)}<div><b style="color:${cl(p.color)}">${esc(p.username)}</b><small>${ago(m.created_at)}${REL[p.relationship] ? " · " + REL[p.relationship] : ""}</small></div>${introOn(p) ? `<button class="mini" data-a="play" data-u="${safe(p.intro_url)}">${ic("music", 14)}Presentación</button>` : ""}</div>${safe(m.image_url) ? `<img class="pic" loading="lazy" alt="Foto del momento" src="${safe(m.image_url)}" data-a="lb" data-u="${safe(m.image_url)}">` : ""}${safe(m.audio_url) ? (m.kind === "music" ? `<div class="note-card" style="background:linear-gradient(135deg,${cl(p.color)} 0%,#1E293B 140%)"><span class="nt">${ic("music", 24)}</span><div><b>${esc(m.audio_title || "Canción")}</b><small>Nota musical</small><audio controls preload="none" src="${safe(m.audio_url)}"></audio></div></div>` : `<div class="voice"><audio controls preload="none" src="${safe(m.audio_url)}"></audio></div>`) : ""}${m.text ? `<p>${esc(m.text)}</p>` : '<div style="height:10px"></div>'}<div class="acts"><button class="${mine ? "on" : ""} ${S.pop === m.id ? "bump" : ""}" data-a="rx" data-id="${m.id}" aria-label="Reaccionar">${tp || ic("heart", 18)}${L.length || ""}</button><button data-a="cm" data-id="${m.id}">${ic("chat", 18)}${C.length}</button></div>${tray}${cms}</article>`;
+  return `<article class="card ${hero ? "hero" : ""}">${hero ? `<span class="tag">${ic(ico || "trophy", 16)}${hero}</span>` : ""}<div class="who" ${hero ? 'style="margin-top:10px"' : ""}>${avatar(p)}<div><b style="color:${cl(p.color)}">${esc(p.username)}</b><small>${ago(m.created_at)}${REL[p.relationship] ? " · " + REL[p.relationship] : ""}</small></div>${introOn(p) ? `<button class="mini" data-a="play" data-u="${safe(p.intro_url)}">${ic("music", 14)}Presentación</button>` : ""}</div>${safe(m.image_url) ? `<img class="pic" loading="lazy" alt="Foto del momento" src="${safe(m.image_url)}" data-a="lb" data-u="${safe(m.image_url)}">` : ""}${safe(m.audio_url) ? (m.kind === "music" ? `<div class="note-card" style="background:linear-gradient(135deg,${cl(p.color)} 0%,#1E293B 140%)"><span class="nt">${ic("music", 24)}</span><div><b>${esc(m.audio_title || "Canción")}</b><small>Nota musical</small>${ap(m.audio_url, "w")}</div></div>` : `<div class="voice">${ap(m.audio_url)}</div>`) : ""}${m.text ? `<p>${esc(m.text)}</p>` : '<div style="height:10px"></div>'}<div class="acts"><button class="${mine ? "on" : ""} ${S.pop === m.id ? "bump" : ""}" data-a="rx" data-id="${m.id}" aria-label="Reaccionar">${tp || ic("heart", 18)}${L.length || ""}</button><button data-a="cm" data-id="${m.id}">${ic("chat", 18)}${C.length}</button></div>${tray}${cms}</article>`;
 }
 
 function home() {
@@ -352,7 +437,7 @@ function home() {
     ? `<div class="card" style="text-align:center"><p style="margin:0 0 12px">Crea tu cuenta para publicar, dar likes y comentar.</p><button class="btn" data-a="auth" data-m="up">Crear cuenta</button></div>`
     : (st === "restricted" || st === "blocked")
       ? `<div class="note">${NOTE[st]}</div>`
-      : `<div class="card"><textarea data-k="post" maxlength="280" placeholder="Cuenta un momento divertido…">${esc(S.dr.post || "")}</textarea>${S.img ? `<div class="prev"><img src="${esc(S.img.prev)}" alt="Vista previa"><button data-a="noimg" aria-label="Quitar foto">${ic("x", 16)}</button></div>` : ""}${S.aud ? `<div style="margin-top:8px">${S.aud.kind === "music" ? `<input data-k="mt" maxlength="60" placeholder="Título de la canción" value="${esc(S.dr.mt || "")}" style="margin-bottom:8px">` : ""}<audio controls src="${S.aud.prev}" style="width:100%"></audio><button class="btn ghost" data-a="noaud" style="margin-top:6px">Quitar audio</button></div>` : ""}${S.rec === "post" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 1:00</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : ""}<div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="f" role="button">${ic("img", 18)}Foto</label><label class="btn ghost" for="fm" role="button">${ic("music", 18)}Música</label><button class="btn ghost" data-a="rec" data-t="post">${ic("mic", 18)}Voz</button><button class="btn" data-a="post" style="margin-left:auto">Publicar</button></div>${st === "muted" ? `<div class="note" style="margin-top:10px">${NOTE.muted}</div>` : ""}</div>`;
+      : `<div class="card"><textarea data-k="post" maxlength="280" placeholder="Cuenta un momento divertido…">${esc(S.dr.post || "")}</textarea>${S.img ? `<div class="prev"><img src="${esc(S.img.prev)}" alt="Vista previa"><button data-a="noimg" aria-label="Quitar foto">${ic("x", 16)}</button></div>` : ""}${S.aud ? `<div style="margin-top:8px">${S.aud.kind === "music" ? `<input data-k="mt" maxlength="60" placeholder="Título de la canción" value="${esc(S.dr.mt || "")}" style="margin-bottom:8px">` : ""}${ap(S.aud.prev)}<button class="btn ghost" data-a="noaud" style="margin-top:6px">Quitar audio</button></div>` : ""}${S.rec === "post" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 1:00</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : ""}<div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="f" role="button">${ic("img", 18)}Foto</label><label class="btn ghost" for="fm" role="button">${ic("music", 18)}Música</label><button class="btn ghost" data-a="rec" data-t="post">${ic("mic", 18)}Voz</button><button class="btn" data-a="post" style="margin-left:auto">Publicar</button></div>${st === "muted" ? `<div class="note" style="margin-top:10px">${NOTE.muted}</div>` : ""}</div>`;
   const pn = m => m.pinned_until > Date.now() ? 1 : 0;
   const ms = S.data.moments.filter(m => visible(m.user_id)).sort((a, b) => pn(b) - pn(a) || b.created_at - a.created_at);
   return pb + comp + (ms.map(m => card(m, pn(m) ? "Fijado" : null, "pin")).join("") || '<div class="empty">Aún no hay momentos. Publica el primero.</div>');
@@ -379,9 +464,9 @@ function prof() {
   <div class="row" style="margin-top:20px"><button class="btn" data-a="psave">Guardar perfil</button><button class="btn ghost" data-a="out">Salir</button></div>
   <h2>Mi presentación</h2><small style="color:var(--mut)">Un audio de hasta 30 segundos que aparece junto a tu nombre.</small>
   ${introOn(p) ? `<div class="note" style="margin-top:8px">Activa hasta ${new Date(p.intro_until).toLocaleString("es", { weekday: "short", hour: "2-digit", minute: "2-digit" })}</div>` : ""}
-  ${S.ia ? `<audio controls src="${S.ia.prev}" style="width:100%;margin-top:8px"></audio>` : ""}
+  ${S.ia ? `${ap(S.ia.prev)}` : ""}
   ${S.rec === "intro" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 0:30</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : `<div class="row" style="flex-wrap:wrap"><button class="btn ghost" data-a="rec" data-t="intro">${ic("mic", 18)}Grabar</button><label class="btn ghost" for="fi" role="button">${ic("music", 18)}Subir audio</label>${introOn(p) ? `<button class="btn ghost" data-a="introoff">Quitar</button>` : ""}</div>`}
-  <div class="row"><select id="idur" aria-label="Duración"><option value="0.25" ${S.idur === "0.25" ? "selected" : ""}>Dura 15 minutos</option><option value="1" ${S.idur === "1" ? "selected" : ""}>Dura 1 hora</option><option value="24" ${!S.idur || S.idur === "24" ? "selected" : ""}>Dura 1 día</option></select><button class="btn" data-a="introsave">Publicar</button></div>`;
+  <div class="row">${dd("dur", "Dura " + ({ "0.25": "15 minutos", "1": "1 hora", "24": "1 día" })[S.idur || "24"], [["0.25", "15 minutos"], ["1", "1 hora"], ["24", "1 día"]], S.idur || "24", "up")}<button class="btn" data-a="introsave">Publicar</button></div>`;
 }
 
 function del(kind, id) {
@@ -394,9 +479,9 @@ function admin() {
   const us = Object.values(S.data.profiles).filter(u => u.id !== S.me.id);
   const cms = [...S.data.comments].sort((a, b) => b.created_at - a.created_at).slice(0, 30);
   const ms = [...S.data.moments].sort((a, b) => b.created_at - a.created_at).slice(0, 20);
-  return `<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span>Usuarios totales</span><b style="font-size:28px">${Object.keys(S.data.profiles).length}</b></div><h2>Perfiles</h2>` + (us.map(u => `<div class="item">${avatar(u, "sm")}<div><b style="color:${cl(u.color)}">${esc(u.username)}</b> ${u.status !== "active" ? `<span class="chip bad">${STAT[u.status]}</span>` : ""}</div><select data-st="${u.id}" aria-label="Estado de ${esc(u.username)}">${Object.entries(STAT).map(([k, v]) => `<option value="${k}" ${u.status === k ? "selected" : ""}>${v}</option>`).join("")}</select></div>`).join("") || '<div class="empty">Aún no hay otros perfiles.</div>')
+  return `<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span>Usuarios totales</span><b style="font-size:28px">${Object.keys(S.data.profiles).length}</b></div><h2>Perfiles</h2>` + (us.map(u => `<div class="item">${avatar(u, "sm")}<div><b style="color:${cl(u.color)}">${esc(u.username)}</b> ${u.status !== "active" ? `<span class="chip bad">${STAT[u.status]}</span>` : ""}</div>${dd("st:" + u.id, STAT[u.status || "active"], Object.entries(STAT), u.status || "active")}</div>`).join("") || '<div class="empty">Aún no hay otros perfiles.</div>')
     + `<h2>Comentarios</h2>` + (cms.map(c => `<div class="item"><div><b>${esc(pOf(c.user_id).username)}</b>: ${esc(c.text)}</div>${del("c", c.id)}</div>`).join("") || '<div class="empty">Sin comentarios.</div>')
-    + `<h2>Momentos</h2>` + (ms.map(m => `<div class="item">${safe(m.image_url) ? `<img class="thumb" alt="" src="${safe(m.image_url)}">` : ""}<div>${m.pinned_until > Date.now() ? '<span class="chip">Fijado</span> ' : ""}<b>${esc(pOf(m.user_id).username)}</b>: ${esc(m.text || "(solo foto)")}</div><select data-pin="${m.id}" aria-label="Fijar momento"><option value="">Fijar…</option><option value="1">1 hora</option><option value="24">1 día</option><option value="168">7 días</option>${m.pinned_until > Date.now() ? '<option value="0">Quitar</option>' : ""}</select>${del("m", m.id)}</div>`).join("") || '<div class="empty">Sin momentos.</div>');
+    + `<h2>Momentos</h2>` + (ms.map(m => `<div class="item">${safe(m.image_url) ? `<img class="thumb" alt="" src="${safe(m.image_url)}">` : ""}<div>${m.pinned_until > Date.now() ? '<span class="chip">Fijado</span> ' : ""}<b>${esc(pOf(m.user_id).username)}</b>: ${esc(m.text || "(solo foto)")}</div>${dd("pin:" + m.id, m.pinned_until > Date.now() ? "Fijado" : "Fijar", [["1", "1 hora"], ["24", "1 día"], ["168", "7 días"], ...(m.pinned_until > Date.now() ? [["0", "Quitar"]] : [])], "")}${del("m", m.id)}</div>`).join("") || '<div class="empty">Sin momentos.</div>');
 }
 
 function authSheet() {
@@ -405,7 +490,7 @@ function authSheet() {
 }
 
 function render() {
-  setTimeout(() => { S.pop = null; });
+  setTimeout(() => { S.pop = null; syncAP(); });
   const p = meP();
   $("#bar").innerHTML = (API.demo ? '<span class="chip">Modo demo</span> ' : "") + (S.me ? `<span style="font-weight:600;display:inline-flex;gap:8px;align-items:center">${avatar(p, "sm")}${esc(S.me.username)}</span>` : '<button class="btn" data-a="auth" data-m="in">Entrar</button>');
   const T = [["home", "home", "Inicio"], ["top", "trophy", "Destacado"], ["friends", "users", "Amistad"], ["me", "user", "Perfil"]];
@@ -420,13 +505,14 @@ function render() {
 async function refresh() { try { S.data = await API.load(); } catch (e) { toast(e.message); } render(); }
 const needLogin = () => { if (!S.me) { S.auth = "in"; render(); return true; } return false; };
 
-document.addEventListener("input", e => { const k = e.target.dataset && e.target.dataset.k; if (k) S.dr[k] = e.target.value; if (k === "fq" && $("#fres")) $("#fres").innerHTML = fres(); });
+document.addEventListener("input", e => { const k = e.target.dataset && e.target.dataset.k; if (k) S.dr[k] = e.target.value; if (k === "fq" && $("#fres")) $("#fres").innerHTML = fres(); if (/^c\d+$/.test(k || "")) e.target.closest(".cbar").classList.toggle("has", !!e.target.value.trim()); });
 
 document.addEventListener("change", async e => {
   const t = e.target;
   try {
     if (t.dataset.st) { await API.setStatus(t.dataset.st, t.value); await refresh(); toast("Perfil actualizado"); }
     else if (t.dataset.pin) { if (t.value === "") return; await API.pin(+t.dataset.pin, +t.value); await refresh(); toast(+t.value ? "Momento fijado" : "Fijado quitado"); }
+    else if (t.id === "fc") { const f = t.files[0]; t.value = ""; if (!f || !S.me || !S.cfor) return; toast("Enviando imagen…"); const url = await API.upload(await shrink(f, 1280, .78)); await API.comment(S.cfor, (S.dr["c" + S.cfor] || "").trim(), null, url); S.dr["c" + S.cfor] = ""; S.cp = null; await refresh(); }
     else if (t.id === "idur") S.idur = t.value;
     else if (t.id === "fm" || t.id === "fi") { const f = t.files[0]; t.value = ""; if (!f) return; await setAudio(f, t.id === "fm" ? 60 : 30, t.id === "fm" ? "post" : "intro", t.id === "fm" ? "music" : "audio", f.name.replace(/\.[^.]+$/, "")); render(); }
     else if (t.id === "fs") { const f = t.files[0]; t.value = ""; if (!f || needLogin()) return; const url = await API.upload(await sticker(f), "png", "image/png"); await API.addSticker(url); await refresh(); toast("Sticker creado"); }
@@ -440,6 +526,7 @@ document.addEventListener("change", async e => {
 });
 
 document.addEventListener("click", async e => {
+  if (S.dd && !e.target.closest(".dd")) { S.dd = null; render(); }
   const b = e.target.closest("[data-a]"); if (!b) return;
   if ((b.dataset.a === "close" || b.dataset.a === "pgx") && e.target.closest("[data-stop]")) return;
   const a = b.dataset.a, id = +b.dataset.id;
@@ -479,9 +566,20 @@ document.addEventListener("click", async e => {
     else if (a === "noaud") { S.aud = null; render(); }
     else if (a === "rec") { if (needLogin()) return; await startRec(b.dataset.t === "intro" ? 30 : 60, b.dataset.t); }
     else if (a === "recstop") { if (REC && REC.mr.state === "recording") REC.mr.stop(); }
-    else if (a === "play") { if (AUD) AUD.pause(); AUD = new Audio(b.dataset.u); AUD.play().catch(() => toast("No se pudo reproducir")); }
-    else if (a === "stk") { if (needLogin()) return; S.st = S.st === id ? null : id; render(); }
-    else if (a === "ss") { await API.comment(id, "", b.dataset.u); S.st = null; await refresh(); }
+    else if (a === "play" || a === "aplay") playUrl(b.dataset.u);
+    else if (a === "pan") { if (needLogin()) return; S.cp = S.cp && S.cp.id === id && S.cp.p === b.dataset.p ? null : { id, p: b.dataset.p }; render(); }
+    else if (a === "emo") { S.dr["c" + id] = (S.dr["c" + id] || "") + b.dataset.e; render(); }
+    else if (a === "cimg") { S.cfor = id; }
+    else if (a === "recsend") { if (REC && REC.mr.state === "recording") REC.mr.stop(); }
+    else if (a === "crc") { if (REC) { REC.cancel = true; if (REC.mr.state === "recording") REC.mr.stop(); } }
+    else if (a === "dd") { S.dd = S.dd === b.dataset.d ? null : b.dataset.d; render(); }
+    else if (a === "ddo") {
+      const [kind, ref] = b.dataset.d.split(":"), v = b.dataset.v; S.dd = null;
+      if (kind === "st") { await API.setStatus(ref, v); await refresh(); toast("Perfil actualizado"); }
+      else if (kind === "pin") { await API.pin(+ref, +v); await refresh(); toast(+v ? "Momento fijado" : "Fijado quitado"); }
+      else { S.idur = v; render(); }
+    }
+    else if (a === "ss") { await API.comment(id, "", b.dataset.u); S.cp = null; await refresh(); }
     else if (a === "fadd") { await API.friendReq(b.dataset.id); await refresh(); toast("Solicitud enviada"); }
     else if (a === "facc") { await API.friendAccept(id); await refresh(); toast("Ahora son amigos"); }
     else if (a === "fdel") { await API.friendDel(id); await refresh(); }
@@ -493,7 +591,7 @@ document.addEventListener("click", async e => {
     else if (a === "send") {
       if (needLogin()) return;
       const t = (S.dr["c" + id] || "").trim(); if (!t) return;
-      await API.comment(id, t); S.dr["c" + id] = ""; await refresh();
+      await API.comment(id, t); S.dr["c" + id] = ""; S.cp = null; await refresh();
     }
     else if (a === "prel") { S.pf.rel = b.dataset.v; render(); }
     else if (a === "pc") { S.pf.color = b.dataset.v; render(); }
@@ -510,7 +608,12 @@ document.addEventListener("click", async e => {
   } catch (err) { toast(err.message || "Algo salió mal"); render(); }
 });
 
-document.addEventListener("keydown", e => { if (e.key === "Enter" && (e.target.id === "u" || e.target.id === "p")) { e.preventDefault(); document.querySelector('[data-a="go"]').click(); } });
+document.addEventListener("keydown", e => {
+  if (e.key !== "Enter") return;
+  const t = e.target;
+  if (t.id === "u" || t.id === "p") { e.preventDefault(); document.querySelector('[data-a="go"]').click(); }
+  else if (/^c\d+$/.test(t.dataset.k || "")) { e.preventDefault(); const bt = document.querySelector('[data-a="send"][data-id="' + t.dataset.k.slice(1) + '"]'); if (bt) bt.click(); }
+});
 
 (async () => { try { S.me = await API.session(); } catch (e) {} await refresh(); })();
 </script>
