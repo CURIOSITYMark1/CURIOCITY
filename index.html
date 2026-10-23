@@ -3,121 +3,150 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
 <title>Momentos</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap">
 <style>
-:root{--bg:#F4F6FB;--card:#fff;--ink:#0B1220;--mut:#6B7790;--line:#E4E8F1;--soft:#EDF1FB;--pri:#2F5BEA;--prid:#2447C7;--onpri:#fff;--bad:#DC2626;--sh:0 1px 2px rgba(11,18,32,.05),0 12px 32px -14px rgba(11,18,32,.16);
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A0F1C;--card:#121A2B;--ink:#E8EDF7;--mut:#92A0BC;--line:#1F2A40;--soft:#18233A;--pri:#4C74F5;--prid:#9DB4FF;--bad:#F87171;--sh:0 1px 2px rgba(0,0,0,.4),0 12px 32px -14px rgba(0,0,0,.7)}}
-:root[data-theme="dark"]{--bg:#0A0F1C;--card:#121A2B;--ink:#E8EDF7;--mut:#92A0BC;--line:#1F2A40;--soft:#18233A;--pri:#4C74F5;--prid:#9DB4FF;--bad:#F87171;--sh:0 1px 2px rgba(0,0,0,.4),0 12px 32px -14px rgba(0,0,0,.7)}
+:root{--void:#000;--white:#fff;--ash:#9a9a9a;--mist:#bdbdbd;--iris:#8052ff;--saffron:#ffb829;--verdant:#15846e;
+--bg:#000;--card:#000;--ink:#fff;--mut:#9a9a9a;--line:rgba(255,255,255,.16);--soft:rgba(255,255,255,.07);--pri:#8052ff;--prid:#8052ff;--onpri:#fff;--bad:#ff5c5c;
+color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Plus Jakarta Sans",system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--line)}
-h1{margin:0;font-size:21px;font-weight:800;letter-spacing:-.03em;display:flex;align-items:center;gap:10px}
-.logo{width:26px;height:26px;border-radius:9px;background:linear-gradient(135deg,var(--pri),#7C3AED);position:relative;display:block}
-.logo::after{content:"";position:absolute;inset:8px;border-radius:50%;background:#fff}
-h2{margin:24px 0 10px;font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
-main{max-width:640px;margin:0 auto;padding:10px 16px 120px}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:#000}
+body{margin:0;background:#000;color:#fff;font:300 17px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-feature-settings:"ss01" on;min-height:100vh;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:transparent;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);z-index:10}
+#px{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+b{font-weight:600}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+h1{margin:0;font-size:17px;font-weight:400;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+h2{margin:48px 0 18px;font-size:28px;font-weight:400;letter-spacing:-.035em;line-height:1.1;color:#fff}
+h2.disp{font-size:clamp(40px,12vw,64px);letter-spacing:-.045em;line-height:1;margin:8px 0 16px}
+.ph{margin:30px 0 42px}
+.lab,.pt{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--saffron)}
+.sub{font-weight:200;font-size:18px;color:var(--mist);max-width:480px;margin:0}
+main{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:6px 24px 130px}
 button,input,textarea,select{font:inherit;color:inherit}
 button{cursor:pointer}
-.btn{background:linear-gradient(180deg,color-mix(in srgb,var(--pri) 90%,#fff),var(--pri));color:var(--onpri);border:0;border-radius:14px;padding:11px 18px;font-weight:700;display:inline-flex;align-items:center;gap:8px;justify-content:center;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 8px 16px -8px color-mix(in srgb,var(--pri) 75%,transparent)}
-.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:none}
-.btn.ghost.on{background:var(--pri);color:var(--onpri);border-color:var(--pri)}
-.btn.bad{background:var(--bad);box-shadow:none}
-input,textarea,select{width:100%;font-size:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
-input:focus,textarea:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px color-mix(in srgb,var(--pri) 20%,transparent)}
-button:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
+.btn{background:var(--iris);color:#fff;border:0;border-radius:24px;padding:13px 22px;min-height:46px;font-weight:600;font-size:13px;letter-spacing:.025em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.22)}
+.btn.ghost.on{background:var(--iris);border-color:var(--iris)}
+.btn.bad{background:var(--bad);color:#000}
+.item .btn:not(.ghost){background:transparent;border:1px solid rgba(255,255,255,.25)}
+input,textarea,select{width:100%;font-size:17px;font-weight:300;color:#fff;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.24);border-radius:0;padding:12px 2px}
+input::placeholder,textarea::placeholder{color:#8a8a8a}
+input:focus,textarea:focus{outline:none;border-bottom-color:var(--iris)}
+button:focus-visible{outline:2px solid var(--iris);outline-offset:2px}
 textarea{resize:none;min-height:84px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin:14px 0;box-shadow:var(--sh)}
-.card p{margin:10px 0;font-size:16px;overflow-wrap:anywhere}
-.who{display:flex;gap:10px;align-items:center}
-.who small{display:block;color:var(--mut);font-size:13px}
-.av{width:42px;height:42px;border-radius:50%;flex:none;display:block;object-fit:cover;overflow:hidden;box-shadow:0 0 0 2px var(--card),0 0 0 3px var(--line)}
+.card{background:transparent;border:0;border-radius:0;padding:0;margin:0 0 56px}
+.card p{margin:12px 0;font-size:18px;line-height:1.5;font-weight:300;overflow-wrap:anywhere}
+.hero p{font-size:30px;line-height:1.12;letter-spacing:-.04em;font-weight:400}
+.who{display:flex;gap:12px;align-items:center}
+.who b{font-size:16px}
+.who small{display:block;color:var(--ash);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:400}
+.av{width:42px;height:42px;border-radius:50%;flex:none;display:block;object-fit:cover;overflow:hidden}
 .av svg{display:block;width:100%;height:100%}
 .av.big{width:104px;height:104px;margin:0 auto}
 .av.sm{width:32px;height:32px}
-.pic{width:100%;max-height:540px;object-fit:cover;border-radius:16px;display:block;margin-top:12px;cursor:zoom-in;background:var(--soft)}
-.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
-.acts button{background:var(--soft);border:1px solid transparent;border-radius:12px;padding:7px 11px;font-weight:600;display:inline-flex;gap:6px;align-items:center}
-.acts button.on{background:color-mix(in srgb,var(--pri) 14%,var(--card));border-color:var(--pri);color:var(--prid)}
-.cms{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
-.cm{margin:8px 0;overflow-wrap:anywhere}
-.cpic{display:block;max-width:230px;width:100%;border-radius:14px;margin-top:6px;cursor:zoom-in}
-.row{display:flex;gap:8px;margin-top:10px;align-items:center}.row input{flex:1}
+.pic{width:100%;max-height:560px;object-fit:cover;border-radius:24px;display:block;margin-top:14px;cursor:zoom-in;background:var(--soft)}
+.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.acts button{background:var(--soft);border:0;border-radius:999px;padding:8px 14px;font-weight:400;color:#fff;display:inline-flex;gap:6px;align-items:center}
+.acts button.on{background:rgba(128,82,255,.3)}
+.cms{margin-top:18px}
+.cm{margin:10px 0;overflow-wrap:anywhere;font-weight:300}
+.cpic{display:block;max-width:230px;width:100%;border-radius:24px;margin-top:6px;cursor:zoom-in}
+.row{display:flex;gap:8px;margin-top:12px;align-items:center}.row input{flex:1}
 .row .dd{flex:1}.row .ddb{width:100%;justify-content:space-between}
-.hero{border:1.5px solid var(--pri);box-shadow:0 0 0 4px color-mix(in srgb,var(--pri) 10%,transparent),var(--sh)}
-.tag{display:inline-flex;gap:6px;align-items:center;background:color-mix(in srgb,var(--pri) 14%,var(--card));color:var(--prid);border-radius:10px;padding:5px 11px;font-weight:700;font-size:13px}
-.empty{text-align:center;color:var(--mut);padding:36px 8px}
-.note{background:var(--soft);border-radius:14px;padding:12px 14px;font-weight:600;color:var(--prid)}
-nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:520px;margin:0 auto;z-index:9;background:color-mix(in srgb,var(--card) 84%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:22px;box-shadow:var(--sh);display:flex;padding:6px;gap:2px}
-nav button{flex:1;position:relative;background:none;border:0;padding:8px 2px;color:var(--mut);font-size:11.5px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:16px}
-nav button.on{color:var(--prid);background:color-mix(in srgb,var(--pri) 13%,transparent)}
-.dot{position:absolute;top:3px;right:calc(50% - 22px);background:var(--bad);color:#fff;font-size:11px;font-style:normal;border-radius:999px;min-width:16px;padding:0 4px;line-height:16px;text-align:center}
-.sheet{position:fixed;inset:0;background:rgba(8,12,24,.6);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
-.sheet>div{background:var(--card);width:100%;max-width:440px;border-radius:24px;padding:22px 20px;display:grid;gap:12px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5);max-height:calc(100dvh - 32px);overflow-y:auto}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:8px 0}
-.grid button{background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--mut)}
-.sw{width:100%;aspect-ratio:1;max-width:68px;border-radius:50%;border:3px solid var(--card);box-shadow:0 0 0 1px var(--line),0 6px 12px -6px rgba(0,0,0,.35)}
-.sel .sw,.sel .av{outline:3px solid var(--ink);outline-offset:3px}
+.tag{display:inline-flex;gap:6px;align-items:center;color:var(--saffron);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.empty{text-align:center;color:var(--mist);font-weight:200;font-size:20px;padding:40px 0}
+.note{background:var(--soft);border-radius:18px;padding:14px 16px;font-weight:400;color:#fff}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:9;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;justify-content:center;padding:8px 8px calc(6px + env(safe-area-inset-bottom,0px));gap:2px}
+nav button{flex:1;max-width:120px;position:relative;background:none;border:0;padding:8px 2px 16px;color:var(--ash);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:5px}
+nav button.on{color:#fff}
+nav button.on::after{content:"";position:absolute;bottom:5px;width:6px;height:6px;border-radius:50%;background:var(--iris)}
+.dot{position:absolute;top:3px;right:calc(50% - 24px);background:var(--bad);color:#000;font-size:11px;font-weight:600;font-style:normal;border-radius:999px;min-width:16px;padding:0 4px;line-height:16px;text-align:center}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+.sheet>div{background:#000;border:1px solid rgba(255,255,255,.16);width:100%;max-width:440px;border-radius:24px;padding:26px 22px;display:grid;gap:14px;max-height:calc(100dvh - 32px);overflow-y:auto}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:8px 0}
+.grid button{background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ash)}
+.sw{width:100%;aspect-ratio:1;max-width:68px;border-radius:50%;border:3px solid #000;box-shadow:0 0 0 1px rgba(255,255,255,.25)}
+.sel .sw,.sel .av{outline:2px solid #fff;outline-offset:3px}
 .grid .av{width:100%;max-width:68px;height:auto;aspect-ratio:1}
-.chip{font-size:12px;background:color-mix(in srgb,var(--pri) 14%,var(--card));color:var(--prid);border-radius:8px;padding:3px 9px;font-weight:700}
-.chip.bad{background:var(--bad);color:#fff}
-.item{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.chip{font-size:11.5px;color:var(--saffron);border:1px solid rgba(255,184,41,.5);border-radius:999px;padding:2px 10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.chip.bad{background:var(--bad);border-color:var(--bad);color:#000}
+.item{display:flex;gap:12px;align-items:center;padding:14px 0}
 .item>div:not(.dd){flex:1;min-width:0;overflow-wrap:anywhere}
-.thumb{width:44px;height:44px;border-radius:10px;object-fit:cover}
-.ic{background:none;border:0;color:var(--bad);padding:8px;border-radius:10px;font-weight:600}
-#toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:14px;z-index:30;display:none;max-width:90%;text-align:center;font-weight:600;box-shadow:var(--sh)}
-.prev{position:relative;margin-top:10px}.prev img{width:100%;max-height:240px;object-fit:cover;border-radius:16px}
-.prev button{position:absolute;top:8px;right:8px;background:rgba(11,18,32,.75);color:#fff;border:0;border-radius:50%;width:32px;height:32px}
+.thumb{width:44px;height:44px;border-radius:12px;object-fit:cover}
+.ic{background:none;border:0;color:var(--bad);padding:8px;border-radius:12px;font-weight:600}
+#toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#fff;color:#000;padding:12px 20px;border-radius:24px;z-index:30;display:none;max-width:90%;text-align:center;font-weight:600;font-size:14px}
+.prev{position:relative;margin-top:10px}.prev img{width:100%;max-height:240px;object-fit:cover;border-radius:24px}
+.prev button{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.75);color:#fff;border:0;border-radius:50%;width:32px;height:32px}
 .vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
 label.btn{cursor:pointer}
-.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--soft);border-radius:14px;padding:4px}
-.seg button{border:0;background:none;border-radius:11px;padding:11px;font-weight:700;color:var(--mut)}
-.seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.18)}
-.err{color:var(--bad);font-weight:600;font-size:14px}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--soft);border-radius:24px;padding:4px}
+.seg button{border:0;background:none;border-radius:20px;padding:11px;font-weight:600;font-size:13px;letter-spacing:.025em;text-transform:uppercase;color:var(--ash)}
+.seg button.on{background:#fff;color:#000}
+.err{color:var(--bad);font-weight:400;font-size:14px}
 .pw{position:relative}.pw input{padding-right:84px}
-.pw button{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--prid);font-weight:700;padding:8px}
-.note-card{display:flex;gap:12px;align-items:center;border-radius:18px;padding:14px;margin-top:12px;color:#fff}
-.note-card small{display:block;opacity:.85}.note-card>div{flex:1;min-width:0}
-.nt{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none}
-.stk{width:96px;height:96px;object-fit:cover;border-radius:16px;display:block;margin-top:4px}
-.tray{display:flex;gap:4px;overflow-x:auto;margin-top:8px;padding:6px;background:var(--soft);border-radius:16px;scrollbar-width:none;animation:pop .2s ease-out}
+.pw button{position:absolute;right:0;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--saffron);font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;padding:8px}
+.note-card{display:flex;gap:14px;align-items:center;border:1.5px solid var(--cc,#8052ff);border-radius:24px;padding:16px;margin-top:14px}
+.note-card small{display:block;color:var(--ash);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase}.note-card>div{flex:1;min-width:0}
+.nt{width:46px;height:46px;border-radius:50%;background:var(--cc,#8052ff);color:#000;display:grid;place-items:center;flex:none}
+.stk{width:96px;height:96px;object-fit:cover;border-radius:24px;display:block;margin-top:4px}
+.tray{display:flex;gap:4px;overflow-x:auto;margin-top:8px;padding:6px;background:var(--soft);border-radius:24px;scrollbar-width:none;animation:pop .2s ease-out}
 .tray::-webkit-scrollbar{display:none}
-.tray button{flex:none;min-width:48px;background:none;border:0;border-radius:12px;padding:4px 6px;display:flex;flex-direction:column;align-items:center}
+.tray button{flex:none;min-width:48px;background:none;border:0;border-radius:16px;padding:4px 6px;display:flex;flex-direction:column;align-items:center}
 .tray button span{font-size:26px;line-height:1.2;transition:transform .15s}
-.tray button small{font-size:11px;color:var(--mut);min-height:14px}
-.tray button.on{background:var(--card);box-shadow:inset 0 0 0 2px var(--pri)}
-.mini{background:color-mix(in srgb,var(--pri) 14%,var(--card));color:var(--prid);border:0;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:700;display:inline-flex;gap:5px;align-items:center;margin-left:auto}
-.ap{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:999px;padding:6px 14px 6px 6px;margin-top:8px;max-width:340px}
-.apb{width:36px;height:36px;border-radius:50%;border:0;background:var(--pri);color:#fff;display:grid;place-items:center;flex:none;padding:0}
-.apt{flex:1;height:5px;border-radius:5px;background:color-mix(in srgb,var(--ink) 15%,transparent);overflow:hidden;min-width:60px}
-.apt i{display:block;height:100%;width:0;background:var(--pri);border-radius:5px}
-.apd{font-size:12px;font-weight:700;color:var(--mut);font-variant-numeric:tabular-nums;min-width:30px;text-align:right}
-.ap.w{background:rgba(255,255,255,.2)}.ap.w .apb{background:#fff;color:#1E293B}.ap.w .apt{background:rgba(255,255,255,.3)}.ap.w .apt i{background:#fff}.ap.w .apd{color:#fff}
+.tray button small{font-size:11px;color:var(--ash);min-height:14px}
+.tray button.on{background:rgba(128,82,255,.3)}
+.tray img{width:64px;height:64px;border-radius:16px;object-fit:cover;display:block}
+.mini{background:var(--soft);color:var(--saffron);border:0;border-radius:999px;padding:6px 12px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;display:inline-flex;gap:5px;align-items:center;margin-left:auto}
+.ap{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:999px;padding:6px 14px 6px 6px;margin-top:10px;max-width:340px}
+.apb{width:36px;height:36px;border-radius:50%;border:0;background:var(--iris);color:#fff;display:grid;place-items:center;flex:none;padding:0}
+.apt{flex:1;height:4px;border-radius:4px;background:rgba(255,255,255,.2);overflow:hidden;min-width:60px}
+.apt i{display:block;height:100%;width:0;background:var(--iris);border-radius:4px}
+.apd{font-size:12px;font-weight:400;color:var(--ash);font-variant-numeric:tabular-nums;min-width:30px;text-align:right}
 .dd{position:relative;flex:none}
-.ddb{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-weight:700;font-size:14px}
-.ddl{position:absolute;right:0;top:calc(100% + 6px);z-index:15;min-width:170px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 40px -12px rgba(0,0,0,.35);padding:6px;display:grid;gap:2px;animation:pop .15s ease-out}
-.ddl.up{top:auto;bottom:calc(100% + 6px)}
-.ddl button{background:none;border:0;text-align:left;padding:11px 12px;border-radius:11px;font-weight:600}
-.ddl button:hover,.ddl button.on{background:color-mix(in srgb,var(--pri) 12%,transparent);color:var(--prid)}
-.cbar{display:flex;align-items:center;gap:2px;background:var(--soft);border-radius:999px;padding:4px;margin-top:12px}
-.cbar input{flex:1;min-width:0;border:0;background:transparent;box-shadow:none;padding:10px 6px}
-.cbar input:focus{box-shadow:none}
-.cb{width:40px;height:40px;border-radius:50%;border:0;background:none;color:var(--mut);display:grid;place-items:center;flex:none;padding:0;cursor:pointer}
-.cb.mic,.cb.send{background:var(--pri);color:#fff}
+.ddb{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid rgba(255,255,255,.22);border-radius:999px;color:#fff;padding:9px 14px;font-weight:600;font-size:13px;letter-spacing:.025em;text-transform:uppercase}
+.ddb.me{text-transform:none;font-size:15px;letter-spacing:0;font-weight:400;padding:4px 12px 4px 4px;gap:8px}
+.ddl{position:absolute;right:0;top:calc(100% + 8px);z-index:15;min-width:180px;background:#000;border:1px solid rgba(255,255,255,.2);border-radius:24px;padding:8px;display:grid;gap:2px;animation:pop .15s ease-out}
+.ddl.up{top:auto;bottom:calc(100% + 8px)}
+.ddl button{background:none;border:0;text-align:left;padding:12px 14px;border-radius:16px;font-weight:400;font-size:15px;color:#fff}
+.ddl button:hover,.ddl button.on{background:rgba(128,82,255,.24)}
+.am{min-width:250px}
+.am button{display:flex;align-items:center;gap:10px;width:100%}
+.cbar{display:flex;align-items:center;gap:2px;background:var(--soft);border-radius:999px;padding:4px;margin-top:14px}
+.cbar input{flex:1;min-width:0;border:0;background:transparent;padding:10px 6px}
+.cb{width:40px;height:40px;border-radius:50%;border:0;background:none;color:var(--mist);display:grid;place-items:center;flex:none;padding:0;cursor:pointer}
+.cb.mic,.cb.send{background:var(--iris);color:#fff}
 .cbar .send{display:none}.cbar.has .send,.cbar.rec .send{display:grid}.cbar.has .mic{display:none}
-.rtime{flex:1;font-weight:700;font-variant-numeric:tabular-nums}
+.rtime{flex:1;font-weight:400;font-variant-numeric:tabular-nums}
 .dotrec{width:10px;height:10px;border-radius:50%;background:var(--bad);animation:blink 1s infinite;margin:0 8px}
-.pnl{background:var(--soft);border-radius:18px;margin-top:8px;padding:10px;max-height:240px;overflow:auto;animation:pop .2s ease-out}
-.pt{font-size:11.5px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.07em;margin:4px 2px 8px}
+.pnl{background:var(--soft);border-radius:24px;margin-top:8px;padding:12px;max-height:240px;overflow:auto;animation:pop .2s ease-out}
+.pt{margin:4px 2px 8px}
 .pg{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:8px}
 .pg.e{grid-template-columns:repeat(8,1fr);gap:2px}
-.em{background:none;border:0;font-size:24px;padding:6px 0;border-radius:10px}.em:active{background:var(--card)}
-.st{aspect-ratio:1;border:0;background:var(--card);border-radius:14px;padding:0;overflow:hidden;display:grid;place-items:center}
+.em{background:none;border:0;font-size:24px;padding:6px 0;border-radius:12px}.em:active{background:rgba(255,255,255,.1)}
+.st{aspect-ratio:1;border:0;background:rgba(255,255,255,.08);border-radius:16px;padding:0;overflow:hidden;display:grid;place-items:center}
 .st img{width:100%;height:100%;object-fit:cover}
-.st.add{color:var(--prid);border:1.5px dashed var(--pri);background:transparent}
+.st.add{color:var(--saffron);border:1.5px dashed rgba(255,184,41,.6);background:transparent}
+.avw{position:relative;display:block;flex:none;line-height:0}
+.pd{position:absolute;right:-1px;bottom:-1px;width:13px;height:13px;border-radius:50%;border:2.5px solid #000;background:#EF4444;display:block}
+.pd.on{background:#22C55E}.pd.off{background:#EF4444}
+.av.sm+.pd{width:11px;height:11px;border-width:2px}
+#bgl{position:fixed;inset:0;z-index:0;pointer-events:none;background-color:#000}
+#bgl.b-custom::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,var(--dim,.3))}
+body:not([data-bg="void"]) header,body:not([data-bg="void"]) nav{background:transparent;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.b-aurora{background:linear-gradient(160deg,#2a0f5e 0%,#14295e 45%,#0b4d45 100%)}
+.b-night{background:linear-gradient(180deg,#14284f 0%,#0a1630 55%,#060c1c 100%)}
+.b-forest{background:linear-gradient(165deg,#0f4a3b 0%,#0a3329 55%,#06201a 100%)}
+.b-ember{background:linear-gradient(160deg,#5a1d0a 0%,#3a1208 55%,#1f0a05 100%)}
+.b-grid{background-color:#0d1424;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:36px 36px}
+.b-dots{background-color:#170c2b;background-image:radial-gradient(rgba(255,255,255,.28) 1px,transparent 1.6px);background-size:22px 22px}
+.b-stars{background:radial-gradient(1.5px 1.5px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 70% 20%,#8052ff,transparent),radial-gradient(1.5px 1.5px at 40% 80%,#ffb829,transparent),radial-gradient(1px 1px at 85% 65%,#fff,transparent),radial-gradient(1px 1px at 10% 70%,#15846e,transparent),radial-gradient(1px 1px at 55% 50%,#fff,transparent),linear-gradient(180deg,#0a0f2a,#02030a)}
+.b-custom{background-color:#000;background-position:center;background-size:cover;background-repeat:no-repeat}
+.bgt{width:100%;aspect-ratio:3/4;border-radius:16px;border:1px solid rgba(255,255,255,.2);display:block;overflow:hidden}
+.bgt.b-grid{background-size:12px 12px}.bgt.b-dots{background-size:10px 10px}
+.sel .bgt{outline:2px solid #fff;outline-offset:3px}
 @keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes pop{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -125,11 +154,11 @@ label.btn{cursor:pointer}
 @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
 @keyframes tin{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
 @keyframes blink{50%{opacity:.25}}
-.go .card,.go .item,.go .empty{animation:up .4s ease-out both}
+.go .card,.go .item,.go .empty,.go .ph{animation:up .5s ease-out both}
 .go .card:nth-child(2){animation-delay:.06s}.go .card:nth-child(3){animation-delay:.12s}.go .card:nth-child(4){animation-delay:.18s}.go .card:nth-child(n+5){animation-delay:.24s}
 .sheet{animation:fade .2s}.sheet>div{animation:slide .28s cubic-bezier(.2,.9,.3,1)}
 #toast{animation:tin .22s ease-out}
-button,label.btn{transition:transform .12s,background .2s,color .2s,box-shadow .2s,border-color .2s}
+button,label.btn{transition:transform .12s,background .2s,color .2s,border-color .2s}
 button:active:not(:disabled),label.btn:active{transform:scale(.96)}
 .pw button:active:not(:disabled){transform:translateY(-50%)}
 .acts button.bump{animation:bump .35s}
@@ -137,7 +166,9 @@ button:active:not(:disabled),label.btn:active{transform:scale(.96)}
 </style>
 </head>
 <body>
-<header><h1><span class="logo"></span>Momentos</h1><div id="bar"></div></header>
+<div id="bgl" class="b-void" aria-hidden="true"></div>
+<canvas id="px" aria-hidden="true"></canvas>
+<header><h1><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8052ff"/><stop offset="1" stop-color="#15846e"/></linearGradient></defs><path d="M3 21L11 2l10 19-9-5z" fill="url(#lg)"/></svg>Momentos</h1><div id="bar"></div></header>
 <main id="main"></main>
 <nav id="nav"></nav>
 <div id="auth"></div>
@@ -148,13 +179,16 @@ button:active:not(:disabled),label.btn:active{transform:scale(.96)}
 <input type="file" id="fi" accept="audio/*" class="vh">
 <input type="file" id="fs" accept="image/*" class="vh">
 <input type="file" id="fc" accept="image/*" class="vh">
+<input type="file" id="fbg" accept="image/*" class="vh">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 /* === CONFIGURACIÓN: pega aquí los datos de Supabase. Vacío = modo demostración (solo en tu navegador) === */
-const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "sb_publishable_ODTlK8Q5KOR8kDW_NblPYQ_UCgDgvNw" };
+const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1YnF3aWZzcnJrZm5jb2ttYmppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MzQ1OTgsImV4cCI6MjEwODIxMDU5OH0.zQISgPu4SWRQxSF7Q-Qr2g6uxEfTXK1qj1z3JSckCi8" };
 
-const COLORS = [["Rojo","#DC2626"],["Naranja","#EA580C"],["Amarillo","#EAB308"],["Verde","#16A34A"],["Azul","#2563EB"],["Morado","#7C3AED"],["Rosa","#DB2777"],["Negro","#1E293B"]];
+const COLORS = [["Rojo","#DC2626"],["Naranja","#EA580C"],["Amarillo","#EAB308"],["Verde","#16A34A"],["Azul","#2563EB"],["Morado","#7C3AED"],["Rosa","#DB2777"],["Blanco","#F2F2F2"]];
 const AVS = ["a1","a2","a3","a4","a5","a6"];
+const BGS = [["void", "Vacío"], ["aurora", "Aurora"], ["night", "Medianoche"], ["forest", "Bosque"], ["ember", "Brasa"], ["grid", "Cuadrícula"], ["dots", "Puntos"], ["stars", "Estrellas"]];
+const kb = n => n > 1e6 ? (n / 1e6).toFixed(1) + " MB" : Math.round(n / 1e3) + " KB";
 const REACT = [["heart","❤️"],["laugh","😂"],["wow","😮"],["sad","😢"],["fire","🔥"],["clap","👏"],["love","😍"],["mind","🤯"],["party","🥳"],["cool","😎"],["up","👍"],["pray","🙏"]];
 const REL = { single: "Soltero/a", taken: "En una relación" };
 const STAT = { active: "Activo", muted: "Silenciado", restricted: "Restringido", blocked: "Bloqueado" };
@@ -162,7 +196,7 @@ const NOTE = { muted: "Tu cuenta está silenciada: no puedes comentar.", restric
 const $ = s => document.querySelector(s);
 let AUD = null, REC = null;
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const cl = c => /^#[0-9a-f]{6}$/i.test(c || "") ? c : COLORS[4][1];
+const cl = c => /^#[0-9a-f]{6}$/i.test(c || "") ? (c.toLowerCase() === "#1e293b" ? "#F2F2F2" : c) : COLORS[4][1];
 const safe = u => /^(https:\/\/|data:image\/)/.test(u || "") ? esc(u) : "";
 
 const IC = {
@@ -180,6 +214,7 @@ const IC = {
   music: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
   mic: '<rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
   sticker: '<path d="M20 12V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6l8-8z"/><path d="M20 12h-6a2 2 0 0 0-2 2v6"/>',
+  check: '<path d="M5 12l5 5 9-9"/>',
   play: '<path d="M7 4l13 8-13 8z"/>',
   pause: '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>',
   send: '<path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/>',
@@ -200,7 +235,20 @@ const ROBOT = {
   a6: '<path d="M16 23h6M26 23h6" stroke="@" stroke-width="2.6" stroke-linecap="round"/><path d="M20 31q4-3 8 0" fill="none" stroke="@" stroke-width="2" stroke-linecap="round"/>'
 };
 const avSvg = (id, c) => `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="${c}"/><path d="M24 14v-5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="8" r="2.6" fill="#fff"/><rect x="7" y="21" width="4" height="8" rx="2" fill="#fff"/><rect x="37" y="21" width="4" height="8" rx="2" fill="#fff"/><rect x="11" y="14" width="26" height="22" rx="6" fill="#fff"/><rect x="16" y="39" width="16" height="5" rx="2.5" fill="#fff" opacity=".9"/>${(ROBOT[id] || ROBOT.a1).replaceAll("@", c)}</svg>`;
-const avatar = (p, cls = "") => safe(p.avatar_url) ? `<img class="av ${cls}" src="${safe(p.avatar_url)}" alt="">` : `<span class="av ${cls}">${avSvg(p.avatar || "a1", cl(p.color))}</span>`;
+const online = p => (S.me && p.id === S.me.id) || (p.last_seen && Date.now() - p.last_seen < 90e3);
+const avatar = (p, cls = "") => {
+  const a = safe(p.avatar_url) ? `<img class="av ${cls}" src="${safe(p.avatar_url)}" alt="">` : `<span class="av ${cls}">${avSvg(p.avatar || "a1", cl(p.color))}</span>`;
+  if (!p.id || p.show_presence === false) return a;
+  const on = online(p);
+  return `<span class="avw">${a}<i class="pd ${on ? "on" : "off"}" data-uid="${esc(p.id)}" title="${on ? "Conectado" : "Desconectado"}"></i></span>`;
+};
+function paintDots() {
+  document.querySelectorAll(".pd[data-uid]").forEach(el => {
+    const p = S.data.profiles[el.dataset.uid]; if (!p) return;
+    const on = online(p); el.className = "pd " + (on ? "on" : "off"); el.title = on ? "Conectado" : "Desconectado";
+  });
+}
+const pingNow = () => { if (S.me) API.ping(meP().show_presence !== false).catch(() => {}); };
 
 async function shrink(file, max, q) {
   const url = URL.createObjectURL(file);
@@ -221,7 +269,8 @@ function mkDemo() {
       users: [{ id: "u1", username: "ana_dev", pass: "x", color: "#16A34A", avatar: "a4", status: "active" }, { id: "u2", username: "admin", pass: "admin123", color: "#7C3AED", avatar: "a2", status: "active", is_admin: true }],
       moments: [{ id: 1, user_id: "u1", text: "Se nos cayó el proyector en plena exposición y nadie dijo nada", created_at: n - 864e5 }, { id: 2, user_id: "u2", text: "Hoy alguien contestó “presente” en el chat equivocado", created_at: n - 36e5 }] };
   }
-  s.friends = s.friends || []; s.stickers = s.stickers || []; s.pigeons = s.pigeons || [];
+  s.friends = s.friends || []; s.stickers = s.stickers || []; s.pigeons = s.pigeons || []; s.saved = s.saved || (s.me ? [s.me] : []);
+  const FULL = "Ya hay 2 cuentas guardadas en este dispositivo. Entra a una de ellas o cierra sesión en una para agregar otra.";
   const save = () => { try { localStorage.setItem(K, JSON.stringify(s)); } catch (e) { throw new Error("El modo demo se quedó sin espacio"); } };
   const find = n => s.users.find(u => u.username.toLowerCase() === n.toLowerCase());
   const meU = () => s.users.find(u => u.id === s.me);
@@ -229,15 +278,15 @@ function mkDemo() {
   return {
     demo: true,
     async session() { const u = meU(); return u ? { id: u.id, username: u.username } : null; },
-    async signUp(n, p) { if (find(n)) throw new Error("Ese nombre ya existe"); const u = { id: "u" + (++s.n), username: n, pass: p, color: COLORS[4][1], avatar: "a1", status: "active" }; s.users.push(u); s.me = u.id; save(); },
-    async signIn(n, p) { const u = find(n); if (!u || u.pass !== p) throw new Error("Usuario o contraseña incorrectos"); s.me = u.id; save(); },
-    async signOut() { s.me = null; save(); },
+    async signUp(n, p) { if (find(n)) throw new Error("Ese nombre ya existe"); if (s.saved.length >= 2) throw new Error(FULL); const u = { id: "u" + (++s.n), username: n, pass: p, color: COLORS[4][1], avatar: "a1", status: "active" }; s.users.push(u); s.me = u.id; s.saved.push(u.id); save(); },
+    async signIn(n, p) { const u = find(n); if (!u || u.pass !== p) throw new Error("Usuario o contraseña incorrectos"); if (!s.saved.includes(u.id)) { if (s.saved.length >= 2) throw new Error(FULL); s.saved.push(u.id); } s.me = u.id; save(); },
+    async signOut() { s.saved = s.saved.filter(x => x !== s.me); s.me = null; save(); },
     async load() { return { profiles: Object.fromEntries(s.users.map(u => [u.id, u])), moments: s.moments, likes: s.likes, comments: s.comments, friends: s.friends, stickers: s.stickers, pg: { inbox: s.pigeons.filter(g => g.recipient === s.me && g.arrives_at <= Date.now() && g.fate !== "lost").sort((a, b) => b.arrives_at - a.arrives_at).map(g => ({ id: g.id, sender: g.sender, text: g.text, arrives_at: g.arrives_at, seen: g.seen })), last: Math.max(0, ...s.pigeons.filter(g => g.sender === s.me).map(g => g.sent_at)) } }; },
     async upload(b) { return toData(b); },
     async post(t, img, ex) { if (["restricted", "blocked"].includes(meU().status)) deny(); s.moments.push({ id: ++s.n, user_id: s.me, text: t, image_url: img || null, ...(ex || {}), created_at: Date.now() }); save(); },
     async like(id, on) { if (meU().status === "blocked") deny(); s.likes = s.likes.filter(l => !(l.moment_id === id && l.user_id === s.me)); if (on) s.likes.push({ moment_id: id, user_id: s.me, kind: on }); save(); },
     async comment(id, t, st, img, aud) { if (["muted", "blocked"].includes(meU().status)) deny(); s.comments.push({ id: ++s.n, moment_id: id, user_id: s.me, text: t, sticker_url: st || null, image_url: img || null, audio_url: aud || null, created_at: Date.now() }); save(); },
-    async profile(color, av, url, rel) { const u = meU(); u.color = color; u.avatar = av; u.avatar_url = url || null; u.relationship = rel; save(); },
+    async profile(color, av, url, rel, bg, bgu) { const u = meU(); u.color = color; u.avatar = av; u.avatar_url = url || null; u.relationship = rel; u.bg = bg; u.bg_url = bgu || null; save(); },
     async setStatus(id, st) { s.users.find(u => u.id === id).status = st; save(); },
     async setIntro(url, h) { const u = meU(); u.intro_url = url; u.intro_until = url ? Date.now() + h * 36e5 : 0; save(); },
     async addSticker(url) { s.stickers.unshift({ id: ++s.n, user_id: s.me, image_url: url }); save(); },
@@ -262,6 +311,11 @@ function mkDemo() {
       s.pigeons.push({ id: ++s.n, sender: s.me, recipient: to, fate, text, sent_at: Date.now(), arrives_at: Date.now() + 6e4, seen: false }); save();
     },
     async pigeonSeen(id) { const g = s.pigeons.find(x => x.id === id); if (g) g.seen = true; save(); },
+    async accounts() { return s.saved.map(id => ({ id, username: (s.users.find(u => u.id === id) || {}).username || "" })); },
+    async switchTo(id) { if (!s.saved.includes(id)) throw new Error("Esa cuenta ya no está guardada"); s.me = id; save(); },
+    async ping(show) { const u = meU(); if (u) { u.last_seen = show ? Date.now() : 0; save(); } },
+    async profiles() { return Object.fromEntries(s.users.map(u => [u.id, u])); },
+    async setPresence(on) { meU().show_presence = on; save(); },
     async friendDel(id) { s.friends = s.friends.filter(f => f.id !== id); save(); },
     async pin(id, h) { s.moments.find(m => m.id === id).pinned_until = h ? Date.now() + h * 36e5 : 0; save(); },
     async delComment(id) { s.comments = s.comments.filter(c => c.id !== id); save(); },
@@ -271,6 +325,11 @@ function mkDemo() {
 
 function mkSup() {
   const sb = supabase.createClient(CFG.url, CFG.key);
+  const KA = "momentos_cuentas", FULL = "Ya hay 2 cuentas guardadas en este dispositivo. Entra a una de ellas o cierra sesión en una para agregar otra.";
+  const rd = () => { try { return JSON.parse(localStorage.getItem(KA)) || []; } catch (e) { return []; } }, wr = l => { try { localStorage.setItem(KA, JSON.stringify(l)); } catch (e) {} };
+  const keep = sess => { if (!sess || !sess.user) return true; const l = rd(), i = l.findIndex(x => x.id === sess.user.id), e = { id: sess.user.id, username: (sess.user.user_metadata || {}).username || "", a: sess.access_token, r: sess.refresh_token }; if (i >= 0) l[i] = e; else if (l.length < 2) l.push(e); else return false; wr(l); return true; };
+  const guard = async sess => { if (!keep(sess)) { await sb.auth.signOut({ scope: "local" }); throw new Error(FULL); } };
+  sb.auth.onAuthStateChange((ev, sess) => { if (sess && ev !== "SIGNED_OUT") keep(sess); });
   const mail = n => n.toLowerCase() + "@momentos.app";
   const fail = e => { if (e) { const m = e.message || ""; throw new Error(/already/i.test(m) ? "Ese nombre ya existe" : /invalid login/i.test(m) ? "Usuario o contraseña incorrectos" : /at least/i.test(m) ? "La contraseña necesita mínimo 6 caracteres" : /row-level security|permission/i.test(m) ? "Tu cuenta no tiene permiso para esto" : m); } };
   const ok = r => { fail(r.error); return r.data; };
@@ -278,18 +337,18 @@ function mkSup() {
   return {
     demo: false,
     async session() { const { data } = await sb.auth.getSession(); const u = data.session && data.session.user; return u ? { id: u.id, username: u.user_metadata.username } : null; },
-    async signUp(n, p) { const r = await sb.auth.signUp({ email: mail(n), password: p, options: { data: { username: n } } }); fail(r.error); if (!r.data.session) throw new Error("Falta desactivar Confirm email en Supabase"); },
-    async signIn(n, p) { fail((await sb.auth.signInWithPassword({ email: mail(n), password: p })).error); },
-    async signOut() { await sb.auth.signOut(); },
+    async signUp(n, p) { if (rd().length >= 2) throw new Error(FULL); const r = await sb.auth.signUp({ email: mail(n), password: p, options: { data: { username: n } } }); fail(r.error); if (!r.data.session) throw new Error("Falta desactivar Confirm email en Supabase"); await guard(r.data.session); },
+    async signIn(n, p) { const r = await sb.auth.signInWithPassword({ email: mail(n), password: p }); fail(r.error); await guard(r.data.session); },
+    async signOut() { const cur = (await sb.auth.getSession()).data.session; await sb.auth.signOut({ scope: "local" }); if (cur) wr(rd().filter(x => x.id !== cur.user.id)); },
     async load() {
       const [a, b, c, d, e, f, g, h] = await Promise.all([sb.from("profiles").select("*"), sb.from("moments").select("*").order("created_at", { ascending: false }).limit(300), sb.from("likes").select("*"), sb.from("comments").select("*").order("created_at"), sb.from("friendships").select("*"), sb.from("stickers").select("*").order("created_at", { ascending: false }).limit(60), Promise.resolve(sb.rpc("pigeon_inbox")).then(r => r.error ? { data: [] } : r), Promise.resolve(sb.rpc("pigeon_last")).then(r => r.error ? { data: null } : r)]);
-      return { profiles: Object.fromEntries(ok(a).map(u => [u.id, { ...u, intro_until: u.intro_until ? Date.parse(u.intro_until) : 0 }])), moments: ok(b).map(t), likes: ok(c), comments: ok(d).map(t), friends: ok(e), stickers: ok(f), pg: { inbox: (ok(g) || []).map(x => ({ id: x.id, sender: x.sender, text: x.delivered_text, arrives_at: Date.parse(x.arrives_at), seen: x.seen })), last: ok(h) ? Date.parse(ok(h)) : 0 } };
+      return { profiles: Object.fromEntries(ok(a).map(u => [u.id, { ...u, intro_until: u.intro_until ? Date.parse(u.intro_until) : 0, last_seen: u.last_seen ? Date.parse(u.last_seen) : 0 }])), moments: ok(b).map(t), likes: ok(c), comments: ok(d).map(t), friends: ok(e), stickers: ok(f), pg: { inbox: (ok(g) || []).map(x => ({ id: x.id, sender: x.sender, text: x.delivered_text, arrives_at: Date.parse(x.arrives_at), seen: x.seen })), last: ok(h) ? Date.parse(ok(h)) : 0 } };
     },
     async upload(b, ext = "jpg", type = "image/jpeg") { const me = await this.session(), path = me.id + "/" + Date.now() + "." + ext; fail((await sb.storage.from("media").upload(path, b, { contentType: type })).error); return sb.storage.from("media").getPublicUrl(path).data.publicUrl; },
     async post(x, img, ex) { fail((await sb.from("moments").insert({ text: x, image_url: img || null, ...(ex || {}) })).error); },
     async like(id, kind) { const me = await this.session(); await sb.from("likes").delete().eq("moment_id", id).eq("user_id", me.id); if (kind) fail((await sb.from("likes").insert({ moment_id: id, kind })).error); },
     async comment(id, x, st, img, aud) { fail((await sb.from("comments").insert({ moment_id: id, text: x, sticker_url: st || null, image_url: img || null, audio_url: aud || null })).error); },
-    async profile(color, av, url, rel) { const me = await this.session(); fail((await sb.from("profiles").update({ color, avatar: av, avatar_url: url || null, relationship: rel }).eq("id", me.id)).error); },
+    async profile(color, av, url, rel, bg, bgu) { const me = await this.session(); fail((await sb.from("profiles").update({ color, avatar: av, avatar_url: url || null, relationship: rel, bg, bg_url: bgu || null }).eq("id", me.id)).error); },
     async setStatus(id, st) { fail((await sb.rpc("admin_set_status", { target: id, new_status: st })).error); },
     async setIntro(url, h) { const me = await this.session(); fail((await sb.from("profiles").update({ intro_url: url, intro_until: url ? new Date(Date.now() + h * 36e5).toISOString() : null }).eq("id", me.id)).error); },
     async addSticker(url) { fail((await sb.from("stickers").insert({ image_url: url })).error); },
@@ -297,6 +356,16 @@ function mkSup() {
     async friendAccept(id) { fail((await sb.from("friendships").update({ status: "accepted" }).eq("id", id)).error); },
     async pigeonSend(to, body) { fail((await sb.rpc("send_pigeon", { to_user: to, msg: body })).error); },
     async pigeonSeen(id) { await sb.rpc("pigeon_seen", { pid: id }); },
+    async accounts() { const cur = (await sb.auth.getSession()).data.session; if (cur) keep(cur); return rd().map(x => ({ id: x.id, username: x.username })); },
+    async switchTo(id) {
+      const cur = (await sb.auth.getSession()).data.session; if (cur) keep(cur);
+      const t = rd().find(x => x.id === id); if (!t) throw new Error("Esa cuenta ya no está guardada");
+      const r = await sb.auth.setSession({ access_token: t.a, refresh_token: t.r });
+      if (r.error) { wr(rd().filter(x => x.id !== id)); throw new Error("La sesión de esa cuenta caducó. Entra de nuevo con tu contraseña."); }
+    },
+    async ping(show) { const me = await this.session(); if (me) await sb.from("profiles").update({ last_seen: show ? new Date().toISOString() : null }).eq("id", me.id); },
+    async profiles() { return Object.fromEntries(ok(await sb.from("profiles").select("*")).map(u => [u.id, { ...u, intro_until: u.intro_until ? Date.parse(u.intro_until) : 0, last_seen: u.last_seen ? Date.parse(u.last_seen) : 0 }])); },
+    async setPresence(on) { const me = await this.session(); fail((await sb.from("profiles").update({ show_presence: on }).eq("id", me.id)).error); },
     async friendDel(id) { fail((await sb.from("friendships").delete().eq("id", id)).error); },
     async pin(id, h) { fail((await sb.from("moments").update({ pinned_until: h ? new Date(Date.now() + h * 36e5).toISOString() : null }).eq("id", id)).error); },
     async delComment(id) { fail((await sb.from("comments").delete().eq("id", id)).error); },
@@ -305,7 +374,7 @@ function mkSup() {
 }
 
 const API = (CFG.url && CFG.key && window.supabase) ? mkSup() : mkDemo();
-let S = { dd: null, cp: null, cfor: null, pgo: {}, pgto: null, fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [], pg: { inbox: [], last: 0 } }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
+let S = { dim: (() => { try { return localStorage.getItem("momentos_dim") || "0.3"; } catch (e) { return "0.3"; } })(), accts: [], dd: null, cp: null, cfor: null, pgo: {}, pgto: null, fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [], pg: { inbox: [], last: 0 } }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
 
 function toast(m) { const t = $("#toast"); t.textContent = m; t.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = "none", 2800); }
 function ago(t) { const m = Math.max(0, (Date.now() - t) / 6e4); if (m < 1) return "ahora"; if (m < 60) return "hace " + Math.floor(m) + " min"; if (m < 1440) return "hace " + Math.floor(m / 60) + " h"; return "hace " + Math.floor(m / 1440) + " d"; }
@@ -343,6 +412,11 @@ function chatbar(id) {
   const pan = S.cp && S.cp.id === id ? (S.cp.p === "s" ? stray(id) : epan(id)) : "";
   return `<div class="cbar ${has ? "has" : ""}"><button class="cb" data-a="pan" data-id="${id}" data-p="e" aria-label="Emojis">${ic("smile", 22)}</button><input data-k="${k}" value="${esc(S.dr[k] || "")}" placeholder="Mensaje" maxlength="200" enterkeyhint="send"><button class="cb" data-a="pan" data-id="${id}" data-p="s" aria-label="Stickers">${ic("sticker", 22)}</button><label class="cb" for="fc" role="button" data-a="cimg" data-id="${id}" aria-label="Enviar imagen">${ic("img", 22)}</label><button class="cb mic" data-a="rec" data-t="${k}" aria-label="Grabar audio">${ic("mic", 22)}</button><button class="cb send" data-a="send" data-id="${id}" aria-label="Enviar">${ic("send", 20)}</button></div>${pan}`;
 }
+function acctMenu() {
+  const p = meP(), pf = S.accts;
+  return `<div class="dd"><button class="ddb me" data-a="dd" data-d="acct">${avatar({ ...p, id: S.me.id }, "sm")}<b>${esc(S.me.username)}</b>${ic("chev", 16)}</button>${S.dd === "acct" ? `<div class="ddl am"><div class="pt" style="margin:6px 12px">Cuentas (${pf.length}/2)</div>${pf.map(a => `<button class="${a.id === S.me.id ? "on" : ""}" data-a="swc" data-id="${esc(a.id)}">${avatar(pOf(a.id), "sm")}<span style="flex:1">${esc(a.username)}</span>${a.id === S.me.id ? ic("check", 16) : ""}</button>`).join("")}${pf.length < 2 ? `<button data-a="addacct">${ic("plus", 18)}Agregar otra cuenta</button>` : ""}<button data-a="out" style="color:var(--bad)">${ic("x", 18)}Cerrar sesión</button></div>` : ""}</div>`;
+}
+const head = (t, sub, lab) => `<div class="ph"><div class="lab">${lab}</div><h2 class="disp">${t}</h2><p class="sub">${sub}</p></div>`;
 const introOn = p => p.intro_url && p.intro_until > Date.now();
 const fmt = n => Math.floor(n / 60) + ":" + String(n % 60).padStart(2, "0");
 const stray = id => {
@@ -351,6 +425,33 @@ const stray = id => {
   return `<div class="pnl"><div class="pt">Mis stickers</div><div class="pg"><label class="st add" for="fs" role="button" aria-label="Crear sticker">${ic("plus", 22)}</label>${mine.map(tile).join("")}</div>${rest.length ? `<div class="pt">De otros</div><div class="pg">${rest.map(tile).join("")}</div>` : ""}</div>`;
 };
 
+async function bgBlob(file) {
+  const url = URL.createObjectURL(file);
+  const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("No se pudo leer esa imagen")); i.src = url; });
+  const enc = (c, t, q) => new Promise(ok => c.toBlob(ok, t, q));
+  let max = 1920, q = .85, out = null;
+  for (let i = 0; i < 6; i++) {
+    const k = Math.min(1, max / Math.max(img.width, img.height)), c = document.createElement("canvas");
+    c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+    const g = c.getContext("2d"); g.imageSmoothingQuality = "high"; g.drawImage(img, 0, 0, c.width, c.height);
+    let b = await enc(c, "image/webp", q); if (!b || b.type !== "image/webp") b = await enc(c, "image/jpeg", q);
+    out = b; if (b.size <= 450e3) break;
+    if (q > .66) q -= .08; else max = Math.round(max * .85);
+  }
+  URL.revokeObjectURL(url);
+  return { blob: out, before: file.size };
+}
+function applyBg() {
+  const p = meP(), b = S.me && S.tab === "me" && S.pf ? { bg: S.pf.bg, url: S.pf.bgurl } : { bg: p.bg, url: p.bg_url };
+  let kind = S.me ? (b.bg || "void") : "void";
+  const el = $("#bgl"), okUrl = /^(https:\/\/|data:image\/)/.test(b.url || "");
+  if (kind === "custom" && !okUrl) kind = "void";
+  if (kind !== "custom" && !BGS.some(x => x[0] === kind)) kind = "void";
+  el.className = "b-" + kind; el.style.backgroundImage = kind === "custom" ? 'url("' + b.url.replace(/"/g, "%22") + '")' : "";
+  document.body.dataset.bg = kind; el.style.setProperty("--dim", S.dim);
+  $("#px").style.display = kind === "void" || kind === "stars" ? "" : "none";
+  if (PX) PX.set(kind === "stars" ? 3 : 1);
+}
 async function wavTrim(blob, max) {
   const ctx = new (window.AudioContext || window.webkitAudioContext)();
   let buf; try { buf = await ctx.decodeAudioData(await blob.arrayBuffer()); } catch (e) { throw new Error("No se pudo leer ese audio"); } finally { ctx.close(); }
@@ -414,7 +515,7 @@ function friends() {
   if (!S.me) return `<div class="empty"><p>Entra para hacer amigos.</p><button class="btn" data-a="auth" data-m="in">Entrar</button></div>`;
   const F = S.data.friends, me = S.me.id, P = f => pOf(f.requester === me ? f.addressee : f.requester);
   const inc = F.filter(f => f.status === "pending" && f.addressee === me), acc = F.filter(f => f.status === "accepted"), out = F.filter(f => f.status === "pending" && f.requester === me);
-  return pigeons() + (inc.length ? `<h2>Solicitudes</h2>` + inc.map(f => urow(pOf(f.requester), `<button class="btn" data-a="facc" data-id="${f.id}">Aceptar</button><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Rechazar">${ic("x", 20)}</button>`)).join("") : "")
+  return head("Tus amigos.", "Agrega personas y mándales una paloma.", "Amistad") + pigeons() + (inc.length ? `<h2>Solicitudes</h2>` + inc.map(f => urow(pOf(f.requester), `<button class="btn" data-a="facc" data-id="${f.id}">Aceptar</button><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Rechazar">${ic("x", 20)}</button>`)).join("") : "")
     + `<h2>Mis amigos (${acc.length})</h2>` + (acc.map(f => urow(P(f), `<button class="btn ghost" data-a="pgsend" data-id="${P(f).id}">${ic("bird", 18)}Paloma</button><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Quitar amigo">${ic("trash", 20)}</button>`)).join("") || '<div class="empty">Todavía no tienes amigos. Agrega a alguien abajo.</div>')
     + (out.length ? `<h2>Enviadas</h2>` + out.map(f => urow(P(f), `<span class="chip">Pendiente</span><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Cancelar">${ic("x", 20)}</button>`)).join("") : "")
     + `<h2>Buscar personas</h2><input data-k="fq" placeholder="Buscar por apodo" value="${esc(S.dr.fq || "")}"><div id="fres">${fres()}</div>`;
@@ -427,7 +528,7 @@ function card(m, hero, ico) {
   const cnt = k => L.filter(l => (l.kind || "heart") === k).length;
   const tp = REACT.map(([k, e]) => [e, cnt(k)]).filter(x => x[1]).sort((a, b) => b[1] - a[1]).slice(0, 3).map(x => x[0]).join("");
   const tray = S.rx === m.id ? `<div class="tray">${REACT.map(([k, e]) => `<button class="${mine === k ? "on" : ""}" data-a="like" data-id="${m.id}" data-k2="${k}" aria-label="Reaccionar ${k}"><span>${e}</span><small>${cnt(k) || ""}</small></button>`).join("")}</div>` : "";
-  return `<article class="card ${hero ? "hero" : ""}">${hero ? `<span class="tag">${ic(ico || "trophy", 16)}${hero}</span>` : ""}<div class="who" ${hero ? 'style="margin-top:10px"' : ""}>${avatar(p)}<div><b style="color:${cl(p.color)}">${esc(p.username)}</b><small>${ago(m.created_at)}${REL[p.relationship] ? " · " + REL[p.relationship] : ""}</small></div>${introOn(p) ? `<button class="mini" data-a="play" data-u="${safe(p.intro_url)}">${ic("music", 14)}Presentación</button>` : ""}</div>${safe(m.image_url) ? `<img class="pic" loading="lazy" alt="Foto del momento" src="${safe(m.image_url)}" data-a="lb" data-u="${safe(m.image_url)}">` : ""}${safe(m.audio_url) ? (m.kind === "music" ? `<div class="note-card" style="background:linear-gradient(135deg,${cl(p.color)} 0%,#1E293B 140%)"><span class="nt">${ic("music", 24)}</span><div><b>${esc(m.audio_title || "Canción")}</b><small>Nota musical</small>${ap(m.audio_url, "w")}</div></div>` : `<div class="voice">${ap(m.audio_url)}</div>`) : ""}${m.text ? `<p>${esc(m.text)}</p>` : '<div style="height:10px"></div>'}<div class="acts"><button class="${mine ? "on" : ""} ${S.pop === m.id ? "bump" : ""}" data-a="rx" data-id="${m.id}" aria-label="Reaccionar">${tp || ic("heart", 18)}${L.length || ""}</button><button data-a="cm" data-id="${m.id}">${ic("chat", 18)}${C.length}</button></div>${tray}${cms}</article>`;
+  return `<article class="card ${hero ? "hero" : ""}">${hero ? `<span class="tag">${ic(ico || "trophy", 16)}${hero}</span>` : ""}<div class="who" ${hero ? 'style="margin-top:10px"' : ""}>${avatar(p)}<div><b style="color:${cl(p.color)}">${esc(p.username)}</b><small>${ago(m.created_at)}${REL[p.relationship] ? " · " + REL[p.relationship] : ""}</small></div>${introOn(p) ? `<button class="mini" data-a="play" data-u="${safe(p.intro_url)}">${ic("music", 14)}Presentación</button>` : ""}</div>${safe(m.image_url) ? `<img class="pic" loading="lazy" alt="Foto del momento" src="${safe(m.image_url)}" data-a="lb" data-u="${safe(m.image_url)}">` : ""}${safe(m.audio_url) ? (m.kind === "music" ? `<div class="note-card" style="--cc:${cl(p.color)}"><span class="nt">${ic("music", 24)}</span><div><b>${esc(m.audio_title || "Canción")}</b><small>Nota musical</small>${ap(m.audio_url, "w")}</div></div>` : `<div class="voice">${ap(m.audio_url)}</div>`) : ""}${m.text ? `<p>${esc(m.text)}</p>` : '<div style="height:10px"></div>'}<div class="acts"><button class="${mine ? "on" : ""} ${S.pop === m.id ? "bump" : ""}" data-a="rx" data-id="${m.id}" aria-label="Reaccionar">${tp || ic("heart", 18)}${L.length || ""}</button><button data-a="cm" data-id="${m.id}">${ic("chat", 18)}${C.length}</button></div>${tray}${cms}</article>`;
 }
 
 function home() {
@@ -440,28 +541,33 @@ function home() {
       : `<div class="card"><textarea data-k="post" maxlength="280" placeholder="Cuenta un momento divertido…">${esc(S.dr.post || "")}</textarea>${S.img ? `<div class="prev"><img src="${esc(S.img.prev)}" alt="Vista previa"><button data-a="noimg" aria-label="Quitar foto">${ic("x", 16)}</button></div>` : ""}${S.aud ? `<div style="margin-top:8px">${S.aud.kind === "music" ? `<input data-k="mt" maxlength="60" placeholder="Título de la canción" value="${esc(S.dr.mt || "")}" style="margin-bottom:8px">` : ""}${ap(S.aud.prev)}<button class="btn ghost" data-a="noaud" style="margin-top:6px">Quitar audio</button></div>` : ""}${S.rec === "post" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 1:00</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : ""}<div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="f" role="button">${ic("img", 18)}Foto</label><label class="btn ghost" for="fm" role="button">${ic("music", 18)}Música</label><button class="btn ghost" data-a="rec" data-t="post">${ic("mic", 18)}Voz</button><button class="btn" data-a="post" style="margin-left:auto">Publicar</button></div>${st === "muted" ? `<div class="note" style="margin-top:10px">${NOTE.muted}</div>` : ""}</div>`;
   const pn = m => m.pinned_until > Date.now() ? 1 : 0;
   const ms = S.data.moments.filter(m => visible(m.user_id)).sort((a, b) => pn(b) - pn(a) || b.created_at - a.created_at);
-  return pb + comp + (ms.map(m => card(m, pn(m) ? "Fijado" : null, "pin")).join("") || '<div class="empty">Aún no hay momentos. Publica el primero.</div>');
+  return pb + head("Comparte tu momento.", "Un lugar para reír juntos, sin nombres reales.", "Comunidad") + comp + (ms.map(m => card(m, pn(m) ? "Fijado" : null, "pin")).join("") || '<div class="empty">Aún no hay momentos. Publica el primero.</div>');
 }
 
 function rank(title, span) {
   const from = span ? Date.now() - span : 0;
   const ms = S.data.moments.filter(m => m.created_at >= from && visible(m.user_id)).sort((a, b) => likesOf(b.id).length - likesOf(a.id).length || b.created_at - a.created_at);
-  if (!ms.length) return `<h2>${title}</h2><div class="empty">${span ? "Esta semana todavía no hay momentos." : "Todavía no hay momentos."}</div>`;
-  return `<h2>${title}</h2>` + card(ms[0], span ? "De la semana" : "Destacado") + (ms.length > 1 ? `<h2>Más votados</h2>` + ms.slice(1, 6).map(m => card(m)).join("") : "");
+  if (!ms.length) return head(title + ".", "El momento con más reacciones de todos.", "Ranking") + `<div class="empty">${span ? "Esta semana todavía no hay momentos." : "Todavía no hay momentos."}</div>`;
+  return head(title + ".", "El momento con más reacciones de todos.", "Ranking") + card(ms[0], span ? "De la semana" : "Destacado") + (ms.length > 1 ? `<h2>Más votados</h2>` + ms.slice(1, 6).map(m => card(m)).join("") : "");
 }
 
 function prof() {
   if (!S.me) return `<div class="empty"><p>Entra para personalizar tu perfil.</p><button class="btn" data-a="auth" data-m="in">Entrar</button></div>`;
   const p = meP();
-  S.pf = S.pf || { color: cl(p.color), avatar: p.avatar || "a1", url: p.avatar_url || null, blob: null, rel: p.relationship || "none" };
+  S.pf = S.pf || { color: cl(p.color), avatar: p.avatar || "a1", url: p.avatar_url || null, blob: null, rel: p.relationship || "none", bg: p.bg || "void", bgurl: p.bg_url || null, bgblob: null };
   const mine = S.data.moments.filter(m => m.user_id === S.me.id), got = mine.reduce((n, m) => n + likesOf(m.id).length, 0);
   const view = { color: S.pf.color, avatar: S.pf.avatar, avatar_url: S.pf.url };
-  return `<div class="card" style="text-align:center">${avatar(view, "big")}<h2 style="color:${S.pf.color};margin:12px 0 2px">${esc(S.me.username)}</h2><small style="color:var(--mut)">${mine.length} momentos · ${got} reacciones recibidas</small></div>
+  return head("Tu perfil.", "Elige cómo te ven los demás.", "Perfil") + `<div class="card" style="text-align:center">${avatar(view, "big")}<h2 style="color:${S.pf.color};margin:12px 0 2px">${esc(S.me.username)}</h2><small style="color:var(--mut)">${mine.length} momentos · ${got} reacciones recibidas</small></div>
   <h2>Foto de perfil</h2><div class="row"><label class="btn" for="fa" role="button">${ic("img", 18)}Subir mi foto</label>${S.pf.url ? `<button class="btn ghost" data-a="noav">Quitar foto</button>` : ""}</div>
   <h2>Robot</h2><div class="grid">${AVS.map(a => `<button data-a="pa" data-v="${a}" class="${!S.pf.url && S.pf.avatar === a ? "sel" : ""}">${avatar({ avatar: a, color: S.pf.color })}</button>`).join("")}</div>
   <h2>Color</h2><div class="grid">${COLORS.map(c => `<button data-a="pc" data-v="${c[1]}" class="${S.pf.color === c[1] ? "sel" : ""}"><span class="sw" style="background:${c[1]}"></span>${c[0]}</button>`).join("")}</div>
+  <h2>Fondo</h2><div class="grid">${BGS.map(([k, n]) => `<button data-a="pbg" data-v="${k}" class="${S.pf.bg === k ? "sel" : ""}"><span class="bgt b-${k}"></span>${n}</button>`).join("")}${S.pf.bgurl ? `<button data-a="pbg" data-v="custom" class="${S.pf.bg === "custom" ? "sel" : ""}"><span class="bgt b-custom" style="background-image:url('${safe(S.pf.bgurl)}')"></span>Mi fondo</button>` : ""}</div>
+  <div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="fbg" role="button">${ic("img", 18)}Subir mi fondo</label>${S.pf.bgurl ? `<button class="btn ghost" data-a="nobg">Quitar mi fondo</button>` : ""}</div>
+  ${S.pf.bg === "custom" ? `<div class="pt" style="margin:18px 0 8px">Oscurecer foto</div><div class="seg" style="grid-template-columns:repeat(4,1fr)">${[["0", "Nada"], ["0.3", "Suave"], ["0.5", "Medio"], ["0.7", "Fuerte"]].map(([v, n]) => `<button data-a="dim" data-v="${v}" class="${String(S.dim) === v ? "on" : ""}">${n}</button>`).join("")}</div>` : ""}
+  <small style="color:var(--ash);display:block;margin-top:8px">Solo tú ves tu fondo. Las fotos se comprimen solas para que pesen poco.</small>
   <h2>Estado</h2><div class="row" style="flex-wrap:wrap">${[["none", "Prefiero no decir"], ["single", "Soltero/a"], ["taken", "En una relación"]].map(([k, v]) => `<button class="btn ghost ${S.pf.rel === k ? "on" : ""}" data-a="prel" data-v="${k}">${v}</button>`).join("")}</div>
-  <div class="row" style="margin-top:20px"><button class="btn" data-a="psave">Guardar perfil</button><button class="btn ghost" data-a="out">Salir</button></div>
+  <div class="row" style="margin-top:20px"><button class="btn" data-a="psave">Guardar perfil</button><button class="btn ghost" data-a="out">Cerrar sesión</button></div>
+  <h2>Privacidad</h2><button class="btn ghost ${p.show_presence !== false ? "on" : ""}" data-a="ptog">Mostrar mi estado de conexión</button>
   <h2>Mi presentación</h2><small style="color:var(--mut)">Un audio de hasta 30 segundos que aparece junto a tu nombre.</small>
   ${introOn(p) ? `<div class="note" style="margin-top:8px">Activa hasta ${new Date(p.intro_until).toLocaleString("es", { weekday: "short", hour: "2-digit", minute: "2-digit" })}</div>` : ""}
   ${S.ia ? `${ap(S.ia.prev)}` : ""}
@@ -486,13 +592,13 @@ function admin() {
 
 function authSheet() {
   const up = S.auth === "up";
-  return `<div class="sheet" data-a="close"><div data-stop="1"><div class="seg"><button data-a="auth" data-m="in" class="${up ? "" : "on"}">Entrar</button><button data-a="auth" data-m="up" class="${up ? "on" : ""}">Crear cuenta</button></div><h2 style="margin:6px 0 0">${up ? "Crea tu cuenta en segundos" : "Qué bueno verte de nuevo"}</h2><small style="color:var(--mut)">${up ? "Solo necesitas un apodo y una contraseña. Los demás verán tu apodo, así que mejor no uses tu nombre real." : "Escribe tu apodo y tu contraseña."}</small><input id="u" data-k="au" placeholder="Tu apodo" autocapitalize="none" autocomplete="username" maxlength="20" value="${esc(S.dr.au || "")}"><div class="pw"><input id="p" data-k="ap" type="${S.spw ? "text" : "password"}" placeholder="Contraseña (mínimo 6)" autocomplete="${up ? "new-password" : "current-password"}" value="${esc(S.dr.ap || "")}"><button data-a="spw">${S.spw ? "Ocultar" : "Mostrar"}</button></div>${S.err ? `<div class="err">${esc(S.err)}</div>` : ""}<button class="btn" data-a="go">${up ? "Crear mi cuenta" : "Entrar"}</button></div></div>`;
+  return `<div class="sheet" data-a="close"><div data-stop="1">${!S.me && S.accts.length ? `<div class="pt" style="margin:0">Tus cuentas en este dispositivo</div>${S.accts.map(a => `<button class="btn ghost" data-a="swc" data-id="${esc(a.id)}" style="justify-content:flex-start">${avatar(pOf(a.id), "sm")}<span>${esc(a.username)}</span></button>`).join("")}<div class="pt" style="margin:6px 0 0">O entra con otra cuenta</div>` : ""}<div class="seg"><button data-a="auth" data-m="in" class="${up ? "" : "on"}">Entrar</button><button data-a="auth" data-m="up" class="${up ? "on" : ""}">Crear cuenta</button></div><h2 style="margin:6px 0 0">${up ? "Crea tu cuenta en segundos" : "Qué bueno verte de nuevo"}</h2><small style="color:var(--mut)">${up ? "Solo necesitas un apodo y una contraseña. Los demás verán tu apodo, así que mejor no uses tu nombre real." : "Escribe tu apodo y tu contraseña."}</small><input id="u" data-k="au" placeholder="Tu apodo" autocapitalize="none" autocomplete="username" maxlength="20" value="${esc(S.dr.au || "")}"><div class="pw"><input id="p" data-k="ap" type="${S.spw ? "text" : "password"}" placeholder="Contraseña (mínimo 6)" autocomplete="${up ? "new-password" : "current-password"}" value="${esc(S.dr.ap || "")}"><button data-a="spw">${S.spw ? "Ocultar" : "Mostrar"}</button></div>${S.err ? `<div class="err">${esc(S.err)}</div>` : ""}<button class="btn" data-a="go">${up ? "Crear mi cuenta" : "Entrar"}</button></div></div>`;
 }
 
 function render() {
-  setTimeout(() => { S.pop = null; syncAP(); });
+  setTimeout(() => { S.pop = null; syncAP(); }); applyBg();
   const p = meP();
-  $("#bar").innerHTML = (API.demo ? '<span class="chip">Modo demo</span> ' : "") + (S.me ? `<span style="font-weight:600;display:inline-flex;gap:8px;align-items:center">${avatar(p, "sm")}${esc(S.me.username)}</span>` : '<button class="btn" data-a="auth" data-m="in">Entrar</button>');
+  $("#bar").innerHTML = (API.demo ? '<span class="chip">Modo demo</span> ' : "") + (S.me ? acctMenu() : '<button class="btn" data-a="auth" data-m="in">Entrar</button>');
   const T = [["home", "home", "Inicio"], ["top", "trophy", "Destacado"], ["friends", "users", "Amistad"], ["me", "user", "Perfil"]];
   if (isAdmin()) T.push(["admin", "shield", "Admin"]);
   const nreq = S.me ? S.data.friends.filter(f => f.status === "pending" && f.addressee === S.me.id).length + S.data.pg.inbox.filter(g => !g.seen).length : 0;
@@ -502,7 +608,7 @@ function render() {
   $("#auth").innerHTML = S.auth ? authSheet() : S.pgto ? pigeonSheet() : S.lb ? `<div class="sheet" data-a="lbx" style="align-items:center"><img src="${S.lb}" alt="Foto ampliada" style="max-width:96%;max-height:90vh;border-radius:12px"></div>` : "";
 }
 
-async function refresh() { try { S.data = await API.load(); } catch (e) { toast(e.message); } render(); }
+async function refresh() { try { S.data = await API.load(); } catch (e) { toast(e.message); } try { S.accts = await API.accounts(); } catch (e) {} render(); }
 const needLogin = () => { if (!S.me) { S.auth = "in"; render(); return true; } return false; };
 
 document.addEventListener("input", e => { const k = e.target.dataset && e.target.dataset.k; if (k) S.dr[k] = e.target.value; if (k === "fq" && $("#fres")) $("#fres").innerHTML = fres(); if (/^c\d+$/.test(k || "")) e.target.closest(".cbar").classList.toggle("has", !!e.target.value.trim()); });
@@ -513,6 +619,7 @@ document.addEventListener("change", async e => {
     if (t.dataset.st) { await API.setStatus(t.dataset.st, t.value); await refresh(); toast("Perfil actualizado"); }
     else if (t.dataset.pin) { if (t.value === "") return; await API.pin(+t.dataset.pin, +t.value); await refresh(); toast(+t.value ? "Momento fijado" : "Fijado quitado"); }
     else if (t.id === "fc") { const f = t.files[0]; t.value = ""; if (!f || !S.me || !S.cfor) return; toast("Enviando imagen…"); const url = await API.upload(await shrink(f, 1280, .78)); await API.comment(S.cfor, (S.dr["c" + S.cfor] || "").trim(), null, url); S.dr["c" + S.cfor] = ""; S.cp = null; await refresh(); }
+    else if (t.id === "fbg") { const f = t.files[0]; t.value = ""; if (!f || !S.pf) return; toast("Optimizando imagen…"); const r = await bgBlob(f), d = await toData(r.blob); S.pf.bgblob = r.blob; S.pf.bgurl = d; S.pf.bg = "custom"; render(); toast("Fondo optimizado: " + kb(r.before) + " a " + kb(r.blob.size)); }
     else if (t.id === "idur") S.idur = t.value;
     else if (t.id === "fm" || t.id === "fi") { const f = t.files[0]; t.value = ""; if (!f) return; await setAudio(f, t.id === "fm" ? 60 : 30, t.id === "fm" ? "post" : "intro", t.id === "fm" ? "music" : "audio", f.name.replace(/\.[^.]+$/, "")); render(); }
     else if (t.id === "fs") { const f = t.files[0]; t.value = ""; if (!f || needLogin()) return; const url = await API.upload(await sticker(f), "png", "image/png"); await API.addSticker(url); await refresh(); toast("Sticker creado"); }
@@ -542,9 +649,9 @@ document.addEventListener("click", async e => {
       if (!/^[A-Za-z0-9_]{3,20}$/.test(u)) { S.err = "El apodo debe tener 3 a 20 letras, números o _ (sin espacios)"; return render(); }
       if (p.length < 6) { S.err = "La contraseña necesita mínimo 6 caracteres"; return render(); }
       try { S.auth === "up" ? await API.signUp(u, p) : await API.signIn(u, p); } catch (e) { S.err = e.message; return render(); }
-      S.err = null; S.dr.ap = ""; S.me = await API.session(); S.auth = null; S.pf = null; await refresh(); toast("Bienvenido, " + S.me.username);
+      S.err = null; S.dr.ap = ""; S.me = await API.session(); S.auth = null; S.pf = null; await refresh(); pingNow(); toast("Bienvenido, " + S.me.username);
     }
-    else if (a === "out") { await API.signOut(); S.me = null; S.pf = null; S.tab = "home"; render(); }
+    else if (a === "out") { S.dd = null; try { await API.ping(false); } catch (e) {} await API.signOut(); S.me = null; S.pf = null; S.tab = "home"; await refresh(); toast("Sesión cerrada"); }
     else if (a === "pick") $("#f").click();
     else if (a === "pickav") $("#fa").click();
     else if (a === "noimg") { S.img = null; render(); }
@@ -555,6 +662,13 @@ document.addEventListener("click", async e => {
       if (S.aud) ex = { kind: S.aud.kind, audio_title: S.aud.kind === "music" ? (S.dr.mt || "Mi canción").slice(0, 60) : null, audio_url: await API.upload(S.aud.blob, "wav", "audio/wav") };
       await API.post(t, url, ex); S.dr.post = ""; S.dr.mt = ""; S.img = null; S.aud = null; await refresh(); toast("Momento publicado");
     }
+    else if (a === "swc") {
+      if (S.me && b.dataset.id === S.me.id) { S.dd = null; return render(); }
+      try { await API.ping(false); } catch (e) {}
+      await API.switchTo(b.dataset.id); S.me = await API.session(); S.auth = null; S.dd = null; S.pf = null; S.tab = "home"; await refresh(); pingNow(); toast("Cuenta: " + S.me.username);
+    }
+    else if (a === "addacct") { S.dd = null; S.auth = "in"; S.err = null; render(); }
+    else if (a === "ptog") { const on = meP().show_presence === false; await API.setPresence(on); await API.ping(on); await refresh(); toast(on ? "Tu estado de conexión es visible" : "Tu estado de conexión está oculto"); }
     else if (a === "pgsend") { S.pgto = b.dataset.id; S.err = null; render(); }
     else if (a === "pgx") { S.pgto = null; S.err = null; render(); }
     else if (a === "pgsend2") {
@@ -593,13 +707,18 @@ document.addEventListener("click", async e => {
       const t = (S.dr["c" + id] || "").trim(); if (!t) return;
       await API.comment(id, t); S.dr["c" + id] = ""; S.cp = null; await refresh();
     }
+    else if (a === "dim") { S.dim = b.dataset.v; try { localStorage.setItem("momentos_dim", S.dim); } catch (e) {} render(); }
+    else if (a === "pbg") { S.pf.bg = b.dataset.v; render(); }
+    else if (a === "nobg") { S.pf.bg = "void"; S.pf.bgurl = null; S.pf.bgblob = null; render(); }
     else if (a === "prel") { S.pf.rel = b.dataset.v; render(); }
     else if (a === "pc") { S.pf.color = b.dataset.v; render(); }
     else if (a === "pa") { S.pf.avatar = b.dataset.v; S.pf.url = null; S.pf.blob = null; render(); }
     else if (a === "noav") { S.pf.url = null; S.pf.blob = null; render(); }
     else if (a === "psave") {
       let url = S.pf.url; if (S.pf.blob) url = await API.upload(S.pf.blob);
-      await API.profile(S.pf.color, S.pf.avatar, url, S.pf.rel); S.pf = null; await refresh(); toast("Perfil guardado");
+      let bgu = S.pf.bg === "custom" ? S.pf.bgurl : null;
+      if (S.pf.bg === "custom" && S.pf.bgblob) bgu = await API.upload(S.pf.bgblob, S.pf.bgblob.type === "image/webp" ? "webp" : "jpg", S.pf.bgblob.type);
+      await API.profile(S.pf.color, S.pf.avatar, url, S.pf.rel, S.pf.bg, bgu); S.pf = null; await refresh(); toast("Perfil guardado");
     }
     else if (a === "del") {
       const k = b.dataset.t + id; if (S.arm !== k) { S.arm = k; render(); return; }
@@ -615,7 +734,29 @@ document.addEventListener("keydown", e => {
   else if (/^c\d+$/.test(t.dataset.k || "")) { e.preventDefault(); const bt = document.querySelector('[data-a="send"][data-id="' + t.dataset.k.slice(1) + '"]'); if (bt) bt.click(); }
 });
 
-(async () => { try { S.me = await API.session(); } catch (e) {} await refresh(); })();
+function particles() {
+  const cv = $("#px"), cx = cv.getContext("2d"), cols = ["#8052ff", "#ffb829", "#15846e", "#d946ef", "#3b82f6"], still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let P = [];
+  const size = () => { const d = devicePixelRatio || 1; cv.width = innerWidth * d; cv.height = innerHeight * d; cx.setTransform(d, 0, 0, d, 0, 0); };
+  const make = () => ({ x: Math.random() * innerWidth, y: Math.random() * innerHeight, s: 4 + Math.random() * 9, r: Math.random() * 6.28, vr: (Math.random() - .5) * .004, vx: (Math.random() - .5) * .08, vy: -.03 - Math.random() * .08, c: cols[Math.floor(Math.random() * cols.length)], a: .12 + Math.random() * .33 });
+  const draw = () => {
+    cx.clearRect(0, 0, innerWidth, innerHeight); cx.lineWidth = 1;
+    for (const p of P) {
+      if (!still) { p.x += p.vx; p.y += p.vy; p.r += p.vr; if (p.y < -20) { p.y = innerHeight + 20; p.x = Math.random() * innerWidth; } if (p.x < -20) p.x = innerWidth + 20; if (p.x > innerWidth + 20) p.x = -20; }
+      cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.globalAlpha = p.a; cx.strokeStyle = p.c;
+      cx.beginPath(); cx.moveTo(0, -p.s); cx.lineTo(p.s * .87, p.s * .5); cx.lineTo(-p.s * .87, p.s * .5); cx.closePath(); cx.stroke(); cx.restore();
+    }
+  };
+  size(); P = Array.from({ length: innerWidth < 600 ? 55 : 110 }, make); draw();
+  addEventListener("resize", () => { size(); draw(); });
+  if (!still) { let last = 0; const loop = t => { if (!document.hidden && cv.style.display !== "none" && t - last > 33) { last = t; draw(); } requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
+  let cur = 1;
+  return { set(m) { if (m === cur) return; cur = m; const n = Math.round((innerWidth < 600 ? 55 : 110) * m); while (P.length < n) P.push(make()); P.length = Math.min(P.length, n); draw(); } };
+}
+let PX = null; try { PX = particles(); } catch (e) {}
+(async () => { try { S.me = await API.session(); } catch (e) {} await refresh(); pingNow(); })();
+setInterval(async () => { if (document.hidden) return; pingNow(); try { S.data.profiles = await API.profiles(); paintDots(); } catch (e) {} }, 45000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) pingNow(); });
 </script>
 </body>
 </html>
