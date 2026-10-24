@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#000000">
-<title>Momentos</title>
+<title>CURIOCITY</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap">
 <style>
 :root{--void:#000;--white:#fff;--ash:#9a9a9a;--mist:#bdbdbd;--iris:#8052ff;--saffron:#ffb829;--verdant:#15846e;
@@ -18,7 +18,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 #px{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 b{font-weight:600}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
-h1{margin:0;font-size:17px;font-weight:400;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+h1{margin:0;font-size:15px;font-weight:600;letter-spacing:.16em;display:flex;align-items:center;gap:10px}
 h2{margin:48px 0 18px;font-size:28px;font-weight:400;letter-spacing:-.035em;line-height:1.1;color:#fff}
 h2.disp{font-size:clamp(40px,12vw,64px);letter-spacing:-.045em;line-height:1;margin:8px 0 16px}
 .ph{margin:30px 0 42px}
@@ -147,6 +147,29 @@ body:not([data-bg="void"]) header,body:not([data-bg="void"]) nav{background:tran
 .bgt{width:100%;aspect-ratio:3/4;border-radius:16px;border:1px solid rgba(255,255,255,.2);display:block;overflow:hidden}
 .bgt.b-grid{background-size:12px 12px}.bgt.b-dots{background-size:10px 10px}
 .sel .bgt{outline:2px solid #fff;outline-offset:3px}
+.stories{display:flex;gap:16px;overflow-x:auto;padding:8px 0 22px;scrollbar-width:none}
+.stories::-webkit-scrollbar{display:none}
+.sc{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:8px;flex:none;width:76px;color:#fff;padding:0}
+.sc small{font-size:12px;max-width:76px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--mist)}
+.sc.wait{width:104px}.sc.wait small{white-space:normal;text-align:center;line-height:1.25;max-width:104px}
+.scw{position:relative;display:block;padding:3px;border-radius:50%;border:2px solid transparent;line-height:0}
+.sc.ring .scw{border-color:var(--iris)}
+.sc.ring.seen .scw{border-color:rgba(255,255,255,.28)}
+.scw.dash{border:2px dashed rgba(255,255,255,.35);width:74px;height:74px;display:grid;place-items:center;color:var(--ash);padding:0}
+.av.lg{width:62px;height:62px}
+.plus{position:absolute;top:-2px;right:-2px;width:22px;height:22px;border-radius:50%;background:var(--iris);color:#fff;display:grid;place-items:center;border:2px solid #000;line-height:0}
+.sview{position:fixed;inset:0;z-index:25;background:#000;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);animation:fade .2s}
+.svtop{display:flex;align-items:center;gap:12px;padding:14px 18px}
+.svtop>div{flex:1}.svtop small{display:block;color:var(--ash);font-size:12px}
+.svimg{flex:1;min-height:0;width:100%;object-fit:contain}
+.svbot{padding:16px 18px 24px;display:flex;flex-direction:column;gap:12px;align-items:center}
+.svnav{display:flex;align-items:center;gap:18px;color:var(--ash)}
+.svnav button{background:none;border:0;color:#fff;font-size:28px;padding:0 12px}
+.svmsg{font-size:22px;font-weight:300;line-height:1.3;text-align:center;letter-spacing:-.02em}
+.sheet>div.vis{overflow:visible}
+.more{background:none;border:0;color:var(--ash);padding:8px 0 0;font-weight:400;font-size:14px;display:block}
+.cm .ic{padding:0 6px;display:inline;vertical-align:middle}
+.who .ic{margin-left:auto}.mini+.ic{margin-left:0}
 @keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes pop{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -168,7 +191,7 @@ button:active:not(:disabled),label.btn:active{transform:scale(.96)}
 <body>
 <div id="bgl" class="b-void" aria-hidden="true"></div>
 <canvas id="px" aria-hidden="true"></canvas>
-<header><h1><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8052ff"/><stop offset="1" stop-color="#15846e"/></linearGradient></defs><path d="M3 21L11 2l10 19-9-5z" fill="url(#lg)"/></svg>Momentos</h1><div id="bar"></div></header>
+<header><h1><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8052ff"/><stop offset="1" stop-color="#15846e"/></linearGradient></defs><path d="M3 21L11 2l10 19-9-5z" fill="url(#lg)"/></svg>CURIOCITY</h1><div id="bar"></div></header>
 <main id="main"></main>
 <nav id="nav"></nav>
 <div id="auth"></div>
@@ -180,10 +203,11 @@ button:active:not(:disabled),label.btn:active{transform:scale(.96)}
 <input type="file" id="fs" accept="image/*" class="vh">
 <input type="file" id="fc" accept="image/*" class="vh">
 <input type="file" id="fbg" accept="image/*" class="vh">
+<input type="file" id="fst" accept="image/*" class="vh">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 /* === CONFIGURACIÓN: pega aquí los datos de Supabase. Vacío = modo demostración (solo en tu navegador) === */
-const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "sb_publishable_ODTlK8Q5KOR8kDW_NblPYQ_UCgDgvNw" };
+const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1YnF3aWZzcnJrZm5jb2ttYmppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MzQ1OTgsImV4cCI6MjEwODIxMDU5OH0.zQISgPu4SWRQxSF7Q-Qr2g6uxEfTXK1qj1z3JSckCi8" };
 
 const COLORS = [["Rojo","#DC2626"],["Naranja","#EA580C"],["Amarillo","#EAB308"],["Verde","#16A34A"],["Azul","#2563EB"],["Morado","#7C3AED"],["Rosa","#DB2777"],["Blanco","#F2F2F2"]];
 const AVS = ["a1","a2","a3","a4","a5","a6"];
@@ -269,7 +293,7 @@ function mkDemo() {
       users: [{ id: "u1", username: "ana_dev", pass: "x", color: "#16A34A", avatar: "a4", status: "active" }, { id: "u2", username: "admin", pass: "admin123", color: "#7C3AED", avatar: "a2", status: "active", is_admin: true }],
       moments: [{ id: 1, user_id: "u1", text: "Se nos cayó el proyector en plena exposición y nadie dijo nada", created_at: n - 864e5 }, { id: 2, user_id: "u2", text: "Hoy alguien contestó “presente” en el chat equivocado", created_at: n - 36e5 }] };
   }
-  s.friends = s.friends || []; s.stickers = s.stickers || []; s.pigeons = s.pigeons || []; s.saved = s.saved || (s.me ? [s.me] : []);
+  s.friends = s.friends || []; s.stickers = s.stickers || []; s.pigeons = s.pigeons || []; s.saved = s.saved || (s.me ? [s.me] : []); s.stories = s.stories || [];
   const FULL = "Ya hay 2 cuentas guardadas en este dispositivo. Entra a una de ellas o cierra sesión en una para agregar otra.";
   const save = () => { try { localStorage.setItem(K, JSON.stringify(s)); } catch (e) { throw new Error("El modo demo se quedó sin espacio"); } };
   const find = n => s.users.find(u => u.username.toLowerCase() === n.toLowerCase());
@@ -281,7 +305,7 @@ function mkDemo() {
     async signUp(n, p) { if (find(n)) throw new Error("Ese nombre ya existe"); if (s.saved.length >= 2) throw new Error(FULL); const u = { id: "u" + (++s.n), username: n, pass: p, color: COLORS[4][1], avatar: "a1", status: "active" }; s.users.push(u); s.me = u.id; s.saved.push(u.id); save(); },
     async signIn(n, p) { const u = find(n); if (!u || u.pass !== p) throw new Error("Usuario o contraseña incorrectos"); if (!s.saved.includes(u.id)) { if (s.saved.length >= 2) throw new Error(FULL); s.saved.push(u.id); } s.me = u.id; save(); },
     async signOut() { s.saved = s.saved.filter(x => x !== s.me); s.me = null; save(); },
-    async load() { return { profiles: Object.fromEntries(s.users.map(u => [u.id, u])), moments: s.moments, likes: s.likes, comments: s.comments, friends: s.friends, stickers: s.stickers, pg: { inbox: s.pigeons.filter(g => g.recipient === s.me && g.arrives_at <= Date.now() && g.fate !== "lost").sort((a, b) => b.arrives_at - a.arrives_at).map(g => ({ id: g.id, sender: g.sender, text: g.text, arrives_at: g.arrives_at, seen: g.seen })), last: Math.max(0, ...s.pigeons.filter(g => g.sender === s.me).map(g => g.sent_at)) } }; },
+    async load() { return { profiles: Object.fromEntries(s.users.map(u => [u.id, u])), moments: s.moments, likes: s.likes, comments: s.comments, friends: s.friends, stickers: s.stickers, pg: { inbox: s.pigeons.filter(g => g.recipient === s.me && g.arrives_at <= Date.now() && g.fate !== "lost").sort((a, b) => b.arrives_at - a.arrives_at).map(g => ({ id: g.id, sender: g.sender, text: g.text, arrives_at: g.arrives_at, seen: g.seen })), last: Math.max(0, ...s.pigeons.filter(g => g.sender === s.me).map(g => g.sent_at)) }, stories: s.stories.filter(x => x.expires_at > Date.now() && (x.user_id === s.me || s.friends.some(f => f.status === "accepted" && ((f.requester === s.me && f.addressee === x.user_id) || (f.addressee === s.me && f.requester === x.user_id))))) }; },
     async upload(b) { return toData(b); },
     async post(t, img, ex) { if (["restricted", "blocked"].includes(meU().status)) deny(); s.moments.push({ id: ++s.n, user_id: s.me, text: t, image_url: img || null, ...(ex || {}), created_at: Date.now() }); save(); },
     async like(id, on) { if (meU().status === "blocked") deny(); s.likes = s.likes.filter(l => !(l.moment_id === id && l.user_id === s.me)); if (on) s.likes.push({ moment_id: id, user_id: s.me, kind: on }); save(); },
@@ -311,6 +335,8 @@ function mkDemo() {
       s.pigeons.push({ id: ++s.n, sender: s.me, recipient: to, fate, text, sent_at: Date.now(), arrives_at: Date.now() + 6e4, seen: false }); save();
     },
     async pigeonSeen(id) { const g = s.pigeons.find(x => x.id === id); if (g) g.seen = true; save(); },
+    async storyCreate(img, msg, hrs) { if (["restricted", "blocked"].includes(meU().status)) deny(); s.stories.push({ id: ++s.n, user_id: s.me, image_url: img, message: msg, created_at: Date.now(), expires_at: Date.now() + hrs * 36e5 }); save(); },
+    async delStory(id) { s.stories = s.stories.filter(x => x.id !== id); save(); },
     async accounts() { return s.saved.map(id => ({ id, username: (s.users.find(u => u.id === id) || {}).username || "" })); },
     async switchTo(id) { if (!s.saved.includes(id)) throw new Error("Esa cuenta ya no está guardada"); s.me = id; save(); },
     async ping(show) { const u = meU(); if (u) { u.last_seen = show ? Date.now() : 0; save(); } },
@@ -341,8 +367,8 @@ function mkSup() {
     async signIn(n, p) { const r = await sb.auth.signInWithPassword({ email: mail(n), password: p }); fail(r.error); await guard(r.data.session); },
     async signOut() { const cur = (await sb.auth.getSession()).data.session; await sb.auth.signOut({ scope: "local" }); if (cur) wr(rd().filter(x => x.id !== cur.user.id)); },
     async load() {
-      const [a, b, c, d, e, f, g, h] = await Promise.all([sb.from("profiles").select("*"), sb.from("moments").select("*").order("created_at", { ascending: false }).limit(300), sb.from("likes").select("*"), sb.from("comments").select("*").order("created_at"), sb.from("friendships").select("*"), sb.from("stickers").select("*").order("created_at", { ascending: false }).limit(60), Promise.resolve(sb.rpc("pigeon_inbox")).then(r => r.error ? { data: [] } : r), Promise.resolve(sb.rpc("pigeon_last")).then(r => r.error ? { data: null } : r)]);
-      return { profiles: Object.fromEntries(ok(a).map(u => [u.id, { ...u, intro_until: u.intro_until ? Date.parse(u.intro_until) : 0, last_seen: u.last_seen ? Date.parse(u.last_seen) : 0 }])), moments: ok(b).map(t), likes: ok(c), comments: ok(d).map(t), friends: ok(e), stickers: ok(f), pg: { inbox: (ok(g) || []).map(x => ({ id: x.id, sender: x.sender, text: x.delivered_text, arrives_at: Date.parse(x.arrives_at), seen: x.seen })), last: ok(h) ? Date.parse(ok(h)) : 0 } };
+      const [a, b, c, d, e, f, g, h, i] = await Promise.all([sb.from("profiles").select("*"), sb.from("moments").select("*").order("created_at", { ascending: false }).limit(300), sb.from("likes").select("*"), sb.from("comments").select("*").order("created_at"), sb.from("friendships").select("*"), sb.from("stickers").select("*").order("created_at", { ascending: false }).limit(60), Promise.resolve(sb.rpc("pigeon_inbox")).then(r => r.error ? { data: [] } : r), Promise.resolve(sb.rpc("pigeon_last")).then(r => r.error ? { data: null } : r), Promise.resolve(sb.from("stories").select("*").gt("expires_at", new Date().toISOString()).order("created_at")).then(r => r.error ? { data: [] } : r)]);
+      return { profiles: Object.fromEntries(ok(a).map(u => [u.id, { ...u, intro_until: u.intro_until ? Date.parse(u.intro_until) : 0, last_seen: u.last_seen ? Date.parse(u.last_seen) : 0 }])), moments: ok(b).map(t), likes: ok(c), comments: ok(d).map(t), friends: ok(e), stickers: ok(f), pg: { inbox: (ok(g) || []).map(x => ({ id: x.id, sender: x.sender, text: x.delivered_text, arrives_at: Date.parse(x.arrives_at), seen: x.seen })), last: ok(h) ? Date.parse(ok(h)) : 0 }, stories: (ok(i) || []).map(x => ({ ...x, created_at: Date.parse(x.created_at), expires_at: Date.parse(x.expires_at) })) };
     },
     async upload(b, ext = "jpg", type = "image/jpeg") { const me = await this.session(), path = me.id + "/" + Date.now() + "." + ext; fail((await sb.storage.from("media").upload(path, b, { contentType: type })).error); return sb.storage.from("media").getPublicUrl(path).data.publicUrl; },
     async post(x, img, ex) { fail((await sb.from("moments").insert({ text: x, image_url: img || null, ...(ex || {}) })).error); },
@@ -356,6 +382,8 @@ function mkSup() {
     async friendAccept(id) { fail((await sb.from("friendships").update({ status: "accepted" }).eq("id", id)).error); },
     async pigeonSend(to, body) { fail((await sb.rpc("send_pigeon", { to_user: to, msg: body })).error); },
     async pigeonSeen(id) { await sb.rpc("pigeon_seen", { pid: id }); },
+    async storyCreate(img, msg, hrs) { fail((await sb.rpc("create_story", { img, msg, hrs })).error); },
+    async delStory(id) { fail((await sb.from("stories").delete().eq("id", id)).error); },
     async accounts() { const cur = (await sb.auth.getSession()).data.session; if (cur) keep(cur); return rd().map(x => ({ id: x.id, username: x.username })); },
     async switchTo(id) {
       const cur = (await sb.auth.getSession()).data.session; if (cur) keep(cur);
@@ -374,7 +402,7 @@ function mkSup() {
 }
 
 const API = (CFG.url && CFG.key && window.supabase) ? mkSup() : mkDemo();
-let S = { dim: (() => { try { return localStorage.getItem("momentos_dim") || "0.3"; } catch (e) { return "0.3"; } })(), accts: [], dd: null, cp: null, cfor: null, pgo: {}, pgto: null, fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [], pg: { inbox: [], last: 0 } }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
+let S = { stnew: false, sv: null, simg: null, sdur: "24", dim: (() => { try { return localStorage.getItem("momentos_dim") || "0.3"; } catch (e) { return "0.3"; } })(), accts: [], dd: null, cp: null, cfor: null, pgo: {}, pgto: null, fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [], pg: { inbox: [], last: 0 }, stories: [] }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
 
 function toast(m) { const t = $("#toast"); t.textContent = m; t.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = "none", 2800); }
 function ago(t) { const m = Math.max(0, (Date.now() - t) / 6e4); if (m < 1) return "ahora"; if (m < 60) return "hace " + Math.floor(m) + " min"; if (m < 1440) return "hace " + Math.floor(m / 60) + " h"; return "hace " + Math.floor(m / 1440) + " d"; }
@@ -415,6 +443,28 @@ function chatbar(id) {
 function acctMenu() {
   const p = meP(), pf = S.accts;
   return `<div class="dd"><button class="ddb me" data-a="dd" data-d="acct">${avatar({ ...p, id: S.me.id }, "sm")}<b>${esc(S.me.username)}</b>${ic("chev", 16)}</button>${S.dd === "acct" ? `<div class="ddl am"><div class="pt" style="margin:6px 12px">Cuentas (${pf.length}/2)</div>${pf.map(a => `<button class="${a.id === S.me.id ? "on" : ""}" data-a="swc" data-id="${esc(a.id)}">${avatar(pOf(a.id), "sm")}<span style="flex:1">${esc(a.username)}</span>${a.id === S.me.id ? ic("check", 16) : ""}</button>`).join("")}${pf.length < 2 ? `<button data-a="addacct">${ic("plus", 18)}Agregar otra cuenta</button>` : ""}<button data-a="out" style="color:var(--bad)">${ic("x", 18)}Cerrar sesión</button></div>` : ""}</div>`;
+}
+const seenSet = () => { try { return new Set(JSON.parse(localStorage.getItem("momentos_seen")) || []); } catch (e) { return new Set(); } };
+const markSeen = list => { const q = seenSet(); list.forEach(x => q.add(x.id)); try { localStorage.setItem("momentos_seen", JSON.stringify([...q].slice(-300))); } catch (e) {} };
+function storiesBar() {
+  if (!S.me) return "";
+  const me = S.me.id, q = seenSet(), ids = S.data.friends.filter(f => f.status === "accepted").map(f => f.requester === me ? f.addressee : f.requester);
+  const of = u => S.data.stories.filter(x => x.user_id === u), fresh = l => l.length && !l.every(x => q.has(x.id));
+  const ring = l => l.length ? (fresh(l) ? "ring" : "ring seen") : "";
+  const c = (uid, name, l, extra) => `<button class="sc ${ring(l)}" data-a="st" data-u="${esc(uid)}"><span class="scw">${avatar(pOf(uid), "lg")}${extra || ""}</span><small>${esc(name)}</small></button>`;
+  const fr = ids.map(id => [id, of(id)]).sort((a, b) => (fresh(b[1]) ? 1 : 0) - (fresh(a[1]) ? 1 : 0));
+  return `<div class="stories">${c(me, "Tu estado", of(me), `<span class="plus" data-a="newst" aria-label="Nuevo estado">${ic("plus", 14)}</span>`)}${fr.map(([id, l]) => c(id, pOf(id).username, l)).join("")}${ids.length ? "" : `<button class="sc wait" data-a="tab" data-t="friends"><span class="scw dash">${ic("plus", 24)}</span><small>Esperas a tu próximo amigo</small></button>`}</div>`;
+}
+function storySheet() {
+  const d = { "1": "1 hora", "6": "6 horas", "12": "12 horas", "24": "24 horas" }, cur = S.sdur || "24";
+  return `<div class="sheet" data-a="stx"><div class="vis" data-stop="1"><h2 style="margin:0">Nuevo estado</h2><small style="color:var(--ash)">Tu foto aparece en el círculo de tus amigos hasta que termine su duración.</small>${S.simg ? `<div class="prev"><img src="${esc(S.simg.prev)}" alt="Vista previa"></div>` : `<label class="btn ghost" for="fst" role="button">${ic("img", 18)}Elegir foto</label>`}<textarea data-k="smsg" maxlength="140" placeholder="Mensaje (solo se abre al tocarlo)">${esc(S.dr.smsg || "")}</textarea><div class="row">${dd("sdur", "Dura " + d[cur], Object.entries(d), cur, "up")}<button class="btn" data-a="stgo">Publicar</button></div>${S.err ? `<div class="err">${esc(S.err)}</div>` : ""}</div></div>`;
+}
+function storyView() {
+  const list = S.data.stories.filter(x => x.user_id === S.sv.uid).sort((a, b) => a.created_at - b.created_at);
+  if (!list.length) return "";
+  const i = Math.min(S.sv.i, list.length - 1), st = list[i], u = pOf(st.user_id), left = Math.max(0, st.expires_at - Date.now());
+  const t = left > 36e5 ? Math.ceil(left / 36e5) + " h" : Math.max(1, Math.ceil(left / 6e4)) + " min", own = S.me && st.user_id === S.me.id;
+  return `<div class="sview"><div class="svtop">${avatar(u, "sm")}<div><b>${esc(u.username)}</b><small>Termina en ${t}</small></div><button class="ic" data-a="svx" aria-label="Cerrar" style="color:#fff">${ic("x", 24)}</button></div><img class="svimg" alt="Estado" src="${safe(st.image_url)}"><div class="svbot">${list.length > 1 ? `<div class="svnav"><button data-a="svn" data-v="-1" aria-label="Anterior">‹</button><span>${i + 1} / ${list.length}</span><button data-a="svn" data-v="1" aria-label="Siguiente">›</button></div>` : ""}${st.message ? (S.sv.msg ? `<div class="svmsg">${esc(st.message)}</div>` : `<button class="btn ghost" data-a="svm">${ic("chat", 18)}Ver mensaje</button>`) : ""}${own ? del("s", st.id) : ""}</div></div>`;
 }
 const head = (t, sub, lab) => `<div class="ph"><div class="lab">${lab}</div><h2 class="disp">${t}</h2><p class="sub">${sub}</p></div>`;
 const introOn = p => p.intro_url && p.intro_until > Date.now();
@@ -524,11 +574,12 @@ function friends() {
 function card(m, hero, ico) {
   const p = pOf(m.user_id), L = likesOf(m.id), mf = S.me && L.find(l => l.user_id === S.me.id), mine = mf && (mf.kind || "heart");
   const C = S.data.comments.filter(c => c.moment_id === m.id && visible(c.user_id)), o = S.open[m.id];
-  const cms = o ? `<div class="cms">${C.map(c => { const q = pOf(c.user_id); return `<div class="cm"><b style="color:${cl(q.color)}">${esc(q.username)}</b> ${cbody(c)}</div>`; }).join("") || '<div class="cm" style="color:var(--mut)">Sin comentarios todavía</div>'}${chatbar(m.id)}</div>` : "";
+  const cms = o ? `<div class="cms">${C.map(c => { const q = pOf(c.user_id); return `<div class="cm"><b style="color:${cl(q.color)}">${esc(q.username)}</b> ${cbody(c)}${S.me && c.user_id === S.me.id ? del("c", c.id) : ""}</div>`; }).join("")}</div>` : "";
+  const more = !o && C.length ? `<button class="more" data-a="cm" data-id="${m.id}">Ver ${C.length} comentario${C.length > 1 ? "s" : ""}</button>` : "";
   const cnt = k => L.filter(l => (l.kind || "heart") === k).length;
   const tp = REACT.map(([k, e]) => [e, cnt(k)]).filter(x => x[1]).sort((a, b) => b[1] - a[1]).slice(0, 3).map(x => x[0]).join("");
   const tray = S.rx === m.id ? `<div class="tray">${REACT.map(([k, e]) => `<button class="${mine === k ? "on" : ""}" data-a="like" data-id="${m.id}" data-k2="${k}" aria-label="Reaccionar ${k}"><span>${e}</span><small>${cnt(k) || ""}</small></button>`).join("")}</div>` : "";
-  return `<article class="card ${hero ? "hero" : ""}">${hero ? `<span class="tag">${ic(ico || "trophy", 16)}${hero}</span>` : ""}<div class="who" ${hero ? 'style="margin-top:10px"' : ""}>${avatar(p)}<div><b style="color:${cl(p.color)}">${esc(p.username)}</b><small>${ago(m.created_at)}${REL[p.relationship] ? " · " + REL[p.relationship] : ""}</small></div>${introOn(p) ? `<button class="mini" data-a="play" data-u="${safe(p.intro_url)}">${ic("music", 14)}Presentación</button>` : ""}</div>${safe(m.image_url) ? `<img class="pic" loading="lazy" alt="Foto del momento" src="${safe(m.image_url)}" data-a="lb" data-u="${safe(m.image_url)}">` : ""}${safe(m.audio_url) ? (m.kind === "music" ? `<div class="note-card" style="--cc:${cl(p.color)}"><span class="nt">${ic("music", 24)}</span><div><b>${esc(m.audio_title || "Canción")}</b><small>Nota musical</small>${ap(m.audio_url, "w")}</div></div>` : `<div class="voice">${ap(m.audio_url)}</div>`) : ""}${m.text ? `<p>${esc(m.text)}</p>` : '<div style="height:10px"></div>'}<div class="acts"><button class="${mine ? "on" : ""} ${S.pop === m.id ? "bump" : ""}" data-a="rx" data-id="${m.id}" aria-label="Reaccionar">${tp || ic("heart", 18)}${L.length || ""}</button><button data-a="cm" data-id="${m.id}">${ic("chat", 18)}${C.length}</button></div>${tray}${cms}</article>`;
+  return `<article class="card ${hero ? "hero" : ""}">${hero ? `<span class="tag">${ic(ico || "trophy", 16)}${hero}</span>` : ""}<div class="who" ${hero ? 'style="margin-top:10px"' : ""}>${avatar(p)}<div><b style="color:${cl(p.color)}">${esc(p.username)}</b><small>${ago(m.created_at)}${REL[p.relationship] ? " · " + REL[p.relationship] : ""}</small></div>${introOn(p) ? `<button class="mini" data-a="play" data-u="${safe(p.intro_url)}">${ic("music", 14)}Presentación</button>` : ""}${S.me && m.user_id === S.me.id ? del("m", m.id) : ""}</div>${safe(m.image_url) ? `<img class="pic" loading="lazy" alt="Foto del momento" src="${safe(m.image_url)}" data-a="lb" data-u="${safe(m.image_url)}">` : ""}${safe(m.audio_url) ? (m.kind === "music" ? `<div class="note-card" style="--cc:${cl(p.color)}"><span class="nt">${ic("music", 24)}</span><div><b>${esc(m.audio_title || "Canción")}</b><small>Nota musical</small>${ap(m.audio_url, "w")}</div></div>` : `<div class="voice">${ap(m.audio_url)}</div>`) : ""}${m.text ? `<p>${esc(m.text)}</p>` : '<div style="height:10px"></div>'}<div class="acts"><button class="${mine ? "on" : ""} ${S.pop === m.id ? "bump" : ""}" data-a="rx" data-id="${m.id}" aria-label="Reaccionar">${tp || ic("heart", 18)}${L.length || ""}</button><button data-a="cm" data-id="${m.id}">${ic("chat", 18)}${C.length}</button></div>${tray}${more}${cms}${chatbar(m.id)}</article>`;
 }
 
 function home() {
@@ -541,7 +592,7 @@ function home() {
       : `<div class="card"><textarea data-k="post" maxlength="280" placeholder="Cuenta un momento divertido…">${esc(S.dr.post || "")}</textarea>${S.img ? `<div class="prev"><img src="${esc(S.img.prev)}" alt="Vista previa"><button data-a="noimg" aria-label="Quitar foto">${ic("x", 16)}</button></div>` : ""}${S.aud ? `<div style="margin-top:8px">${S.aud.kind === "music" ? `<input data-k="mt" maxlength="60" placeholder="Título de la canción" value="${esc(S.dr.mt || "")}" style="margin-bottom:8px">` : ""}${ap(S.aud.prev)}<button class="btn ghost" data-a="noaud" style="margin-top:6px">Quitar audio</button></div>` : ""}${S.rec === "post" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 1:00</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : ""}<div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="f" role="button">${ic("img", 18)}Foto</label><label class="btn ghost" for="fm" role="button">${ic("music", 18)}Música</label><button class="btn ghost" data-a="rec" data-t="post">${ic("mic", 18)}Voz</button><button class="btn" data-a="post" style="margin-left:auto">Publicar</button></div>${st === "muted" ? `<div class="note" style="margin-top:10px">${NOTE.muted}</div>` : ""}</div>`;
   const pn = m => m.pinned_until > Date.now() ? 1 : 0;
   const ms = S.data.moments.filter(m => visible(m.user_id)).sort((a, b) => pn(b) - pn(a) || b.created_at - a.created_at);
-  return pb + head("Comparte tu momento.", "Un lugar para reír juntos, sin nombres reales.", "Comunidad") + comp + (ms.map(m => card(m, pn(m) ? "Fijado" : null, "pin")).join("") || '<div class="empty">Aún no hay momentos. Publica el primero.</div>');
+  return pb + storiesBar() + head("Comparte tu momento.", "Un lugar para reír juntos, sin nombres reales.", "Comunidad") + comp + (ms.map(m => card(m, pn(m) ? "Fijado" : null, "pin")).join("") || '<div class="empty">Aún no hay momentos. Publica el primero.</div>');
 }
 
 function rank(title, span) {
@@ -605,7 +656,7 @@ function render() {
   $("#nav").innerHTML = T.map(t => `<button data-a="tab" data-t="${t[0]}" class="${S.tab === t[0] ? "on" : ""}">${ic(t[1], 22)}${t[2]}${t[0] === "friends" && nreq ? `<i class="dot">${nreq}</i>` : ""}</button>`).join("");
   $("#main").className = S.fresh ? "go" : ""; S.fresh = false;
   $("#main").innerHTML = S.tab === "home" ? home() : S.tab === "top" ? rank("Momento destacado", 0) : S.tab === "friends" ? friends() : S.tab === "admin" ? admin() : prof();
-  $("#auth").innerHTML = S.auth ? authSheet() : S.pgto ? pigeonSheet() : S.lb ? `<div class="sheet" data-a="lbx" style="align-items:center"><img src="${S.lb}" alt="Foto ampliada" style="max-width:96%;max-height:90vh;border-radius:12px"></div>` : "";
+  $("#auth").innerHTML = S.auth ? authSheet() : S.stnew ? storySheet() : S.sv ? storyView() : S.pgto ? pigeonSheet() : S.lb ? `<div class="sheet" data-a="lbx" style="align-items:center"><img src="${S.lb}" alt="Foto ampliada" style="max-width:96%;max-height:90vh;border-radius:12px"></div>` : "";
 }
 
 async function refresh() { try { S.data = await API.load(); } catch (e) { toast(e.message); } try { S.accts = await API.accounts(); } catch (e) {} render(); }
@@ -619,6 +670,7 @@ document.addEventListener("change", async e => {
     if (t.dataset.st) { await API.setStatus(t.dataset.st, t.value); await refresh(); toast("Perfil actualizado"); }
     else if (t.dataset.pin) { if (t.value === "") return; await API.pin(+t.dataset.pin, +t.value); await refresh(); toast(+t.value ? "Momento fijado" : "Fijado quitado"); }
     else if (t.id === "fc") { const f = t.files[0]; t.value = ""; if (!f || !S.me || !S.cfor) return; toast("Enviando imagen…"); const url = await API.upload(await shrink(f, 1280, .78)); await API.comment(S.cfor, (S.dr["c" + S.cfor] || "").trim(), null, url); S.dr["c" + S.cfor] = ""; S.cp = null; await refresh(); }
+    else if (t.id === "fst") { const f = t.files[0]; t.value = ""; if (!f) return; const bl = await shrink(f, 1080, .8); S.simg = { blob: bl, prev: await toData(bl) }; render(); }
     else if (t.id === "fbg") { const f = t.files[0]; t.value = ""; if (!f || !S.pf) return; toast("Optimizando imagen…"); const r = await bgBlob(f), d = await toData(r.blob); S.pf.bgblob = r.blob; S.pf.bgurl = d; S.pf.bg = "custom"; render(); toast("Fondo optimizado: " + kb(r.before) + " a " + kb(r.blob.size)); }
     else if (t.id === "idur") S.idur = t.value;
     else if (t.id === "fm" || t.id === "fi") { const f = t.files[0]; t.value = ""; if (!f) return; await setAudio(f, t.id === "fm" ? 60 : 30, t.id === "fm" ? "post" : "intro", t.id === "fm" ? "music" : "audio", f.name.replace(/\.[^.]+$/, "")); render(); }
@@ -635,7 +687,7 @@ document.addEventListener("change", async e => {
 document.addEventListener("click", async e => {
   if (S.dd && !e.target.closest(".dd")) { S.dd = null; render(); }
   const b = e.target.closest("[data-a]"); if (!b) return;
-  if ((b.dataset.a === "close" || b.dataset.a === "pgx") && e.target.closest("[data-stop]")) return;
+  if (/^(close|pgx|stx)$/.test(b.dataset.a) && e.target.closest("[data-stop]")) return;
   const a = b.dataset.a, id = +b.dataset.id;
   try {
     if (a === "tab") { S.tab = b.dataset.t; S.pf = null; S.arm = null; S.fresh = true; S.rx = null; render(); scrollTo(0, 0); }
@@ -691,6 +743,7 @@ document.addEventListener("click", async e => {
       const [kind, ref] = b.dataset.d.split(":"), v = b.dataset.v; S.dd = null;
       if (kind === "st") { await API.setStatus(ref, v); await refresh(); toast("Perfil actualizado"); }
       else if (kind === "pin") { await API.pin(+ref, +v); await refresh(); toast(+v ? "Momento fijado" : "Fijado quitado"); }
+      else if (kind === "sdur") { S.sdur = v; render(); }
       else { S.idur = v; render(); }
     }
     else if (a === "ss") { await API.comment(id, "", b.dataset.u); S.cp = null; await refresh(); }
@@ -707,6 +760,22 @@ document.addEventListener("click", async e => {
       const t = (S.dr["c" + id] || "").trim(); if (!t) return;
       await API.comment(id, t); S.dr["c" + id] = ""; S.cp = null; await refresh();
     }
+    else if (a === "st") {
+      const uid = b.dataset.u, l = S.data.stories.filter(x => x.user_id === uid);
+      if (!l.length) { if (S.me && uid === S.me.id) { S.stnew = true; S.err = null; render(); } return; }
+      S.sv = { uid, i: 0, msg: false }; markSeen(l); render();
+    }
+    else if (a === "newst") { S.stnew = true; S.err = null; render(); }
+    else if (a === "stx") { S.stnew = false; S.simg = null; S.dd = null; render(); }
+    else if (a === "svx") { S.sv = null; render(); }
+    else if (a === "svn") { const n = S.data.stories.filter(x => x.user_id === S.sv.uid).length || 1; S.sv.i = (S.sv.i + +b.dataset.v + n) % n; S.sv.msg = false; render(); }
+    else if (a === "svm") { S.sv.msg = true; render(); }
+    else if (a === "stgo") {
+      if (!S.simg) { S.err = "Elige una foto primero"; return render(); }
+      b.disabled = true;
+      try { const url = await API.upload(S.simg.blob); await API.storyCreate(url, (S.dr.smsg || "").trim(), +(S.sdur || 24)); } catch (e) { S.err = e.message; return render(); }
+      S.stnew = false; S.simg = null; S.dr.smsg = ""; S.err = null; await refresh(); toast("Estado publicado");
+    }
     else if (a === "dim") { S.dim = b.dataset.v; try { localStorage.setItem("momentos_dim", S.dim); } catch (e) {} render(); }
     else if (a === "pbg") { S.pf.bg = b.dataset.v; render(); }
     else if (a === "nobg") { S.pf.bg = "void"; S.pf.bgurl = null; S.pf.bgblob = null; render(); }
@@ -721,8 +790,8 @@ document.addEventListener("click", async e => {
       await API.profile(S.pf.color, S.pf.avatar, url, S.pf.rel, S.pf.bg, bgu); S.pf = null; await refresh(); toast("Perfil guardado");
     }
     else if (a === "del") {
-      const k = b.dataset.t + id; if (S.arm !== k) { S.arm = k; render(); return; }
-      S.arm = null; b.dataset.t === "c" ? await API.delComment(id) : await API.delMoment(id); await refresh(); toast("Eliminado");
+      const k = b.dataset.t + id; if (S.arm !== k) { S.arm = k; render(); setTimeout(() => { if (S.arm === k) { S.arm = null; render(); } }, 4000); return; }
+      S.arm = null; const dt = b.dataset.t; dt === "c" ? await API.delComment(id) : dt === "s" ? await API.delStory(id) : await API.delMoment(id); await refresh(); toast("Eliminado");
     }
   } catch (err) { toast(err.message || "Algo salió mal"); render(); }
 });
