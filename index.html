@@ -204,6 +204,10 @@ label.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(
 .btn{font-size:15px;min-height:44px;padding:11px 20px}
 nav button{font-size:12px}
 .ddb{font-size:14px}
+.srow{display:flex;justify-content:space-between;align-items:center;margin-top:30px;font-size:16px}
+.tg{width:50px;height:30px;border-radius:15px;background:rgba(255,255,255,.2);border:0;position:relative;flex:none;padding:0}
+.tg::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:left .2s}
+.tg.on{background:var(--iris)}.tg.on::after{left:23px}
 </style>
 </head>
 <body>
@@ -222,7 +226,7 @@ nav button{font-size:12px}
 <input type="file" id="fc" accept="image/*" class="vh">
 <input type="file" id="fbg" accept="image/*" class="vh">
 <input type="file" id="fst" accept="image/*" class="vh">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1"></script>
 <script>
 /* === CONFIGURACIÓN: pega aquí los datos de Supabase. Vacío = modo demostración (solo en tu navegador) === */
 const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "sb_publishable_ODTlK8Q5KOR8kDW_NblPYQ_UCgDgvNw" };
@@ -230,7 +234,7 @@ const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "sb_publisha
 const COLORS = [["Rojo","#DC2626"],["Naranja","#EA580C"],["Amarillo","#EAB308"],["Verde","#16A34A"],["Azul","#2563EB"],["Morado","#7C3AED"],["Rosa","#DB2777"],["Blanco","#F2F2F2"]];
 const AVS = ["a1","a2","a3","a4","a5","a6"];
 const BGS = [["void", "Vacío"], ["aurora", "Aurora"], ["night", "Medianoche"], ["forest", "Bosque"], ["ember", "Brasa"], ["grid", "Cuadrícula"], ["dots", "Puntos"], ["stars", "Estrellas"]];
-const CONTACT = "contactcuriocitysupport@gmail.com"; // correo o medio de contacto del administrador (opcional)
+const CONTACT = "contactcuriocitysupport@gmail.com"; // correo de contacto del administrador
 const kb = n => n > 1e6 ? (n / 1e6).toFixed(1) + " MB" : Math.round(n / 1e3) + " KB";
 const REACT = [["heart","❤️"],["laugh","😂"],["wow","😮"],["sad","😢"],["fire","🔥"],["clap","👏"],["love","😍"],["mind","🤯"],["party","🥳"],["cool","😎"],["up","👍"],["pray","🙏"]];
 const REL = { single: "Soltero/a", taken: "En una relación" };
@@ -355,6 +359,7 @@ function mkDemo() {
       s.pigeons.push({ id: ++s.n, sender: s.me, recipient: to, fate, text, sent_at: Date.now(), arrives_at: Date.now() + 6e4, seen: false }); save();
     },
     async pigeonSeen(id) { const g = s.pigeons.find(x => x.id === id); if (g) g.seen = true; save(); },
+    async setRel(rel) { meU().relationship = rel; save(); },
     async unblock() {},
     async delAlert() {},
     async storyCreate(img, msg, hrs) { if (["restricted", "blocked"].includes(meU().status)) deny(); s.stories.push({ id: ++s.n, user_id: s.me, image_url: img, message: msg, created_at: Date.now(), expires_at: Date.now() + hrs * 36e5 }); save(); },
@@ -404,6 +409,7 @@ function mkSup() {
     async friendAccept(id) { fail((await sb.from("friendships").update({ status: "accepted" }).eq("id", id)).error); },
     async pigeonSend(to, body) { fail((await sb.rpc("send_pigeon", { to_user: to, msg: body })).error); },
     async pigeonSeen(id) { await sb.rpc("pigeon_seen", { pid: id }); },
+    async setRel(rel) { const me = await this.session(); fail((await sb.from("profiles").update({ relationship: rel }).eq("id", me.id)).error); },
     async unblock(id) { fail((await sb.rpc("admin_unblock", { target: id })).error); },
     async delAlert(id) { fail((await sb.from("alerts").delete().eq("id", id)).error); },
     async storyCreate(img, msg, hrs) { fail((await sb.rpc("create_story", { img, msg, hrs })).error); },
@@ -426,9 +432,10 @@ function mkSup() {
 }
 
 const API = (CFG.url && CFG.key && window.supabase) ? mkSup() : mkDemo();
+if (CFG.url && CFG.key && !window.supabase) setTimeout(() => toast("No se pudo cargar la conexión. Recarga la página."), 800);
 const gate = (() => { let t = 0; return () => { if (Date.now() - t < 1200) throw new Error("Más despacio"); t = Date.now(); }; })();
 ["post", "comment"].forEach(k => { const f = API[k].bind(API); API[k] = async (...a) => { gate(); return f(...a); }; });
-let S = { fails: 0, lock: 0, acc: false, pol: false, stnew: false, sv: null, simg: null, sdur: "24", dim: (() => { try { return localStorage.getItem("momentos_dim") || "0.3"; } catch (e) { return "0.3"; } })(), accts: [], dd: null, cp: null, cfor: null, pgo: {}, pgto: null, fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [], pg: { inbox: [], last: 0 }, stories: [], alerts: [] }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
+let S = { ptab: "look", fails: 0, lock: 0, acc: false, pol: false, stnew: false, sv: null, simg: null, sdur: "24", dim: (() => { try { return localStorage.getItem("momentos_dim") || "0.3"; } catch (e) { return "0.3"; } })(), accts: [], dd: null, cp: null, cfor: null, pgo: {}, pgto: null, fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [], pg: { inbox: [], last: 0 }, stories: [], alerts: [] }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
 
 function toast(m) { const t = $("#toast"); t.textContent = m; t.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = "none", 2800); }
 function ago(t) { const m = Math.max(0, (Date.now() - t) / 6e4); if (m < 1) return "ahora"; if (m < 60) return "hace " + Math.floor(m) + " min"; if (m < 1440) return "hace " + Math.floor(m / 60) + " h"; return "hace " + Math.floor(m / 1440) + " d"; }
@@ -597,6 +604,7 @@ const POL = [
   ["Normas de convivencia", "No se permite acosar, amenazar, discriminar, publicar contenido sexual, violento o ilegal, ni compartir datos personales de otras personas. Tampoco el spam: enviar muchos mensajes en poco tiempo activa una pausa automática de 30 minutos y avisa al administrador. El administrador puede silenciar, restringir o bloquear cuentas y eliminar contenido que incumpla estas normas."],
   ["Seguridad", "Usamos límites de envío, pausas automáticas y revisión del administrador. Ningún sistema es perfecto: usa una contraseña única y no la compartas con nadie."],
   ["Tus derechos", "Puedes eliminar tus mensajes y comentarios cuando quieras. Para borrar tu cuenta y tus datos, pídeselo al administrador" + (CONTACT ? ": " + CONTACT : "") + "."],
+  ...(CONTACT ? [["Contacto", "Para dudas, reportes o para borrar tu cuenta, escribe a " + CONTACT + "."]] : []),
   ["Cambios", "Si esta política cambia, se publicará una nueva versión y se avisará en la página."]
 ];
 function polSheet() {
@@ -656,22 +664,24 @@ function prof() {
   S.pf = S.pf || { color: cl(p.color), avatar: p.avatar || "a1", url: p.avatar_url || null, blob: null, rel: p.relationship || "none", bg: p.bg || "void", bgu: [p.bg_url || null, p.bg_url2 || null], bgb: [null, null] };
   const mine = S.data.moments.filter(m => m.user_id === S.me.id), got = mine.reduce((n, m) => n + likesOf(m.id).length, 0);
   const view = { color: S.pf.color, avatar: S.pf.avatar, avatar_url: S.pf.url };
-  return head("Perfil") + `<div class="card" style="text-align:center">${avatar(view, "big")}<h2 style="color:${S.pf.color};margin:12px 0 2px">${esc(S.me.username)}${gold(S.me.id)}</h2><small style="color:var(--mut)">${mine.length} momentos · ${got} reacciones recibidas</small></div>
-  <h2>Foto de perfil</h2><div class="row"><label class="btn" for="fa" role="button">${ic("img", 18)}Subir mi foto</label>${S.pf.url ? `<button class="btn ghost" data-a="noav">Quitar foto</button>` : ""}</div>
-  <h2>Robot</h2><div class="grid">${AVS.map(a => `<button data-a="pa" data-v="${a}" class="${!S.pf.url && S.pf.avatar === a ? "sel" : ""}">${avatar({ avatar: a, color: S.pf.color })}</button>`).join("")}</div>
-  <h2>Color</h2><div class="grid">${COLORS.map(c => `<button data-a="pc" data-v="${c[1]}" class="${S.pf.color === c[1] ? "sel" : ""}"><span class="sw" style="background:${c[1]}"></span>${c[0]}</button>`).join("")}</div>
-  <h2>Fondo</h2><div class="grid">${BGS.map(([k, n]) => `<button data-a="pbg" data-v="${k}" class="${S.pf.bg === k ? "sel" : ""}"><span class="bgt b-${k}"></span>${n}</button>`).join("")}${S.pf.bgu.map((u, i) => u ? `<button data-a="pbg" data-v="${i ? "custom2" : "custom"}" class="${S.pf.bg === (i ? "custom2" : "custom") ? "sel" : ""}"><span class="bgt b-custom" style="background-image:url('${safe(u)}')"></span>Mío ${i + 1}</button>` : "").join("")}</div>
-  <div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="fbg" role="button">${ic("img", 18)}Subir fondo ${S.pf.bgu.filter(Boolean).length}/2</label>${S.pf.bg.startsWith("custom") ? `<button class="btn ghost" data-a="nobg">Quitar</button>` : ""}</div>
-  ${S.pf.bg.startsWith("custom") ? `<div class="pt" style="margin:18px 0 8px">Oscurecer</div><div class="seg" style="grid-template-columns:repeat(4,1fr)">${[["0", "Nada"], ["0.3", "Suave"], ["0.5", "Medio"], ["0.7", "Fuerte"]].map(([v, n]) => `<button data-a="dim" data-v="${v}" class="${String(S.dim) === v ? "on" : ""}">${n}</button>`).join("")}</div>` : ""}
-  <h2>Relación</h2><div class="row" style="flex-wrap:wrap">${[["none", "Prefiero no decir"], ["single", "Soltero/a"], ["taken", "En una relación"]].map(([k, v]) => `<button class="btn ghost ${S.pf.rel === k ? "on" : ""}" data-a="prel" data-v="${k}">${v}</button>`).join("")}</div>
-  <div class="row" style="margin-top:20px"><button class="btn" data-a="psave">Guardar perfil</button><button class="btn ghost" data-a="out">Cerrar sesión</button></div>
-  <div class="row" style="justify-content:space-between;margin-top:28px"><button class="plink" data-a="pol">Política de privacidad</button><small style="color:var(--ash)">CURIOCITY v1.0</small></div>
-  <h2>Privacidad</h2><button class="btn ghost ${p.show_presence !== false ? "on" : ""}" data-a="ptog">Mostrar si estoy en línea</button>
-  <h2>Presentación</h2>
-  ${introOn(p) ? `<div class="note" style="margin-top:8px">Activa hasta ${new Date(p.intro_until).toLocaleString("es", { weekday: "short", hour: "2-digit", minute: "2-digit" })}</div>` : ""}
-  ${S.ia ? `${ap(S.ia.prev)}` : ""}
-  ${S.rec === "intro" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 0:30</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : `<div class="row" style="flex-wrap:wrap"><button class="btn ghost" data-a="rec" data-t="intro">${ic("mic", 18)}Grabar</button><label class="btn ghost" for="fi" role="button">${ic("music", 18)}Subir audio</label>${introOn(p) ? `<button class="btn ghost" data-a="introoff">Quitar</button>` : ""}</div>`}
-  <div class="row">${dd("dur", "Dura " + ({ "0.25": "15 minutos", "1": "1 hora", "24": "1 día" })[S.idur || "24"], [["0.25", "15 minutos"], ["1", "1 hora"], ["24", "1 día"]], S.idur || "24", "up")}<button class="btn" data-a="introsave">Publicar</button></div>`;
+  const tab = S.ptab || "look", labs = { look: "Apariencia", bg: "Fondo", more: "Ajustes" };
+  const save = `<button class="btn" data-a="psave" style="width:100%;margin-top:32px">Guardar cambios</button>`;
+  const look = `<div class="pt">Foto</div><div class="row"><label class="btn ghost" for="fa" role="button">${ic("img", 18)}Subir foto</label>${S.pf.url ? `<button class="btn ghost" data-a="noav">Quitar</button>` : ""}</div>
+    <div class="pt" style="margin-top:30px">Robot</div><div class="grid">${AVS.map(a => `<button data-a="pa" data-v="${a}" class="${!S.pf.url && S.pf.avatar === a ? "sel" : ""}">${avatar({ avatar: a, color: S.pf.color })}</button>`).join("")}</div>
+    <div class="pt" style="margin-top:30px">Color</div><div class="grid">${COLORS.map(c => `<button data-a="pc" data-v="${c[1]}" class="${S.pf.color === c[1] ? "sel" : ""}"><span class="sw" style="background:${c[1]}"></span>${c[0]}</button>`).join("")}</div>${save}`;
+  const bgs = `<div class="pt">Elige un fondo</div><div class="grid">${BGS.map(([k, n]) => `<button data-a="pbg" data-v="${k}" class="${S.pf.bg === k ? "sel" : ""}"><span class="bgt b-${k}"></span>${n}</button>`).join("")}${S.pf.bgu.map((u, i) => u ? `<button data-a="pbg" data-v="${i ? "custom2" : "custom"}" class="${S.pf.bg === (i ? "custom2" : "custom") ? "sel" : ""}"><span class="bgt b-custom" style="background-image:url('${safe(u)}')"></span>Mío ${i + 1}</button>` : "").join("")}</div>
+    <div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="fbg" role="button">${ic("img", 18)}Subir fondo ${S.pf.bgu.filter(Boolean).length}/2</label>${S.pf.bg.startsWith("custom") ? `<button class="btn ghost" data-a="nobg">Quitar</button>` : ""}</div>
+    ${S.pf.bg.startsWith("custom") ? `<div class="pt" style="margin:26px 0 8px">Oscurecer</div><div class="seg" style="grid-template-columns:repeat(4,1fr)">${[["0", "Nada"], ["0.3", "Suave"], ["0.5", "Medio"], ["0.7", "Fuerte"]].map(([v, n]) => `<button data-a="dim" data-v="${v}" class="${String(S.dim) === v ? "on" : ""}">${n}</button>`).join("")}</div>` : ""}${save}`;
+  const more = `<div class="pt">Relación</div><div class="row" style="flex-wrap:wrap">${[["none", "Prefiero no decir"], ["single", "Soltero/a"], ["taken", "En una relación"]].map(([k, v]) => `<button class="btn ghost ${S.pf.rel === k ? "on" : ""}" data-a="prel" data-v="${k}">${v}</button>`).join("")}</div>
+    <div class="srow"><span>Mostrar si estoy en línea</span><button class="tg ${p.show_presence !== false ? "on" : ""}" data-a="ptog" aria-label="Mostrar si estoy en línea"></button></div>
+    <div class="pt" style="margin-top:34px">Presentación</div>
+    ${introOn(p) ? `<div class="note" style="margin-top:8px">Activa hasta ${new Date(p.intro_until).toLocaleString("es", { weekday: "short", hour: "2-digit", minute: "2-digit" })}</div>` : ""}
+    ${S.ia ? ap(S.ia.prev) : ""}
+    ${S.rec === "intro" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 0:30</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : `<div class="row" style="flex-wrap:wrap"><button class="btn ghost" data-a="rec" data-t="intro">${ic("mic", 18)}Grabar</button><label class="btn ghost" for="fi" role="button">${ic("music", 18)}Subir audio</label>${introOn(p) ? `<button class="btn ghost" data-a="introoff">Quitar</button>` : ""}</div>`}
+    <div class="row">${dd("dur", "Dura " + ({ "0.25": "15 minutos", "1": "1 hora", "24": "1 día" })[S.idur || "24"], [["0.25", "15 minutos"], ["1", "1 hora"], ["24", "1 día"]], S.idur || "24", "up")}<button class="btn" data-a="introsave">Publicar</button></div>
+    <button class="btn ghost" data-a="out" style="width:100%;margin-top:40px">Cerrar sesión</button>
+    <div class="row" style="justify-content:space-between;margin-top:22px"><button class="plink" data-a="pol">Política de privacidad</button><small style="color:var(--ash)">CURIOCITY v1.0</small></div>`;
+  return head("Perfil") + `<div class="card" style="text-align:center;margin-bottom:26px">${avatar(view, "big")}<h2 style="color:${S.pf.color};margin:14px 0 2px">${esc(S.me.username)}${gold(S.me.id)}</h2><small style="color:var(--mut)">${mine.length} momentos · ${got} reacciones</small></div><div class="seg" style="grid-template-columns:repeat(3,1fr);margin-bottom:30px">${Object.entries(labs).map(([k, v]) => `<button data-a="ptab" data-v="${k}" class="${tab === k ? "on" : ""}">${v}</button>`).join("")}</div>${tab === "look" ? look : tab === "bg" ? bgs : more}`;
 }
 
 function del(kind, id) {
@@ -839,7 +849,8 @@ document.addEventListener("click", async e => {
     else if (a === "dim") { S.dim = b.dataset.v; try { localStorage.setItem("momentos_dim", S.dim); } catch (e) {} render(); }
     else if (a === "pbg") { S.pf.bg = b.dataset.v; render(); }
     else if (a === "nobg") { const i = S.pf.bg === "custom2" ? 1 : 0; S.pf.bgu[i] = null; S.pf.bgb[i] = null; S.pf.bg = "void"; render(); }
-    else if (a === "prel") { S.pf.rel = b.dataset.v; render(); }
+    else if (a === "ptab") { S.ptab = b.dataset.v; render(); }
+    else if (a === "prel") { await API.setRel(b.dataset.v); S.pf.rel = b.dataset.v; await refresh(); }
     else if (a === "pc") { S.pf.color = b.dataset.v; render(); }
     else if (a === "pa") { S.pf.avatar = b.dataset.v; S.pf.url = null; S.pf.blob = null; render(); }
     else if (a === "noav") { S.pf.url = null; S.pf.blob = null; render(); }
