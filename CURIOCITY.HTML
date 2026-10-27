@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-pT9s+sJPUkeI5TZVq1zfKwCEFrE/xtH3KMH7FTGqc2k=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>CURIOCITY</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap">
+<style>
+:root{--void:#000;--white:#fff;--ash:#9a9a9a;--mist:#bdbdbd;--iris:#8052ff;--saffron:#ffb829;--verdant:#15846e;
+--bg:#000;--card:#000;--ink:#fff;--mut:#9a9a9a;--line:rgba(255,255,255,.16);--soft:rgba(255,255,255,.07);--pri:#8052ff;--prid:#8052ff;--onpri:#fff;--bad:#ff5c5c;
+color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:#000}
+body{margin:0;background:#000;color:#fff;font:400 16px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-feature-settings:"ss01" on,"cv02" on,"cv03" on;min-height:100vh;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:transparent;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);z-index:10}
+#px{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:0;pointer-events:none}
+b{font-weight:600}
+ .pname{background:none;border:0;padding:0;font:inherit;font-weight:600;text-align:left;cursor:pointer;text-decoration:none}.pname:hover{filter:brightness(1.18);text-decoration:none}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.12em;display:flex;align-items:center;gap:10px}
+h2{margin:48px 0 18px;font-size:29px;font-weight:650;letter-spacing:-.045em;line-height:1.08;color:#fff}
+h2.disp{font-size:clamp(42px,12vw,66px);font-weight:650;letter-spacing:-.06em;line-height:.96;margin:8px 0 16px}
+h3{margin:22px 0 10px;font-size:16px;font-weight:700;letter-spacing:-.02em}
+.ph{margin:30px 0 42px}
+.lab,.pt{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--saffron)}
+.sub{font-weight:200;font-size:18px;color:var(--mist);max-width:480px;margin:0}
+main{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:6px 24px 130px}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+.btn{background:var(--iris);color:#fff;border:0;border-radius:24px;padding:13px 22px;min-height:46px;font-weight:600;font-size:13px;letter-spacing:.025em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.22)}
+.btn.ghost.on{background:var(--iris);border-color:var(--iris)}
+.btn.bad{background:var(--bad);color:#000}
+.item .btn:not(.ghost){background:transparent;border:1px solid rgba(255,255,255,.25)}
+input,textarea,select{width:100%;font-size:17px;font-weight:300;color:#fff;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.24);border-radius:0;padding:12px 2px}
+input::placeholder,textarea::placeholder{color:#8a8a8a}
+input:focus,textarea:focus{outline:none;border-bottom-color:var(--iris)}
+button:focus-visible{outline:2px solid var(--iris);outline-offset:2px}
+textarea{resize:none;min-height:84px}
+.card{background:transparent;border:0;border-radius:0;padding:0;margin:0 0 56px}
+.card p{margin:12px 0;font-size:18px;line-height:1.52;font-weight:400;letter-spacing:-.012em;overflow-wrap:anywhere}
+.hero p{font-size:30px;line-height:1.12;letter-spacing:-.045em;font-weight:550}
+.who{display:flex;gap:12px;align-items:center}
+.who b{font-size:16px}
+.who small{display:block;color:var(--ash);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:400}
+.av{width:42px;height:42px;border-radius:50%;flex:none;display:block;object-fit:cover;overflow:hidden}
+.av svg{display:block;width:100%;height:100%}
+.av.big{width:104px;height:104px;margin:0 auto}
+.av.sm{width:32px;height:32px}
+.pic{width:100%;max-height:560px;object-fit:cover;border-radius:24px;display:block;margin-top:14px;cursor:zoom-in;background:var(--soft)}
+.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.acts button{background:var(--soft);border:0;border-radius:999px;padding:8px 14px;font-weight:400;color:#fff;display:inline-flex;gap:6px;align-items:center}
+.acts button.on{background:rgba(128,82,255,.3)}
+.cms{margin-top:18px}
+.cm{margin:10px 0;overflow-wrap:anywhere;font-weight:300}
+.cpic{display:block;max-width:230px;width:100%;border-radius:24px;margin-top:6px;cursor:zoom-in}
+.row{display:flex;gap:8px;margin-top:12px;align-items:center}.row input{flex:1}
+.row .dd{flex:1}.row .ddb{width:100%;justify-content:space-between}
+.tag{display:inline-flex;gap:6px;align-items:center;color:var(--saffron);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.empty{text-align:center;color:var(--mist);font-weight:200;font-size:20px;padding:40px 0}
+.note{background:var(--soft);border-radius:18px;padding:14px 16px;font-weight:400;color:#fff}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:9;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;justify-content:center;padding:8px 8px calc(6px + env(safe-area-inset-bottom,0px));gap:2px}
+nav button{flex:1;max-width:120px;position:relative;background:none;border:0;padding:8px 2px 16px;color:var(--ash);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:5px}
+nav button.on{color:#fff}
+nav button.on::after{content:"";position:absolute;bottom:5px;width:6px;height:6px;border-radius:50%;background:var(--iris)}
+.dot{position:absolute;top:3px;right:calc(50% - 24px);background:var(--bad);color:#000;font-size:11px;font-weight:600;font-style:normal;border-radius:999px;min-width:16px;padding:0 4px;line-height:16px;text-align:center}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+.sheet>div{background:#000;border:1px solid rgba(255,255,255,.16);width:100%;max-width:440px;border-radius:24px;padding:26px 22px;display:grid;gap:14px;max-height:calc(100dvh - 32px);overflow-y:auto}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:8px 0}
+.grid button{background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ash)}
+.sw{width:100%;aspect-ratio:1;max-width:68px;border-radius:50%;border:3px solid #000;box-shadow:0 0 0 1px rgba(255,255,255,.25)}
+.sel .sw,.sel .av{outline:2px solid #fff;outline-offset:3px}
+.grid .av{width:100%;max-width:68px;height:auto;aspect-ratio:1}
+.chip{font-size:11.5px;color:var(--saffron);border:1px solid rgba(255,184,41,.5);border-radius:999px;padding:2px 10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.chip.bad{background:var(--bad);border-color:var(--bad);color:#000}
+.item{display:flex;gap:12px;align-items:center;padding:14px 0}
+.item>div:not(.dd){flex:1;min-width:0;overflow-wrap:anywhere}
+.thumb{width:44px;height:44px;border-radius:12px;object-fit:cover}
+.ic{background:none;border:0;color:var(--bad);padding:8px;border-radius:12px;font-weight:600}
+#toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#fff;color:#000;padding:12px 20px;border-radius:24px;z-index:30;display:none;max-width:90%;text-align:center;font-weight:600;font-size:14px}
+.prev{position:relative;margin-top:10px}.prev img{width:100%;max-height:240px;object-fit:cover;border-radius:24px}
+.prev button{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.75);color:#fff;border:0;border-radius:50%;width:32px;height:32px}
+.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
+label.btn{cursor:pointer}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--soft);border-radius:24px;padding:4px}
+.seg button{border:0;background:none;border-radius:20px;padding:11px;font-weight:600;font-size:13px;letter-spacing:.025em;text-transform:uppercase;color:var(--ash)}
+.seg button.on{background:#fff;color:#000}
+.err{color:var(--bad);font-weight:400;font-size:14px}
+.pw{position:relative}.pw input{padding-right:84px}
+.pw button{position:absolute;right:0;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--saffron);font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;padding:8px}
+.note-card{display:flex;gap:14px;align-items:center;border:1.5px solid var(--cc,#8052ff);border-radius:24px;padding:16px;margin-top:14px}
+.note-card small{display:block;color:var(--ash);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase}.note-card>div{flex:1;min-width:0}
+.nt{width:46px;height:46px;border-radius:50%;background:var(--cc,#8052ff);color:#000;display:grid;place-items:center;flex:none}
+.stk{width:96px;height:96px;object-fit:cover;border-radius:24px;display:block;margin-top:4px}
+.tray{display:flex;gap:4px;overflow-x:auto;margin-top:8px;padding:6px;background:var(--soft);border-radius:24px;scrollbar-width:none;animation:pop .2s ease-out}
+.tray::-webkit-scrollbar{display:none}
+.tray button{flex:none;min-width:48px;background:none;border:0;border-radius:16px;padding:4px 6px;display:flex;flex-direction:column;align-items:center}
+.tray button span{font-size:26px;line-height:1.2;transition:transform .15s}
+.tray button small{font-size:11px;color:var(--ash);min-height:14px}
+.tray button.on{background:rgba(128,82,255,.3)}
+.tray img{width:64px;height:64px;border-radius:16px;object-fit:cover;display:block}
+.mini{background:var(--soft);color:var(--saffron);border:0;border-radius:999px;padding:6px 12px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;display:inline-flex;gap:5px;align-items:center;margin-left:auto}
+.ap{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:999px;padding:6px 14px 6px 6px;margin-top:10px;max-width:340px}
+.apb{width:36px;height:36px;border-radius:50%;border:0;background:var(--iris);color:#fff;display:grid;place-items:center;flex:none;padding:0}
+.apt{flex:1;height:4px;border-radius:4px;background:rgba(255,255,255,.2);overflow:hidden;min-width:60px}
+.apt i{display:block;height:100%;width:0;background:var(--iris);border-radius:4px}
+.apd{font-size:12px;font-weight:400;color:var(--ash);font-variant-numeric:tabular-nums;min-width:30px;text-align:right}
+.dd{position:relative;flex:none}
+.ddb{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid rgba(255,255,255,.22);border-radius:999px;color:#fff;padding:9px 14px;font-weight:600;font-size:13px;letter-spacing:.025em;text-transform:uppercase}
+.ddb.me{text-transform:none;font-size:15px;letter-spacing:0;font-weight:400;padding:4px 12px 4px 4px;gap:8px}
+.ddl{position:absolute;right:0;top:calc(100% + 8px);z-index:15;min-width:180px;background:#000;border:1px solid rgba(255,255,255,.2);border-radius:24px;padding:8px;display:grid;gap:2px;animation:pop .15s ease-out}
+.ddl.up{top:auto;bottom:calc(100% + 8px)}
+.ddl button{background:none;border:0;text-align:left;padding:12px 14px;border-radius:16px;font-weight:400;font-size:15px;color:#fff}
+.ddl button:hover,.ddl button.on{background:rgba(128,82,255,.24)}
+.am{min-width:250px}
+.am button{display:flex;align-items:center;gap:10px;width:100%}
+.cbar{display:flex;align-items:center;gap:2px;background:var(--soft);border-radius:999px;padding:4px;margin-top:14px}
+.cbar input{flex:1;min-width:0;border:0;background:transparent;padding:10px 6px}
+.cb{width:40px;height:40px;border-radius:50%;border:0;background:none;color:var(--mist);display:grid;place-items:center;flex:none;padding:0;cursor:pointer}
+.cb.mic,.cb.send{background:var(--iris);color:#fff}
+.cbar .send{display:none}.cbar.has .send,.cbar.rec .send{display:grid}.cbar.has .mic{display:none}
+.rtime{flex:1;font-weight:400;font-variant-numeric:tabular-nums}
+.dotrec{width:10px;height:10px;border-radius:50%;background:var(--bad);animation:blink 1s infinite;margin:0 8px}
+.pnl{background:var(--soft);border-radius:24px;margin-top:8px;padding:12px;max-height:240px;overflow:auto;animation:pop .2s ease-out}
+.pt{margin:4px 2px 8px}
+.pg{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:8px}
+.pg.e{grid-template-columns:repeat(8,1fr);gap:2px}
+.em{background:none;border:0;font-size:24px;padding:6px 0;border-radius:12px}.em:active{background:rgba(255,255,255,.1)}
+.st{aspect-ratio:1;border:0;background:rgba(255,255,255,.08);border-radius:16px;padding:0;overflow:hidden;display:grid;place-items:center}
+.st img{width:100%;height:100%;object-fit:cover}
+.st.add{color:var(--saffron);border:1.5px dashed rgba(255,184,41,.6);background:transparent}
+.avw{position:relative;display:block;flex:none;line-height:0}
+.pd{position:absolute;right:-1px;bottom:-1px;width:13px;height:13px;border-radius:50%;border:2.5px solid #000;background:#EF4444;display:block}
+.pd.on{background:#22C55E}.pd.off{background:#EF4444}
+.av.sm+.pd{width:11px;height:11px;border-width:2px}
+#bgl{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:0;pointer-events:none;background-color:#000}
+#bgl.b-custom::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,var(--dim,.3))}
+body:not([data-bg="void"]) header,body:not([data-bg="void"]) nav{background:transparent;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.b-aurora{background:linear-gradient(160deg,#2a0f5e 0%,#14295e 45%,#0b4d45 100%)}
+.b-night{background:linear-gradient(180deg,#14284f 0%,#0a1630 55%,#060c1c 100%)}
+.b-forest{background:linear-gradient(165deg,#0f4a3b 0%,#0a3329 55%,#06201a 100%)}
+.b-ember{background:linear-gradient(160deg,#5a1d0a 0%,#3a1208 55%,#1f0a05 100%)}
+.b-grid{background-color:#0d1424;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:36px 36px}
+.b-dots{background-color:#170c2b;background-image:radial-gradient(rgba(255,255,255,.28) 1px,transparent 1.6px);background-size:22px 22px}
+.b-stars{background:radial-gradient(1.5px 1.5px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 70% 20%,#8052ff,transparent),radial-gradient(1.5px 1.5px at 40% 80%,#ffb829,transparent),radial-gradient(1px 1px at 85% 65%,#fff,transparent),radial-gradient(1px 1px at 10% 70%,#15846e,transparent),radial-gradient(1px 1px at 55% 50%,#fff,transparent),linear-gradient(180deg,#0a0f2a,#02030a)}
+.b-custom{background-color:#000;background-position:center;background-size:cover;background-repeat:no-repeat}
+.bgt{width:100%;aspect-ratio:3/4;border-radius:16px;border:1px solid rgba(255,255,255,.2);display:block;overflow:hidden}
+.bgt.b-grid{background-size:12px 12px}.bgt.b-dots{background-size:10px 10px}
+.sel .bgt{outline:2px solid #fff;outline-offset:3px}
+.stories{display:flex;gap:16px;overflow-x:auto;padding:8px 0 22px;scrollbar-width:none}
+.stories::-webkit-scrollbar{display:none}
+.sc{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:8px;flex:none;width:76px;color:#fff;padding:0}
+.sc small{font-size:12px;max-width:76px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--mist)}
+.sc.wait{width:104px}.sc.wait small{white-space:normal;text-align:center;line-height:1.25;max-width:104px}
+.scw{position:relative;display:block;padding:3px;border-radius:50%;border:2px solid transparent;line-height:0}
+.sc.ring .scw{border-color:var(--iris)}
+.sc.ring.seen .scw{border-color:rgba(255,255,255,.28)}
+.scw.dash{border:2px dashed rgba(255,255,255,.35);width:74px;height:74px;display:grid;place-items:center;color:var(--ash);padding:0}
+.av.lg{width:62px;height:62px}
+.plus{position:absolute;top:-2px;right:-2px;width:22px;height:22px;border-radius:50%;background:var(--iris);color:#fff;display:grid;place-items:center;border:2px solid #000;line-height:0}
+.sview{position:fixed;inset:0;z-index:25;background:#000;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);animation:fade .2s}
+.svtop{display:flex;align-items:center;gap:12px;padding:14px 18px}
+.svtop>div{flex:1}.svtop small{display:block;color:var(--ash);font-size:12px}
+.svimg{flex:1;min-height:0;width:100%;object-fit:contain}
+.svbot{padding:16px 18px 24px;display:flex;flex-direction:column;gap:12px;align-items:center}
+.svnav{display:flex;align-items:center;gap:18px;color:var(--ash)}
+.svnav button{background:none;border:0;color:#fff;font-size:28px;padding:0 12px}
+.svmsg{font-size:22px;font-weight:300;line-height:1.3;text-align:center;letter-spacing:-.02em}
+.sheet>div.vis{overflow:visible}
+.more{background:none;border:0;color:var(--ash);padding:8px 0 0;font-weight:400;font-size:14px;display:block}
+.cm .ic{padding:0 6px;display:inline;vertical-align:middle}
+.who .ic{margin-left:auto}.mini+.ic{margin-left:0}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes slide{from{transform:translateY(24px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes tin{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes blink{50%{opacity:.25}}
+@keyframes flame{0%,100%{opacity:.88;filter:brightness(.92) saturate(1.15) drop-shadow(0 0 4px #ff4300)}45%{opacity:1;filter:brightness(1.23) saturate(1.45) drop-shadow(0 0 13px #ff7900)}70%{opacity:.94;filter:brightness(1.06) saturate(1.3) drop-shadow(0 0 8px #ff3200)}}
+.go .card,.go .item,.go .empty,.go .ph{animation:up .5s ease-out both}
+.go .card:nth-child(2){animation-delay:.06s}.go .card:nth-child(3){animation-delay:.12s}.go .card:nth-child(4){animation-delay:.18s}.go .card:nth-child(n+5){animation-delay:.24s}
+.sheet{animation:fade .2s}.sheet>div{animation:slide .28s cubic-bezier(.2,.9,.3,1)}
+#toast{animation:tin .22s ease-out}
+button,label.btn{transition:transform .12s,background .2s,color .2s,border-color .2s}
+button:active:not(:disabled),label.btn:active{transform:scale(.96)}
+.pw button:active:not(:disabled){transform:translateY(-50%)}
+.acts button.bump{animation:bump .35s}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+section.rkitem{display:flex;gap:14px;margin-bottom:44px;position:relative}
+.rkn{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1;width:36px;flex:none;color:var(--ash);padding-top:3px;text-align:center}
+.rkn.streak{font-size:34px;width:42px;padding-top:0;animation:flame 1.35s ease-in-out infinite}
+.rkc{flex:1;min-width:0}.rkc .card{margin:0;padding:0;border:0}
+.rkmeta{display:flex;align-items:center;gap:8px;margin:-4px 0 12px;color:var(--ash);font-size:12px;font-weight:600;letter-spacing:.025em}
+.rkmeta.fire{color:#ff6b2d}.rkname-fire{color:#ff4b2b!important;text-shadow:0 0 18px rgba(255,72,32,.36)}
+.comment-fire{display:inline-block;margin-left:4px;font-size:12px;line-height:1;vertical-align:1px;animation:flame 1.35s ease-in-out infinite}
+article.card{padding-bottom:30px;margin-bottom:30px;border-bottom:1px solid rgba(255,255,255,.12)}
+.timer{font-size:46px;font-weight:200;letter-spacing:-.03em;font-variant-numeric:tabular-nums;text-align:center;padding:6px 0}
+label.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mist);font-weight:300}
+.chk input{width:20px;height:20px;accent-color:var(--iris);flex:none;margin-top:2px;padding:0;border:0}
+.plink{background:none;border:0;padding:0;color:#4C8DFF;font:inherit;text-decoration:none;cursor:pointer}
+.sheet>div.pol{max-width:520px;display:grid;gap:14px}
+.pol p{margin:4px 0 0;font-size:15px;color:var(--mist)}
+.btn,.ddb,.seg button,nav button,.grid button,.pw button,.mini{text-transform:none;letter-spacing:0}
+.btn{font-size:15px;min-height:44px;padding:11px 20px}
+nav button{font-size:12px}
+.ddb{font-size:14px}
+.srow{display:flex;justify-content:space-between;align-items:center;margin-top:30px;font-size:16px}
+.tg{width:50px;height:30px;border-radius:15px;background:rgba(255,255,255,.2);border:0;position:relative;flex:none;padding:0}
+.tg::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:left .2s}
+.tg.on{background:var(--iris)}.tg.on::after{left:23px}
+</style>
+</head>
+<body>
+<div id="bgl" class="b-void" aria-hidden="true"></div>
+<canvas id="px" aria-hidden="true"></canvas>
+<header><h1><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8052ff"/><stop offset="1" stop-color="#15846e"/></linearGradient></defs><path d="M3 21L11 2l10 19-9-5z" fill="url(#lg)"/></svg>CURIOCITY</h1><div id="bar"></div></header>
+<main id="main"></main>
+<nav id="nav"></nav>
+<div id="auth"></div>
+<div id="toast"></div>
+<input type="file" id="f" accept="image/*" class="vh">
+<input type="file" id="fa" accept="image/*" class="vh">
+<input type="file" id="fm" accept="audio/*" class="vh">
+<input type="file" id="fi" accept="audio/*" class="vh">
+<input type="file" id="fs" accept="image/*" class="vh">
+<input type="file" id="fc" accept="image/*" class="vh">
+<input type="file" id="fbg" accept="image/*" class="vh">
+<input type="file" id="fst" accept="image/*" class="vh">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1"></script>
+<script>
+/* === CONFIGURACIÓN: pega aquí los datos de Supabase. Vacío = modo demostración (solo en tu navegador) === */
+const CFG = { url: "https://tubqwifsrrkfncokmbji.supabase.co", key: "sb_publishable_ODTlK8Q5KOR8kDW_NblPYQ_UCgDgvNw" };
+
+const COLORS = [["Rojo","#DC2626"],["Naranja","#EA580C"],["Amarillo","#EAB308"],["Verde","#16A34A"],["Azul","#2563EB"],["Morado","#7C3AED"],["Rosa","#DB2777"],["Blanco","#F2F2F2"]];
+const AVS = ["a1","a2","a3","a4","a5","a6"];
+const BGS = [["void", "Vacío"], ["aurora", "Aurora"], ["night", "Medianoche"], ["forest", "Bosque"], ["ember", "Brasa"], ["grid", "Cuadrícula"], ["dots", "Puntos"], ["stars", "Estrellas"]];
+const CONTACT = "contactcuriocitysupport@gmail.com"; // correo de contacto del administrador
+const kb = n => n > 1e6 ? (n / 1e6).toFixed(1) + " MB" : Math.round(n / 1e3) + " KB";
+const REACT = [["heart","❤️"],["laugh","😂"],["wow","😮"],["sad","😢"],["fire","🔥"],["clap","👏"],["love","😍"],["mind","🤯"],["party","🥳"],["cool","😎"],["up","👍"],["pray","🙏"]];
+const REL = { single: "Soltero/a", taken: "En una relación" };
+const STAT = { active: "Activo", muted: "Silenciado", restricted: "Restringido", blocked: "Bloqueado" };
+const NOTE = { muted: "Tu cuenta está silenciada: no puedes comentar.", restricted: "Tu cuenta está restringida: no puedes publicar momentos.", blocked: "Tu cuenta está bloqueada: no puedes publicar, comentar ni dar likes." };
+const $ = s => document.querySelector(s);
+let AUD = null, REC = null;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const cl = c => /^#[0-9a-f]{6}$/i.test(c || "") ? (c.toLowerCase() === "#1e293b" ? "#F2F2F2" : c) : COLORS[4][1];
+const imageUrl = value => {
+  if (typeof value !== "string" || value.length > 2_000_000) return "";
+  if (/^data:image\/(?:png|jpeg|webp|gif);base64,[a-z0-9+/]+=*$/i.test(value)) return value;
+  try { const u = new URL(value, location.href); return u.protocol === "https:" && !u.username && !u.password ? u.href : ""; }
+  catch (e) { return ""; }
+};
+const safe = u => esc(imageUrl(u));
+const cssImage = u => imageUrl(u).replace(/[\\'"()\n\r]/g, x => "%" + x.charCodeAt(0).toString(16).padStart(2, "0"));
+
+const IC = {
+  heart: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/>',
+  chat: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  home: '<path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>',
+  trophy: '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/>',
+  cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',
+  img: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/>',
+  trash: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+  pin: '<path d="M12 17v5M9 3h6l-1 6 3 3v2H7v-2l3-3z"/>',
+  users: '<circle cx="9" cy="8" r="3.5"/><path d="M2 21a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M22 21a7 7 0 0 0-4-6.3"/>',
+  music: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+  mic: '<rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+  sticker: '<path d="M20 12V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6l8-8z"/><path d="M20 12h-6a2 2 0 0 0-2 2v6"/>',
+  check: '<path d="M5 12l5 5 9-9"/>',
+  play: '<path d="M7 4l13 8-13 8z"/>',
+  pause: '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>',
+  send: '<path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/>',
+  smile: '<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
+  chev: '<path d="M6 9l6 6 6-6"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  bird: '<path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 0 3.84-10.61"/>',
+  x: '<path d="M6 6l12 12M18 6L6 18"/>'
+};
+const ic = (n, s = 22, f) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${f ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
+
+const ROBOT = {
+  a1: '<circle cx="19" cy="23" r="3" fill="@"/><circle cx="29" cy="23" r="3" fill="@"/><path d="M19 30q5 4 10 0" fill="none" stroke="@" stroke-width="2" stroke-linecap="round"/>',
+  a2: '<rect x="15" y="20" width="18" height="7" rx="3.5" fill="@"/><path d="M19 31h10" stroke="@" stroke-width="2" stroke-linecap="round"/>',
+  a3: '<rect x="16" y="20" width="6" height="6" rx="1" fill="@"/><rect x="26" y="20" width="6" height="6" rx="1" fill="@"/><path d="M18 31h12M21 29v4M24 29v4M27 29v4" stroke="@" stroke-width="1.6"/>',
+  a4: '<circle cx="24" cy="23" r="5" fill="@"/><circle cx="24" cy="23" r="1.8" fill="#fff"/><path d="M19 32h10" stroke="@" stroke-width="2" stroke-linecap="round"/>',
+  a5: '<path d="M16 24q3-4 6 0M26 24q3-4 6 0" fill="none" stroke="@" stroke-width="2.2" stroke-linecap="round"/><rect x="20" y="29" width="8" height="4" rx="2" fill="@"/>',
+  a6: '<path d="M16 23h6M26 23h6" stroke="@" stroke-width="2.6" stroke-linecap="round"/><path d="M20 31q4-3 8 0" fill="none" stroke="@" stroke-width="2" stroke-linecap="round"/>'
+};
+const avSvg = (id, c) => `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="${c}"/><path d="M24 14v-5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="8" r="2.6" fill="#fff"/><rect x="7" y="21" width="4" height="8" rx="2" fill="#fff"/><rect x="37" y="21" width="4" height="8" rx="2" fill="#fff"/><rect x="11" y="14" width="26" height="22" rx="6" fill="#fff"/><rect x="16" y="39" width="16" height="5" rx="2.5" fill="#fff" opacity=".9"/>${(ROBOT[id] || ROBOT.a1).replaceAll("@", c)}</svg>`;
+const online = p => (S.me && p.id === S.me.id) || (p.last_seen && Date.now() - p.last_seen < 90e3);
+const avatar = (p, cls = "") => {
+  const a = safe(p.avatar_url) ? `<img class="av ${cls}" src="${safe(p.avatar_url)}" alt="">` : `<span class="av ${cls}">${avSvg(p.avatar || "a1", cl(p.color))}</span>`;
+  if (!p.id || p.show_presence === false) return a;
+  const on = online(p);
+  return `<span class="avw">${a}<i class="pd ${on ? "on" : "off"}" data-uid="${esc(p.id)}" title="${on ? "Conectado" : "Desconectado"}"></i></span>`;
+};
+function paintDots() {
+  document.querySelectorAll(".pd[data-uid]").forEach(el => {
+    const p = S.data.profiles[el.dataset.uid]; if (!p) return;
+    const on = online(p); el.className = "pd " + (on ? "on" : "off"); el.title = on ? "Conectado" : "Desconectado";
+  });
+}
+const pingNow = () => { if (S.me && meP().show_presence !== false) API.ping(true).catch(() => {}); };
+
+async function shrink(file, max, q) {
+  if (!/^image\//.test(file.type) || file.size > 30e6) throw new Error("Imagen no válida");
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("No se pudo leer esa imagen")); i.src = url; });
+    const k = Math.min(1, max / Math.max(img.width, img.height)), c = document.createElement("canvas");
+    c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+    const ctx = c.getContext("2d"); if (!ctx) throw new Error("No se pudo procesar esa imagen");
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+    return await new Promise((ok, no) => c.toBlob(b => b ? ok(b) : no(new Error("No se pudo comprimir esa imagen")), "image/jpeg", q));
+  } finally { URL.revokeObjectURL(url); }
+}
+const toData = b => new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(b); });
+
+function mkDemo() {
+  const K = "momentos_demo2"; let s;
+  try { s = JSON.parse(localStorage.getItem(K)); } catch (e) {}
+  if (!s) {
+    const n = Date.now();
+    s = { n: 10, me: null, comments: [], likes: [{ moment_id: 1, user_id: "u2" }],
+      users: [{ id: "u1", username: "ana_dev", pass: "x", color: "#16A34A", avatar: "a4", status: "active" }, { id: "u2", username: "admin", pass: "admin123", color: "#7C3AED", avatar: "a2", status: "active", is_admin: true }],
+      moments: [{ id: 1, user_id: "u1", text: "Se nos cayó el proyector en plena exposición y nadie dijo nada", created_at: n - 864e5 }, { id: 2, user_id: "u2", text: "Hoy alguien contestó “presente” en el chat equivocado", created_at: n - 36e5 }] };
+  }
+  s.friends = s.friends || []; s.stickers = s.stickers || []; s.pigeons = s.pigeons || []; s.saved = s.saved || (s.me ? [s.me] : []); s.stories = s.stories || [];
+  const FULL = "Ya hay 2 cuentas guardadas en este dispositivo. Entra a una de ellas o cierra sesión en una para agregar otra.";
+  const save = () => { try { localStorage.setItem(K, JSON.stringify(s)); } catch (e) { throw new Error("El modo demo se quedó sin espacio"); } };
+  const find = n => s.users.find(u => u.username.toLowerCase() === n.toLowerCase());
+  const meU = () => s.users.find(u => u.id === s.me);
+  const deny = () => { throw new Error("Tu cuenta no tiene permiso para esto"); };
+  return {
+    demo: true,
+    async session() { const u = meU(); return u ? { id: u.id, username: u.username } : null; },
+    async signUp(n, p) { if (find(n)) throw new Error("Ese nombre ya existe"); if (s.saved.length >= 2) throw new Error(FULL); const u = { id: "u" + (++s.n), username: n, pass: p, color: COLORS[4][1], avatar: "a1", status: "active" }; s.users.push(u); s.me = u.id; s.saved.push(u.id); save(); },
+    async signIn(n, p) { const u = find(n); if (!u || u.pass !== p) throw new Error("Usuario o contraseña incorrectos"); if (!s.saved.includes(u.id)) { if (s.saved.length >= 2) throw new Error(FULL); s.saved.push(u.id); } s.me = u.id; save(); },
+    async signOut() { s.saved = s.saved.filter(x => x !== s.me); s.me = null; save(); },
+    async load() { const isFriend=u=>s.friends.some(f=>f.status==="accepted"&&((f.requester===s.me&&f.addressee===u.id)||(f.addressee===s.me&&f.requester===u.id))); return { profiles: Object.fromEntries(s.users.filter(u=>u.id===s.me||u.profile_visibility!=="private"&&(u.profile_visibility!=="friends"||isFriend(u))).map(u => [u.id, u])), moments: s.moments, likes: s.likes, comments: s.comments, friends: s.friends, stickers: s.stickers, pg: { inbox: s.pigeons.filter(g => g.recipient === s.me && g.arrives_at <= Date.now() && g.fate !== "lost").sort((a, b) => b.arrives_at - a.arrives_at).map(g => ({ id: g.id, sender: g.sender, text: g.text, arrives_at: g.arrives_at, seen: g.seen })), last: Math.max(0, ...s.pigeons.filter(g => g.sender === s.me).map(g => g.sent_at)) }, stories: s.stories.filter(x => x.expires_at > Date.now() && (x.user_id === s.me || s.friends.some(f => f.status === "accepted" && ((f.requester === s.me && f.addressee === x.user_id) || (f.addressee === s.me && f.requester === x.user_id))))), alerts: [] }; },
+    async upload(b) { return toData(b); },
+    async post(t, img, ex) { if (["restricted", "blocked"].includes(meU().status)) deny(); s.moments.push({ id: ++s.n, user_id: s.me, text: t, image_url: img || null, ...(ex || {}), created_at: Date.now() }); save(); },
+    async like(id, on) { if (meU().status === "blocked") deny(); s.likes = s.likes.filter(l => !(l.moment_id === id && l.user_id === s.me)); if (on) s.likes.push({ moment_id: id, user_id: s.me, kind: on }); save(); },
+    async comment(id, t, st, img, aud) { if (["muted", "blocked"].includes(meU().status)) deny(); s.comments.push({ id: ++s.n, moment_id: id, user_id: s.me, text: t, sticker_url: st || null, image_url: img || null, audio_url: aud || null, created_at: Date.now() }); save(); },
+    async profile(color, av, url, rel, bg, bgu, bgu2) { const u = meU(); u.bg_url2 = bgu2 || null; u.color = color; u.avatar = av; u.avatar_url = url || null; u.relationship = rel; u.bg = bg; u.bg_url = bgu || null; save(); },
+    async setProfileVisibility(v) { if (!["public","friends","private"].includes(v)) throw new Error("Opción no válida"); meU().profile_visibility=v; save(); },
+    async setStatus(id, st) { s.users.find(u => u.id === id).status = st; save(); },
+    async setIntro(url, h) { const u = meU(); u.intro_url = url; u.intro_until = url ? Date.now() + h * 36e5 : 0; save(); },
+    async addSticker(url) { s.stickers.unshift({ id: ++s.n, user_id: s.me, image_url: url }); save(); },
+    async friendReq(to) { if (meU().status === "blocked") deny(); s.friends.push({ id: ++s.n, requester: s.me, addressee: to, status: "pending" }); save(); },
+    async friendAccept(id) { s.friends.find(f => f.id === id).status = "accepted"; save(); },
+    async pigeonSend(to, body) {
+      if (["muted", "blocked"].includes(meU().status)) deny();
+      if (!s.friends.some(f => f.status === "accepted" && ((f.requester === s.me && f.addressee === to) || (f.requester === to && f.addressee === s.me)))) throw new Error("Solo puedes enviar palomas a tus amigos");
+      if (s.pigeons.some(g => g.sender === s.me && g.sent_at > Date.now() - 864e5)) throw new Error("Tu paloma está descansando. Podrás enviar otra pasado un día.");
+      const r = Math.random(); let fate = "ok", text = body;
+      if (r < 0.0025) { fate = "lost"; text = null; }
+      else if (r < 0.0525) {
+        const w = body.split(/\s+/);
+        if (w.length >= 2) {
+          const o = [...w]; let d = false;
+          w.forEach((x, i) => { if (Math.random() < 0.35) { w[i] = "…"; d = true; } });
+          if (!d) w[Math.floor(Math.random() * w.length)] = "…";
+          if (w.every(x => x === "…")) { const i = Math.floor(Math.random() * w.length); w[i] = o[i]; }
+          text = w.join(" "); fate = "garbled";
+        }
+      }
+      s.pigeons.push({ id: ++s.n, sender: s.me, recipient: to, fate, text, sent_at: Date.now(), arrives_at: Date.now() + 6e4, seen: false }); save();
+    },
+    async pigeonSeen(id) { const g = s.pigeons.find(x => x.id === id); if (g) g.seen = true; save(); },
+    async setRel(rel) { meU().relationship = rel; save(); },
+    async unblock() {},
+    async delAlert() {},
+    async storyCreate(img, msg, hrs) { if (["restricted", "blocked"].includes(meU().status)) deny(); s.stories.push({ id: ++s.n, user_id: s.me, image_url: img, message: msg, created_at: Date.now(), expires_at: Date.now() + hrs * 36e5 }); save(); },
+    async delStory(id) { s.stories = s.stories.filter(x => x.id !== id); save(); },
+    async accounts() { return s.saved.map(id => ({ id, username: (s.users.find(u => u.id === id) || {}).username || "" })); },
+    async switchTo(id) { if (!s.saved.includes(id)) throw new Error("Esa cuenta ya no está guardada"); s.me = id; save(); },
+    async ping(show) { const u = meU(); if (u) { u.last_seen = show ? Date.now() : 0; save(); } },
+    async profiles() { return Object.fromEntries(s.users.map(u => [u.id, u])); },
+    async setPresence(on) { meU().show_presence = on; save(); },
+    async friendDel(id) { s.friends = s.friends.filter(f => f.id !== id); save(); },
+    async pin(id, h) { s.moments.find(m => m.id === id).pinned_until = h ? Date.now() + h * 36e5 : 0; save(); },
+    async delComment(id) { s.comments = s.comments.filter(c => c.id !== id); save(); },
+    async delMoment(id) { s.moments = s.moments.filter(m => m.id !== id); s.likes = s.likes.filter(l => l.moment_id !== id); s.comments = s.comments.filter(c => c.moment_id !== id); save(); }
+  };
+}
+
+function mkSup() {
+  const sb = supabase.createClient(CFG.url, CFG.key);
+  const KA = "momentos_cuentas", FULL = "Ya hay 2 cuentas guardadas en este dispositivo. Entra a una de ellas o cierra sesión en una para agregar otra.";
+  const rd = () => { try { return JSON.parse(localStorage.getItem(KA)) || []; } catch (e) { return []; } }, wr = l => { try { localStorage.setItem(KA, JSON.stringify(l)); } catch (e) {} };
+  const keep = sess => { if (!sess || !sess.user) return true; const l = rd(), i = l.findIndex(x => x.id === sess.user.id), e = { id: sess.user.id, username: (sess.user.user_metadata || {}).username || "", a: sess.access_token, r: sess.refresh_token }; if (i >= 0) l[i] = e; else if (l.length < 2) l.push(e); else return false; wr(l); return true; };
+  const guard = async sess => { if (!keep(sess)) { await sb.auth.signOut({ scope: "local" }); throw new Error(FULL); } };
+  sb.auth.onAuthStateChange((ev, sess) => { if (sess && ev !== "SIGNED_OUT") keep(sess); });
+  const mail = n => n.toLowerCase() + "@momentos.app";
+  const fail = e => { if (e) { const m = e.message || ""; throw new Error(/already/i.test(m) ? "Ese nombre ya existe" : /invalid login/i.test(m) ? "Usuario o contraseña incorrectos" : /at least/i.test(m) ? "La contraseña necesita mínimo 6 caracteres" : /row-level security|permission/i.test(m) ? "Tu cuenta no tiene permiso para esto" : m); } };
+  const ok = r => { fail(r.error); return r.data; };
+  const t = r => ({ ...r, created_at: Date.parse(r.created_at), pinned_until: r.pinned_until ? Date.parse(r.pinned_until) : 0 });
+  return {
+    demo: false,
+    async session() { const { data } = await sb.auth.getSession(); const u = data.session && data.session.user; return u ? { id: u.id, username: u.user_metadata.username } : null; },
+    async signUp(n, p) { if (rd().length >= 2) throw new Error(FULL); const r = await sb.auth.signUp({ email: mail(n), password: p, options: { data: { username: n, terms: "v1.0", terms_at: new Date().toISOString(), adult: true } } }); fail(r.error); if (!r.data.session) throw new Error("Falta desactivar Confirm email en Supabase"); await guard(r.data.session); },
+    async signIn(n, p) { const r = await sb.auth.signInWithPassword({ email: mail(n), password: p }); fail(r.error); await guard(r.data.session); },
+    async signOut() { const cur = (await sb.auth.getSession()).data.session; await sb.auth.signOut({ scope: "local" }); if (cur) wr(rd().filter(x => x.id !== cur.user.id)); },
+    async load() {
+      const [profiles, b, c, d, e, f, g, h, i, j] = await Promise.all([this.profiles(), sb.from("moments").select("*").order("created_at", { ascending: false }).limit(300), sb.from("likes").select("*"), sb.from("comments").select("*").order("created_at"), sb.from("friendships").select("*"), sb.from("stickers").select("*").order("created_at", { ascending: false }).limit(60), Promise.resolve(sb.rpc("pigeon_inbox")).then(r => r.error ? { data: [] } : r), Promise.resolve(sb.rpc("pigeon_last")).then(r => r.error ? { data: null } : r), Promise.resolve(sb.from("stories").select("*").gt("expires_at", new Date().toISOString()).order("created_at")).then(r => r.error ? { data: [] } : r), Promise.resolve(sb.from("alerts").select("*").order("created_at", { ascending: false }).limit(30)).then(r => r.error ? { data: [] } : r)]);
+      return { profiles, moments: ok(b).map(t), likes: ok(c), comments: ok(d).map(t), friends: ok(e), stickers: ok(f), pg: { inbox: (ok(g) || []).map(x => ({ id: x.id, sender: x.sender, text: x.delivered_text, arrives_at: Date.parse(x.arrives_at), seen: x.seen })), last: ok(h) ? Date.parse(ok(h)) : 0 }, stories: (ok(i) || []).map(x => ({ ...x, created_at: Date.parse(x.created_at), expires_at: Date.parse(x.expires_at) })), alerts: (ok(j) || []).map(x => ({ ...x, created_at: Date.parse(x.created_at) })) };
+    },
+    async upload(b, ext = "jpg", type = "image/jpeg") { const me = await this.session(), path = me.id + "/" + Date.now() + "." + ext; fail((await sb.storage.from("media").upload(path, b, { contentType: type })).error); return sb.storage.from("media").getPublicUrl(path).data.publicUrl; },
+    async post(x, img, ex) { fail((await sb.from("moments").insert({ text: x, image_url: img || null, ...(ex || {}) })).error); },
+    async like(id, kind) { const me = await this.session(); await sb.from("likes").delete().eq("moment_id", id).eq("user_id", me.id); if (kind) fail((await sb.from("likes").insert({ moment_id: id, kind })).error); },
+    async comment(id, x, st, img, aud) { fail((await sb.from("comments").insert({ moment_id: id, text: x, sticker_url: st || null, image_url: img || null, audio_url: aud || null })).error); },
+    async profile(color, av, url, rel, bg, bgu, bgu2) { const me = await this.session(); fail((await sb.from("profiles").update({ color, avatar: av, avatar_url: url || null, relationship: rel, bg, bg_url: bgu || null, bg_url2: bgu2 || null }).eq("id", me.id)).error); },
+    async setProfileVisibility(v) { fail((await sb.rpc("set_my_profile_visibility", { p_visibility: v })).error); },
+    async setStatus(id, st) { fail((await sb.rpc("admin_set_status", { target: id, new_status: st })).error); },
+    async setIntro(url, h) { const me = await this.session(); fail((await sb.from("profiles").update({ intro_url: url, intro_until: url ? new Date(Date.now() + h * 36e5).toISOString() : null }).eq("id", me.id)).error); },
+    async addSticker(url) { fail((await sb.from("stickers").insert({ image_url: url })).error); },
+    async friendReq(to) { fail((await sb.from("friendships").insert({ addressee: to })).error); },
+    async friendAccept(id) { fail((await sb.from("friendships").update({ status: "accepted" }).eq("id", id)).error); },
+    async pigeonSend(to, body) { fail((await sb.rpc("send_pigeon", { to_user: to, msg: body })).error); },
+    async pigeonSeen(id) { await sb.rpc("pigeon_seen", { pid: id }); },
+    async setRel(rel) { const me = await this.session(); fail((await sb.from("profiles").update({ relationship: rel }).eq("id", me.id)).error); },
+    async unblock(id) { fail((await sb.rpc("admin_unblock", { target: id })).error); },
+    async delAlert(id) { fail((await sb.from("alerts").delete().eq("id", id)).error); },
+    async storyCreate(img, msg, hrs) { fail((await sb.rpc("create_story", { img, msg, hrs })).error); },
+    async delStory(id) { fail((await sb.from("stories").delete().eq("id", id)).error); },
+    async accounts() { const cur = (await sb.auth.getSession()).data.session; if (cur) keep(cur); return rd().map(x => ({ id: x.id, username: x.username })); },
+    async switchTo(id) {
+      const cur = (await sb.auth.getSession()).data.session; if (cur) keep(cur);
+      const t = rd().find(x => x.id === id); if (!t) throw new Error("Esa cuenta ya no está guardada");
+      const r = await sb.auth.setSession({ access_token: t.a, refresh_token: t.r });
+      if (r.error) { wr(rd().filter(x => x.id !== id)); throw new Error("La sesión de esa cuenta caducó. Entra de nuevo con tu contraseña."); }
+    },
+    async ping(show) { const me = await this.session(); if (me) await sb.from("profiles").update({ last_seen: show ? new Date().toISOString() : null }).eq("id", me.id); },
+    async profiles() {
+      const rows = ok(await sb.from("profiles_public").select("*"));
+      const map = Object.fromEntries(rows.map(u => [u.id, { ...u, intro_until: u.intro_until ? Date.parse(u.intro_until) : 0, last_seen: u.last_seen ? Date.parse(u.last_seen) : 0, blocked_until: 0 }]));
+      const me = await this.session();
+      if (me) {
+        const own = ok(await sb.rpc("my_profile_private"));
+        if (own) map[me.id] = { ...(map[me.id] || { id: me.id, username: me.username }), ...own, blocked_until: own.blocked_until ? Date.parse(own.blocked_until) : 0 };
+        if (map[me.id] && map[me.id].is_admin) {
+          const adminRows = ok(await sb.rpc("admin_profile_status"));
+          (adminRows || []).forEach(u => { map[u.id] = { ...(map[u.id] || { id: u.id }), ...u, blocked_until: u.blocked_until ? Date.parse(u.blocked_until) : 0 }; });
+        }
+      }
+      return map;
+    },
+    async setPresence(on) { const me = await this.session(); fail((await sb.from("profiles").update({ show_presence: on }).eq("id", me.id)).error); },
+    async friendDel(id) { fail((await sb.from("friendships").delete().eq("id", id)).error); },
+    async pin(id, h) { fail((await sb.from("moments").update({ pinned_until: h ? new Date(Date.now() + h * 36e5).toISOString() : null }).eq("id", id)).error); },
+    async delComment(id) { fail((await sb.from("comments").delete().eq("id", id)).error); },
+    async delMoment(id) { fail((await sb.from("moments").delete().eq("id", id)).error); }
+  };
+}
+
+const API = (CFG.url && CFG.key && window.supabase) ? mkSup() : mkDemo();
+if (CFG.url && CFG.key && !window.supabase) setTimeout(() => toast("No se pudo cargar la conexión. Recarga la página."), 800);
+const gate = (() => { let t = 0; return () => { if (Date.now() - t < 1200) throw new Error("Más despacio"); t = Date.now(); }; })();
+["post", "comment"].forEach(k => { const f = API[k].bind(API); API[k] = async (...a) => { gate(); return f(...a); }; });
+let S = { viewUser: null, ptab: "look", fails: 0, lock: 0, acc: false, pol: false, stnew: false, sv: null, simg: null, sdur: "24", dim: (() => { try { return localStorage.getItem("momentos_dim") || "0.3"; } catch (e) { return "0.3"; } })(), accts: [], dd: null, cp: null, cfor: null, pgo: {}, pgto: null, fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [], pg: { inbox: [], last: 0 }, stories: [], alerts: [] }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
+
+function toast(m) { const t = $("#toast"); t.textContent = m; t.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = "none", 2800); }
+function ago(t) { const m = Math.max(0, (Date.now() - t) / 6e4); if (m < 1) return "ahora"; if (m < 60) return "hace " + Math.floor(m) + " min"; if (m < 1440) return "hace " + Math.floor(m / 60) + " h"; return "hace " + Math.floor(m / 1440) + " d"; }
+const likesOf = id => S.data.likes.filter(l => l.moment_id === id);
+const meP = () => (S.me && S.data.profiles[S.me.id]) || {};
+const isAdmin = () => !!meP().is_admin;
+const pOf = id => S.data.profiles[id] || { username: "anónimo", color: COLORS[4][1], avatar: "a1" };
+const visible = uid => isAdmin() || eff(pOf(uid)) !== "blocked";
+
+const safeA = u => /^(https:\/\/|blob:|data:audio\/)/.test(u || "") ? esc(u) : "";
+const ap = (u, t) => `<div class="ap ${t || ""}" data-u="${safeA(u)}"><button class="apb" data-a="aplay" data-u="${safeA(u)}" aria-label="Reproducir">${ic("play", 18, 1)}</button><div class="apt"><i></i></div><span class="apd">0:00</span></div>`;
+function syncAP() {
+  document.querySelectorAll(".ap").forEach(el => {
+    const on = AUD && AUD._u === el.dataset.u, d = on && isFinite(AUD.duration) ? AUD.duration : 0, c = on ? AUD.currentTime : 0;
+    el.querySelector(".apt i").style.width = (d ? c / d * 100 : 0) + "%";
+    el.querySelector(".apd").textContent = fmt(Math.floor(c));
+    el.querySelector(".apb").innerHTML = ic(on && !AUD.paused ? "pause" : "play", 18, 1);
+  });
+}
+function playUrl(u) {
+  if (AUD && AUD._u === u) { AUD.paused ? AUD.play() : AUD.pause(); return syncAP(); }
+  if (AUD) AUD.pause();
+  AUD = new Audio(u); AUD._u = u;
+  AUD.ontimeupdate = AUD.onpause = AUD.onplay = AUD.onloadedmetadata = syncAP;
+  AUD.onended = () => { AUD.currentTime = 0; syncAP(); };
+  AUD.play().catch(() => toast("No se pudo reproducir")); syncAP();
+}
+const dd = (id, label, opts, cur, dir) => `<div class="dd"><button class="ddb" data-a="dd" data-d="${esc(id)}">${esc(label)}${ic("chev", 16)}</button>${S.dd === id ? `<div class="ddl ${dir || ""}">${opts.map(([v, t]) => `<button class="${v === cur ? "on" : ""}" data-a="ddo" data-d="${esc(id)}" data-v="${esc(v)}">${esc(t)}</button>`).join("")}</div>` : ""}</div>`;
+const EMJ = "😀 😃 😄 😁 😆 😅 😂 🤣 😊 😇 🙂 😉 😍 🥰 😘 😋 😛 😜 🤪 😎 🤩 🥳 😏 😒 😞 😔 😕 🙁 😣 😖 😫 😩 🥺 😢 😭 😤 😠 😡 🤯 😳 🥵 🥶 😱 😨 😰 🤗 🤔 🫡 🤭 🤫 😶 😐 😑 😬 🙄 😯 😮 😴 🤤 😷 🤒 🤕 🤢 🥴 😵 🤠 👍 👎 👏 🙌 🙏 💪 👀 ❤️ 🧡 💛 💚 💙 💜 🖤 💔 🔥 ✨ 🎉 🎂 🎁 ⭐ 💯 ✅ ❌".split(" ");
+const epan = id => `<div class="pnl"><div class="pg e">${EMJ.map(e => `<button class="em" data-a="emo" data-id="${id}" data-e="${e}">${e}</button>`).join("")}</div></div>`;
+const cbody = c => [safe(c.sticker_url) ? `<img class="stk" alt="Sticker" src="${safe(c.sticker_url)}">` : "", safe(c.image_url) ? `<img class="cpic" loading="lazy" alt="Imagen" src="${safe(c.image_url)}" data-a="lb" data-u="${safe(c.image_url)}">` : "", safeA(c.audio_url) ? ap(c.audio_url) : "", c.text ? esc(c.text) : ""].join("");
+function chatbar(id) {
+  const k = "c" + id, has = (S.dr[k] || "").trim();
+  if (S.rec === k) return `<div class="cbar rec"><button class="cb" data-a="crc" aria-label="Cancelar">${ic("trash", 20)}</button><span class="dotrec"></span><span class="rtime" id="rt">0:00 / 1:00</span><button class="cb send" data-a="recsend" aria-label="Enviar audio">${ic("send", 20)}</button></div>`;
+  const pan = S.cp && S.cp.id === id ? (S.cp.p === "s" ? stray(id) : epan(id)) : "";
+  return `<div class="cbar ${has ? "has" : ""}"><button class="cb" data-a="pan" data-id="${id}" data-p="e" aria-label="Emojis">${ic("smile", 22)}</button><input data-k="${k}" value="${esc(S.dr[k] || "")}" placeholder="Mensaje" maxlength="200" enterkeyhint="send"><button class="cb" data-a="pan" data-id="${id}" data-p="s" aria-label="Stickers">${ic("sticker", 22)}</button><label class="cb" for="fc" role="button" data-a="cimg" data-id="${id}" aria-label="Enviar imagen">${ic("img", 22)}</label><button class="cb mic" data-a="rec" data-t="${k}" aria-label="Grabar audio">${ic("mic", 22)}</button><button class="cb send" data-a="send" data-id="${id}" aria-label="Enviar">${ic("send", 20)}</button></div>${pan}`;
+}
+function acctMenu() {
+  const p = meP(), pf = S.accts;
+  return `<div class="dd"><button class="ddb me" data-a="dd" data-d="acct">${avatar({ ...p, id: S.me.id }, "sm")}<b>${esc(S.me.username)}</b>${ic("chev", 16)}</button>${S.dd === "acct" ? `<div class="ddl am"><div class="pt" style="margin:6px 12px">Cuentas (${pf.length}/2)</div>${pf.map(a => `<button class="${a.id === S.me.id ? "on" : ""}" data-a="swc" data-id="${esc(a.id)}">${avatar(pOf(a.id), "sm")}<span style="flex:1">${esc(a.username)}</span>${a.id === S.me.id ? ic("check", 16) : ""}</button>`).join("")}${pf.length < 2 ? `<button data-a="addacct">${ic("plus", 18)}Agregar otra cuenta</button>` : ""}<button data-a="out" style="color:var(--bad)">${ic("x", 18)}Cerrar sesión</button></div>` : ""}</div>`;
+}
+const seenSet = () => { try { return new Set(JSON.parse(localStorage.getItem("momentos_seen")) || []); } catch (e) { return new Set(); } };
+const markSeen = list => { const q = seenSet(); list.forEach(x => q.add(x.id)); try { localStorage.setItem("momentos_seen", JSON.stringify([...q].slice(-300))); } catch (e) {} };
+function storiesBar() {
+  if (!S.me) return "";
+  const me = S.me.id, q = seenSet(), ids = S.data.friends.filter(f => f.status === "accepted").map(f => f.requester === me ? f.addressee : f.requester);
+  const of = u => S.data.stories.filter(x => x.user_id === u), fresh = l => l.length && !l.every(x => q.has(x.id));
+  const ring = l => l.length ? (fresh(l) ? "ring" : "ring seen") : "";
+  const c = (uid, name, l, extra) => `<button class="sc ${ring(l)}" data-a="st" data-u="${esc(uid)}"><span class="scw">${avatar(pOf(uid), "lg")}${extra || ""}</span><small>${esc(name)}</small></button>`;
+  const fr = ids.map(id => [id, of(id)]).sort((a, b) => (fresh(b[1]) ? 1 : 0) - (fresh(a[1]) ? 1 : 0));
+  return `<div class="stories">${c(me, "Tu estado", of(me), `<span class="plus" data-a="newst" aria-label="Nuevo estado">${ic("plus", 14)}</span>`)}${fr.map(([id, l]) => c(id, pOf(id).username, l)).join("")}${ids.length ? "" : `<button class="sc wait" data-a="tab" data-t="friends"><span class="scw dash">${ic("plus", 24)}</span><small>Esperas a tu próximo amigo</small></button>`}</div>`;
+}
+function storySheet() {
+  const d = { "1": "1 hora", "6": "6 horas", "12": "12 horas", "24": "24 horas" }, cur = S.sdur || "24";
+  return `<div class="sheet" data-a="stx"><div class="vis" data-stop="1"><h2 style="margin:0">Nuevo estado</h2>${S.simg ? `<div class="prev"><img src="${esc(S.simg.prev)}" alt="Vista previa"></div>` : `<label class="btn ghost" for="fst" role="button">${ic("img", 18)}Elegir foto</label>`}<textarea data-k="smsg" maxlength="140" placeholder="Mensaje (opcional)">${esc(S.dr.smsg || "")}</textarea><div class="row">${dd("sdur", "Dura " + d[cur], Object.entries(d), cur, "up")}<button class="btn" data-a="stgo">Publicar</button></div>${S.err ? `<div class="err">${esc(S.err)}</div>` : ""}</div></div>`;
+}
+function storyView() {
+  const list = S.data.stories.filter(x => x.user_id === S.sv.uid).sort((a, b) => a.created_at - b.created_at);
+  if (!list.length) return "";
+  const i = Math.min(S.sv.i, list.length - 1), st = list[i], u = pOf(st.user_id), left = Math.max(0, st.expires_at - Date.now());
+  const t = left > 36e5 ? Math.ceil(left / 36e5) + " h" : Math.max(1, Math.ceil(left / 6e4)) + " min", own = S.me && st.user_id === S.me.id;
+  return `<div class="sview"><div class="svtop">${avatar(u, "sm")}<div><b>${esc(u.username)}</b><small>Termina en ${t}</small></div><button class="ic" data-a="svx" aria-label="Cerrar" style="color:#fff">${ic("x", 24)}</button></div><img class="svimg" alt="Estado" src="${safe(st.image_url)}"><div class="svbot">${list.length > 1 ? `<div class="svnav"><button data-a="svn" data-v="-1" aria-label="Anterior">‹</button><span>${i + 1} / ${list.length}</span><button data-a="svn" data-v="1" aria-label="Siguiente">›</button></div>` : ""}${st.message ? (S.sv.msg ? `<div class="svmsg">${esc(st.message)}</div>` : `<button class="btn ghost" data-a="svm">${ic("chat", 18)}Ver mensaje</button>`) : ""}${own ? del("s", st.id) : ""}</div></div>`;
+}
+const head = t => `<div class="ph"><h2 class="disp">${t}</h2></div>`;
+const hms = ms => { const t = Math.max(0, Math.floor(ms / 1e3)); return [Math.floor(t / 3600), Math.floor(t % 3600 / 60), t % 60].map(n => String(n).padStart(2, "0")).join(":"); };
+const eff = p => p.blocked_until > Date.now() ? "blocked" : (p.status || (p.is_blocked ? "blocked" : "active"));
+const gold = () => "";
+const commentFire = id => id && id === S.topId ? '<span class="comment-fire" aria-label="Destacado de hoy" title="Destacado de hoy">🔥</span>' : "";
+const introOn = p => p.intro_url && p.intro_until > Date.now();
+const fmt = n => Math.floor(n / 60) + ":" + String(n % 60).padStart(2, "0");
+const stray = id => {
+  const mine = S.data.stickers.filter(k => S.me && k.user_id === S.me.id), rest = S.data.stickers.filter(k => !S.me || k.user_id !== S.me.id);
+  const tile = k => `<button class="st" data-a="ss" data-id="${id}" data-u="${safe(k.image_url)}" aria-label="Enviar sticker"><img alt="" src="${safe(k.image_url)}"></button>`;
+  return `<div class="pnl"><div class="pt">Mis stickers</div><div class="pg"><label class="st add" for="fs" role="button" aria-label="Crear sticker">${ic("plus", 22)}</label>${mine.map(tile).join("")}</div>${rest.length ? `<div class="pt">De otros</div><div class="pg">${rest.map(tile).join("")}</div>` : ""}</div>`;
+};
+
+async function bgBlob(file) {
+  if (!/^image\//.test(file.type) || file.size > 30e6) throw new Error("Imagen no válida");
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("No se pudo leer esa imagen")); i.src = url; });
+    const enc = (c, t, q) => new Promise((ok, no) => c.toBlob(b => b ? ok(b) : no(new Error("No se pudo comprimir esa imagen")), t, q));
+    let max = 1920, q = .85, out = null;
+    for (let i = 0; i < 6; i++) {
+      const k = Math.min(1, max / Math.max(img.width, img.height)), c = document.createElement("canvas");
+      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+      const g = c.getContext("2d"); if (!g) throw new Error("No se pudo procesar esa imagen");
+      g.imageSmoothingQuality = "high"; g.drawImage(img, 0, 0, c.width, c.height);
+      let b = await enc(c, "image/webp", q); if (b.type !== "image/webp") b = await enc(c, "image/jpeg", q);
+      out = b; if (b.size <= 450e3) break;
+      if (q > .66) q -= .08; else max = Math.round(max * .85);
+    }
+    return { blob: out, before: file.size };
+  } finally { URL.revokeObjectURL(url); }
+}
+function applyBg() {
+  const p = meP(), live = S.me && S.tab === "me" && S.pf;
+  const bg = live ? S.pf.bg : p.bg, urls = live ? S.pf.bgu : [p.bg_url, p.bg_url2];
+  let kind = S.me ? (bg || "void") : "void";
+  const isC = kind === "custom" || kind === "custom2", url = kind === "custom" ? urls[0] : kind === "custom2" ? urls[1] : null, el = $("#bgl");
+  if (isC && !imageUrl(url)) kind = "void";
+  else if (!isC && !BGS.some(x => x[0] === kind)) kind = "void";
+  const c = isC && kind !== "void";
+  el.className = "b-" + (c ? "custom" : kind); const bgUrl = c ? imageUrl(url) : ""; el.style.backgroundImage = bgUrl ? `url("${bgUrl.replace(/[\\"\n\r]/g, x => encodeURIComponent(x))}")` : "";
+  document.body.dataset.bg = kind; el.style.setProperty("--dim", S.dim);
+  $("#px").style.display = kind === "void" || kind === "stars" ? "" : "none";
+  if (PX) PX.set(kind === "stars" ? 3 : 1);
+}
+async function wavTrim(blob, max) {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  let buf; try { buf = await ctx.decodeAudioData(await blob.arrayBuffer()); } catch (e) { throw new Error("No se pudo leer ese audio"); } finally { ctx.close(); }
+  const rate = 16000, secs = Math.min(buf.duration, max), n = Math.floor(secs * rate);
+  const off = new OfflineAudioContext(1, n, rate), src = off.createBufferSource();
+  src.buffer = buf; src.connect(off.destination); src.start(0);
+  const out = (await off.startRendering()).getChannelData(0);
+  const v = new DataView(new ArrayBuffer(44 + n * 2)), w = (o, t) => [...t].forEach((c, i) => v.setUint8(o + i, c.charCodeAt(0)));
+  w(0, "RIFF"); v.setUint32(4, 36 + n * 2, true); w(8, "WAVEfmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+  v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true); w(36, "data"); v.setUint32(40, n * 2, true);
+  for (let i = 0; i < n; i++) v.setInt16(44 + i * 2, Math.max(-1, Math.min(1, out[i])) * 32767, true);
+  return { blob: new Blob([v], { type: "audio/wav" }), trimmed: buf.duration > max + .5 };
+}
+async function setAudio(blob, max, target, kind, title) {
+  const r = await wavTrim(blob, max), o = { blob: r.blob, prev: URL.createObjectURL(r.blob), kind, title: title || "" };
+  if (target === "intro") S.ia = o; else { S.aud = o; S.img = null; }
+  if (r.trimmed) toast("Se recortó a " + max + " segundos");
+}
+async function startRec(max, target) {
+  if (!navigator.mediaDevices || !window.MediaRecorder) throw new Error("Tu navegador no permite grabar audio");
+  let st; try { st = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch (e) { throw new Error("No se pudo usar el micrófono. Revisa el permiso del navegador."); }
+  const mr = new MediaRecorder(st), ch = [], t0 = Date.now();
+  mr.ondataavailable = e => ch.push(e.data);
+  mr.onstop = async () => {
+    const cancel = REC.cancel; clearInterval(REC.iv); st.getTracks().forEach(x => x.stop()); REC = null; S.rec = null;
+    try {
+      if (!cancel) {
+        if (target[0] === "c") { const r = await wavTrim(new Blob(ch), max); toast("Enviando audio…"); const url = await API.upload(r.blob, "wav", "audio/wav"); await API.comment(+target.slice(1), "", null, null, url); await refresh(); return; }
+        await setAudio(new Blob(ch), max, target, "audio");
+      }
+    } catch (e) { toast(e.message); }
+    render();
+  };
+  REC = { mr, iv: setInterval(() => { const n = Math.floor((Date.now() - t0) / 1e3), el = $("#rt"); if (el) el.textContent = fmt(n) + " / " + fmt(max); if (n >= max && mr.state === "recording") mr.stop(); }, 250) };
+  mr.start(); S.rec = target; render();
+}
+async function sticker(file) {
+  if (!/^image\//.test(file.type) || file.size > 30e6) throw new Error("Imagen no válida");
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("No se pudo leer esa imagen")); i.src = url; });
+    const c = document.createElement("canvas"); c.width = c.height = 256;
+    const k = Math.max(256 / img.width, 256 / img.height), w = img.width * k, h = img.height * k;
+    const ctx = c.getContext("2d"); if (!ctx) throw new Error("No se pudo procesar esa imagen");
+    ctx.drawImage(img, (256 - w) / 2, (256 - h) / 2, w, h);
+    return await new Promise((ok, no) => c.toBlob(b => b ? ok(b) : no(new Error("No se pudo crear el sticker")), "image/png"));
+  } finally { URL.revokeObjectURL(url); }
+}
+
+function pigeons() {
+  const inbox = S.data.pg.inbox; if (!inbox.length) return "";
+  return `<h2>Palomas</h2>` + inbox.map(g => { const u = pOf(g.sender); return `<div class="card" style="margin:8px 0"><div class="who">${avatar(u)}<div><b style="color:${cl(u.color)}">${esc(u.username)}</b> te mandó un mensaje<small>${ago(g.arrives_at)}</small></div>${g.seen ? "" : '<span class="chip" style="margin-left:auto">Nueva</span>'}</div>${S.pgo[g.id] ? `<p>${esc(g.text)}</p>` : `<button class="btn ghost" data-a="pread" data-id="${g.id}" style="margin-top:8px">Leer mensaje</button>`}</div>`; }).join("");
+}
+function pigeonSheet() {
+  const u = pOf(S.pgto), next = S.data.pg.last + 864e5, rest = next > Date.now();
+  return `<div class="sheet" data-a="pgx"><div data-stop="1"><h2 style="margin:0">Paloma para ${esc(u.username)}</h2>${rest ? `<div class="pt" style="margin:0;text-align:center">Próxima paloma en</div><div class="timer" id="pgtm">${hms(next - Date.now())}</div>` : `<textarea data-k="pgt" maxlength="200" placeholder="Tu mensaje">${esc(S.dr.pgt || "")}</textarea>`}${S.err ? `<div class="err">${esc(S.err)}</div>` : ""}${rest ? "" : `<button class="btn" data-a="pgsend2">${ic("bird", 18)}Enviar</button>`}</div></div>`;
+}
+const POL = [
+  ["Edad mínima", "CURIOCITY está destinada exclusivamente a personas de 18 años o más. Al registrarte marcas una casilla y la aplicación guarda esa declaración; no verifica tu edad de forma independiente ni solicita documentos de identidad. Si eres menor, no crees una cuenta. Si se identifica una cuenta de una persona menor, contacta al responsable para solicitar su revisión."],
+  ["Datos que tratamos", "Tratamos tu apodo y el identificador de acceso asociado; datos de perfil como avatar, color, fotos, fondos, relación y preferencia de presencia; publicaciones, comentarios, reacciones, amistades, historias, stickers, audios y mensajes enviados mediante Palomas; alertas de moderación y marcas de tiempo como creación, expiración y última conexión. Supabase Auth administra tu contraseña y conserva un hash criptográfico; CURIOCITY no guarda la contraseña en claro en la tabla de perfiles. La aplicación también conserva tokens de sesión en el almacenamiento local del navegador para mantener la sesión y permitir cambiar entre cuentas guardadas."],
+  ["Fotos y archivos", "Antes de subir imágenes, la aplicación las vuelve a procesar en el navegador mediante canvas y las comprime. No hemos verificado en todos los formatos y navegadores que el resultado elimine todos los metadatos; evita subir imágenes que contengan información que no quieras compartir. Los archivos multimedia se almacenan en Supabase Storage."],
+  ["Visibilidad y límites actuales", "La ficha de perfil puede configurarse como pública, visible para amistades aceptadas o no visible para otros usuarios, conforme a la configuración de privacidad del perfil en Supabase. Esta preferencia no restringe por sí sola publicaciones públicas ni enlaces directos de archivos del bucket `media`, que actualmente es público; evita compartir información sensible."],
+  ["Proveedores", "La página se aloja en GitHub Pages; Supabase proporciona autenticación, base de datos y almacenamiento; Google Fonts entrega la tipografía. Estos proveedores reciben los datos técnicos necesarios para prestar esos servicios. No hemos verificado la región de almacenamiento, los periodos de retención ni todas las condiciones contractuales o transferencias de cada proveedor."],
+  ["Convivencia y moderación", "No publiques amenazas, acoso, discriminación, contenido ilegal ni datos personales de otras personas; evita el spam. El código incluye funciones y controles de base de datos para ciertas acciones y herramientas administrativas para cambiar estados de cuentas y moderar contenido. No afirmamos una pausa de duración fija ni que cada incidente genere una alerta hasta verificar completamente esos mecanismos en producción."],
+  ["Seguridad de la cuenta", "Supabase Auth gestiona las contraseñas mediante hash criptográfico, no cifrado reversible. La protección de Supabase contra contraseñas filtradas está deshabilitada en la configuración revisada. Los tokens de sesión se guardan en el almacenamiento local del navegador; un código malicioso que llegara a ejecutarse en la página podría intentar leerlos. Usa una contraseña única, cierra sesión en dispositivos compartidos y mantén actualizado tu navegador. Ninguna medida elimina todos los riesgos."],
+  ["Tus derechos y eliminación", "Puedes solicitar acceso, rectificación, cancelación u oposición respecto de tus datos escribiendo al contacto indicado abajo. La aplicación permite eliminar publicaciones, comentarios e historias desde la interfaz según los controles disponibles. No cuenta con un flujo automatizado para borrar una cuenta; solicita ayuda al contacto. No hemos confirmado la eliminación asociada de todos los archivos, mensajes, registros ni copias de seguridad, por lo que no prometemos borrado total o inmediato. Atenderemos solicitudes conforme a la normativa aplicable, sin fijar aquí plazos no verificados."],
+  ["Responsable y contacto", "CURIOCITY es el nombre del servicio. Para dudas, reportes o solicitudes sobre tus datos, escribe a " + CONTACT + ". El nombre o denominación legal y domicilio del responsable deben completarse para identificar plenamente a la persona responsable del tratamiento."],
+  ["Cambios a este aviso", "Esta política puede actualizarse para reflejar cambios en el servicio o en el tratamiento de datos. La versión vigente se mostrará en CURIOCITY con su fecha de actualización. Esta versión describe limitaciones técnicas identificadas y no constituye una garantía de cumplimiento legal absoluto."]
+];
+function polSheet() {
+  return `<div class="sheet" data-a="polx"><div class="pol" data-stop="1"><h2 style="margin:0">Política de privacidad de CURIOCITY</h2><small style="color:var(--ash)">Versión 2.0 · 26 de octubre de 2026</small>${POL.map(([t, x], i) => `<div><b>${i + 1}. ${t}</b><p>${esc(x)}</p></div>`).join("")}<button class="btn" data-a="polok">Entendido</button></div></div>`;
+}
+function profileName(u) { return `<button class="plink pname" data-a="viewp" data-id="${esc(u.id)}" style="color:${cl(u.color)}">${esc(u.username)}</button>`; }
+function profileSheet() { const u=S.viewUser&&S.data.profiles[S.viewUser]; if(!u)return ""; const own=S.me&&S.me.id===u.id, friend=S.me&&S.data.friends.some(f=>f.status==="accepted"&&((f.requester===S.me.id&&f.addressee===u.id)||(f.addressee===S.me.id&&f.requester===u.id))); return `<div class="sheet" data-a="viewpx"><div data-stop="1"><button class="ic" data-a="viewpx" style="justify-self:end">Cerrar</button>${avatar(u,"big")}<h2 style="margin:8px 0;text-align:center;color:${cl(u.color)}">${esc(u.username)}</h2>${REL[u.relationship]?`<div style="text-align:center;color:var(--mut)">${REL[u.relationship]}</div>`:""}<div class="note">${own?"Este es tu perfil.":friend?"Pueden ver este perfil porque son amigos.":"Perfil visible según la configuración de su propietario."}</div>${own?"":`<button class="btn ghost" data-a="fadd" data-id="${esc(u.id)}">Agregar a amistades</button>`}<h3>Momentos</h3>${S.data.moments.filter(m=>m.user_id===u.id).map(m=>`<div class="note"><small>${ago(m.created_at)}</small><div>${esc(m.text||"Foto")}</div></div>`).join("")||'<div class="empty">Sin momentos para mostrar</div>'}</div></div>`; }
+function urow(u, acts) { return `<div class="item">${avatar(u, "sm")}<div>${profileName(u)}${gold(u.id)}${REL[u.relationship] ? `<small style="display:block;color:var(--mut)">${REL[u.relationship]}</small>` : ""}</div>${acts}</div>`; }
+function fres() {
+  const F = S.data.friends, me = S.me.id, rel = new Set(F.map(f => f.requester === me ? f.addressee : f.requester)), q = (S.dr.fq || "").trim().toLowerCase();
+  const us = Object.values(S.data.profiles).filter(u => u.id !== me && !rel.has(u.id) && (isAdmin() || eff(u) !== "blocked") && u.username.toLowerCase().includes(q));
+  return us.slice(0, 30).map(u => urow(u, `<button class="btn" data-a="fadd" data-id="${u.id}">Agregar</button>`)).join("") || '<div class="empty">Nadie más por ahora</div>';
+}
+function friends() {
+  if (!S.me) return `<div class="empty"><p>Entra para hacer amigos.</p><button class="btn" data-a="auth" data-m="in">Entrar</button></div>`;
+  const F = S.data.friends, me = S.me.id, P = f => pOf(f.requester === me ? f.addressee : f.requester);
+  const inc = F.filter(f => f.status === "pending" && f.addressee === me), acc = F.filter(f => f.status === "accepted"), out = F.filter(f => f.status === "pending" && f.requester === me);
+  return head("Amistades") + pigeons() + (inc.length ? `<h2>Solicitudes</h2>` + inc.map(f => urow(pOf(f.requester), `<button class="btn" data-a="facc" data-id="${f.id}">Aceptar</button><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Rechazar">${ic("x", 20)}</button>`)).join("") : "")
+    + `<h2>Mis amigos (${acc.length})</h2>` + (acc.map(f => urow(P(f), `<button class="btn ghost" data-a="pgsend" data-id="${P(f).id}">${ic("bird", 18)}Paloma</button><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Quitar amigo">${ic("trash", 20)}</button>`)).join("") || '<div class="empty">Sin amistades todavía</div>')
+    + (out.length ? `<h2>Enviadas</h2>` + out.map(f => urow(P(f), `<span class="chip">Pendiente</span><button class="ic" data-a="fdel" data-id="${f.id}" aria-label="Cancelar">${ic("x", 20)}</button>`)).join("") : "")
+    + `<h2>Buscar</h2><input data-k="fq" placeholder="Buscar por apodo" value="${esc(S.dr.fq || "")}"><div id="fres">${fres()}</div>`;
+}
+
+function card(m, hero, ico, rankMode = false) {
+  const p = pOf(m.user_id), L = likesOf(m.id), mf = S.me && L.find(l => l.user_id === S.me.id), mine = mf && (mf.kind || "heart");
+  const C = S.data.comments.filter(c => c.moment_id === m.id && visible(c.user_id)), o = S.open[m.id];
+  const cms = o ? `<div class="cms">${C.map(c => { const q = pOf(c.user_id); return `<div class="cm"><b style="color:${cl(q.color)}">${esc(q.username)}</b>${commentFire(c.user_id)} ${cbody(c)}${S.me && c.user_id === S.me.id ? del("c", c.id) : ""}</div>`; }).join("")}</div>` : "";
+  const more = !o && C.length ? `<button class="more" data-a="cm" data-id="${m.id}">Ver ${C.length} comentario${C.length > 1 ? "s" : ""}</button>` : "";
+  const cnt = k => L.filter(l => (l.kind || "heart") === k).length;
+  const tp = REACT.map(([k, e]) => [e, cnt(k)]).filter(x => x[1]).sort((a, b) => b[1] - a[1]).slice(0, 3).map(x => x[0]).join("");
+  const tray = S.rx === m.id ? `<div class="tray">${REACT.map(([k, e]) => `<button class="${mine === k ? "on" : ""}" data-a="like" data-id="${m.id}" data-k2="${k}" aria-label="Reaccionar ${k}"><span>${e}</span><small>${cnt(k) || ""}</small></button>`).join("")}</div>` : "";
+  return `<article class="card ${hero ? "hero" : ""}">${hero ? `<span class="tag">${ic(ico || "trophy", 16)}${hero}</span>` : ""}<div class="who" ${hero ? 'style="margin-top:10px"' : ""}>${avatar(p)}<div>${profileName(p)}${rankMode ? "" : gold(m.user_id)}<small>${ago(m.created_at)}${REL[p.relationship] ? " · " + REL[p.relationship] : ""}</small></div>${introOn(p) ? `<button class="mini" data-a="play" data-u="${safe(p.intro_url)}">${ic("music", 14)}Presentación</button>` : ""}${S.me && m.user_id === S.me.id ? del("m", m.id) : ""}</div>${safe(m.image_url) ? `<img class="pic" loading="lazy" alt="Foto del momento" src="${safe(m.image_url)}" data-a="lb" data-u="${safe(m.image_url)}">` : ""}${safe(m.audio_url) ? (m.kind === "music" ? `<div class="note-card" style="--cc:${cl(p.color)}"><span class="nt">${ic("music", 24)}</span><div><b>${esc(m.audio_title || "Canción")}</b><small>Nota musical</small>${ap(m.audio_url, "w")}</div></div>` : `<div class="voice">${ap(m.audio_url)}</div>`) : ""}${m.text ? `<p>${esc(m.text)}</p>` : '<div style="height:10px"></div>'}<div class="acts"><button class="${mine ? "on" : ""} ${S.pop === m.id ? "bump" : ""}" data-a="rx" data-id="${m.id}" aria-label="Reaccionar">${tp || ic("heart", 18)}${L.length || ""}</button><button data-a="cm" data-id="${m.id}">${ic("chat", 18)}${C.length}</button></div>${tray}${more}${cms}${chatbar(m.id)}</article>`;
+}
+
+function home() {
+  const st = eff(meP()), un = S.me ? S.data.pg.inbox.filter(g => !g.seen).length : 0;
+  const pb = un ? `<button class="note" data-a="tab" data-t="friends" style="width:100%;border:0;text-align:left">${ic("bird", 18)} Tienes ${un} paloma${un > 1 ? "s" : ""} nueva${un > 1 ? "s" : ""}</button>` : "";
+  const comp = !S.me
+    ? `<div class="card" style="text-align:center"><p style="margin:0 0 12px">Crea tu cuenta para publicar, dar likes y comentar.</p><button class="btn" data-a="auth" data-m="up">Crear cuenta</button></div>`
+    : (st === "restricted" || st === "blocked")
+      ? `<div class="note">${NOTE[st]}</div>`
+      : `<div class="card"><textarea data-k="post" maxlength="280" placeholder="¿Qué pasó hoy?">${esc(S.dr.post || "")}</textarea>${S.img ? `<div class="prev"><img src="${esc(S.img.prev)}" alt="Vista previa"><button data-a="noimg" aria-label="Quitar foto">${ic("x", 16)}</button></div>` : ""}${S.aud ? `<div style="margin-top:8px">${S.aud.kind === "music" ? `<input data-k="mt" maxlength="60" placeholder="Título de la canción" value="${esc(S.dr.mt || "")}" style="margin-bottom:8px">` : ""}${ap(S.aud.prev)}<button class="btn ghost" data-a="noaud" style="margin-top:6px">Quitar audio</button></div>` : ""}${S.rec === "post" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 1:00</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : ""}<div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="f" role="button">${ic("img", 18)}Foto</label><label class="btn ghost" for="fm" role="button">${ic("music", 18)}Música</label><button class="btn ghost" data-a="rec" data-t="post">${ic("mic", 18)}Voz</button><button class="btn" data-a="post" style="margin-left:auto">Publicar</button></div>${st === "muted" ? `<div class="note" style="margin-top:10px">${NOTE.muted}</div>` : ""}</div>`;
+  const pn = m => m.pinned_until > Date.now() ? 1 : 0;
+  const ms = S.data.moments.filter(m => visible(m.user_id)).sort((a, b) => pn(b) - pn(a) || b.created_at - a.created_at);
+  return pb + storiesBar() + head("Inicio") + comp + (ms.map(m => card(m, pn(m) ? "Fijado" : null, "pin")).join("") || '<div class="empty">Aún no hay momentos</div>');
+}
+
+const rankScore = m => {
+  const reactions = likesOf(m.id).length;
+  const comments = S.data.comments.filter(c => c.moment_id === m.id).length;
+  return reactions + comments * 2;
+};
+const daily = () => S.data.moments.filter(m => Date.now() - m.created_at < 864e5 && visible(m.user_id)).map(m => [m, rankScore(m)]).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1] || b[0].created_at - a[0].created_at).slice(0, 3);
+function rank() {
+  const top = daily();
+  if (!top.length) return head("Destacados") + '<div class="empty">Aún no hay destacados hoy</div>';
+  return head("Destacados") + top.map(([m, points], i) => {
+    const lead = i === 0, author = pOf(m.user_id);
+    const mark = lead ? '<div class="rkn streak" aria-label="Primer lugar">🔥</div>' : `<div class="rkn">${i + 1}</div>`;
+    const meta = lead ? "" : `<div class="rkmeta"><span>#{i + 1}</span><span>·</span><span>${points} punto${points === 1 ? "" : "s"}</span></div>`;
+    const post = card(m, null, null, true).replace(`style="color:${cl(author.color)}"`, `class="${lead ? "rkname-fire" : ""}" style="color:${lead ? "#ff4b2b" : cl(author.color)}"`);
+    return `<section class="rkitem">${mark}<div class="rkc">${meta}${post}</div></section>`;
+  }).join("");
+}
+
+function prof() {
+  if (!S.me) return `<div class="empty"><p>Entra para personalizar tu perfil.</p><button class="btn" data-a="auth" data-m="in">Entrar</button></div>`;
+  const p = meP();
+  S.pf = S.pf || { color: cl(p.color), avatar: p.avatar || "a1", url: p.avatar_url || null, blob: null, rel: p.relationship || "none", bg: p.bg || "void", bgu: [p.bg_url || null, p.bg_url2 || null], bgb: [null, null] };
+  const mine = S.data.moments.filter(m => m.user_id === S.me.id), got = mine.reduce((n, m) => n + likesOf(m.id).length, 0);
+  const view = { color: S.pf.color, avatar: S.pf.avatar, avatar_url: S.pf.url };
+  const tab = S.ptab || "look", labs = { look: "Apariencia", bg: "Fondo", more: "Ajustes" };
+  const save = `<button class="btn" data-a="psave" style="width:100%;margin-top:32px">Guardar cambios</button>`;
+  const look = `<div class="pt">Foto</div><div class="row"><label class="btn ghost" for="fa" role="button">${ic("img", 18)}Subir foto</label>${S.pf.url ? `<button class="btn ghost" data-a="noav">Quitar</button>` : ""}</div>
+    <div class="pt" style="margin-top:30px">Robot</div><div class="grid">${AVS.map(a => `<button data-a="pa" data-v="${a}" class="${!S.pf.url && S.pf.avatar === a ? "sel" : ""}">${avatar({ avatar: a, color: S.pf.color })}</button>`).join("")}</div>
+    <div class="pt" style="margin-top:30px">Color</div><div class="grid">${COLORS.map(c => `<button data-a="pc" data-v="${c[1]}" class="${S.pf.color === c[1] ? "sel" : ""}"><span class="sw" style="background:${c[1]}"></span>${c[0]}</button>`).join("")}</div>${save}`;
+  const bgs = `<div class="pt">Elige un fondo</div><div class="grid">${BGS.map(([k, n]) => `<button data-a="pbg" data-v="${k}" class="${S.pf.bg === k ? "sel" : ""}"><span class="bgt b-${k}"></span>${n}</button>`).join("")}${S.pf.bgu.map((u, i) => u ? `<button data-a="pbg" data-v="${i ? "custom2" : "custom"}" class="${S.pf.bg === (i ? "custom2" : "custom") ? "sel" : ""}"><span class="bgt b-custom" style="background-image:url('${cssImage(u)}')"></span>Mío ${i + 1}</button>` : "").join("")}</div>
+    <div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="fbg" role="button">${ic("img", 18)}Subir fondo ${S.pf.bgu.filter(Boolean).length}/2</label>${S.pf.bg.startsWith("custom") ? `<button class="btn ghost" data-a="nobg">Quitar</button>` : ""}</div>
+    ${S.pf.bg.startsWith("custom") ? `<div class="pt" style="margin:26px 0 8px">Oscurecer</div><div class="seg" style="grid-template-columns:repeat(4,1fr)">${[["0", "Nada"], ["0.3", "Suave"], ["0.5", "Medio"], ["0.7", "Fuerte"]].map(([v, n]) => `<button data-a="dim" data-v="${v}" class="${String(S.dim) === v ? "on" : ""}">${n}</button>`).join("")}</div>` : ""}${save}`;
+  const more = `<div class="pt">Quién puede ver tu perfil</div><div class="row" style="flex-wrap:wrap">${[["public","Público"],["friends","Amigos"],["private","Nadie"]].map(([k,v])=>`<button class="btn ghost ${(p.profile_visibility||"public")===k?"on":""}" data-a="pvisibility" data-v="${k}" aria-pressed="${(p.profile_visibility||"public")===k}">${v}</button>`).join("")}</div><small style="color:var(--mut)">Controla la ficha del perfil. Los momentos y enlaces de archivos tienen permisos independientes.</small><div class="pt" style="margin-top:30px">Relación</div><div class="row" style="flex-wrap:wrap">${[["none", "Prefiero no decir"], ["single", "Soltero/a"], ["taken", "En una relación"]].map(([k, v]) => `<button class="btn ghost ${S.pf.rel === k ? "on" : ""}" data-a="prel" data-v="${k}">${v}</button>`).join("")}</div>
+    <div class="srow"><span>Mostrar si estoy en línea</span><button class="tg ${p.show_presence !== false ? "on" : ""}" data-a="ptog" aria-label="Mostrar si estoy en línea"></button></div>
+    <div class="pt" style="margin-top:34px">Presentación</div>
+    ${introOn(p) ? `<div class="note" style="margin-top:8px">Activa hasta ${new Date(p.intro_until).toLocaleString("es", { weekday: "short", hour: "2-digit", minute: "2-digit" })}</div>` : ""}
+    ${S.ia ? ap(S.ia.prev) : ""}
+    ${S.rec === "intro" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 0:30</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : `<div class="row" style="flex-wrap:wrap"><button class="btn ghost" data-a="rec" data-t="intro">${ic("mic", 18)}Grabar</button><label class="btn ghost" for="fi" role="button">${ic("music", 18)}Subir audio</label>${introOn(p) ? `<button class="btn ghost" data-a="introoff">Quitar</button>` : ""}</div>`}
+    <div class="row">${dd("dur", "Dura " + ({ "0.25": "15 minutos", "1": "1 hora", "24": "1 día" })[S.idur || "24"], [["0.25", "15 minutos"], ["1", "1 hora"], ["24", "1 día"]], S.idur || "24", "up")}<button class="btn" data-a="introsave">Publicar</button></div>
+    <button class="btn ghost" data-a="out" style="width:100%;margin-top:40px">Cerrar sesión</button>
+    <div class="row" style="justify-content:space-between;margin-top:22px"><button class="plink" data-a="pol">Política de privacidad</button><small style="color:var(--ash)">CURIOCITY v2.0</small></div>`;
+  return head("Perfil") + `<div class="card" style="text-align:center;margin-bottom:26px">${avatar(view, "big")}<h2 style="color:${S.pf.color};margin:14px 0 2px">${esc(S.me.username)}${gold(S.me.id)}</h2><small style="color:var(--mut)">${mine.length} momentos · ${got} reacciones</small></div><div class="seg" style="grid-template-columns:repeat(3,1fr);margin-bottom:30px">${Object.entries(labs).map(([k, v]) => `<button data-a="ptab" data-v="${k}" class="${tab === k ? "on" : ""}">${v}</button>`).join("")}</div>${tab === "look" ? look : tab === "bg" ? bgs : more}`;
+}
+
+function del(kind, id) {
+  const k = kind + id;
+  return `<button class="ic" data-a="del" data-t="${kind}" data-id="${id}" aria-label="Eliminar">${S.arm === k ? "Confirmar" : ic("trash", 20)}</button>`;
+}
+
+function alertsHtml() {
+  const A = S.data.alerts; if (!A.length) return "";
+  return `<h2>Alertas</h2>` + A.map(a => { const u = pOf(a.user_id); return `<div class="item">${avatar(u, "sm")}<div><b>${esc(u.username)}</b> <span class="chip bad">Spam</span><small style="display:block;color:var(--ash)">${esc(a.detail)} · ${ago(a.created_at)}</small></div><button class="btn ghost" data-a="unb" data-u="${esc(a.user_id)}" data-id="${a.id}">Desbloquear</button><button class="ic" data-a="dal" data-id="${a.id}" aria-label="Descartar">${ic("x", 20)}</button></div>`; }).join("");
+}
+function admin() {
+  if (!isAdmin()) return '<div class="empty">Solo para administradores.</div>';
+  const us = Object.values(S.data.profiles).filter(u => u.id !== S.me.id);
+  const cms = [...S.data.comments].sort((a, b) => b.created_at - a.created_at).slice(0, 30);
+  const ms = [...S.data.moments].sort((a, b) => b.created_at - a.created_at).slice(0, 20);
+  return alertsHtml() + `<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span>Usuarios totales</span><b style="font-size:28px">${Object.keys(S.data.profiles).length}</b></div><h2>Perfiles</h2>` + (us.map(u => `<div class="item">${avatar(u, "sm")}<div><b style="color:${cl(u.color)}">${esc(u.username)}</b> ${eff(u) !== "active" ? `<span class="chip bad">${STAT[eff(u)]}</span>` : ""}</div>${dd("st:" + u.id, STAT[u.status || "active"], Object.entries(STAT), u.status || "active")}</div>`).join("") || '<div class="empty">Aún no hay otros perfiles.</div>')
+    + `<h2>Comentarios</h2>` + (cms.map(c => `<div class="item"><div><b>${esc(pOf(c.user_id).username)}</b>: ${esc(c.text)}</div>${del("c", c.id)}</div>`).join("") || '<div class="empty">Sin comentarios.</div>')
+    + `<h2>Momentos</h2>` + (ms.map(m => `<div class="item">${safe(m.image_url) ? `<img class="thumb" alt="" src="${safe(m.image_url)}">` : ""}<div>${m.pinned_until > Date.now() ? '<span class="chip">Fijado</span> ' : ""}<b>${esc(pOf(m.user_id).username)}</b>: ${esc(m.text || "(solo foto)")}</div>${dd("pin:" + m.id, m.pinned_until > Date.now() ? "Fijado" : "Fijar", [["1", "1 hora"], ["24", "1 día"], ["168", "7 días"], ...(m.pinned_until > Date.now() ? [["0", "Quitar"]] : [])], "")}${del("m", m.id)}</div>`).join("") || '<div class="empty">Sin momentos.</div>');
+}
+
+function authSheet() {
+  const up = S.auth === "up";
+  return `<div class="sheet" data-a="close"><div data-stop="1">${!S.me && S.accts.length ? `<div class="pt" style="margin:0">Tus cuentas</div>${S.accts.map(a => `<button class="btn ghost" data-a="swc" data-id="${esc(a.id)}" style="justify-content:flex-start">${avatar(pOf(a.id), "sm")}<span>${esc(a.username)}</span></button>`).join("")}<div class="pt" style="margin:6px 0 0">Otra cuenta</div>` : ""}<div class="seg"><button data-a="auth" data-m="in" class="${up ? "" : "on"}">Entrar</button><button data-a="auth" data-m="up" class="${up ? "on" : ""}">Crear cuenta</button></div><input id="u" data-k="au" placeholder="Apodo" autocapitalize="none" autocomplete="username" maxlength="20" value="${esc(S.dr.au || "")}"><div class="pw"><input id="p" data-k="ap" type="${S.spw ? "text" : "password"}" placeholder="${up ? "Contraseña (mínimo 8)" : "Contraseña"}" autocomplete="${up ? "new-password" : "current-password"}" value="${esc(S.dr.ap || "")}"><button data-a="spw">${S.spw ? "Ocultar" : "Mostrar"}</button></div>${up ? `<label class="chk"><input type="checkbox" id="acc" ${S.acc ? "checked" : ""}><span>Tengo 18 años o más y acepto la <button type="button" class="plink" data-a="pol">Política de privacidad</button></span></label>` : ""}${S.err ? `<div class="err">${esc(S.err)}</div>` : ""}<button class="btn" data-a="go">${up ? "Crear cuenta" : "Entrar"}</button></div></div>`;
+}
+
+function render() {
+  setTimeout(() => { S.pop = null; syncAP(); }); S.topId = (daily()[0] || [{}])[0].user_id; applyBg();
+  const p = meP();
+  $("#bar").innerHTML = (API.demo ? '<span class="chip">Modo demo</span> ' : "") + (S.me ? acctMenu() : '<button class="btn" data-a="auth" data-m="in">Entrar</button>');
+  const T = [["home", "home", "Inicio"], ["top", "trophy", "Destacados"], ["friends", "users", "Amistades"], ["me", "user", "Perfil"]];
+  if (isAdmin()) T.push(["admin", "shield", "Admin"]);
+  const nreq = S.me ? S.data.friends.filter(f => f.status === "pending" && f.addressee === S.me.id).length + S.data.pg.inbox.filter(g => !g.seen).length : 0;
+  $("#nav").innerHTML = T.map(t => `<button data-a="tab" data-t="${t[0]}" class="${S.tab === t[0] ? "on" : ""}">${ic(t[1], 22)}${t[2]}${(t[0] === "friends" ? nreq : t[0] === "admin" ? S.data.alerts.length : 0) ? `<i class="dot">${t[0] === "friends" ? nreq : S.data.alerts.length}</i>` : ""}</button>`).join("");
+  $("#main").className = S.fresh ? "go" : ""; S.fresh = false;
+  $("#main").innerHTML = S.tab === "home" ? home() : S.tab === "top" ? rank() : S.tab === "friends" ? friends() : S.tab === "admin" ? admin() : prof();
+  const auth = $("#auth"); auth.innerHTML = S.pol ? polSheet() : S.auth ? authSheet() : S.stnew ? storySheet() : S.sv ? storyView() : S.pgto ? pigeonSheet() : S.viewUser ? profileSheet() : "";
+  if (!S.pol && !S.auth && !S.stnew && !S.sv && !S.pgto && !S.viewUser && S.lb) {
+    const sheet = document.createElement("div"), img = document.createElement("img");
+    sheet.className = "sheet"; sheet.dataset.a = "lbx"; sheet.style.alignItems = "center";
+    img.alt = "Foto ampliada"; img.style.cssText = "max-width:96%;max-height:90vh;border-radius:12px";
+    const src = imageUrl(S.lb); if (src) { img.src = src; sheet.append(img); auth.append(sheet); }
+  }
+}
+
+async function refresh() { try { S.data = await API.load(); } catch (e) { toast(e.message); } try { S.accts = await API.accounts(); } catch (e) {} render(); }
+const needLogin = () => { if (!S.me) { S.auth = "in"; render(); return true; } return false; };
+
+document.addEventListener("input", e => { const k = e.target.dataset && e.target.dataset.k; if (k) S.dr[k] = e.target.value; if (k === "fq" && $("#fres")) $("#fres").innerHTML = fres(); if (/^c\d+$/.test(k || "")) e.target.closest(".cbar").classList.toggle("has", !!e.target.value.trim()); });
+
+document.addEventListener("change", async e => {
+  const t = e.target;
+  try {
+    if (t.dataset.st) { await API.setStatus(t.dataset.st, t.value); await refresh(); toast("Perfil actualizado"); }
+    else if (t.dataset.pin) { if (t.value === "") return; await API.pin(+t.dataset.pin, +t.value); await refresh(); toast(+t.value ? "Momento fijado" : "Fijado quitado"); }
+    else if (t.id === "fc") { const f = t.files[0]; t.value = ""; if (!f || !S.me || !S.cfor) return; toast("Enviando imagen…"); const url = await API.upload(await shrink(f, 1280, .78)); await API.comment(S.cfor, (S.dr["c" + S.cfor] || "").trim(), null, url); S.dr["c" + S.cfor] = ""; S.cp = null; await refresh(); }
+    else if (t.id === "fst") { const f = t.files[0]; t.value = ""; if (!f) return; const bl = await shrink(f, 1080, .8); S.simg = { blob: bl, prev: await toData(bl) }; render(); }
+    else if (t.id === "fbg") { const f = t.files[0]; t.value = ""; if (!f || !S.pf) return; const sl = !S.pf.bgu[0] ? 0 : !S.pf.bgu[1] ? 1 : -1; if (sl < 0) return toast("Máximo 2 fondos. Quita uno para subir otro."); toast("Optimizando…"); const r = await bgBlob(f), d = await toData(r.blob); S.pf.bgb[sl] = r.blob; S.pf.bgu[sl] = d; S.pf.bg = sl ? "custom2" : "custom"; render(); toast("Fondo listo: " + kb(r.before) + " a " + kb(r.blob.size)); }
+    else if (t.id === "acc") S.acc = t.checked;
+    else if (t.id === "idur") S.idur = t.value;
+    else if (t.id === "fm" || t.id === "fi") { const f = t.files[0]; t.value = ""; if (!f) return; await setAudio(f, t.id === "fm" ? 60 : 30, t.id === "fm" ? "post" : "intro", t.id === "fm" ? "music" : "audio", f.name.replace(/\.[^.]+$/, "")); render(); }
+    else if (t.id === "fs") { const f = t.files[0]; t.value = ""; if (!f || needLogin()) return; const url = await API.upload(await sticker(f), "png", "image/png"); await API.addSticker(url); await refresh(); toast("Sticker creado"); }
+    else if (t.id === "f" || t.id === "fa") {
+      const f = t.files[0]; t.value = ""; if (!f) return;
+      const b = await shrink(f, t.id === "f" ? 1280 : 256, t.id === "f" ? .8 : .62), d = await toData(b);
+      if (t.id === "f") { S.img = { blob: b, prev: d }; S.aud = null; } else { S.pf = S.pf || {}; S.pf.blob = b; S.pf.url = d; }
+      render();
+    }
+  } catch (x) { toast(x.message || "Algo salió mal"); }
+});
+
+document.addEventListener("click", async e => {
+  if (S.dd && !e.target.closest(".dd")) { S.dd = null; render(); }
+  const b = e.target.closest("[data-a]"); if (!b) return;
+  if (/^(close|pgx|stx|polx|viewpx)$/.test(b.dataset.a) && e.target.closest("[data-stop]")) return;
+  const a = b.dataset.a, id = +b.dataset.id;
+  try {
+    if (a === "tab") { S.tab = b.dataset.t; S.pf = null; S.arm = null; S.fresh = true; S.rx = null; render(); scrollTo(0, 0); }
+    else if (a === "auth") { S.auth = b.dataset.m; S.err = null; render(); }
+    else if (a === "spw") { S.spw = !S.spw; render(); }
+    else if (a === "close") { S.auth = null; render(); }
+    else if (a === "lb") { S.lb = b.dataset.u; render(); }
+    else if (a === "lbx") { S.lb = null; render(); }
+    else if (a === "go") {
+      const u = ($("#u").value || "").trim(), p = $("#p").value || ""; S.dr.au = u; S.dr.ap = p;
+      if (S.lock && Date.now() < S.lock) { S.err = "Espera unos segundos e inténtalo de nuevo"; return render(); }
+      if (!/^[A-Za-z0-9_]{3,20}$/.test(u)) { S.err = "Apodo: 3 a 20 letras, números o _"; return render(); }
+      if (S.auth === "up" && p.length < 8) { S.err = "La contraseña necesita mínimo 8 caracteres"; return render(); }
+      if (p.length < 6) { S.err = "Contraseña demasiado corta"; return render(); }
+      if (S.auth === "up" && !S.acc) { S.err = "Acepta la política para crear tu cuenta"; return render(); }
+      try { S.auth === "up" ? await API.signUp(u, p) : await API.signIn(u, p); } catch (e) { if (S.auth !== "up" && /incorrectos/.test(e.message) && ++S.fails >= 5) { S.lock = Date.now() + 30000; S.fails = 0; } S.err = e.message; return render(); }
+      S.err = null; S.fails = 0; S.dr.ap = ""; S.me = await API.session(); S.auth = null; S.pf = null; await refresh(); pingNow(); toast("Bienvenido, " + S.me.username);
+    }
+    else if (a === "out") { S.dd = null; try { await API.ping(false); } catch (e) {} await API.signOut(); S.me = null; S.pf = null; S.tab = "home"; await refresh(); toast("Sesión cerrada"); }
+    else if (a === "pick") $("#f").click();
+    else if (a === "pickav") $("#fa").click();
+    else if (a === "noimg") { S.img = null; render(); }
+    else if (a === "post") {
+      const t = (S.dr.post || "").trim(); if (!t && !S.img && !S.aud) return toast("Escribe algo o agrega una foto o un audio");
+      b.disabled = true; const url = S.img ? await API.upload(S.img.blob) : null;
+      let ex = null;
+      if (S.aud) ex = { kind: S.aud.kind, audio_title: S.aud.kind === "music" ? (S.dr.mt || "Mi canción").slice(0, 60) : null, audio_url: await API.upload(S.aud.blob, "wav", "audio/wav") };
+      await API.post(t, url, ex); S.dr.post = ""; S.dr.mt = ""; S.img = null; S.aud = null; await refresh(); toast("Momento publicado");
+    }
+    else if (a === "swc") {
+      if (S.me && b.dataset.id === S.me.id) { S.dd = null; return render(); }
+      try { await API.ping(false); } catch (e) {}
+      await API.switchTo(b.dataset.id); S.me = await API.session(); S.auth = null; S.dd = null; S.pf = null; S.tab = "home"; await refresh(); pingNow(); toast("Cuenta: " + S.me.username);
+    }
+    else if (a === "addacct") { S.dd = null; S.auth = "in"; S.err = null; render(); }
+    else if (a === "ptog") { const on = meP().show_presence === false; await API.setPresence(on); await API.ping(on); await refresh(); toast(on ? "Tu estado de conexión es visible" : "Tu estado de conexión está oculto"); }
+    else if (a === "viewp") { S.viewUser=b.dataset.id; render(); }
+    else if (a === "viewpx") { S.viewUser=null; render(); }
+    else if (a === "pvisibility") { await API.setProfileVisibility(b.dataset.v); S.data.profiles[S.me.id].profile_visibility=b.dataset.v; toast("Visibilidad actualizada"); render(); }
+    else if (a === "pgsend") { S.pgto = b.dataset.id; S.err = null; render(); }
+    else if (a === "pgx") { S.pgto = null; S.err = null; render(); }
+    else if (a === "pgsend2") {
+      const t = (S.dr.pgt || "").trim(); if (!t) { S.err = "Escribe un mensaje"; return render(); }
+      try { await API.pigeonSend(S.pgto, t); } catch (e) { S.err = e.message; return render(); }
+      S.pgto = null; S.dr.pgt = ""; S.err = null; await refresh(); toast("Paloma enviada");
+    }
+    else if (a === "pread") { S.pgo[id] = true; await API.pigeonSeen(id); await refresh(); }
+    else if (a === "noaud") { S.aud = null; render(); }
+    else if (a === "rec") { if (needLogin()) return; await startRec(b.dataset.t === "intro" ? 30 : 60, b.dataset.t); }
+    else if (a === "recstop") { if (REC && REC.mr.state === "recording") REC.mr.stop(); }
+    else if (a === "play" || a === "aplay") playUrl(b.dataset.u);
+    else if (a === "pan") { if (needLogin()) return; S.cp = S.cp && S.cp.id === id && S.cp.p === b.dataset.p ? null : { id, p: b.dataset.p }; render(); }
+    else if (a === "emo") { S.dr["c" + id] = (S.dr["c" + id] || "") + b.dataset.e; render(); }
+    else if (a === "cimg") { S.cfor = id; }
+    else if (a === "recsend") { if (REC && REC.mr.state === "recording") REC.mr.stop(); }
+    else if (a === "crc") { if (REC) { REC.cancel = true; if (REC.mr.state === "recording") REC.mr.stop(); } }
+    else if (a === "dd") { S.dd = S.dd === b.dataset.d ? null : b.dataset.d; render(); }
+    else if (a === "ddo") {
+      const [kind, ref] = b.dataset.d.split(":"), v = b.dataset.v; S.dd = null;
+      if (kind === "st") { await API.setStatus(ref, v); await refresh(); toast("Perfil actualizado"); }
+      else if (kind === "pin") { await API.pin(+ref, +v); await refresh(); toast(+v ? "Momento fijado" : "Fijado quitado"); }
+      else if (kind === "sdur") { S.sdur = v; render(); }
+      else { S.idur = v; render(); }
+    }
+    else if (a === "ss") { await API.comment(id, "", b.dataset.u); S.cp = null; await refresh(); }
+    else if (a === "fadd") { await API.friendReq(b.dataset.id); await refresh(); toast("Solicitud enviada"); }
+    else if (a === "facc") { await API.friendAccept(id); await refresh(); toast("Ahora son amigos"); }
+    else if (a === "fdel") { await API.friendDel(id); await refresh(); }
+    else if (a === "introsave") { if (!S.ia) return toast("Graba o sube un audio primero"); b.disabled = true; const url = await API.upload(S.ia.blob, "wav", "audio/wav"); await API.setIntro(url, +(S.idur || 24)); S.ia = null; await refresh(); toast("Presentación publicada"); }
+    else if (a === "introoff") { await API.setIntro(null, 0); await refresh(); toast("Presentación quitada"); }
+    else if (a === "rx") { if (needLogin()) return; S.rx = S.rx === id ? null : id; render(); }
+    else if (a === "like") { if (needLogin()) return; const k = b.dataset.k2, cur = likesOf(id).find(l => l.user_id === S.me.id), same = cur && (cur.kind || "heart") === k; S.rx = null; S.pop = same ? null : id; await API.like(id, same ? null : k); await refresh(); }
+    else if (a === "cm") { S.open[id] = !S.open[id]; render(); }
+    else if (a === "send") {
+      if (needLogin()) return;
+      const t = (S.dr["c" + id] || "").trim(); if (!t) return;
+      await API.comment(id, t); S.dr["c" + id] = ""; S.cp = null; await refresh();
+    }
+    else if (a === "pol") { S.pol = true; render(); }
+    else if (a === "polx" || a === "polok") { S.pol = false; render(); }
+    else if (a === "unb") { await API.unblock(b.dataset.u); await API.delAlert(id); await refresh(); toast("Desbloqueado"); }
+    else if (a === "dal") { await API.delAlert(id); await refresh(); }
+    else if (a === "st") {
+      const uid = b.dataset.u, l = S.data.stories.filter(x => x.user_id === uid);
+      if (!l.length) { if (S.me && uid === S.me.id) { S.stnew = true; S.err = null; render(); } return; }
+      S.sv = { uid, i: 0, msg: false }; markSeen(l); render();
+    }
+    else if (a === "newst") { S.stnew = true; S.err = null; render(); }
+    else if (a === "stx") { S.stnew = false; S.simg = null; S.dd = null; render(); }
+    else if (a === "svx") { S.sv = null; render(); }
+    else if (a === "svn") { const n = S.data.stories.filter(x => x.user_id === S.sv.uid).length || 1; S.sv.i = (S.sv.i + +b.dataset.v + n) % n; S.sv.msg = false; render(); }
+    else if (a === "svm") { S.sv.msg = true; render(); }
+    else if (a === "stgo") {
+      if (!S.simg) { S.err = "Elige una foto primero"; return render(); }
+      b.disabled = true;
+      try { const url = await API.upload(S.simg.blob); await API.storyCreate(url, (S.dr.smsg || "").trim(), +(S.sdur || 24)); } catch (e) { S.err = e.message; return render(); }
+      S.stnew = false; S.simg = null; S.dr.smsg = ""; S.err = null; await refresh(); toast("Estado publicado");
+    }
+    else if (a === "dim") { S.dim = b.dataset.v; try { localStorage.setItem("momentos_dim", S.dim); } catch (e) {} render(); }
+    else if (a === "pbg") { S.pf.bg = b.dataset.v; render(); }
+    else if (a === "nobg") { const i = S.pf.bg === "custom2" ? 1 : 0; S.pf.bgu[i] = null; S.pf.bgb[i] = null; S.pf.bg = "void"; render(); }
+    else if (a === "ptab") { S.ptab = b.dataset.v; render(); }
+    else if (a === "prel") { await API.setRel(b.dataset.v); S.pf.rel = b.dataset.v; await refresh(); }
+    else if (a === "pc") { S.pf.color = b.dataset.v; render(); }
+    else if (a === "pa") { S.pf.avatar = b.dataset.v; S.pf.url = null; S.pf.blob = null; render(); }
+    else if (a === "noav") { S.pf.url = null; S.pf.blob = null; render(); }
+    else if (a === "psave") {
+      let url = S.pf.url; if (S.pf.blob) url = await API.upload(S.pf.blob);
+      const bgs = [];
+      for (let i = 0; i < 2; i++) { let u = S.pf.bgu[i], bb = S.pf.bgb[i]; if (u && bb) u = await API.upload(bb, bb.type === "image/webp" ? "webp" : "jpg", bb.type); bgs.push(u || null); }
+      if ((S.pf.bg === "custom" && !bgs[0]) || (S.pf.bg === "custom2" && !bgs[1])) S.pf.bg = "void";
+      await API.profile(S.pf.color, S.pf.avatar, url, S.pf.rel, S.pf.bg, bgs[0], bgs[1]);
+    }
+    else if (a === "del") {
+      const k = b.dataset.t + id; if (S.arm !== k) { S.arm = k; render(); setTimeout(() => { if (S.arm === k) { S.arm = null; render(); } }, 4000); return; }
+      S.arm = null; const dt = b.dataset.t; dt === "c" ? await API.delComment(id) : dt === "s" ? await API.delStory(id) : await API.delMoment(id); await refresh(); toast("Eliminado");
+    }
+  } catch (err) { toast(err.message || "Algo salió mal"); render(); }
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key !== "Enter") return;
+  const t = e.target;
+  if (t.id === "u" || t.id === "p") { e.preventDefault(); document.querySelector('[data-a="go"]').click(); }
+  else if (/^c\d+$/.test(t.dataset.k || "")) { e.preventDefault(); const bt = document.querySelector('[data-a="send"][data-id="' + t.dataset.k.slice(1) + '"]'); if (bt) bt.click(); }
+});
+
+function particles() {
+  const cv = $("#px"), cx = cv.getContext("2d"), cols = ["#8052ff", "#ffb829", "#15846e", "#d946ef", "#3b82f6"], still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let P = [], W = 0, H = 0, cur = 1;
+  const size = () => { if (!cv.clientWidth) return; const d = devicePixelRatio || 1; W = cv.clientWidth; H = cv.clientHeight; cv.width = W * d; cv.height = H * d; cx.setTransform(d, 0, 0, d, 0, 0); };
+  const make = () => ({ x: Math.random() * W, y: Math.random() * H, s: 4 + Math.random() * 9, r: Math.random() * 6.28, vr: (Math.random() - .5) * .004, vx: (Math.random() - .5) * .08, vy: -.03 - Math.random() * .08, c: cols[Math.floor(Math.random() * cols.length)], a: .12 + Math.random() * .33 });
+  const draw = () => {
+    cx.clearRect(0, 0, W, H); cx.lineWidth = 1;
+    for (const p of P) {
+      if (!still) { p.x += p.vx; p.y += p.vy; p.r += p.vr; if (p.y < -20) { p.y = H + 20; p.x = Math.random() * W; } if (p.x < -20) p.x = W + 20; if (p.x > W + 20) p.x = -20; }
+      cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.globalAlpha = p.a; cx.strokeStyle = p.c;
+      cx.beginPath(); cx.moveTo(0, -p.s); cx.lineTo(p.s * .87, p.s * .5); cx.lineTo(-p.s * .87, p.s * .5); cx.closePath(); cx.stroke(); cx.restore();
+    }
+  };
+  const count = m => Math.round((W < 600 ? 55 : 110) * m);
+  size(); P = Array.from({ length: count(1) }, make); draw();
+  let lw = innerWidth; addEventListener("resize", () => { if (innerWidth !== lw) { lw = innerWidth; size(); draw(); } });
+  if (!still) { let last = 0; const loop = t => { if (!document.hidden && cv.style.display !== "none" && t - last > 33) { last = t; draw(); } requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
+  return { set(m) { if (m === cur) return; cur = m; const n = count(m); while (P.length < n) P.push(make()); P.length = Math.min(P.length, n); draw(); } };
+}
+let PX = null; try { PX = particles(); } catch (e) {}
+(async () => { try { S.me = await API.session(); } catch (e) {} await refresh(); pingNow(); })();
+setInterval(async () => { if (document.hidden) return; pingNow(); try { S.data.profiles = await API.profiles(); paintDots(); } catch (e) {} }, 45000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) pingNow(); });
+setInterval(() => { const el = $("#pgtm"); if (!el) return; const left = S.data.pg.last + 864e5 - Date.now(); if (left <= 0) render(); else el.textContent = hms(left); }, 1000);
+</script>
+</body>
+</html>
+
+
