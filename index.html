@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#000000">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-EGMMdDVsAIP+VCiiuKPcm/bkJFl7rwG3nciWk705oUg=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-pT9s+sJPUkeI5TZVq1zfKwCEFrE/xtH3KMH7FTGqc2k=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
 <title>CURIOCITY</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap">
 <style>
@@ -15,14 +15,16 @@
 color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px);background:#000}
-body{margin:0;background:#000;color:#fff;font:300 17px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-feature-settings:"ss01" on;min-height:100vh;-webkit-font-smoothing:antialiased}
+body{margin:0;background:#000;color:#fff;font:400 16px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-feature-settings:"ss01" on,"cv02" on,"cv03" on;min-height:100vh;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:transparent;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);z-index:10}
 #px{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:0;pointer-events:none}
 b{font-weight:600}
+ .pname{background:none;border:0;padding:0;font:inherit;font-weight:600;text-align:left;cursor:pointer;text-decoration:none}.pname:hover{filter:brightness(1.18);text-decoration:none}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
-h1{margin:0;font-size:15px;font-weight:600;letter-spacing:.16em;display:flex;align-items:center;gap:10px}
-h2{margin:48px 0 18px;font-size:28px;font-weight:400;letter-spacing:-.035em;line-height:1.1;color:#fff}
-h2.disp{font-size:clamp(40px,12vw,64px);letter-spacing:-.045em;line-height:1;margin:8px 0 16px}
+h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.12em;display:flex;align-items:center;gap:10px}
+h2{margin:48px 0 18px;font-size:29px;font-weight:650;letter-spacing:-.045em;line-height:1.08;color:#fff}
+h2.disp{font-size:clamp(42px,12vw,66px);font-weight:650;letter-spacing:-.06em;line-height:.96;margin:8px 0 16px}
+h3{margin:22px 0 10px;font-size:16px;font-weight:700;letter-spacing:-.02em}
 .ph{margin:30px 0 42px}
 .lab,.pt{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--saffron)}
 .sub{font-weight:200;font-size:18px;color:var(--mist);max-width:480px;margin:0}
@@ -40,8 +42,8 @@ input:focus,textarea:focus{outline:none;border-bottom-color:var(--iris)}
 button:focus-visible{outline:2px solid var(--iris);outline-offset:2px}
 textarea{resize:none;min-height:84px}
 .card{background:transparent;border:0;border-radius:0;padding:0;margin:0 0 56px}
-.card p{margin:12px 0;font-size:18px;line-height:1.5;font-weight:300;overflow-wrap:anywhere}
-.hero p{font-size:30px;line-height:1.12;letter-spacing:-.04em;font-weight:400}
+.card p{margin:12px 0;font-size:18px;line-height:1.52;font-weight:400;letter-spacing:-.012em;overflow-wrap:anywhere}
+.hero p{font-size:30px;line-height:1.12;letter-spacing:-.045em;font-weight:550}
 .who{display:flex;gap:12px;align-items:center}
 .who b{font-size:16px}
 .who small{display:block;color:var(--ash);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:400}
@@ -179,6 +181,7 @@ body:not([data-bg="void"]) header,body:not([data-bg="void"]) nav{background:tran
 @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
 @keyframes tin{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
 @keyframes blink{50%{opacity:.25}}
+@keyframes flame{0%,100%{opacity:.88;filter:brightness(.92) saturate(1.15) drop-shadow(0 0 4px #ff4300)}45%{opacity:1;filter:brightness(1.23) saturate(1.45) drop-shadow(0 0 13px #ff7900)}70%{opacity:.94;filter:brightness(1.06) saturate(1.3) drop-shadow(0 0 8px #ff3200)}}
 .go .card,.go .item,.go .empty,.go .ph{animation:up .5s ease-out both}
 .go .card:nth-child(2){animation-delay:.06s}.go .card:nth-child(3){animation-delay:.12s}.go .card:nth-child(4){animation-delay:.18s}.go .card:nth-child(n+5){animation-delay:.24s}
 .sheet{animation:fade .2s}.sheet>div{animation:slide .28s cubic-bezier(.2,.9,.3,1)}
@@ -188,16 +191,18 @@ button:active:not(:disabled),label.btn:active{transform:scale(.96)}
 .pw button:active:not(:disabled){transform:translateY(-50%)}
 .acts button.bump{animation:bump .35s}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-.gold{display:inline-grid;place-items:center;min-width:19px;height:19px;border-radius:50%;border:1.5px solid var(--saffron);color:var(--saffron);font-size:11px;font-weight:600;font-style:normal;margin-left:8px;vertical-align:middle;box-shadow:0 0 10px rgba(255,184,41,.4)}
-section.rkitem{display:flex;gap:14px;margin-bottom:44px}
-.rkn{font-size:46px;font-weight:200;letter-spacing:-.05em;line-height:1;width:36px;flex:none;color:var(--ash)}
-section.rkitem:first-of-type .rkn{color:var(--saffron)}
+section.rkitem{display:flex;gap:14px;margin-bottom:44px;position:relative}
+.rkn{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1;width:36px;flex:none;color:var(--ash);padding-top:3px;text-align:center}
+.rkn.streak{font-size:34px;width:42px;padding-top:0;animation:flame 1.35s ease-in-out infinite}
 .rkc{flex:1;min-width:0}.rkc .card{margin:0;padding:0;border:0}
+.rkmeta{display:flex;align-items:center;gap:8px;margin:-4px 0 12px;color:var(--ash);font-size:12px;font-weight:600;letter-spacing:.025em}
+.rkmeta.fire{color:#ff6b2d}.rkname-fire{color:#ff4b2b!important;text-shadow:0 0 18px rgba(255,72,32,.36)}
+.comment-fire{display:inline-block;margin-left:4px;font-size:12px;line-height:1;vertical-align:1px;animation:flame 1.35s ease-in-out infinite}
 article.card{padding-bottom:30px;margin-bottom:30px;border-bottom:1px solid rgba(255,255,255,.12)}
 .timer{font-size:46px;font-weight:200;letter-spacing:-.03em;font-variant-numeric:tabular-nums;text-align:center;padding:6px 0}
 label.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mist);font-weight:300}
 .chk input{width:20px;height:20px;accent-color:var(--iris);flex:none;margin-top:2px;padding:0;border:0}
-.plink{background:none;border:0;padding:0;color:#4C8DFF;font:inherit;text-decoration:underline;cursor:pointer}
+.plink{background:none;border:0;padding:0;color:#4C8DFF;font:inherit;text-decoration:none;cursor:pointer}
 .sheet>div.pol{max-width:520px;display:grid;gap:14px}
 .pol p{margin:4px 0 0;font-size:15px;color:var(--mist)}
 .btn,.ddb,.seg button,nav button,.grid button,.pw button,.mini{text-transform:none;letter-spacing:0}
@@ -339,12 +344,13 @@ function mkDemo() {
     async signUp(n, p) { if (find(n)) throw new Error("Ese nombre ya existe"); if (s.saved.length >= 2) throw new Error(FULL); const u = { id: "u" + (++s.n), username: n, pass: p, color: COLORS[4][1], avatar: "a1", status: "active" }; s.users.push(u); s.me = u.id; s.saved.push(u.id); save(); },
     async signIn(n, p) { const u = find(n); if (!u || u.pass !== p) throw new Error("Usuario o contraseña incorrectos"); if (!s.saved.includes(u.id)) { if (s.saved.length >= 2) throw new Error(FULL); s.saved.push(u.id); } s.me = u.id; save(); },
     async signOut() { s.saved = s.saved.filter(x => x !== s.me); s.me = null; save(); },
-    async load() { return { profiles: Object.fromEntries(s.users.map(u => [u.id, u])), moments: s.moments, likes: s.likes, comments: s.comments, friends: s.friends, stickers: s.stickers, pg: { inbox: s.pigeons.filter(g => g.recipient === s.me && g.arrives_at <= Date.now() && g.fate !== "lost").sort((a, b) => b.arrives_at - a.arrives_at).map(g => ({ id: g.id, sender: g.sender, text: g.text, arrives_at: g.arrives_at, seen: g.seen })), last: Math.max(0, ...s.pigeons.filter(g => g.sender === s.me).map(g => g.sent_at)) }, stories: s.stories.filter(x => x.expires_at > Date.now() && (x.user_id === s.me || s.friends.some(f => f.status === "accepted" && ((f.requester === s.me && f.addressee === x.user_id) || (f.addressee === s.me && f.requester === x.user_id))))), alerts: [] }; },
+    async load() { const isFriend=u=>s.friends.some(f=>f.status==="accepted"&&((f.requester===s.me&&f.addressee===u.id)||(f.addressee===s.me&&f.requester===u.id))); return { profiles: Object.fromEntries(s.users.filter(u=>u.id===s.me||u.profile_visibility!=="private"&&(u.profile_visibility!=="friends"||isFriend(u))).map(u => [u.id, u])), moments: s.moments, likes: s.likes, comments: s.comments, friends: s.friends, stickers: s.stickers, pg: { inbox: s.pigeons.filter(g => g.recipient === s.me && g.arrives_at <= Date.now() && g.fate !== "lost").sort((a, b) => b.arrives_at - a.arrives_at).map(g => ({ id: g.id, sender: g.sender, text: g.text, arrives_at: g.arrives_at, seen: g.seen })), last: Math.max(0, ...s.pigeons.filter(g => g.sender === s.me).map(g => g.sent_at)) }, stories: s.stories.filter(x => x.expires_at > Date.now() && (x.user_id === s.me || s.friends.some(f => f.status === "accepted" && ((f.requester === s.me && f.addressee === x.user_id) || (f.addressee === s.me && f.requester === x.user_id))))), alerts: [] }; },
     async upload(b) { return toData(b); },
     async post(t, img, ex) { if (["restricted", "blocked"].includes(meU().status)) deny(); s.moments.push({ id: ++s.n, user_id: s.me, text: t, image_url: img || null, ...(ex || {}), created_at: Date.now() }); save(); },
     async like(id, on) { if (meU().status === "blocked") deny(); s.likes = s.likes.filter(l => !(l.moment_id === id && l.user_id === s.me)); if (on) s.likes.push({ moment_id: id, user_id: s.me, kind: on }); save(); },
     async comment(id, t, st, img, aud) { if (["muted", "blocked"].includes(meU().status)) deny(); s.comments.push({ id: ++s.n, moment_id: id, user_id: s.me, text: t, sticker_url: st || null, image_url: img || null, audio_url: aud || null, created_at: Date.now() }); save(); },
     async profile(color, av, url, rel, bg, bgu, bgu2) { const u = meU(); u.bg_url2 = bgu2 || null; u.color = color; u.avatar = av; u.avatar_url = url || null; u.relationship = rel; u.bg = bg; u.bg_url = bgu || null; save(); },
+    async setProfileVisibility(v) { if (!["public","friends","private"].includes(v)) throw new Error("Opción no válida"); meU().profile_visibility=v; save(); },
     async setStatus(id, st) { s.users.find(u => u.id === id).status = st; save(); },
     async setIntro(url, h) { const u = meU(); u.intro_url = url; u.intro_until = url ? Date.now() + h * 36e5 : 0; save(); },
     async addSticker(url) { s.stickers.unshift({ id: ++s.n, user_id: s.me, image_url: url }); save(); },
@@ -412,6 +418,7 @@ function mkSup() {
     async like(id, kind) { const me = await this.session(); await sb.from("likes").delete().eq("moment_id", id).eq("user_id", me.id); if (kind) fail((await sb.from("likes").insert({ moment_id: id, kind })).error); },
     async comment(id, x, st, img, aud) { fail((await sb.from("comments").insert({ moment_id: id, text: x, sticker_url: st || null, image_url: img || null, audio_url: aud || null })).error); },
     async profile(color, av, url, rel, bg, bgu, bgu2) { const me = await this.session(); fail((await sb.from("profiles").update({ color, avatar: av, avatar_url: url || null, relationship: rel, bg, bg_url: bgu || null, bg_url2: bgu2 || null }).eq("id", me.id)).error); },
+    async setProfileVisibility(v) { fail((await sb.rpc("set_my_profile_visibility", { p_visibility: v })).error); },
     async setStatus(id, st) { fail((await sb.rpc("admin_set_status", { target: id, new_status: st })).error); },
     async setIntro(url, h) { const me = await this.session(); fail((await sb.from("profiles").update({ intro_url: url, intro_until: url ? new Date(Date.now() + h * 36e5).toISOString() : null }).eq("id", me.id)).error); },
     async addSticker(url) { fail((await sb.from("stickers").insert({ image_url: url })).error); },
@@ -458,7 +465,7 @@ const API = (CFG.url && CFG.key && window.supabase) ? mkSup() : mkDemo();
 if (CFG.url && CFG.key && !window.supabase) setTimeout(() => toast("No se pudo cargar la conexión. Recarga la página."), 800);
 const gate = (() => { let t = 0; return () => { if (Date.now() - t < 1200) throw new Error("Más despacio"); t = Date.now(); }; })();
 ["post", "comment"].forEach(k => { const f = API[k].bind(API); API[k] = async (...a) => { gate(); return f(...a); }; });
-let S = { ptab: "look", fails: 0, lock: 0, acc: false, pol: false, stnew: false, sv: null, simg: null, sdur: "24", dim: (() => { try { return localStorage.getItem("momentos_dim") || "0.3"; } catch (e) { return "0.3"; } })(), accts: [], dd: null, cp: null, cfor: null, pgo: {}, pgto: null, fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [], pg: { inbox: [], last: 0 }, stories: [], alerts: [] }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
+let S = { viewUser: null, ptab: "look", fails: 0, lock: 0, acc: false, pol: false, stnew: false, sv: null, simg: null, sdur: "24", dim: (() => { try { return localStorage.getItem("momentos_dim") || "0.3"; } catch (e) { return "0.3"; } })(), accts: [], dd: null, cp: null, cfor: null, pgo: {}, pgto: null, fresh: true, tab: "home", data: { profiles: {}, moments: [], likes: [], comments: [], friends: [], stickers: [], pg: { inbox: [], last: 0 }, stories: [], alerts: [] }, me: null, open: {}, auth: null, dr: {}, pf: null, img: null, lb: null, arm: null };
 
 function toast(m) { const t = $("#toast"); t.textContent = m; t.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = "none", 2800); }
 function ago(t) { const m = Math.max(0, (Date.now() - t) / 6e4); if (m < 1) return "ahora"; if (m < 60) return "hace " + Math.floor(m) + " min"; if (m < 1440) return "hace " + Math.floor(m / 60) + " h"; return "hace " + Math.floor(m / 1440) + " d"; }
@@ -525,7 +532,8 @@ function storyView() {
 const head = t => `<div class="ph"><h2 class="disp">${t}</h2></div>`;
 const hms = ms => { const t = Math.max(0, Math.floor(ms / 1e3)); return [Math.floor(t / 3600), Math.floor(t % 3600 / 60), t % 60].map(n => String(n).padStart(2, "0")).join(":"); };
 const eff = p => p.blocked_until > Date.now() ? "blocked" : (p.status || (p.is_blocked ? "blocked" : "active"));
-const gold = id => id && id === S.topId ? '<i class="gold" title="Mejor del día">1</i>' : "";
+const gold = () => "";
+const commentFire = id => id && id === S.topId ? '<span class="comment-fire" aria-label="Destacado de hoy" title="Destacado de hoy">🔥</span>' : "";
 const introOn = p => p.intro_url && p.intro_until > Date.now();
 const fmt = n => Math.floor(n / 60) + ":" + String(n % 60).padStart(2, "0");
 const stray = id => {
@@ -627,7 +635,7 @@ const POL = [
   ["Edad mínima", "CURIOCITY está destinada exclusivamente a personas de 18 años o más. Al registrarte marcas una casilla y la aplicación guarda esa declaración; no verifica tu edad de forma independiente ni solicita documentos de identidad. Si eres menor, no crees una cuenta. Si se identifica una cuenta de una persona menor, contacta al responsable para solicitar su revisión."],
   ["Datos que tratamos", "Tratamos tu apodo y el identificador de acceso asociado; datos de perfil como avatar, color, fotos, fondos, relación y preferencia de presencia; publicaciones, comentarios, reacciones, amistades, historias, stickers, audios y mensajes enviados mediante Palomas; alertas de moderación y marcas de tiempo como creación, expiración y última conexión. Supabase Auth administra tu contraseña y conserva un hash criptográfico; CURIOCITY no guarda la contraseña en claro en la tabla de perfiles. La aplicación también conserva tokens de sesión en el almacenamiento local del navegador para mantener la sesión y permitir cambiar entre cuentas guardadas."],
   ["Fotos y archivos", "Antes de subir imágenes, la aplicación las vuelve a procesar en el navegador mediante canvas y las comprime. No hemos verificado en todos los formatos y navegadores que el resultado elimine todos los metadatos; evita subir imágenes que contengan información que no quieras compartir. Los archivos multimedia se almacenan en Supabase Storage."],
-  ["Visibilidad y límites actuales", "La configuración técnica revisada permite lectura pública de registros de perfiles en la API y el bucket `media` de Supabase está configurado como público. Esto incluye campos de perfil que la interfaz puede no mostrar y archivos multimedia que pueden abrirse sin iniciar sesión si se conoce o encuentra su URL. Las restricciones de la interfaz no equivalen a privacidad. Las filas de historias tienen restricciones de lectura, pero sus archivos usan ese bucket público. Por estas limitaciones no prometemos que perfiles, fondos, fotos, audios o historias sean privados. No publiques información sensible. La aplicación revisada no incorpora módulos propios de publicidad."],
+  ["Visibilidad y límites actuales", "La ficha de perfil puede configurarse como pública, visible para amistades aceptadas o no visible para otros usuarios, conforme a la configuración de privacidad del perfil en Supabase. Esta preferencia no restringe por sí sola publicaciones públicas ni enlaces directos de archivos del bucket `media`, que actualmente es público; evita compartir información sensible."],
   ["Proveedores", "La página se aloja en GitHub Pages; Supabase proporciona autenticación, base de datos y almacenamiento; Google Fonts entrega la tipografía. Estos proveedores reciben los datos técnicos necesarios para prestar esos servicios. No hemos verificado la región de almacenamiento, los periodos de retención ni todas las condiciones contractuales o transferencias de cada proveedor."],
   ["Convivencia y moderación", "No publiques amenazas, acoso, discriminación, contenido ilegal ni datos personales de otras personas; evita el spam. El código incluye funciones y controles de base de datos para ciertas acciones y herramientas administrativas para cambiar estados de cuentas y moderar contenido. No afirmamos una pausa de duración fija ni que cada incidente genere una alerta hasta verificar completamente esos mecanismos en producción."],
   ["Seguridad de la cuenta", "Supabase Auth gestiona las contraseñas mediante hash criptográfico, no cifrado reversible. La protección de Supabase contra contraseñas filtradas está deshabilitada en la configuración revisada. Los tokens de sesión se guardan en el almacenamiento local del navegador; un código malicioso que llegara a ejecutarse en la página podría intentar leerlos. Usa una contraseña única, cierra sesión en dispositivos compartidos y mantén actualizado tu navegador. Ninguna medida elimina todos los riesgos."],
@@ -638,7 +646,9 @@ const POL = [
 function polSheet() {
   return `<div class="sheet" data-a="polx"><div class="pol" data-stop="1"><h2 style="margin:0">Política de privacidad de CURIOCITY</h2><small style="color:var(--ash)">Versión 2.0 · 26 de octubre de 2026</small>${POL.map(([t, x], i) => `<div><b>${i + 1}. ${t}</b><p>${esc(x)}</p></div>`).join("")}<button class="btn" data-a="polok">Entendido</button></div></div>`;
 }
-function urow(u, acts) { return `<div class="item">${avatar(u, "sm")}<div><b style="color:${cl(u.color)}">${esc(u.username)}</b>${gold(u.id)}${REL[u.relationship] ? `<small style="display:block;color:var(--mut)">${REL[u.relationship]}</small>` : ""}</div>${acts}</div>`; }
+function profileName(u) { return `<button class="plink pname" data-a="viewp" data-id="${esc(u.id)}" style="color:${cl(u.color)}">${esc(u.username)}</button>`; }
+function profileSheet() { const u=S.viewUser&&S.data.profiles[S.viewUser]; if(!u)return ""; const own=S.me&&S.me.id===u.id, friend=S.me&&S.data.friends.some(f=>f.status==="accepted"&&((f.requester===S.me.id&&f.addressee===u.id)||(f.addressee===S.me.id&&f.requester===u.id))); return `<div class="sheet" data-a="viewpx"><div data-stop="1"><button class="ic" data-a="viewpx" style="justify-self:end">Cerrar</button>${avatar(u,"big")}<h2 style="margin:8px 0;text-align:center;color:${cl(u.color)}">${esc(u.username)}</h2>${REL[u.relationship]?`<div style="text-align:center;color:var(--mut)">${REL[u.relationship]}</div>`:""}<div class="note">${own?"Este es tu perfil.":friend?"Pueden ver este perfil porque son amigos.":"Perfil visible según la configuración de su propietario."}</div>${own?"":`<button class="btn ghost" data-a="fadd" data-id="${esc(u.id)}">Agregar a amistades</button>`}<h3>Momentos</h3>${S.data.moments.filter(m=>m.user_id===u.id).map(m=>`<div class="note"><small>${ago(m.created_at)}</small><div>${esc(m.text||"Foto")}</div></div>`).join("")||'<div class="empty">Sin momentos para mostrar</div>'}</div></div>`; }
+function urow(u, acts) { return `<div class="item">${avatar(u, "sm")}<div>${profileName(u)}${gold(u.id)}${REL[u.relationship] ? `<small style="display:block;color:var(--mut)">${REL[u.relationship]}</small>` : ""}</div>${acts}</div>`; }
 function fres() {
   const F = S.data.friends, me = S.me.id, rel = new Set(F.map(f => f.requester === me ? f.addressee : f.requester)), q = (S.dr.fq || "").trim().toLowerCase();
   const us = Object.values(S.data.profiles).filter(u => u.id !== me && !rel.has(u.id) && (isAdmin() || eff(u) !== "blocked") && u.username.toLowerCase().includes(q));
@@ -654,15 +664,15 @@ function friends() {
     + `<h2>Buscar</h2><input data-k="fq" placeholder="Buscar por apodo" value="${esc(S.dr.fq || "")}"><div id="fres">${fres()}</div>`;
 }
 
-function card(m, hero, ico) {
+function card(m, hero, ico, rankMode = false) {
   const p = pOf(m.user_id), L = likesOf(m.id), mf = S.me && L.find(l => l.user_id === S.me.id), mine = mf && (mf.kind || "heart");
   const C = S.data.comments.filter(c => c.moment_id === m.id && visible(c.user_id)), o = S.open[m.id];
-  const cms = o ? `<div class="cms">${C.map(c => { const q = pOf(c.user_id); return `<div class="cm"><b style="color:${cl(q.color)}">${esc(q.username)}</b>${gold(c.user_id)} ${cbody(c)}${S.me && c.user_id === S.me.id ? del("c", c.id) : ""}</div>`; }).join("")}</div>` : "";
+  const cms = o ? `<div class="cms">${C.map(c => { const q = pOf(c.user_id); return `<div class="cm"><b style="color:${cl(q.color)}">${esc(q.username)}</b>${commentFire(c.user_id)} ${cbody(c)}${S.me && c.user_id === S.me.id ? del("c", c.id) : ""}</div>`; }).join("")}</div>` : "";
   const more = !o && C.length ? `<button class="more" data-a="cm" data-id="${m.id}">Ver ${C.length} comentario${C.length > 1 ? "s" : ""}</button>` : "";
   const cnt = k => L.filter(l => (l.kind || "heart") === k).length;
   const tp = REACT.map(([k, e]) => [e, cnt(k)]).filter(x => x[1]).sort((a, b) => b[1] - a[1]).slice(0, 3).map(x => x[0]).join("");
   const tray = S.rx === m.id ? `<div class="tray">${REACT.map(([k, e]) => `<button class="${mine === k ? "on" : ""}" data-a="like" data-id="${m.id}" data-k2="${k}" aria-label="Reaccionar ${k}"><span>${e}</span><small>${cnt(k) || ""}</small></button>`).join("")}</div>` : "";
-  return `<article class="card ${hero ? "hero" : ""}">${hero ? `<span class="tag">${ic(ico || "trophy", 16)}${hero}</span>` : ""}<div class="who" ${hero ? 'style="margin-top:10px"' : ""}>${avatar(p)}<div><b style="color:${cl(p.color)}">${esc(p.username)}</b>${gold(m.user_id)}<small>${ago(m.created_at)}${REL[p.relationship] ? " · " + REL[p.relationship] : ""}</small></div>${introOn(p) ? `<button class="mini" data-a="play" data-u="${safe(p.intro_url)}">${ic("music", 14)}Presentación</button>` : ""}${S.me && m.user_id === S.me.id ? del("m", m.id) : ""}</div>${safe(m.image_url) ? `<img class="pic" loading="lazy" alt="Foto del momento" src="${safe(m.image_url)}" data-a="lb" data-u="${safe(m.image_url)}">` : ""}${safe(m.audio_url) ? (m.kind === "music" ? `<div class="note-card" style="--cc:${cl(p.color)}"><span class="nt">${ic("music", 24)}</span><div><b>${esc(m.audio_title || "Canción")}</b><small>Nota musical</small>${ap(m.audio_url, "w")}</div></div>` : `<div class="voice">${ap(m.audio_url)}</div>`) : ""}${m.text ? `<p>${esc(m.text)}</p>` : '<div style="height:10px"></div>'}<div class="acts"><button class="${mine ? "on" : ""} ${S.pop === m.id ? "bump" : ""}" data-a="rx" data-id="${m.id}" aria-label="Reaccionar">${tp || ic("heart", 18)}${L.length || ""}</button><button data-a="cm" data-id="${m.id}">${ic("chat", 18)}${C.length}</button></div>${tray}${more}${cms}${chatbar(m.id)}</article>`;
+  return `<article class="card ${hero ? "hero" : ""}">${hero ? `<span class="tag">${ic(ico || "trophy", 16)}${hero}</span>` : ""}<div class="who" ${hero ? 'style="margin-top:10px"' : ""}>${avatar(p)}<div>${profileName(p)}${rankMode ? "" : gold(m.user_id)}<small>${ago(m.created_at)}${REL[p.relationship] ? " · " + REL[p.relationship] : ""}</small></div>${introOn(p) ? `<button class="mini" data-a="play" data-u="${safe(p.intro_url)}">${ic("music", 14)}Presentación</button>` : ""}${S.me && m.user_id === S.me.id ? del("m", m.id) : ""}</div>${safe(m.image_url) ? `<img class="pic" loading="lazy" alt="Foto del momento" src="${safe(m.image_url)}" data-a="lb" data-u="${safe(m.image_url)}">` : ""}${safe(m.audio_url) ? (m.kind === "music" ? `<div class="note-card" style="--cc:${cl(p.color)}"><span class="nt">${ic("music", 24)}</span><div><b>${esc(m.audio_title || "Canción")}</b><small>Nota musical</small>${ap(m.audio_url, "w")}</div></div>` : `<div class="voice">${ap(m.audio_url)}</div>`) : ""}${m.text ? `<p>${esc(m.text)}</p>` : '<div style="height:10px"></div>'}<div class="acts"><button class="${mine ? "on" : ""} ${S.pop === m.id ? "bump" : ""}" data-a="rx" data-id="${m.id}" aria-label="Reaccionar">${tp || ic("heart", 18)}${L.length || ""}</button><button data-a="cm" data-id="${m.id}">${ic("chat", 18)}${C.length}</button></div>${tray}${more}${cms}${chatbar(m.id)}</article>`;
 }
 
 function home() {
@@ -678,12 +688,22 @@ function home() {
   return pb + storiesBar() + head("Inicio") + comp + (ms.map(m => card(m, pn(m) ? "Fijado" : null, "pin")).join("") || '<div class="empty">Aún no hay momentos</div>');
 }
 
-const score = m => likesOf(m.id).length + S.data.comments.filter(c => c.moment_id === m.id).length;
-const daily = () => S.data.moments.filter(m => Date.now() - m.created_at < 864e5 && visible(m.user_id)).map(m => [m, score(m)]).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1] || a[0].created_at - b[0].created_at).slice(0, 3);
+const rankScore = m => {
+  const reactions = likesOf(m.id).length;
+  const comments = S.data.comments.filter(c => c.moment_id === m.id).length;
+  return reactions + comments * 2;
+};
+const daily = () => S.data.moments.filter(m => Date.now() - m.created_at < 864e5 && visible(m.user_id)).map(m => [m, rankScore(m)]).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1] || b[0].created_at - a[0].created_at).slice(0, 3);
 function rank() {
   const top = daily();
   if (!top.length) return head("Destacados") + '<div class="empty">Aún no hay destacados hoy</div>';
-  return head("Destacados") + top.map(([m], i) => `<section class="rkitem"><div class="rkn">${i + 1}</div><div class="rkc">${card(m)}</div></section>`).join("");
+  return head("Destacados") + top.map(([m, points], i) => {
+    const lead = i === 0, author = pOf(m.user_id);
+    const mark = lead ? '<div class="rkn streak" aria-label="Primer lugar">🔥</div>' : `<div class="rkn">${i + 1}</div>`;
+    const meta = lead ? "" : `<div class="rkmeta"><span>#{i + 1}</span><span>·</span><span>${points} punto${points === 1 ? "" : "s"}</span></div>`;
+    const post = card(m, null, null, true).replace(`style="color:${cl(author.color)}"`, `class="${lead ? "rkname-fire" : ""}" style="color:${lead ? "#ff4b2b" : cl(author.color)}"`);
+    return `<section class="rkitem">${mark}<div class="rkc">${meta}${post}</div></section>`;
+  }).join("");
 }
 
 function prof() {
@@ -700,7 +720,7 @@ function prof() {
   const bgs = `<div class="pt">Elige un fondo</div><div class="grid">${BGS.map(([k, n]) => `<button data-a="pbg" data-v="${k}" class="${S.pf.bg === k ? "sel" : ""}"><span class="bgt b-${k}"></span>${n}</button>`).join("")}${S.pf.bgu.map((u, i) => u ? `<button data-a="pbg" data-v="${i ? "custom2" : "custom"}" class="${S.pf.bg === (i ? "custom2" : "custom") ? "sel" : ""}"><span class="bgt b-custom" style="background-image:url('${cssImage(u)}')"></span>Mío ${i + 1}</button>` : "").join("")}</div>
     <div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="fbg" role="button">${ic("img", 18)}Subir fondo ${S.pf.bgu.filter(Boolean).length}/2</label>${S.pf.bg.startsWith("custom") ? `<button class="btn ghost" data-a="nobg">Quitar</button>` : ""}</div>
     ${S.pf.bg.startsWith("custom") ? `<div class="pt" style="margin:26px 0 8px">Oscurecer</div><div class="seg" style="grid-template-columns:repeat(4,1fr)">${[["0", "Nada"], ["0.3", "Suave"], ["0.5", "Medio"], ["0.7", "Fuerte"]].map(([v, n]) => `<button data-a="dim" data-v="${v}" class="${String(S.dim) === v ? "on" : ""}">${n}</button>`).join("")}</div>` : ""}${save}`;
-  const more = `<div class="pt">Relación</div><div class="row" style="flex-wrap:wrap">${[["none", "Prefiero no decir"], ["single", "Soltero/a"], ["taken", "En una relación"]].map(([k, v]) => `<button class="btn ghost ${S.pf.rel === k ? "on" : ""}" data-a="prel" data-v="${k}">${v}</button>`).join("")}</div>
+  const more = `<div class="pt">Quién puede ver tu perfil</div><div class="row" style="flex-wrap:wrap">${[["public","Público"],["friends","Amigos"],["private","Nadie"]].map(([k,v])=>`<button class="btn ghost ${(p.profile_visibility||"public")===k?"on":""}" data-a="pvisibility" data-v="${k}" aria-pressed="${(p.profile_visibility||"public")===k}">${v}</button>`).join("")}</div><small style="color:var(--mut)">Controla la ficha del perfil. Los momentos y enlaces de archivos tienen permisos independientes.</small><div class="pt" style="margin-top:30px">Relación</div><div class="row" style="flex-wrap:wrap">${[["none", "Prefiero no decir"], ["single", "Soltero/a"], ["taken", "En una relación"]].map(([k, v]) => `<button class="btn ghost ${S.pf.rel === k ? "on" : ""}" data-a="prel" data-v="${k}">${v}</button>`).join("")}</div>
     <div class="srow"><span>Mostrar si estoy en línea</span><button class="tg ${p.show_presence !== false ? "on" : ""}" data-a="ptog" aria-label="Mostrar si estoy en línea"></button></div>
     <div class="pt" style="margin-top:34px">Presentación</div>
     ${introOn(p) ? `<div class="note" style="margin-top:8px">Activa hasta ${new Date(p.intro_until).toLocaleString("es", { weekday: "short", hour: "2-digit", minute: "2-digit" })}</div>` : ""}
@@ -746,8 +766,8 @@ function render() {
   $("#nav").innerHTML = T.map(t => `<button data-a="tab" data-t="${t[0]}" class="${S.tab === t[0] ? "on" : ""}">${ic(t[1], 22)}${t[2]}${(t[0] === "friends" ? nreq : t[0] === "admin" ? S.data.alerts.length : 0) ? `<i class="dot">${t[0] === "friends" ? nreq : S.data.alerts.length}</i>` : ""}</button>`).join("");
   $("#main").className = S.fresh ? "go" : ""; S.fresh = false;
   $("#main").innerHTML = S.tab === "home" ? home() : S.tab === "top" ? rank() : S.tab === "friends" ? friends() : S.tab === "admin" ? admin() : prof();
-  const auth = $("#auth"); auth.innerHTML = S.pol ? polSheet() : S.auth ? authSheet() : S.stnew ? storySheet() : S.sv ? storyView() : S.pgto ? pigeonSheet() : "";
-  if (!S.pol && !S.auth && !S.stnew && !S.sv && !S.pgto && S.lb) {
+  const auth = $("#auth"); auth.innerHTML = S.pol ? polSheet() : S.auth ? authSheet() : S.stnew ? storySheet() : S.sv ? storyView() : S.pgto ? pigeonSheet() : S.viewUser ? profileSheet() : "";
+  if (!S.pol && !S.auth && !S.stnew && !S.sv && !S.pgto && !S.viewUser && S.lb) {
     const sheet = document.createElement("div"), img = document.createElement("img");
     sheet.className = "sheet"; sheet.dataset.a = "lbx"; sheet.style.alignItems = "center";
     img.alt = "Foto ampliada"; img.style.cssText = "max-width:96%;max-height:90vh;border-radius:12px";
@@ -784,7 +804,7 @@ document.addEventListener("change", async e => {
 document.addEventListener("click", async e => {
   if (S.dd && !e.target.closest(".dd")) { S.dd = null; render(); }
   const b = e.target.closest("[data-a]"); if (!b) return;
-  if (/^(close|pgx|stx|polx)$/.test(b.dataset.a) && e.target.closest("[data-stop]")) return;
+  if (/^(close|pgx|stx|polx|viewpx)$/.test(b.dataset.a) && e.target.closest("[data-stop]")) return;
   const a = b.dataset.a, id = +b.dataset.id;
   try {
     if (a === "tab") { S.tab = b.dataset.t; S.pf = null; S.arm = null; S.fresh = true; S.rx = null; render(); scrollTo(0, 0); }
@@ -821,6 +841,9 @@ document.addEventListener("click", async e => {
     }
     else if (a === "addacct") { S.dd = null; S.auth = "in"; S.err = null; render(); }
     else if (a === "ptog") { const on = meP().show_presence === false; await API.setPresence(on); await API.ping(on); await refresh(); toast(on ? "Tu estado de conexión es visible" : "Tu estado de conexión está oculto"); }
+    else if (a === "viewp") { S.viewUser=b.dataset.id; render(); }
+    else if (a === "viewpx") { S.viewUser=null; render(); }
+    else if (a === "pvisibility") { await API.setProfileVisibility(b.dataset.v); S.data.profiles[S.me.id].profile_visibility=b.dataset.v; toast("Visibilidad actualizada"); render(); }
     else if (a === "pgsend") { S.pgto = b.dataset.id; S.err = null; render(); }
     else if (a === "pgx") { S.pgto = null; S.err = null; render(); }
     else if (a === "pgsend2") {
