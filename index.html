@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#000000">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-KA/SriUsaqxERYuITjr/UmcFJP+ZcLQCwOZxZG4wR/k=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-EGMMdDVsAIP+VCiiuKPcm/bkJFl7rwG3nciWk705oUg=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
 <title>CURIOCITY</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap">
 <style>
@@ -708,7 +708,7 @@ function prof() {
     ${S.rec === "intro" ? `<div class="row"><div class="note" style="flex:1">● Grabando <span id="rt">0:00 / 0:30</span></div><button class="btn bad" data-a="recstop">Detener</button></div>` : `<div class="row" style="flex-wrap:wrap"><button class="btn ghost" data-a="rec" data-t="intro">${ic("mic", 18)}Grabar</button><label class="btn ghost" for="fi" role="button">${ic("music", 18)}Subir audio</label>${introOn(p) ? `<button class="btn ghost" data-a="introoff">Quitar</button>` : ""}</div>`}
     <div class="row">${dd("dur", "Dura " + ({ "0.25": "15 minutos", "1": "1 hora", "24": "1 día" })[S.idur || "24"], [["0.25", "15 minutos"], ["1", "1 hora"], ["24", "1 día"]], S.idur || "24", "up")}<button class="btn" data-a="introsave">Publicar</button></div>
     <button class="btn ghost" data-a="out" style="width:100%;margin-top:40px">Cerrar sesión</button>
-    <div class="row" style="justify-content:space-between;margin-top:22px"><button class="plink" data-a="pol">Política de privacidad</button><small style="color:var(--ash)">CURIOCITY v1.0</small></div>`;
+    <div class="row" style="justify-content:space-between;margin-top:22px"><button class="plink" data-a="pol">Política de privacidad</button><small style="color:var(--ash)">CURIOCITY v2.0</small></div>`;
   return head("Perfil") + `<div class="card" style="text-align:center;margin-bottom:26px">${avatar(view, "big")}<h2 style="color:${S.pf.color};margin:14px 0 2px">${esc(S.me.username)}${gold(S.me.id)}</h2><small style="color:var(--mut)">${mine.length} momentos · ${got} reacciones</small></div><div class="seg" style="grid-template-columns:repeat(3,1fr);margin-bottom:30px">${Object.entries(labs).map(([k, v]) => `<button data-a="ptab" data-v="${k}" class="${tab === k ? "on" : ""}">${v}</button>`).join("")}</div>${tab === "look" ? look : tab === "bg" ? bgs : more}`;
 }
 
@@ -936,4 +936,5 @@ setInterval(() => { const el = $("#pgtm"); if (!el) return; const left = S.data.
 </script>
 </body>
 </html>
+
 
