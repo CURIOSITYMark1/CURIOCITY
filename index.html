@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#000000">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-lMiFJdyE0CoadjhMc8lDXccPw7LlOO2hNmrWOaD9cig=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
 <title>CURIOCITY</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap">
 <style>
@@ -244,7 +244,14 @@ const $ = s => document.querySelector(s);
 let AUD = null, REC = null;
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const cl = c => /^#[0-9a-f]{6}$/i.test(c || "") ? (c.toLowerCase() === "#1e293b" ? "#F2F2F2" : c) : COLORS[4][1];
-const safe = u => /^(https:\/\/|data:image\/)/.test(u || "") ? esc(u) : "";
+const imageUrl = value => {
+  if (typeof value !== "string" || value.length > 2_000_000) return "";
+  if (/^data:image\/(?:png|jpeg|webp|gif);base64,[a-z0-9+/]+=*$/i.test(value)) return value;
+  try { const u = new URL(value, location.href); return u.protocol === "https:" && !u.username && !u.password ? u.href : ""; }
+  catch (e) { return ""; }
+};
+const safe = u => esc(imageUrl(u));
+const cssImage = u => imageUrl(u).replace(/[\\'"()\n\r]/g, x => "%" + x.charCodeAt(0).toString(16).padStart(2, "0"));
 
 const IC = {
   heart: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/>',
@@ -295,16 +302,19 @@ function paintDots() {
     const on = online(p); el.className = "pd " + (on ? "on" : "off"); el.title = on ? "Conectado" : "Desconectado";
   });
 }
-const pingNow = () => { if (S.me) API.ping(meP().show_presence !== false).catch(() => {}); };
+const pingNow = () => { if (S.me && meP().show_presence !== false) API.ping(true).catch(() => {}); };
 
 async function shrink(file, max, q) {
   if (!/^image\//.test(file.type) || file.size > 30e6) throw new Error("Imagen no válida");
   const url = URL.createObjectURL(file);
-  const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("No se pudo leer esa imagen")); i.src = url; });
-  const k = Math.min(1, max / Math.max(img.width, img.height)), c = document.createElement("canvas");
-  c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
-  c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
-  return new Promise(ok => c.toBlob(ok, "image/jpeg", q));
+  try {
+    const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("No se pudo leer esa imagen")); i.src = url; });
+    const k = Math.min(1, max / Math.max(img.width, img.height)), c = document.createElement("canvas");
+    c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+    const ctx = c.getContext("2d"); if (!ctx) throw new Error("No se pudo procesar esa imagen");
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+    return await new Promise((ok, no) => c.toBlob(b => b ? ok(b) : no(new Error("No se pudo comprimir esa imagen")), "image/jpeg", q));
+  } finally { URL.revokeObjectURL(url); }
 }
 const toData = b => new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(b); });
 
@@ -514,29 +524,31 @@ const stray = id => {
 async function bgBlob(file) {
   if (!/^image\//.test(file.type) || file.size > 30e6) throw new Error("Imagen no válida");
   const url = URL.createObjectURL(file);
-  const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("No se pudo leer esa imagen")); i.src = url; });
-  const enc = (c, t, q) => new Promise(ok => c.toBlob(ok, t, q));
-  let max = 1920, q = .85, out = null;
-  for (let i = 0; i < 6; i++) {
-    const k = Math.min(1, max / Math.max(img.width, img.height)), c = document.createElement("canvas");
-    c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
-    const g = c.getContext("2d"); g.imageSmoothingQuality = "high"; g.drawImage(img, 0, 0, c.width, c.height);
-    let b = await enc(c, "image/webp", q); if (!b || b.type !== "image/webp") b = await enc(c, "image/jpeg", q);
-    out = b; if (b.size <= 450e3) break;
-    if (q > .66) q -= .08; else max = Math.round(max * .85);
-  }
-  URL.revokeObjectURL(url);
-  return { blob: out, before: file.size };
+  try {
+    const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("No se pudo leer esa imagen")); i.src = url; });
+    const enc = (c, t, q) => new Promise((ok, no) => c.toBlob(b => b ? ok(b) : no(new Error("No se pudo comprimir esa imagen")), t, q));
+    let max = 1920, q = .85, out = null;
+    for (let i = 0; i < 6; i++) {
+      const k = Math.min(1, max / Math.max(img.width, img.height)), c = document.createElement("canvas");
+      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+      const g = c.getContext("2d"); if (!g) throw new Error("No se pudo procesar esa imagen");
+      g.imageSmoothingQuality = "high"; g.drawImage(img, 0, 0, c.width, c.height);
+      let b = await enc(c, "image/webp", q); if (b.type !== "image/webp") b = await enc(c, "image/jpeg", q);
+      out = b; if (b.size <= 450e3) break;
+      if (q > .66) q -= .08; else max = Math.round(max * .85);
+    }
+    return { blob: out, before: file.size };
+  } finally { URL.revokeObjectURL(url); }
 }
 function applyBg() {
   const p = meP(), live = S.me && S.tab === "me" && S.pf;
   const bg = live ? S.pf.bg : p.bg, urls = live ? S.pf.bgu : [p.bg_url, p.bg_url2];
   let kind = S.me ? (bg || "void") : "void";
   const isC = kind === "custom" || kind === "custom2", url = kind === "custom" ? urls[0] : kind === "custom2" ? urls[1] : null, el = $("#bgl");
-  if (isC && !/^(https:\/\/|data:image\/)/.test(url || "")) kind = "void";
+  if (isC && !imageUrl(url)) kind = "void";
   else if (!isC && !BGS.some(x => x[0] === kind)) kind = "void";
   const c = isC && kind !== "void";
-  el.className = "b-" + (c ? "custom" : kind); el.style.backgroundImage = c ? 'url("' + url.replace(/"/g, "%22") + '")' : "";
+  el.className = "b-" + (c ? "custom" : kind); const bgUrl = c ? imageUrl(url) : ""; el.style.backgroundImage = bgUrl ? `url("${bgUrl.replace(/[\\"\n\r]/g, x => encodeURIComponent(x))}")` : "";
   document.body.dataset.bg = kind; el.style.setProperty("--dim", S.dim);
   $("#px").style.display = kind === "void" || kind === "stars" ? "" : "none";
   if (PX) PX.set(kind === "stars" ? 3 : 1);
@@ -580,11 +592,14 @@ async function startRec(max, target) {
 async function sticker(file) {
   if (!/^image\//.test(file.type) || file.size > 30e6) throw new Error("Imagen no válida");
   const url = URL.createObjectURL(file);
-  const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("No se pudo leer esa imagen")); i.src = url; });
-  const c = document.createElement("canvas"); c.width = c.height = 256;
-  const k = Math.max(256 / img.width, 256 / img.height), w = img.width * k, h = img.height * k;
-  c.getContext("2d").drawImage(img, (256 - w) / 2, (256 - h) / 2, w, h); URL.revokeObjectURL(url);
-  return new Promise(ok => c.toBlob(ok, "image/png"));
+  try {
+    const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("No se pudo leer esa imagen")); i.src = url; });
+    const c = document.createElement("canvas"); c.width = c.height = 256;
+    const k = Math.max(256 / img.width, 256 / img.height), w = img.width * k, h = img.height * k;
+    const ctx = c.getContext("2d"); if (!ctx) throw new Error("No se pudo procesar esa imagen");
+    ctx.drawImage(img, (256 - w) / 2, (256 - h) / 2, w, h);
+    return await new Promise((ok, no) => c.toBlob(b => b ? ok(b) : no(new Error("No se pudo crear el sticker")), "image/png"));
+  } finally { URL.revokeObjectURL(url); }
 }
 
 function pigeons() {
@@ -596,19 +611,19 @@ function pigeonSheet() {
   return `<div class="sheet" data-a="pgx"><div data-stop="1"><h2 style="margin:0">Paloma para ${esc(u.username)}</h2>${rest ? `<div class="pt" style="margin:0;text-align:center">Próxima paloma en</div><div class="timer" id="pgtm">${hms(next - Date.now())}</div>` : `<textarea data-k="pgt" maxlength="200" placeholder="Tu mensaje">${esc(S.dr.pgt || "")}</textarea>`}${S.err ? `<div class="err">${esc(S.err)}</div>` : ""}${rest ? "" : `<button class="btn" data-a="pgsend2">${ic("bird", 18)}Enviar</button>`}</div></div>`;
 }
 const POL = [
-  ["Solo mayores de 18", "CURIOCITY es únicamente para personas de 18 años o más. Al crear tu cuenta confirmas que cumples este requisito. Si una cuenta pertenece a una persona menor de edad, será eliminada."],
-  ["Qué datos guardamos", "Tu apodo y tu contraseña (se guarda cifrada y nadie puede leerla). Lo que publicas: mensajes, fotos, audios, stickers, estados y reacciones. Tu avatar, color, foto de perfil, fondos y estado de relación si los eliges. Tu última conexión, solo si dejas activado mostrar si estás en línea. La hora de tus acciones, para detectar abusos."],
-  ["Tus fotos", "Antes de subir una imagen, tu dispositivo la vuelve a generar sin sus metadatos (ubicación, modelo del teléfono, fecha de captura) y la comprime. Aun así, no publiques fotos que te identifiquen si quieres mantener el anonimato."],
-  ["Quién ve qué", "Tu apodo, tus mensajes y tus comentarios los ven las personas que usan CURIOCITY. Tus estados solo los ven tus amistades. Las palomas solo las ve quien las recibe. Tu fondo solo lo ves tú. No vendemos tus datos ni los usamos para publicidad."],
-  ["Servicios de terceros", "Los datos se guardan con Supabase, la página se muestra desde un servicio de alojamiento y las tipografías vienen de Google Fonts. Estos proveedores procesan datos técnicos para que la página funcione."],
-  ["Normas de convivencia", "No se permite acosar, amenazar, discriminar, publicar contenido sexual, violento o ilegal, ni compartir datos personales de otras personas. Tampoco el spam: enviar muchos mensajes en poco tiempo activa una pausa automática de 30 minutos y avisa al administrador. El administrador puede silenciar, restringir o bloquear cuentas y eliminar contenido que incumpla estas normas."],
-  ["Seguridad", "Usamos límites de envío, pausas automáticas y revisión del administrador. Ningún sistema es perfecto: usa una contraseña única y no la compartas con nadie."],
-  ["Tus derechos", "Puedes eliminar tus mensajes y comentarios cuando quieras. Para borrar tu cuenta y tus datos, pídeselo al administrador" + (CONTACT ? ": " + CONTACT : "") + "."],
-  ...(CONTACT ? [["Contacto", "Para dudas, reportes o para borrar tu cuenta, escribe a " + CONTACT + "."]] : []),
-  ["Cambios", "Si esta política cambia, se publicará una nueva versión y se avisará en la página."]
+  ["Edad mínima", "CURIOCITY está destinada exclusivamente a personas de 18 años o más. Al registrarte marcas una casilla y la aplicación guarda esa declaración; no verifica tu edad de forma independiente ni solicita documentos de identidad. Si eres menor, no crees una cuenta. Si se identifica una cuenta de una persona menor, contacta al responsable para solicitar su revisión."],
+  ["Datos que tratamos", "Tratamos tu apodo y el identificador de acceso asociado; datos de perfil como avatar, color, fotos, fondos, relación y preferencia de presencia; publicaciones, comentarios, reacciones, amistades, historias, stickers, audios y mensajes enviados mediante Palomas; alertas de moderación y marcas de tiempo como creación, expiración y última conexión. Supabase Auth administra tu contraseña y conserva un hash criptográfico; CURIOCITY no guarda la contraseña en claro en la tabla de perfiles. La aplicación también conserva tokens de sesión en el almacenamiento local del navegador para mantener la sesión y permitir cambiar entre cuentas guardadas."],
+  ["Fotos y archivos", "Antes de subir imágenes, la aplicación las vuelve a procesar en el navegador mediante canvas y las comprime. No hemos verificado en todos los formatos y navegadores que el resultado elimine todos los metadatos; evita subir imágenes que contengan información que no quieras compartir. Los archivos multimedia se almacenan en Supabase Storage."],
+  ["Visibilidad y límites actuales", "La configuración técnica revisada permite lectura pública de registros de perfiles en la API y el bucket `media` de Supabase está configurado como público. Esto incluye campos de perfil que la interfaz puede no mostrar y archivos multimedia que pueden abrirse sin iniciar sesión si se conoce o encuentra su URL. Las restricciones de la interfaz no equivalen a privacidad. Las filas de historias tienen restricciones de lectura, pero sus archivos usan ese bucket público. Por estas limitaciones no prometemos que perfiles, fondos, fotos, audios o historias sean privados. No publiques información sensible. La aplicación revisada no incorpora módulos propios de publicidad."],
+  ["Proveedores", "La página se aloja en GitHub Pages; Supabase proporciona autenticación, base de datos y almacenamiento; Google Fonts entrega la tipografía. Estos proveedores reciben los datos técnicos necesarios para prestar esos servicios. No hemos verificado la región de almacenamiento, los periodos de retención ni todas las condiciones contractuales o transferencias de cada proveedor."],
+  ["Convivencia y moderación", "No publiques amenazas, acoso, discriminación, contenido ilegal ni datos personales de otras personas; evita el spam. El código incluye funciones y controles de base de datos para ciertas acciones y herramientas administrativas para cambiar estados de cuentas y moderar contenido. No afirmamos una pausa de duración fija ni que cada incidente genere una alerta hasta verificar completamente esos mecanismos en producción."],
+  ["Seguridad de la cuenta", "Supabase Auth gestiona las contraseñas mediante hash criptográfico, no cifrado reversible. La protección de Supabase contra contraseñas filtradas está deshabilitada en la configuración revisada. Los tokens de sesión se guardan en el almacenamiento local del navegador; un código malicioso que llegara a ejecutarse en la página podría intentar leerlos. Usa una contraseña única, cierra sesión en dispositivos compartidos y mantén actualizado tu navegador. Ninguna medida elimina todos los riesgos."],
+  ["Tus derechos y eliminación", "Puedes solicitar acceso, rectificación, cancelación u oposición respecto de tus datos escribiendo al contacto indicado abajo. La aplicación permite eliminar publicaciones, comentarios e historias desde la interfaz según los controles disponibles. No cuenta con un flujo automatizado para borrar una cuenta; solicita ayuda al contacto. No hemos confirmado la eliminación asociada de todos los archivos, mensajes, registros ni copias de seguridad, por lo que no prometemos borrado total o inmediato. Atenderemos solicitudes conforme a la normativa aplicable, sin fijar aquí plazos no verificados."],
+  ["Responsable y contacto", "CURIOCITY es el nombre del servicio. Para dudas, reportes o solicitudes sobre tus datos, escribe a " + CONTACT + ". El nombre o denominación legal y domicilio del responsable deben completarse para identificar plenamente a la persona responsable del tratamiento."],
+  ["Cambios a este aviso", "Esta política puede actualizarse para reflejar cambios en el servicio o en el tratamiento de datos. La versión vigente se mostrará en CURIOCITY con su fecha de actualización. Esta versión describe limitaciones técnicas identificadas y no constituye una garantía de cumplimiento legal absoluto."]
 ];
 function polSheet() {
-  return `<div class="sheet" data-a="polx"><div class="pol" data-stop="1"><h2 style="margin:0">Política de privacidad</h2><small style="color:var(--ash)">Versión 1.0</small>${POL.map(([t, x], i) => `<div><b>${i + 1}. ${t}</b><p>${esc(x)}</p></div>`).join("")}<button class="btn" data-a="polok">Entendido</button></div></div>`;
+  return `<div class="sheet" data-a="polx"><div class="pol" data-stop="1"><h2 style="margin:0">Política de privacidad de CURIOCITY</h2><small style="color:var(--ash)">Versión 2.0 · 26 de octubre de 2026</small>${POL.map(([t, x], i) => `<div><b>${i + 1}. ${t}</b><p>${esc(x)}</p></div>`).join("")}<button class="btn" data-a="polok">Entendido</button></div></div>`;
 }
 function urow(u, acts) { return `<div class="item">${avatar(u, "sm")}<div><b style="color:${cl(u.color)}">${esc(u.username)}</b>${gold(u.id)}${REL[u.relationship] ? `<small style="display:block;color:var(--mut)">${REL[u.relationship]}</small>` : ""}</div>${acts}</div>`; }
 function fres() {
@@ -669,7 +684,7 @@ function prof() {
   const look = `<div class="pt">Foto</div><div class="row"><label class="btn ghost" for="fa" role="button">${ic("img", 18)}Subir foto</label>${S.pf.url ? `<button class="btn ghost" data-a="noav">Quitar</button>` : ""}</div>
     <div class="pt" style="margin-top:30px">Robot</div><div class="grid">${AVS.map(a => `<button data-a="pa" data-v="${a}" class="${!S.pf.url && S.pf.avatar === a ? "sel" : ""}">${avatar({ avatar: a, color: S.pf.color })}</button>`).join("")}</div>
     <div class="pt" style="margin-top:30px">Color</div><div class="grid">${COLORS.map(c => `<button data-a="pc" data-v="${c[1]}" class="${S.pf.color === c[1] ? "sel" : ""}"><span class="sw" style="background:${c[1]}"></span>${c[0]}</button>`).join("")}</div>${save}`;
-  const bgs = `<div class="pt">Elige un fondo</div><div class="grid">${BGS.map(([k, n]) => `<button data-a="pbg" data-v="${k}" class="${S.pf.bg === k ? "sel" : ""}"><span class="bgt b-${k}"></span>${n}</button>`).join("")}${S.pf.bgu.map((u, i) => u ? `<button data-a="pbg" data-v="${i ? "custom2" : "custom"}" class="${S.pf.bg === (i ? "custom2" : "custom") ? "sel" : ""}"><span class="bgt b-custom" style="background-image:url('${safe(u)}')"></span>Mío ${i + 1}</button>` : "").join("")}</div>
+  const bgs = `<div class="pt">Elige un fondo</div><div class="grid">${BGS.map(([k, n]) => `<button data-a="pbg" data-v="${k}" class="${S.pf.bg === k ? "sel" : ""}"><span class="bgt b-${k}"></span>${n}</button>`).join("")}${S.pf.bgu.map((u, i) => u ? `<button data-a="pbg" data-v="${i ? "custom2" : "custom"}" class="${S.pf.bg === (i ? "custom2" : "custom") ? "sel" : ""}"><span class="bgt b-custom" style="background-image:url('${cssImage(u)}')"></span>Mío ${i + 1}</button>` : "").join("")}</div>
     <div class="row" style="flex-wrap:wrap"><label class="btn ghost" for="fbg" role="button">${ic("img", 18)}Subir fondo ${S.pf.bgu.filter(Boolean).length}/2</label>${S.pf.bg.startsWith("custom") ? `<button class="btn ghost" data-a="nobg">Quitar</button>` : ""}</div>
     ${S.pf.bg.startsWith("custom") ? `<div class="pt" style="margin:26px 0 8px">Oscurecer</div><div class="seg" style="grid-template-columns:repeat(4,1fr)">${[["0", "Nada"], ["0.3", "Suave"], ["0.5", "Medio"], ["0.7", "Fuerte"]].map(([v, n]) => `<button data-a="dim" data-v="${v}" class="${String(S.dim) === v ? "on" : ""}">${n}</button>`).join("")}</div>` : ""}${save}`;
   const more = `<div class="pt">Relación</div><div class="row" style="flex-wrap:wrap">${[["none", "Prefiero no decir"], ["single", "Soltero/a"], ["taken", "En una relación"]].map(([k, v]) => `<button class="btn ghost ${S.pf.rel === k ? "on" : ""}" data-a="prel" data-v="${k}">${v}</button>`).join("")}</div>
@@ -718,7 +733,13 @@ function render() {
   $("#nav").innerHTML = T.map(t => `<button data-a="tab" data-t="${t[0]}" class="${S.tab === t[0] ? "on" : ""}">${ic(t[1], 22)}${t[2]}${(t[0] === "friends" ? nreq : t[0] === "admin" ? S.data.alerts.length : 0) ? `<i class="dot">${t[0] === "friends" ? nreq : S.data.alerts.length}</i>` : ""}</button>`).join("");
   $("#main").className = S.fresh ? "go" : ""; S.fresh = false;
   $("#main").innerHTML = S.tab === "home" ? home() : S.tab === "top" ? rank() : S.tab === "friends" ? friends() : S.tab === "admin" ? admin() : prof();
-  $("#auth").innerHTML = S.pol ? polSheet() : S.auth ? authSheet() : S.stnew ? storySheet() : S.sv ? storyView() : S.pgto ? pigeonSheet() : S.lb ? `<div class="sheet" data-a="lbx" style="align-items:center"><img src="${S.lb}" alt="Foto ampliada" style="max-width:96%;max-height:90vh;border-radius:12px"></div>` : "";
+  const auth = $("#auth"); auth.innerHTML = S.pol ? polSheet() : S.auth ? authSheet() : S.stnew ? storySheet() : S.sv ? storyView() : S.pgto ? pigeonSheet() : "";
+  if (!S.pol && !S.auth && !S.stnew && !S.sv && !S.pgto && S.lb) {
+    const sheet = document.createElement("div"), img = document.createElement("img");
+    sheet.className = "sheet"; sheet.dataset.a = "lbx"; sheet.style.alignItems = "center";
+    img.alt = "Foto ampliada"; img.style.cssText = "max-width:96%;max-height:90vh;border-radius:12px";
+    const src = imageUrl(S.lb); if (src) { img.src = src; sheet.append(img); auth.append(sheet); }
+  }
 }
 
 async function refresh() { try { S.data = await API.load(); } catch (e) { toast(e.message); } try { S.accts = await API.accounts(); } catch (e) {} render(); }
@@ -902,3 +923,4 @@ setInterval(() => { const el = $("#pgtm"); if (!el) return; const left = S.data.
 </script>
 </body>
 </html>
+
