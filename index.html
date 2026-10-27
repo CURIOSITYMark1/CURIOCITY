@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#000000">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-lMiFJdyE0CoadjhMc8lDXccPw7LlOO2hNmrWOaD9cig=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-KA/SriUsaqxERYuITjr/UmcFJP+ZcLQCwOZxZG4wR/k=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
 <title>CURIOCITY</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap">
 <style>
@@ -404,8 +404,8 @@ function mkSup() {
     async signIn(n, p) { const r = await sb.auth.signInWithPassword({ email: mail(n), password: p }); fail(r.error); await guard(r.data.session); },
     async signOut() { const cur = (await sb.auth.getSession()).data.session; await sb.auth.signOut({ scope: "local" }); if (cur) wr(rd().filter(x => x.id !== cur.user.id)); },
     async load() {
-      const [a, b, c, d, e, f, g, h, i, j] = await Promise.all([sb.from("profiles").select("*"), sb.from("moments").select("*").order("created_at", { ascending: false }).limit(300), sb.from("likes").select("*"), sb.from("comments").select("*").order("created_at"), sb.from("friendships").select("*"), sb.from("stickers").select("*").order("created_at", { ascending: false }).limit(60), Promise.resolve(sb.rpc("pigeon_inbox")).then(r => r.error ? { data: [] } : r), Promise.resolve(sb.rpc("pigeon_last")).then(r => r.error ? { data: null } : r), Promise.resolve(sb.from("stories").select("*").gt("expires_at", new Date().toISOString()).order("created_at")).then(r => r.error ? { data: [] } : r), Promise.resolve(sb.from("alerts").select("*").order("created_at", { ascending: false }).limit(30)).then(r => r.error ? { data: [] } : r)]);
-      return { profiles: Object.fromEntries(ok(a).map(u => [u.id, { ...u, intro_until: u.intro_until ? Date.parse(u.intro_until) : 0, last_seen: u.last_seen ? Date.parse(u.last_seen) : 0, blocked_until: u.blocked_until ? Date.parse(u.blocked_until) : 0 }])), moments: ok(b).map(t), likes: ok(c), comments: ok(d).map(t), friends: ok(e), stickers: ok(f), pg: { inbox: (ok(g) || []).map(x => ({ id: x.id, sender: x.sender, text: x.delivered_text, arrives_at: Date.parse(x.arrives_at), seen: x.seen })), last: ok(h) ? Date.parse(ok(h)) : 0 }, stories: (ok(i) || []).map(x => ({ ...x, created_at: Date.parse(x.created_at), expires_at: Date.parse(x.expires_at) })), alerts: (ok(j) || []).map(x => ({ ...x, created_at: Date.parse(x.created_at) })) };
+      const [profiles, b, c, d, e, f, g, h, i, j] = await Promise.all([this.profiles(), sb.from("moments").select("*").order("created_at", { ascending: false }).limit(300), sb.from("likes").select("*"), sb.from("comments").select("*").order("created_at"), sb.from("friendships").select("*"), sb.from("stickers").select("*").order("created_at", { ascending: false }).limit(60), Promise.resolve(sb.rpc("pigeon_inbox")).then(r => r.error ? { data: [] } : r), Promise.resolve(sb.rpc("pigeon_last")).then(r => r.error ? { data: null } : r), Promise.resolve(sb.from("stories").select("*").gt("expires_at", new Date().toISOString()).order("created_at")).then(r => r.error ? { data: [] } : r), Promise.resolve(sb.from("alerts").select("*").order("created_at", { ascending: false }).limit(30)).then(r => r.error ? { data: [] } : r)]);
+      return { profiles, moments: ok(b).map(t), likes: ok(c), comments: ok(d).map(t), friends: ok(e), stickers: ok(f), pg: { inbox: (ok(g) || []).map(x => ({ id: x.id, sender: x.sender, text: x.delivered_text, arrives_at: Date.parse(x.arrives_at), seen: x.seen })), last: ok(h) ? Date.parse(ok(h)) : 0 }, stories: (ok(i) || []).map(x => ({ ...x, created_at: Date.parse(x.created_at), expires_at: Date.parse(x.expires_at) })), alerts: (ok(j) || []).map(x => ({ ...x, created_at: Date.parse(x.created_at) })) };
     },
     async upload(b, ext = "jpg", type = "image/jpeg") { const me = await this.session(), path = me.id + "/" + Date.now() + "." + ext; fail((await sb.storage.from("media").upload(path, b, { contentType: type })).error); return sb.storage.from("media").getPublicUrl(path).data.publicUrl; },
     async post(x, img, ex) { fail((await sb.from("moments").insert({ text: x, image_url: img || null, ...(ex || {}) })).error); },
@@ -432,7 +432,20 @@ function mkSup() {
       if (r.error) { wr(rd().filter(x => x.id !== id)); throw new Error("La sesión de esa cuenta caducó. Entra de nuevo con tu contraseña."); }
     },
     async ping(show) { const me = await this.session(); if (me) await sb.from("profiles").update({ last_seen: show ? new Date().toISOString() : null }).eq("id", me.id); },
-    async profiles() { return Object.fromEntries(ok(await sb.from("profiles").select("*")).map(u => [u.id, { ...u, intro_until: u.intro_until ? Date.parse(u.intro_until) : 0, last_seen: u.last_seen ? Date.parse(u.last_seen) : 0, blocked_until: u.blocked_until ? Date.parse(u.blocked_until) : 0 }])); },
+    async profiles() {
+      const rows = ok(await sb.from("profiles_public").select("*"));
+      const map = Object.fromEntries(rows.map(u => [u.id, { ...u, intro_until: u.intro_until ? Date.parse(u.intro_until) : 0, last_seen: u.last_seen ? Date.parse(u.last_seen) : 0, blocked_until: 0 }]));
+      const me = await this.session();
+      if (me) {
+        const own = ok(await sb.rpc("my_profile_private"));
+        if (own) map[me.id] = { ...(map[me.id] || { id: me.id, username: me.username }), ...own, blocked_until: own.blocked_until ? Date.parse(own.blocked_until) : 0 };
+        if (map[me.id] && map[me.id].is_admin) {
+          const adminRows = ok(await sb.rpc("admin_profile_status"));
+          (adminRows || []).forEach(u => { map[u.id] = { ...(map[u.id] || { id: u.id }), ...u, blocked_until: u.blocked_until ? Date.parse(u.blocked_until) : 0 }; });
+        }
+      }
+      return map;
+    },
     async setPresence(on) { const me = await this.session(); fail((await sb.from("profiles").update({ show_presence: on }).eq("id", me.id)).error); },
     async friendDel(id) { fail((await sb.from("friendships").delete().eq("id", id)).error); },
     async pin(id, h) { fail((await sb.from("moments").update({ pinned_until: h ? new Date(Date.now() + h * 36e5).toISOString() : null }).eq("id", id)).error); },
@@ -511,7 +524,7 @@ function storyView() {
 }
 const head = t => `<div class="ph"><h2 class="disp">${t}</h2></div>`;
 const hms = ms => { const t = Math.max(0, Math.floor(ms / 1e3)); return [Math.floor(t / 3600), Math.floor(t % 3600 / 60), t % 60].map(n => String(n).padStart(2, "0")).join(":"); };
-const eff = p => p.blocked_until > Date.now() ? "blocked" : (p.status || "active");
+const eff = p => p.blocked_until > Date.now() ? "blocked" : (p.status || (p.is_blocked ? "blocked" : "active"));
 const gold = id => id && id === S.topId ? '<i class="gold" title="Mejor del día">1</i>' : "";
 const introOn = p => p.intro_url && p.intro_until > Date.now();
 const fmt = n => Math.floor(n / 60) + ":" + String(n % 60).padStart(2, "0");
